@@ -31,7 +31,7 @@ var pjax = new Pjax({
 function initStart() {
 	$('[css-majax]').remove();
 	$('.content-page').block({
-		message: '<div class="spinner-border text-primary m-2" role="status"><span class="sr-only">Loading...</span></div>',
+		message: '<div class="spinner-border text-primary m-2" role="status"></div>',
 		overlayCSS: {
 			backgroundColor: "#fff",
 			cursor: 'wait',
