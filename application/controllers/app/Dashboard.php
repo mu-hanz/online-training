@@ -12,7 +12,9 @@ class Dashboard extends CI_Controller {
 		// if(!$this->ion_auth->logged_in()) { 
         //     $this->session->set_userdata('redirect_login', current_url());
         //     redirect('webadmin/auth/login'); 
-        // }
+		// }
+		
+		$this->load->model('dashboard_m');
 	}	
 
 	// Templating
@@ -45,9 +47,18 @@ class Dashboard extends CI_Controller {
 	public function data()
 	{
 		$this->output->unset_template('app/layout/webadmin');
-		$data = array(22,24,54,65,22,35,66,32,99);
-		header('Content-Type: application/json');
-		echo json_encode($data);
+
+		$data		= $this->dashboard_m->get_visitor_chart();
+
+		foreach ($data as $key) {
+            $val[] = $key->count;
+		}
+		
+
+		// $data = array(22,24,54,65,22,35,66,32,99);
+		// header('Content-Type: application/json');
+		// print_r($val);
+		echo json_encode($val);
 
 	}
 
