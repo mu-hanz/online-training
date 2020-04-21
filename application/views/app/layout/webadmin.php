@@ -25,18 +25,7 @@
     </head>
 
 <body data-layout="topnav">
-    <!-- Pre-loader -->
-    <div id="preloader">
-        <div id="status">
-            <div class="spinner">
-                <div class="circle1"></div>
-                <div class="circle2"></div>
-                <div class="circle3"></div>
-            </div>
-        </div>
-    </div>
-    <!-- End Preloader-->
-
+<div>
     <!-- Load Dynamically CSS -->
     <div css-majax>
         <?php foreach($css as $file){ echo "\n\t\t"; ?>
@@ -65,7 +54,7 @@
         <!-- End Content -->
 
         <!-- Footer Start -->
-        <footer class="footer">
+        <div class="footer">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
@@ -73,7 +62,7 @@
                     </div>
                 </div>
             </div>
-        </footer>
+        </div>
         <!-- end Footer -->
 
     </div>
@@ -89,18 +78,19 @@
     <script src="<?php echo base_url('assets/app/js/blockUI.min.js') ;?>"></script>
 
     <!-- App js -->
-    <script src="<?php echo base_url('assets/app/js/app.js') ;?>"></script>
+    
     <script src="<?php echo base_url('assets/scripts/mz.pjax.js') ;?>"></script>
+  
 
     <!-- Load Dynamically JS -->
-    <footer id="footer">
+    <div js-majax>
+    <script src="<?php echo base_url('assets/app/js/app.min.js') ;?>"></script>
         <?php foreach($js as $file){ echo "\n\t\t"; ?>
         <script src="<?php echo $file; ?>"></script>
         <?php } echo "\n\t"; ?>
-		<script src="<?php echo base_url('assets/scripts/mz.core.js') ;?>"></script>
-    </footer>
+    </div>
     <!-- End Load Dynamically JS -->
-
+            </div>
     </body>
 </html>
 

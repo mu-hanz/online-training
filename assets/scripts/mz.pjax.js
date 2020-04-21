@@ -2,34 +2,16 @@ var pjax = new Pjax({
     elements: [".mz-menu a, .mlink, .breadcrumb a"],
     cacheBust: false,
     history: true,
-    debug: true,
+    debug: false,
     currentUrlFullReload: false, //jika di klik lagi link yg sama maka akan melakukan reload
-    selectors: ["#footer", "#ajax-content"],
+    selectors: ["[js-majax]", "#ajax-content"],
     switches: {
-        "#ajax-content": Pjax.switches.sideBySide
-    },
-    switchesOptions: {
-        "#ajax-content": {
-            classNames: {
-                // class added to the old element being replaced, e.g. a fade out
-				remove: "Animated Animate--fast Animate--noDelay",
-				// class added to the new element that is replacing the old one, e.g. a fade in
-				add: "Animated",
-				// class added on the element when navigating back
-				backward: "fadeIn",
-				// class added on the element when navigating forward (used for new page too)
-				forward: "fadeOut"
-            },
-            callbacks: {
-				
-            }
-        }
+        "#ajax-content": Pjax.switches.outerHTML
     }
 })
 
-
-function initStart() {
-	$('[css-majax]').remove();
+// Loading Page
+function loadingPage() {
 	$('.content-page').block({
 		message: '<div class="spinner-border text-primary m-2" role="status"></div>',
 		overlayCSS: {
@@ -42,26 +24,25 @@ function initStart() {
 			backgroundColor: 'none'
 		}
 	});
-
 }
 
-function initDone() {
-
-}
+function initStart() {
+	$('[css-majax]').remove();
+	loadingPage();
+};
 
 function initEnd() {
 	$('[css-majax]').appendTo(document.head);
 	$('.content-page').unblock(); 
-}
+};
 
 window.onload = function() {
     $('[css-majax]').appendTo(document.head);
 };
 
 
-document.addEventListener("pjax:send", initStart)
-document.addEventListener("pjax:success", initDone)
-document.addEventListener("pjax:complete", initEnd)
+document.addEventListener("pjax:send", initStart);
+document.addEventListener("pjax:complete", initEnd);
 
 // Form submit
 function showResponse(data) {
@@ -97,6 +78,7 @@ var options = {
 
 $(document).on('submit', '.ajaxForm', function(e) {
 	e.preventDefault(); // prevent native submit
+	loadingPage();
 	$(this).ajaxSubmit(options);
 	return false;
 });

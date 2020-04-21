@@ -12,52 +12,61 @@
                                         <span> Dashboard </span>
                                     </a>
                                 </li>
-                                <li class="menu-title">Apps</li>
-                                <li>
-                                    <a href="<?php echo base_url('webadmin/dashboard/starter');?>">
-                                        <i data-feather="calendar"></i>
-                                        <span> Starter </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript: void(0);">
-                                        <i data-feather="inbox"></i>
-                                        <span> Email </span>
-                                        <span class="menu-arrow"></span>
-                                    </a>
+                                <li class="menu-title">Manage Order</li>
 
+                                <li>
+                                <a href="<?php echo base_url('webadmin/dashboard/starter');?>">
+                                        <i data-feather="shopping-cart"></i>
+                                        <span> Manage Order </span>
+                                    </a>
+    
                                     <ul class="nav-second-level" aria-expanded="false">
                                         <li>
-                                            <a href="email-inbox.html">Inbox</a>
+                                            <a href="project-list.html">Add new</a>
                                         </li>
                                         <li>
-                                            <a href="email-read.html">Read</a>
+                                            <a href="project-detail.html">List Article</a>
                                         </li>
                                         <li>
-                                            <a href="email-compose.html">Compose</a>
+                                            <a href="project-detail.html">Category</a>
+                                        </li>
+                                        <li>
+                                            <a href="project-detail.html">Tags</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
+                                    <a href="<?php echo base_url('webadmin/dashboard/starter');?>">
+                                        <i data-feather="calendar"></i>
+                                        <span> Events </span>
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="javascript: void(0);">
-                                        <i data-feather="briefcase"></i>
-                                        <span> Projects </span>
+                                        <i data-feather="file-text"></i>
+                                        <span> Articles </span>
                                         <span class="menu-arrow"></span>
                                     </a>
     
                                     <ul class="nav-second-level" aria-expanded="false">
                                         <li>
-                                            <a href="project-list.html">List</a>
+                                            <a href="project-list.html">Add new</a>
                                         </li>
                                         <li>
-                                            <a href="project-detail.html">Detail</a>
+                                            <a href="project-detail.html">List Article</a>
+                                        </li>
+                                        <li>
+                                            <a href="project-detail.html">Category</a>
+                                        </li>
+                                        <li>
+                                            <a href="project-detail.html">Tags</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
                                     <a href="javascript: void(0);">
                                         <i data-feather="bookmark"></i>
-                                        <span> Tasks </span>
+                                        <span> Pages </span>
                                         <span class="menu-arrow"></span>
                                     </a>
     
@@ -73,8 +82,8 @@
                                 <li class="menu-title">Custom</li>
                                 <li>
                                     <a href="javascript: void(0);">
-                                        <i data-feather="file-text"></i>
-                                        <span> Pages </span>
+                                        <i data-feather="percent"></i>
+                                        <span> Promotion </span>
                                         <span class="menu-arrow"></span>
                                     </a>
                                     <ul class="nav-second-level" aria-expanded="false">
@@ -119,8 +128,8 @@
 
                                 <li>
                                     <a href="javascript: void(0);">
-                                        <i data-feather="layout"></i>
-                                        <span> Layouts </span>
+                                        <i data-feather="archive"></i>
+                                        <span> Reports </span>
                                         <span class="menu-arrow"></span>
                                     </a>
                                     <ul class="nav-second-level" aria-expanded="false">
@@ -151,12 +160,12 @@
                                     </ul>
                                 </li>
 
-                                <li class="menu-title">Components</li>
+                                <li class="menu-title">Settings</li>
 
                                 <li>
                                     <a href="javascript: void(0);">
-                                        <i data-feather="package"></i>
-                                        <span> UI Elements </span>
+                                        <i data-feather="settings"></i>
+                                        <span> Settings </span>
                                         <span class="menu-arrow"></span>
                                     </a>
                                     <ul class="nav-second-level" aria-expanded="false">
@@ -178,34 +187,6 @@
                                         </li>
                                         <li>
                                             <a href="widgets.html">Widgets</a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li>
-                                    <a href="javascript: void(0);" aria-expanded="false">
-                                        <i data-feather="file-text"></i>
-                                        <span> Forms </span>
-                                        <span class="menu-arrow"></span>
-                                    </a>
-                                    <ul class="nav-second-level" aria-expanded="false">
-                                        <li>
-                                            <a href="forms-basic.html">Basic Elements</a>
-                                        </li>
-                                        <li>
-                                            <a href="forms-advanced.html">Advanced</a>
-                                        </li>
-                                        <li>
-                                            <a href="forms-validation.html">Validation</a>
-                                        </li>
-                                        <li>
-                                            <a href="forms-wizard.html">Wizard</a>
-                                        </li>
-                                        <li>
-                                            <a href="forms-editor.html">Editor</a>
-                                        </li>
-                                        <li>
-                                            <a href="forms-file-uploads.html">File Uploads</a>
                                         </li>
                                     </ul>
                                 </li>

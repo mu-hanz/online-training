@@ -8,7 +8,7 @@
                 <span class="d-inline h5 ml-1 text-logo"><?php echo $this->config->item('system_name');?></span>
             </span>
             <span class="logo-sm">
-                <img src="assets/images/logo.png" alt="" height="24">
+                <img src="<?php echo base_url('assets/app/images/logo.png');?>" alt="" height="24">
             </span>
         </a>
 
@@ -65,7 +65,7 @@
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
                             <div class="notify-icon">
-                                <img src="assets/images/users/avatar-1.jpg" class="img-fluid rounded-circle" alt="" />
+                                <img src="<?php echo base_url('assets/app/images/users/avatar-2.jpg');?>" class="img-fluid rounded-circle" alt="" />
                             </div>
                             <p class="notify-details">Karen Robinson</p>
                             <p class="text-muted mb-0 user-msg">
@@ -76,7 +76,7 @@
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
                             <div class="notify-icon">
-                                <img src="assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" />
+                                <img src="<?php echo base_url('assets/app/images/users/avatar-2.jpg');?>" class="img-fluid rounded-circle" alt="" />
                             </div>
                             <p class="notify-details">Cristina Pride</p>
                             <p class="text-muted mb-0 user-msg">

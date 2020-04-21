@@ -11,7 +11,7 @@
                             <h2 class="mb-0">2.189 K</h2>
                         </div>
                         <div class="align-self-center">
-                            <div id="today-revenue-chart" class="apex-charts"></div>
+                        <div id="today-revenue-chart" class="apex-charts"></div>
                             <span class="text-success font-weight-bold font-size-13"><i
                                     class='uil uil-arrow-up'></i> 10.21%</span>
                         </div>
@@ -145,7 +145,7 @@
         <div class="card">
                 <div class="card-body pt-2 pb-3">
                     <a href="task-list.html" class="btn btn-primary btn-sm mt-2 float-right">
-                        View All
+                    <i class='uil uil-sort-amount-up  ml-1'></i> View All
                     </a>
                     <h5 class="mb-4 header-title">Tasks</h5>
                     <div class="slimscroll" style="max-height: 275px;">
@@ -292,7 +292,7 @@
             <div class="card">
                 <div class="card-body">
                     <a href="" class="btn btn-primary btn-sm float-right">
-                        <i class='uil uil-export ml-1'></i> Export
+                        <i class='uil uil-sort-amount-up  ml-1'></i> View All
                     </a>
                     <h5 class="card-title mt-0 mb-0 header-title">Recent Orders</h5>
 

@@ -25,34 +25,31 @@ class Dashboard_m extends CI_Model
     }
 
     public function get_visitor_chart() {
-        $date = date('Y-m-d');
-    	$thn = date('Y');
-        $this->db->select('IFNULL(SUM(hits),0) AS count');
+        $this->db->select('DATE_FORMAT(tanggal, "%m/%Y") as month_date, IFNULL(SUM(hits),0) AS count');
         $this->db->from('viewers');
         $this->db->where('DATE(tanggal) BETWEEN NOW() - INTERVAL 7 DAY AND NOW()');
         $this->db->group_by('DATE(tanggal)');
+        $this->db->order_by('DATE(tanggal)','asc');
         return $this->db->get()->result();
     }
 
-    // public function get_visitor_chart($bln) {
-    // 	$thn = date('Y');
-    //     $this->db->select('IFNULL(SUM(hits),0) AS total_viewers');
-    //     $this->db->from('viewers');
-    //     $this->db->where('MONTH(tanggal)', $bln);
-    //     $this->db->where('YEAR(tanggal)', $thn);
-    //     return $this->db->get()->result();
-    // }
-    
-    public function get_visitor_chart_u($bln) {
-    	$thn = date('Y');
-    	$this->db->distinct();
-    	$this->db->select('ip');
-    	$this->db->where('MONTH(tanggal)', $bln);
-        $this->db->where('YEAR(tanggal)', $thn);
-        $this->db->group_by('ip');
-        $query = $this->db->get('viewers');
-        return $query->num_rows();
-        
+    public function get_visitor_chart_month() {
+        $this->db->select('DATE_FORMAT(tanggal, "%m/%Y") as month_date, IFNULL(SUM(hits),0) AS count');
+        $this->db->from('viewers');
+        $this->db->where('DATE(tanggal) BETWEEN NOW() - INTERVAL 5 MONTH AND NOW()');
+        $this->db->group_by('MONTH(tanggal)');
+        $this->db->order_by('DATE(tanggal)','asc');
+        return $this->db->get()->result();
     }
 
+    public function get_visitor_chart_month_unique() {
+        $this->db->distinct();
+        $this->db->select('DATE_FORMAT(tanggal, "%m/%Y") as month_date, COUNT(DISTINCT ip) AS count');
+        $this->db->from('viewers');
+    	$this->db->where('DATE(tanggal) BETWEEN NOW() - INTERVAL 5 MONTH AND NOW()');
+        $this->db->group_by('MONTH(tanggal)');
+        $this->db->order_by('DATE(tanggal)','desc');
+        return $this->db->get()->result();
+        
+    }
 }
