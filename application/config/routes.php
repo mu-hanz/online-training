@@ -55,7 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 //webadmin
 $route['webadmin'] = "App/dashboard";
-$route['webadmin/auth/login'] = "App/auth/auth";
+$route['webadmin/login'] = "App/auth/auth/login";
 $route['webadmin/([a-z]+)'] = "App/$1";
 $route['webadmin/([a-z]+)/(:any)'] = "App/$1/$2";
 $route['webadmin/([a-z]+)/(:any)/(:any)'] = "App/$1/$2/$3";

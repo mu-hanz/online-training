@@ -13,27 +13,6 @@ File: Main Js File
 
     var Components = function () { };
 
-    //initializing tooltip
-    Components.prototype.initTooltipPlugin = function () {
-        $.fn.tooltip && $('[data-toggle="tooltip"]').tooltip()
-    },
-
-    //initializing popover
-    Components.prototype.initPopoverPlugin = function () {
-        $.fn.popover && $('[data-toggle="popover"]').popover()
-    },
-
-    //initializing Slimscroll
-    Components.prototype.initSlimScrollPlugin = function () {
-        //You can change the color of scroll bar here
-        $.fn.slimScroll && $(".slimscroll").slimScroll({
-            height: 'auto',
-            position: 'right',
-            size: "4px",
-            touchScrollStep: 20,
-            color: '#9ea5ab'
-        });
-    },
 
     //initializing form validation
     Components.prototype.initFormValidation = function () {
@@ -51,9 +30,6 @@ File: Main Js File
     //initilizing
     Components.prototype.init = function () {
         var $this = this;
-        this.initTooltipPlugin(),
-        this.initPopoverPlugin(),
-        this.initSlimScrollPlugin(),
         this.initFormValidation()
     },
 
@@ -122,18 +98,6 @@ function ($) {
                 // sidebar - scroll container
                 $this._resetSidebarScroll();
 
-                $("#menu-bar a").each(function () {
-                    var pageUrl = window.location.href.split(/[?#]/)[0];
-                    if (this.href == pageUrl) {
-                        $(this).addClass("active");
-                        $(this).parent().addClass("mm-active"); // add active to li of the current link
-                        $(this).parent().parent().addClass("mm-show");
-                        $(this).parent().parent().prev().addClass("active"); // add active class to an anchor
-                        $(this).parent().parent().parent().addClass("mm-active");
-                        $(this).parent().parent().parent().parent().addClass("mm-show"); // add active to li of the current link
-                        $(this).parent().parent().parent().parent().parent().addClass("mm-active");
-                    }
-                });
 
             } else {
                 var menuRef = new MetisMenu('#menu-bar').on('shown.metisMenu', function (event) {
@@ -143,16 +107,6 @@ function ($) {
                             window.removeEventListener('click', menuClick);
                         }
                     });
-                });
-                $("#menu-bar a").each(function () {
-                    var pageUrl = window.location.href.split(/[?#]/)[0];
-                    if (this.href == pageUrl) {
-                        $(this).addClass("active");
-                        $(this).parent().addClass("active"); // add active to li of the current link
-                        $(this).parent().parent().prev().addClass("active"); // add active class to an anchor
-                        $(this).parent().parent().parent().addClass("active");
-                        $(this).parent().parent().parent().parent().parent().addClass("active");
-                    }
                 });
             }
         }
@@ -177,37 +131,6 @@ function ($) {
             return;
         });
 
-        
-        // activate topnav menu
-        // $('#topnav-menu li a').each(function () {
-        //     var pageUrl = window.location.href.split(/[?#]/)[0];
-        //     if (this.href == pageUrl) {
-        //         $(this).addClass('active');
-        //         $(this).parent().parent().addClass('active'); // add active to li of the current link
-        //         $(this).parent().parent().parent().parent().addClass('active');
-        //         $(this).parent().parent().parent().parent().parent().parent().addClass('active');
-        //     }
-        // });
-
-        // // horizontal menu
-        // $('#topnav-menu .dropdown-menu a.dropdown-toggle').on('click', function () {
-        //     console.log("hello");
-        //     if (
-        //         !$(this)
-        //             .next()
-        //             .hasClass('show')
-        //     ) {
-        //         $(this)
-        //             .parents('.dropdown-menu')
-        //             .first()
-        //             .find('.show')
-        //             .removeClass('show');
-        //     }
-        //     var $subMenu = $(this).next('.dropdown-menu');
-        //     $subMenu.toggleClass('show');
-
-        //     return false;
-        // });
 
     },
 

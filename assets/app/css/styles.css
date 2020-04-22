@@ -20,82 +20,15 @@
   background-color: #ffffffc7;
 }
 
-/*
-  Note: If your content elements don't have a fixed width it can cause
-  an issue when positioning absolutely
-*/
-.js-Pjax { position: relative } /* parent element where switch will be made */
-
-.js-Pjax-child { width: 100% }
-
-/* position for the elements that will be removed */
-.js-Pjax-remove {
-  position: absolute;
-  left: 50%;
-  /* transform: translateX(-50%) */
-  /* transform can't be used since we already use generic translate for the remove effect (eg animate.css) */
-  /* margin-left: -width/2; // made with js */
-  /* you can totally drop the margin-left thing from switchesOptions if you use custom animations */
-}
-
-/* CSS animations */
-.Animated {
-  animation-fill-mode: both;
-  animation-duration: 1s;
-}
-
-.Animated--reverse { animation-direction: reverse }
-
-.Animate--fast { animation-duration: 0s }
-.Animate--noDelay { animation-delay: 0s !important;  }
-
-@-webkit-keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.fadeIn {
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
-}
-
-
-@-webkit-keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
-}
-
-.fadeOut {
-  -webkit-animation-name: fadeOut;
-  animation-name: fadeOut;
+.spinner-border1 {
+  display: inline-block;
+  width: 1.1rem;
+  height: 1.1rem;
+  vertical-align: text-bottom;
+  border: .15em solid currentColor;
+      border-right-color: currentcolor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  -webkit-animation: spinner-border .45s linear infinite;
+  animation: spinner-border .45s linear infinite;
 }

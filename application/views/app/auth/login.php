@@ -13,13 +13,14 @@
         <meta name="googlebot" content="noindex">
 
         <!-- App favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        <link rel="shortcut icon" href="<?php echo base_url('assets/app/images/favicon.png') ;?>">
 
         <!-- App css -->
         <link href="<?php echo base_url('assets/app/css/bootstrap.min.css') ;?>" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url('assets/app/css/icons.min.css') ;?>" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url('assets/app/css/app.min.css') ;?>" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url('assets/app/css/styles.css') ;?>" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url('assets/sweetalert/sweetalert2.min.css') ;?>" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -43,6 +44,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 p-5">
+                                    <div class="data-loading">
                                         <div class="mx-auto mb-5">
                                             <a href="<?php echo base_url();?>">
                                             <img src="<?php echo base_url('assets/app/images/logo.png');?>" alt="" height="24" />
@@ -54,8 +56,9 @@
                                         <p class="text-muted mt-1 mb-4">Enter your email address and password to
                                             access admin panel.</p>
 
-                                        <form action="#" class="authentication-form">
-                                            <div class="form-group">
+                                        <form class="ajaxForm authentication-form" action="<?php echo base_url('webadmin/auth/auth/login'); ?>" method="post">
+                                        <input type="hidden" id="mz-csrf" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">    
+                                        <div class="form-group">
                                                 <label class="form-control-label">Email Address</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
@@ -63,7 +66,7 @@
                                                             <i class="icon-dual" data-feather="mail"></i>
                                                         </span>
                                                     </div>
-                                                    <input type="email" class="form-control" id="email" placeholder="hello@trainingcenter.events">
+                                                    <?php echo form_input($identity);?>
                                                 </div>
                                             </div>
 
@@ -75,8 +78,7 @@
                                                             <i class="icon-dual" data-feather="lock"></i>
                                                         </span>
                                                     </div>
-                                                    <input type="password" class="form-control" id="password"
-                                                        placeholder="Enter your password">
+                                                    <?php echo form_input($password);?>
                                                 </div>
                                             </div>
 
@@ -95,7 +97,7 @@
                                             </div>
                                         </form>
                                     </div>
-                                    
+                                    </div>
                                 </div>
                                 
                             </div> <!-- end card-body -->
@@ -109,6 +111,11 @@
         </div>
         <!-- end page -->
         <script src="<?php echo base_url('assets/app/js/vendor.min.js') ;?>"></script>
+        <script src="<?php echo base_url('assets/aform/jquery.form.min.js') ;?>"></script>
+        <script src="<?php echo base_url('assets/app/js/blockUI.min.js') ;?>"></script>
+        <script src="<?php echo base_url('assets/sweetalert/sweetalert2.all.min.js') ;?>"></script>
+        <script src="<?php echo base_url('assets/pjax/pjax.min.js') ;?>"></script>
         <script src="<?php echo base_url('assets/app/js/app.min.js') ;?>"></script>
+        <script src="<?php echo base_url('assets/app/js/pages/login.init.js') ;?>"></script>
     </body>
 </html>

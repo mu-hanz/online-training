@@ -9,10 +9,10 @@ class Dashboard extends CI_Controller {
 		$this->_init();
 		
 		// Check Login
-		// if(!$this->ion_auth->logged_in()) { 
-        //     $this->session->set_userdata('redirect_login', current_url());
-        //     redirect('webadmin/auth/login'); 
-		// }
+		if(!$this->ion_auth->logged_in()) { 
+            $this->session->set_userdata('redirect_login', current_url());
+            redirect('webadmin/login'); 
+		}
 		
 		$this->load->model('dashboard_m');
 	}	
@@ -71,6 +71,20 @@ class Dashboard extends CI_Controller {
 
 	}
 
+	public function data_last()
+	{
+		$this->output->unset_template('app/layout/webadmin');
+
+		$data1		= $this->dashboard_m->get_visitor_chart_last();
+		$data2		= $this->dashboard_m->get_visitor_chart_last_seven();
+
+		echo $data1->total.'<br>';
+		echo $data2->total.'<br>';
+
+		// print_r($data1);
+	}
+
+
 	public function data_visitor()
 	{
 		$this->output->unset_template('app/layout/webadmin');
@@ -91,6 +105,7 @@ class Dashboard extends CI_Controller {
 
 		$sum_viewer_all		= $this->dashboard_m->get_visitor_chart_month();
 		$sum_viewer_unique		= $this->dashboard_m->get_visitor_chart_month_unique();
+		$sum_viewer_page		= $this->dashboard_m->get_visitor_chart_month_page_view();
 
 		foreach ($sum_viewer_all as $key) {
             $val['all_visitor'][] = $key->count;
@@ -100,7 +115,11 @@ class Dashboard extends CI_Controller {
             $val1['unique_visitor'][] = $key->count;
 		}
 
-		$data = array_merge($val, $val1);
+		foreach ($sum_viewer_page as $key) {
+            $val2['page_view'][] = $key->count;
+		}
+
+		$data = array_merge($val, $val1, $val2);
 
 		header('Content-Type: application/json');
 		echo json_encode($data);

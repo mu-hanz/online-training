@@ -1,18 +1,47 @@
 var pjax = new Pjax({
-    elements: [".mz-menu a, .mlink, .breadcrumb a"],
+    elements: ["a"],
     cacheBust: false,
     history: true,
     debug: false,
     currentUrlFullReload: false, //jika di klik lagi link yg sama maka akan melakukan reload
-    selectors: ["[js-majax]", "#ajax-content"],
+    selectors: [".data-loading"],
     switches: {
-        "#ajax-content": Pjax.switches.outerHTML
+        ".data-loading": Pjax.switches.outerHTML
     }
 })
 
-// Loading Page
-function loadingPage() {
-	$('.content-page').block({
+// Form submit
+function showResponse(data) {
+    
+	const Toast = Swal.mixin({
+        toast: true,
+        position: 'center',
+        showConfirmButton: false,
+        timer: 3000
+      });
+      
+      Toast.fire({
+        type: data.status,
+        title: data.message
+      })
+    
+    if(data.status === 'error'){
+        pjax.options.requestOptions = {}
+        pjax.loadUrl(data.url, $.extend({}, pjax.options))
+    } else {
+        $(function () {
+            setTimeout(function() {
+                window.location.replace(data.url);
+            }, 2000);
+        });
+    }
+    
+    
+      
+}
+
+function showRequest() {
+	$('.data-loading').block({
 		message: '<div class="spinner-border text-primary m-2" role="status"></div>',
 		overlayCSS: {
 			backgroundColor: "#fff",
@@ -24,47 +53,6 @@ function loadingPage() {
 			backgroundColor: 'none'
 		}
 	});
-}
-
-function initStart() {
-	$('[css-majax]').remove();
-	loadingPage();
-};
-
-function initEnd() {
-	$('[css-majax]').appendTo(document.head);
-	$('.content-page').unblock(); 
-};
-
-window.onload = function() {
-    $('[css-majax]').appendTo(document.head);
-};
-
-
-document.addEventListener("pjax:send", initStart);
-document.addEventListener("pjax:complete", initEnd);
-
-// Form submit
-function showResponse(data) {
-    
-	const Toast = Swal.mixin({
-        toast: true,
-        position: 'center',
-        showConfirmButton: false,
-        timer: 2000
-      });
-      
-      Toast.fire({
-        type: data.status,
-        title: data.message
-      })
-
-	pjax.options.requestOptions = {}
-	pjax.loadUrl(data.url, $.extend({}, pjax.options))
-}
-
-function showRequest() {
-	loadingPage();
 }
 
 // ajax submit
@@ -81,7 +69,3 @@ $(document).on('submit', '.ajaxForm', function(e) {
 	$(this).ajaxSubmit(options);
 	return false;
 });
-
-
-
-

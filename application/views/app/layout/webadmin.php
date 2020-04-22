@@ -78,16 +78,16 @@
     <script src="<?php echo base_url('assets/app/js/blockUI.min.js') ;?>"></script>
 
     <!-- App js -->
-    
+    <script src="<?php echo base_url('assets/app/js/app.js') ;?>"></script>
     <script src="<?php echo base_url('assets/scripts/mz.pjax.js') ;?>"></script>
   
 
     <!-- Load Dynamically JS -->
     <div js-majax>
-    <script src="<?php echo base_url('assets/app/js/app.min.js') ;?>"></script>
         <?php foreach($js as $file){ echo "\n\t\t"; ?>
         <script src="<?php echo $file; ?>"></script>
         <?php } echo "\n\t"; ?>
+        <script src="<?php echo base_url('assets/scripts/mz.core.js') ;?>"></script>
     </div>
     <!-- End Load Dynamically JS -->
             </div>

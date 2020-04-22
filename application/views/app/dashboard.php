@@ -10,7 +10,7 @@
                                 Revenue</span>
                             <h2 class="mb-0">2.189 K</h2>
                         </div>
-                        <div class="align-self-center">
+                        <div class="align-self-center chart-small">
                         <div id="today-revenue-chart" class="apex-charts"></div>
                             <span class="text-success font-weight-bold font-size-13"><i
                                     class='uil uil-arrow-up'></i> 10.21%</span>
@@ -29,7 +29,7 @@
                                 Sold</span>
                             <h2 class="mb-0">1065</h2>
                         </div>
-                        <div class="align-self-center">
+                        <div class="align-self-center chart-small">
                             <div id="today-product-sold-chart" class="apex-charts"></div>
                             <span class="text-danger font-weight-bold font-size-13"><i
                                     class='uil uil-arrow-down'></i> 5.05%</span>
@@ -48,7 +48,7 @@
                                 Customers</span>
                             <h2 class="mb-0">11</h2>
                         </div>
-                        <div class="align-self-center">
+                        <div class="align-self-center chart-small">
                             <div id="today-new-customer-chart" class="apex-charts"></div>
                             <span class="text-success font-weight-bold font-size-13"><i
                                     class='uil uil-arrow-up'></i> 25.16%</span>
@@ -67,10 +67,9 @@
                                 Visitors</span>
                             <h2 class="mb-0">750</h2>
                         </div>
-                        <div class="align-self-center">
+                        <div class="align-self-center chart-small">
                             <div id="today-new-visitors-chart" class="apex-charts"></div>
-                            <span class="text-danger font-weight-bold font-size-13"><i
-                                    class='uil uil-arrow-down'></i> 5.05%</span>
+                            <span class="text-danger font-weight-bold font-size-13"><i class='uil uil-arrow-down'></i> 5.05%</span>
                         </div>
                     </div>
                 </div>
@@ -116,7 +115,7 @@
 
         <div class="col-xl-6">
             <div class="card">
-                <div class="card-body pb-0">
+                <div class="card-body pb-0 chart-big" style="min-height:310px">
                     <ul class="nav card-nav float-right">
                         <li class="nav-item">
                             <a class="nav-link text-muted" href="#">Today</a>

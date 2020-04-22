@@ -10,7 +10,26 @@
                 width: 90,
                 sparkline: {
                     enabled: !0
-                }
+                },
+                events: {
+                    beforeMount: function (chartContext, config) {
+                        $('.chart-small').block({
+                            message: '<div class="spinner-border1 text-primary" role="status"></div>',
+                            overlayCSS: {
+                                backgroundColor: "#fff",
+                                cursor: 'wait',
+                            },
+                            css: {
+                                border: 0,
+                                padding: 0,
+                                backgroundColor: 'none'
+                            }
+                        });
+                    },
+                    mounted:function (chartContext, config) {
+                        $('.chart-small').unblock();
+                    }
+                  }
             },
             series: [],
             stroke: {
@@ -130,6 +149,25 @@
                     type: "area",
                     zoom: {
                         enabled: false
+                      },
+                      events: {
+                        beforeMount: function (chartContext, config) {
+                            $('.chart-big').block({
+                                message: '<div class="spinner-border text-primary" role="status"></div>',
+                                overlayCSS: {
+                                    backgroundColor: "#fff",
+                                    cursor: 'wait',
+                                },
+                                css: {
+                                    border: 0,
+                                    padding: 0,
+                                    backgroundColor: 'none'
+                                }
+                            });
+                        },
+                        mounted:function (chartContext, config) {
+                            $('.chart-big').unblock();
+                        }
                       }
                 },
                 dataLabels: {
@@ -143,7 +181,7 @@
                 legend: {
                     show: true,
                 },
-                colors: ["#5369f8","#43d39e"],
+                colors: ["#5369f8","#43d39e","#ffbe0b"],
                 xaxis: {
                     type: "string",
                     categories: []
@@ -190,6 +228,10 @@
                 {
                     name : 'Unique Visitor',
                     data: response.unique_visitor 
+                },
+                {
+                    name : 'Page View',
+                    data: response.page_view 
                 }
             ])
             });

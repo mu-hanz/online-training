@@ -164,7 +164,7 @@
 
                     <div class="dropdown-divider"></div>
 
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <a href="<?php echo base_url('webadmin/auth/auth/logout');?>" class="dropdown-item notify-item">
                         <i data-feather="log-out" class="icon-dual icon-xs mr-2"></i>
                         <span>Logout</span>
                     </a>
