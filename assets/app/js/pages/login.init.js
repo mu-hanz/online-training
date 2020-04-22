@@ -29,11 +29,9 @@ function showResponse(data) {
         pjax.options.requestOptions = {}
         pjax.loadUrl(data.url, $.extend({}, pjax.options))
     } else {
-        $(function () {
-            setTimeout(function() {
-                window.location.replace(data.url);
-            }, 2000);
-        });
+        setTimeout(function() {
+            window.location.href = data.url;
+        }, 2000);
     }
     
     

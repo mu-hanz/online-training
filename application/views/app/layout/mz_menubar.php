@@ -15,7 +15,7 @@
                                 <li class="menu-title">Manage Order</li>
 
                                 <li>
-                                <a href="<?php echo base_url('webadmin/dashboard/starter');?>">
+                                <a href="javascript: void(0);">
                                         <i data-feather="shopping-cart"></i>
                                         <span> Manage Order </span>
                                     </a>
