@@ -24,7 +24,6 @@ var muhanz = (function(muhanz) {
 
 
       activeNav: function() {
-
 		$(".mz-menu a").each(function() {
 			if (this.href == window.location.href) {
 					$(this).parent().removeClass("active");
@@ -40,11 +39,12 @@ var muhanz = (function(muhanz) {
 					$(this).parent().parent().parent().addClass("mm-active");
 					$(this).parent().parent().parent().parent().addClass("mm-show"); // add active to li of the current link
 					$(this).parent().parent().parent().parent().parent().addClass("mm-active");
-
 			}
-
-			$('.button-menu-mobile').removeClass("open");
-			$('#topnav-menu-content').slideUp(400);
+			this.$window = $(window);
+				if (this.$window.width() <= 768) {
+				$('.button-menu-mobile').removeClass("open");
+				$('#topnav-menu-content').slideUp(400);
+			}
 
 		});
 
