@@ -1,18 +1,35 @@
 var pjax = new Pjax({
     elements: [".mz-menu a, .mlink, .breadcrumb a"],
     cacheBust: false,
-    history: true,
+    history: false,
     debug: false,
     currentUrlFullReload: false, //jika di klik lagi link yg sama maka akan melakukan reload
-    selectors: ["[js-majax]", "#ajax-content"],
-    switches: {
-        "#ajax-content": Pjax.switches.outerHTML
-    }
+	selectors: ["title",".css-majax", ".js-majax", ".ajax-content"],
+	switches: {
+		  ".ajax-content": Pjax.switches.sideBySide
+    },
+    switchesOptions: {
+		".ajax-content": {
+		  classNames: {
+			remove: "animated animated-fast animated-no-delay",
+			add: "animated",
+			backward: "animated zoomIn animated-delay animated-fast1",
+			forward: "animated zoomOut "
+		  },
+		  
+      callbacks: {
+				removeElement: function(el) {
+					// el.style.marginLeft = "600px"
+				}
+			}
+		}
+	}
 })
 
-// Loading Page
+  
+// Loading Block init
 function loadingPage() {
-	$('.content-page').block({
+	$.blockUI({
 		message: '<div class="spinner-border text-primary m-2" role="status"></div>',
 		overlayCSS: {
 			backgroundColor: "#fff",
@@ -27,18 +44,15 @@ function loadingPage() {
 }
 
 function initStart() {
-	$('[css-majax]').remove();
-	loadingPage();
+	Pace.start();
+	// remove svg apexchart
+	$( "svg" ).not( ".feather" ).remove();
 };
 
 function initEnd() {
-	$('[css-majax]').appendTo(document.head);
-	$('.content-page').unblock(); 
+	Pace.stop();
 };
 
-window.onload = function() {
-    $('[css-majax]').appendTo(document.head);
-};
 
 
 document.addEventListener("pjax:send", initStart);
@@ -46,7 +60,11 @@ document.addEventListener("pjax:complete", initEnd);
 
 // Form submit
 function showResponse(data) {
-    
+
+	// remove loading ui block
+	$.unblockUI();
+	
+	//sweetalert
 	const Toast = Swal.mixin({
         toast: true,
         position: 'center',
@@ -58,16 +76,18 @@ function showResponse(data) {
         type: data.status,
         title: data.message
       })
-
+	
+	// pjax load page
 	pjax.options.requestOptions = {}
 	pjax.loadUrl(data.url, $.extend({}, pjax.options))
 }
 
 function showRequest() {
+	//loading ui block
 	loadingPage();
 }
 
-// ajax submit
+// ajax form submit
 var options = {
 	beforeSubmit:  showRequest,  // pre-submit callback
 	success: showResponse, // post-submit callback 
@@ -81,7 +101,4 @@ $(document).on('submit', '.ajaxForm', function(e) {
 	$(this).ajaxSubmit(options);
 	return false;
 });
-
-
-
 

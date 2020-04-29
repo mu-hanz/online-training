@@ -19,7 +19,7 @@ var muhanz = (function(muhanz) {
 	
   muhanz = {
       afterDOMReady: function() {
-          this.activeNav();
+		  this.activeNav();
       },
 
 
@@ -39,6 +39,9 @@ var muhanz = (function(muhanz) {
 					$(this).parent().parent().parent().addClass("mm-active");
 					$(this).parent().parent().parent().parent().addClass("mm-show"); // add active to li of the current link
 					$(this).parent().parent().parent().parent().parent().addClass("mm-active");
+					$(this).parent().removeClass("mm-active");
+					$(this).parent().parent().removeClass("mm-show");
+					$(this).parent().parent().parent().removeClass("mm-active");
 			}
 			this.$window = $(window);
 				if (this.$window.width() <= 768) {

@@ -1,139 +1,119 @@
-var on = require("../events/on");
-var clone = require("../util/clone");
+var on = require("../events/on")
+var clone = require("../util/clone")
 
-var attrState = "data-pjax-state";
+var attrState = "data-pjax-state"
 
 var formAction = function(el, event) {
   if (isDefaultPrevented(event)) {
-    return;
+    return
   }
 
   // Since loadUrl modifies options and we may add our own modifications below,
   // clone it so the changes don't persist
-  var options = clone(this.options);
+  var options = clone(this.options)
 
   // Initialize requestOptions
   options.requestOptions = {
     requestUrl: el.getAttribute("action") || window.location.href,
-    requestMethod: el.getAttribute("method") || "GET"
-  };
+    requestMethod: el.getAttribute("method") || "GET",
+    requestParams: []
+  }
 
   // create a testable virtual link of the form action
-  var virtLinkElement = document.createElement("a");
-  virtLinkElement.setAttribute("href", options.requestOptions.requestUrl);
+  var virtLinkElement = document.createElement("a")
+  virtLinkElement.setAttribute("href", options.requestOptions.requestUrl)
 
-  var attrValue = checkIfShouldAbort(virtLinkElement, options);
+  var attrValue = checkIfShouldAbort(virtLinkElement, options)
   if (attrValue) {
-    el.setAttribute(attrState, attrValue);
-    return;
+    el.setAttribute(attrState, attrValue)
+    return
   }
 
-  event.preventDefault();
+  event.preventDefault()
 
-  if (el.enctype === "multipart/form-data") {
-    options.requestOptions.formData = new FormData(el);
-  } else {
-    options.requestOptions.requestParams = parseFormElements(el);
-  }
+  for (var elementKey in el.elements) {
+    if (Number.isNaN(Number(elementKey))) {
+      continue;
+    }
 
-  el.setAttribute(attrState, "submit");
-
-  options.triggerElement = el;
-  this.loadUrl(virtLinkElement.href, options);
-};
-
-function parseFormElements(el) {
-  var requestParams = [];
-  var formElements = el.elements;
-
-  for (var i = 0; i < formElements.length; i++) {
-    var element = formElements[i];
-    var tagName = element.tagName.toLowerCase();
+    var element = el.elements[elementKey]
+    var tagName = element.tagName.toLowerCase()
     // jscs:disable disallowImplicitTypeConversion
-    if (
-      !!element.name &&
-      element.attributes !== undefined &&
-      tagName !== "button"
-    ) {
+    if (!!element.name && element.attributes !== undefined && tagName !== "button") {
+      var type = element.attributes.type
       // jscs:enable disallowImplicitTypeConversion
-      var type = element.attributes.type;
-
-      if (
-        !type ||
-        (type.value !== "checkbox" && type.value !== "radio") ||
-        element.checked
-      ) {
+      if ((!type || type.value !== "checkbox" && type.value !== "radio") || element.checked) {
         // Build array of values to submit
-        var values = [];
+        var values = []
 
         if (tagName === "select") {
-          var opt;
+          var opt
 
-          for (var j = 0; j < element.options.length; j++) {
-            opt = element.options[j];
-            if (opt.selected && !opt.disabled) {
-              values.push(opt.hasAttribute("value") ? opt.value : opt.text);
+          for (var i = 0; i < element.options.length; i++) {
+            opt = element.options[i]
+            if (opt.selected) {
+              values.push(opt.value || opt.text)
             }
           }
-        } else {
-          values.push(element.value);
+        }
+        else {
+          values.push(element.value)
         }
 
-        for (var k = 0; k < values.length; k++) {
-          requestParams.push({
+        for (var j = 0; j < values.length; j++) {
+          options.requestOptions.requestParams.push({
             name: encodeURIComponent(element.name),
-            value: encodeURIComponent(values[k])
-          });
+            value: encodeURIComponent(values[j])
+          })
         }
       }
     }
   }
 
-  return requestParams;
+  el.setAttribute(attrState, "submit")
+
+  options.triggerElement = el
+  this.loadUrl(virtLinkElement.href, options)
 }
 
 function checkIfShouldAbort(virtLinkElement, options) {
   // Ignore external links.
-  if (
-    virtLinkElement.protocol !== window.location.protocol ||
-    virtLinkElement.host !== window.location.host
-  ) {
-    return "external";
+  if (virtLinkElement.protocol !== window.location.protocol || virtLinkElement.host !== window.location.host) {
+    return "external"
   }
 
   // Ignore click if we are on an anchor on the same page
-  if (
-    virtLinkElement.hash &&
-    virtLinkElement.href.replace(virtLinkElement.hash, "") ===
-      window.location.href.replace(location.hash, "")
-  ) {
-    return "anchor";
+  if (virtLinkElement.hash && virtLinkElement.href.replace(virtLinkElement.hash, "") === window.location.href.replace(location.hash, "")) {
+    return "anchor"
   }
 
   // Ignore empty anchor "foo.html#"
   if (virtLinkElement.href === window.location.href.split("#")[0] + "#") {
-    return "anchor-empty";
+    return "anchor-empty"
   }
 
   // if declared as a full reload, just normally submit the form
-  if (
-    options.currentUrlFullReload &&
-    virtLinkElement.href === window.location.href.split("#")[0]
-  ) {
-    return "reload";
+  if (options.currentUrlFullReload && virtLinkElement.href === window.location.href.split("#")[0]) {
+    return "reload"
   }
 }
 
 var isDefaultPrevented = function(event) {
-  return event.defaultPrevented || event.returnValue === false;
-};
+  return event.defaultPrevented || event.returnValue === false
+}
 
 module.exports = function(el) {
-  var that = this;
+  var that = this
 
-  el.setAttribute(attrState, "");
+  el.setAttribute(attrState, "")
 
   on(el, "submit", function(event) {
-    formAction.call(that, el, event);
-  });
-};
+    formAction.call(that, el, event)
+  })
+
+  on(el, "keyup", function(event) {
+    if (event.keyCode === 13) {
+      formAction.call(that, el, event)
+    }
+  }.bind(this))
+}

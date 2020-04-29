@@ -1,15 +1,3 @@
-var pjax = new Pjax({
-    elements: ["a"],
-    cacheBust: false,
-    history: true,
-    debug: false,
-    currentUrlFullReload: false, //jika di klik lagi link yg sama maka akan melakukan reload
-    selectors: [".data-loading"],
-    switches: {
-        ".data-loading": Pjax.switches.outerHTML
-    }
-})
-
 // Form submit
 function showResponse(data) {
     
@@ -25,16 +13,14 @@ function showResponse(data) {
         title: data.message
       })
     
-    if(data.status === 'error'){
-        pjax.options.requestOptions = {}
-        pjax.loadUrl(data.url, $.extend({}, pjax.options))
+    if(data.status == 'error'){
+        $('#mz-csrf').val(data.csrf_hash);
+        $('.data-loading').unblock();
     } else {
         setTimeout(function() {
-            window.location.href = data.url;
+            window.location.replace(data.url)
         }, 2000);
     }
-    
-    
       
 }
 
