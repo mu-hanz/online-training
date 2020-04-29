@@ -33,7 +33,7 @@
                 </div>
             </li>
 
-            <li class="dropdown notification-list" data-toggle="tooltip" data-placement="bottom"
+            <li class="dropdown notification-list" data-toggle="tooltip" data-placement="left"
                 title="8 new unread notifications">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                     aria-expanded="false">

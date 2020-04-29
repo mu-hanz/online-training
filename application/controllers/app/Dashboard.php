@@ -23,7 +23,6 @@ class Dashboard extends CI_Controller {
 		$this->output->set_template('app/layout/webadmin');
 		$this->load->section('topbar', 'app/layout/mz_topbar');
 		$this->load->section('menubar', 'app/layout/mz_menubar');
-
 	}
 
 	public function index()
@@ -33,6 +32,8 @@ class Dashboard extends CI_Controller {
 		
 		$this->load->js('assets/app/js/pages/dashboard.init.js');
 
+		$this->output->set_title($this->muhanz->app_title('Dashboard'));
+
 		// Load View
 		$this->load->view('app/dashboard');
 
@@ -40,6 +41,8 @@ class Dashboard extends CI_Controller {
 
 	public function starter()
 	{
+		$this->output->set_title($this->muhanz->app_title('Starter'));
+
 		// Load View
 		$this->load->view('app/starter');
 	}
@@ -68,6 +71,7 @@ class Dashboard extends CI_Controller {
 
 		header('Content-Type: application/json');
 		echo json_encode($marge);
+		// print_r($data);
 
 	}
 

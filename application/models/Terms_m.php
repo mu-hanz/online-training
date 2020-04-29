@@ -92,9 +92,7 @@ class Terms_m extends CI_Model
         if ($parent != '') {
             $this->db->where('term_taxonomy.parent', $parent);
         }
-
-
-
+        
         $this->db->order_by('terms.term_id', 'desc');
         $this->db->group_by('terms.term_id');
         return $this->db->get();

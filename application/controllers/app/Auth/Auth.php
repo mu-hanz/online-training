@@ -103,9 +103,16 @@ class Auth extends CI_Controller
 			}
 			else
 			{
-				// if the login was un-successful
-				// redirect them back to the login page
-				$this->muhanz->error($this->ion_auth->errors(), 'webadmin/login');
+
+				$message = array(
+					'url'     => base_url('webadmin/login'),
+					'status'  => 'error',
+					'type'    => 'danger',
+					'csrf_hash' => $this->security->get_csrf_hash(),
+					'message' => strip_tags($this->lang->line('auth_error'))
+				);
+		
+				echo json_encode($message);
 			}
 		}
 		else

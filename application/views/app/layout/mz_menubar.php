@@ -53,10 +53,10 @@
                                             <a href="project-list.html">Add new</a>
                                         </li>
                                         <li>
-                                            <a href="project-detail.html">List Article</a>
+                                            <a href="project-detail.html">List Articles</a>
                                         </li>
                                         <li>
-                                            <a href="project-detail.html">Category</a>
+                                            <a href="<?php echo base_url('webadmin/posts/category/create/articles');?>">Category</a>
                                         </li>
                                         <li>
                                             <a href="project-detail.html">Tags</a>

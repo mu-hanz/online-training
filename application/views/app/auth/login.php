@@ -114,7 +114,6 @@
         <script src="<?php echo base_url('assets/aform/jquery.form.min.js') ;?>"></script>
         <script src="<?php echo base_url('assets/app/js/blockUI.min.js') ;?>"></script>
         <script src="<?php echo base_url('assets/sweetalert/sweetalert2.all.min.js') ;?>"></script>
-        <script src="<?php echo base_url('assets/pjax/pjax.min.js') ;?>"></script>
         <script src="<?php echo base_url('assets/app/js/app.min.js') ;?>"></script>
         <script src="<?php echo base_url('assets/app/js/pages/login.init.js') ;?>"></script>
     </body>

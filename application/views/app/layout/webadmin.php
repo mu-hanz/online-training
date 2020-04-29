@@ -25,9 +25,9 @@
     </head>
 
 <body data-layout="topnav">
-<div>
+
     <!-- Load Dynamically CSS -->
-    <div css-majax>
+    <div class="css-majax">
         <?php foreach($css as $file){ echo "\n\t\t"; ?>
             <link rel="stylesheet" href="<?php echo $file; ?>" type="text/css"/>
         <?php } echo "\n\t"; ?>
@@ -46,8 +46,8 @@
         <!-- End Menubar -->
 
         <!-- Content -->
-        <div class="content-page">
-            <div class="content" id="ajax-content">    
+        <div class="content-page ajax-content" >
+            <div class="content ajax-content-child">    
                 <?php echo $output;?>
             </div>
         </div>
@@ -73,24 +73,25 @@
     <script src="<?php echo base_url('assets/app/js/moment-with-locales.min.js') ;?>"></script>
 
     <!-- optional plugins -->
-    <script src="<?php echo base_url('assets/pjax/pjax.min.js') ;?>"></script>
+    <script src="<?php echo base_url('assets/pjax/pjax.js') ;?>"></script>
     <script src="<?php echo base_url('assets/aform/jquery.form.min.js') ;?>"></script>
     <script src="<?php echo base_url('assets/app/js/blockUI.min.js') ;?>"></script>
 
     <!-- App js -->
-    <script src="<?php echo base_url('assets/app/js/app.js') ;?>"></script>
+    <script src="<?php echo base_url('assets/app/js/app.min.js') ;?>"></script>
+    
+    <script data-pace-options='{ "ajax": false }' src='<?php echo base_url('assets/app/js/pace.min.js') ;?>'></script>
     <script src="<?php echo base_url('assets/scripts/mz.pjax.js') ;?>"></script>
-  
 
     <!-- Load Dynamically JS -->
-    <div js-majax>
+    <div class="js-majax">
         <?php foreach($js as $file){ echo "\n\t\t"; ?>
         <script src="<?php echo $file; ?>"></script>
         <?php } echo "\n\t"; ?>
         <script src="<?php echo base_url('assets/scripts/mz.core.js') ;?>"></script>
     </div>
     <!-- End Load Dynamically JS -->
-            </div>
+
     </body>
 </html>
 
