@@ -17,9 +17,10 @@ function showResponse(data) {
         $('#mz-csrf').val(data.csrf_hash);
         $('.data-loading').unblock();
     } else {
-        setTimeout(function() {
-            window.location.replace(data.url)
-        }, 2000);
+
+		setTimeout(() => window.location.href = '/webadmin', 2000)
+		
+
     }
       
 }

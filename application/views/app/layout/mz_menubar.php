@@ -12,12 +12,18 @@
                                         <span> Dashboard </span>
                                     </a>
                                 </li>
-                                <li class="menu-title">Manage Order</li>
-
                                 <li>
-                                <a href="javascript: void(0);">
+                                    <a href="<?php echo base_url('webadmin/dashboard/starter');?>">
                                         <i data-feather="shopping-cart"></i>
+                                        <span class="badge badge-success float-right">1</span>
                                         <span> Manage Order </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript: void(0);">
+                                        <i data-feather="calendar"></i>
+                                        <span> Events </span>
+                                        <span class="menu-arrow"></span>
                                     </a>
     
                                     <ul class="nav-second-level" aria-expanded="false">
@@ -25,21 +31,12 @@
                                             <a href="project-list.html">Add new</a>
                                         </li>
                                         <li>
-                                            <a href="project-detail.html">List Article</a>
+                                            <a href="project-detail.html">List Events</a>
                                         </li>
                                         <li>
-                                            <a href="project-detail.html">Category</a>
-                                        </li>
-                                        <li>
-                                            <a href="project-detail.html">Tags</a>
+                                            <a href="<?php echo base_url('webadmin/posts/category/create/events');?>">Category</a>
                                         </li>
                                     </ul>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('webadmin/dashboard/starter');?>">
-                                        <i data-feather="calendar"></i>
-                                        <span> Events </span>
-                                    </a>
                                 </li>
                                 <li>
                                     <a href="javascript: void(0);">
@@ -72,14 +69,13 @@
     
                                     <ul class="nav-second-level" aria-expanded="false">
                                         <li>
-                                            <a href="task-list.html">List</a>
+                                            <a href="task-list.html">Add Pages</a>
                                         </li>
                                         <li>
-                                            <a href="task-board.html">Kanban Board</a>
+                                            <a href="task-board.html">List Pages</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="menu-title">Custom</li>
                                 <li>
                                     <a href="javascript: void(0);">
                                         <i data-feather="percent"></i>
@@ -88,44 +84,22 @@
                                     </a>
                                     <ul class="nav-second-level" aria-expanded="false">
                                         <li>
-                                            <a href="pages-starter.html">Starter</a>
+                                            <a href="#">Campaign</a>
                                         </li>
                                         <li>
-                                            <a href="pages-profile.html">Profile</a>
+                                            <a href="#">Voucher</a>
                                         </li>
                                         <li>
-                                            <a href="pages-activity.html">Activity</a>
+                                            <a href="#">Flexi Combo</a>
                                         </li>
                                         <li>
-                                            <a href="pages-invoice.html">Invoice</a>
+                                            <a href="#">Slider</a>
                                         </li>
                                         <li>
-                                            <a href="pages-pricing.html">Pricing</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-maintenance.html">Maintenance</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-login.html">Login</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-register.html">Register</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-recoverpw.html">Recover Password</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-confirm-mail.html">Confirm</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-404.html">Error 404</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-500.html">Error 500</a>
+                                            <a href="#">Banner</a>
                                         </li>
                                     </ul>
                                 </li>
-
                                 <li>
                                     <a href="javascript: void(0);">
                                         <i data-feather="archive"></i>
@@ -134,34 +108,13 @@
                                     </a>
                                     <ul class="nav-second-level" aria-expanded="false">
                                         <li>
-                                            <a href="layouts-horizontal.html">Horizontal Nav</a>
+                                            <a href="#">Orders</a>
                                         </li>
                                         <li>
-                                            <a href="layouts-rtl.html">RTL</a>
-                                        </li>
-                                        <li>
-                                            <a href="layouts-dark.html">Dark</a>
-                                        </li>
-                                        <li>
-                                            <a href="layouts-scrollable.html">Scrollable</a>
-                                        </li>
-                                        <li>
-                                            <a href="layouts-boxed.html">Boxed</a>
-                                        </li>
-                                        <li>
-                                            <a href="layouts-preloader.html">With Pre-loader</a>
-                                        </li>
-                                        <li>
-                                            <a href="layouts-dark-sidebar.html">Dark Side Nav</a>
-                                        </li>
-                                        <li>
-                                            <a href="layouts-condensed.html">Condensed Nav</a>
+                                            <a href="#">Referals</a>
                                         </li>
                                     </ul>
                                 </li>
-
-                                <li class="menu-title">Settings</li>
-
                                 <li>
                                     <a href="javascript: void(0);">
                                         <i data-feather="settings"></i>
@@ -170,23 +123,16 @@
                                     </a>
                                     <ul class="nav-second-level" aria-expanded="false">
                                         <li>
-                                            <a href="components-bootstrap.html">Bootstrap UI</a>
+                                            <a href="#">General</a>
                                         </li>
                                         <li>
-                                            <a href="javascript: void(0);" aria-expanded="false">Icons
-                                                <span class="menu-arrow"></span>
-                                            </a>
-                                            <ul class="nav-third-level" aria-expanded="false">
-                                                <li>
-                                                    <a href="icons-feather.html">Feather Icons</a>
-                                                </li>
-                                                <li>
-                                                    <a href="icons-unicons.html">Unicons Icons</a>
-                                                </li>
-                                            </ul>
+                                            <a href="#">Email</a>
                                         </li>
                                         <li>
-                                            <a href="widgets.html">Widgets</a>
+                                            <a href="#">Invoice</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Accounts</a>
                                         </li>
                                     </ul>
                                 </li>

@@ -122,9 +122,38 @@
             </li>
 
             <li class="dropdown notification-list" data-toggle="tooltip" data-placement="bottom" title="Settings">
-                <a href="javascript:void(0);" class="nav-link right-bar-toggle">
+                <a href="javascript:void(0);" class="nav-link right-bar-toggle" data-toggle="dropdown" href="#" role="button"
+                    aria-haspopup="false" aria-expanded="false">
                     <i data-feather="settings"></i>
                 </a>
+                <div class="dropdown-menu profile-dropdown-items dropdown-menu-right">
+                    <a href="pages-profile.html" class="dropdown-item notify-item">
+                        <i data-feather="user" class="icon-dual icon-xs mr-2"></i>
+                        <span>My Account</span>
+                    </a>
+
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <i data-feather="settings" class="icon-dual icon-xs mr-2"></i>
+                        <span>Settings</span>
+                    </a>
+
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <i data-feather="help-circle" class="icon-dual icon-xs mr-2"></i>
+                        <span>Support</span>
+                    </a>
+
+                    <a href="pages-lock-screen.html" class="dropdown-item notify-item">
+                        <i data-feather="lock" class="icon-dual icon-xs mr-2"></i>
+                        <span>Lock Screen</span>
+                    </a>
+
+                    <div class="dropdown-divider"></div>
+
+                    <a href="<?php echo base_url('webadmin/auth/auth/logout');?>" class="dropdown-item notify-item">
+                        <i data-feather="log-out" class="icon-dual icon-xs mr-2"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
             </li>
 
             <li class="dropdown notification-list align-self-center profile-dropdown">

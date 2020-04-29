@@ -76,8 +76,7 @@ class Terms_m extends CI_Model
 
     public function delete_term($id)
     {
-        $this->db->where_in('term_id', $id);
-        return $this->db->delete('terms');
+        return $this->db->delete('terms', array('term_id' => $id));
     }
 
     public function get_terms($term, $parent = false)
@@ -92,7 +91,9 @@ class Terms_m extends CI_Model
         if ($parent != '') {
             $this->db->where('term_taxonomy.parent', $parent);
         }
-        
+
+
+
         $this->db->order_by('terms.term_id', 'desc');
         $this->db->group_by('terms.term_id');
         return $this->db->get();
@@ -110,13 +111,11 @@ class Terms_m extends CI_Model
         return $this->db->get();
     }
 
-    public function edit_term($id, $table)
+    public function edit_term($id)
     {
-		$this->db->cache_off();
         $this->db->select('*');
         $this->db->from('terms');
         $this->db->join('term_taxonomy', 'term_taxonomy.term_id = terms.term_id', 'left');
-        $this->db->where('term_taxonomy.taxonomy', $table);
         $this->db->where('terms.term_id', $id);
         return $this->db->get()->row();
     }
@@ -146,20 +145,25 @@ class Terms_m extends CI_Model
 
     public function update_to_uncategorized($type)
     {
-        if ($type == 'product') {
-            $terms_id = '1';
+   
+        $terms_id = '1'; // default
+
+        if ($type == 'category-products') {
+            $table = 'products';
+            $table_id = 'id_product';
         } else {
-            $terms_id = '0';
+            $table = 'posts';
+            $table_id = 'id_post';
         }
 
         $this->db->select('*');
-        $this->db->from('products');
+        $this->db->from($table);
         $data_post = $this->db->get()->result();
 
         foreach ($data_post as $data) {
             $this->db->select('*');
             $this->db->from('term_relationships');
-            $this->db->where('object_id', $data->product_id);
+            $this->db->where('object_id', $data->$table_id);
             $check = $this->db->get()->num_rows();
 
             if ($check <= 0) {

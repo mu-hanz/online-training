@@ -16,14 +16,58 @@ var muhanz = (function(muhanz) {
 		color: '#9ea5ab'
 	});
 
+
+	// For check element
+	$.fn.exists = function(callback) {
+		var args = [].slice.call(arguments, 1);
+		if (this.length) {
+			callback.call(this, args);
+		}
+		return this;
+	};
+
 	
   muhanz = {
       afterDOMReady: function() {
+		  this.getcsrf();
 		  this.activeNav();
+		  this.DataTable();
       },
 
+		getcsrf: function(name) {
+			var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+			return v ? v[2] : null;
+		},
 
-      activeNav: function() {
+		DataTable: function(name) {
+			$('#datatable').exists(function() {
+				this.DataTable({
+
+					ordering: false,
+					autoWidth: false,
+					initComplete: function () {
+						$('.show-table').fadeIn();
+					},
+					columnDefs: [{
+						orderable: false,
+						targets: [0]
+					}],
+							
+					language: {
+						paginate: {
+							previous: "<i class='uil uil-angle-left'>",
+							next: "<i class='uil uil-angle-right'>"
+						}
+					},
+					drawCallback: function() {
+						$(".dataTables_paginate > .pagination").addClass("pagination-rounded")
+					}
+				});
+			})
+		},
+
+
+      	activeNav: function() {
 		$(".mz-menu a").each(function() {
 			if (this.href == window.location.href) {
 					$(this).parent().removeClass("active");

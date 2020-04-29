@@ -26,6 +26,19 @@ var pjax = new Pjax({
 	}
 })
 
+
+var pjaxS = new Pjax({
+    elements: [".mlinks"],
+    cacheBust: false,
+    history: false,
+    debug: false,
+    currentUrlFullReload: false, //jika di klik lagi link yg sama maka akan melakukan reload
+	selectors: ["title",".css-majax", ".js-majax", ".ajax-content"],
+	switches: {
+		  ".ajax-content": Pjax.switches.outerHTML
+    }
+})
+
   
 // Loading Block init
 function loadingPage() {
@@ -78,8 +91,8 @@ function showResponse(data) {
       })
 	
 	// pjax load page
-	pjax.options.requestOptions = {}
-	pjax.loadUrl(data.url, $.extend({}, pjax.options))
+	pjaxS.options.requestOptions = {}
+	pjaxS.loadUrl(data.url, $.extend({}, pjaxS.options))
 }
 
 function showRequest() {

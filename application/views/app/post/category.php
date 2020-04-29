@@ -37,17 +37,24 @@
                             <textarea class="form-control" name="description"><?php echo $description;?></textarea>
                             <small id="emailHelp" class="form-text text-muted">Keterangan Kategori. Opsional</small>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="form-group float-right">
+                        
+                        <?php if($cancel): ?>
+                            <a href="<?php echo $cancel; ?>"
+                                class="btn btn-danger mlinks">Cancel</a>
+                        <?php endif ?>
+                        <button type="submit" class="btn btn-primary"><?php echo ($cancel ? 'Update' : 'Save');?></button>
+                        </div>
                     </form>
 
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div>
         <div class="col-xl-8">
-            <div class="card">
+            <div class="card <?php if($cancel): echo 'box-disable'; endif ?>">
                 <div class="card-body">
-                <div class="table-responsive show-table <?php if($cancel): echo 'box-disable'; endif ?>">
-                    <table id="datatable" class="table table-hover" cellspacing="0" border="0">
+                <div class="table-responsive show-table">
+                    <table id="datatable" class="table table-hover">
                         <thead>
                         <tr>
                         <th width="200px">Category Name</th>
@@ -62,11 +69,11 @@
                                     <td>
                                     <strong><?php echo $category->name;?></strong>
                                     <div class="row-action" id="<?php echo 'action'.$no;?>">
-                                        <span><a class="ajax-link" href="<?php echo site_url('webadmin/post/edit_category/post/'.$category->term_id) ?>">Edit</a></span>
+                                        <span><a class="mlinks" href="<?php echo site_url('webadmin/posts/category/edit/'.$type.'/'.$category->term_id) ?>">Edit</a></span>
                                         <?php if($category->term_id != '1'){ ?>
-                                        <span><a class="del ajax-link" href="<?php echo site_url('webadmin/post/delete_category/post/'.$category->term_id) ?>">Delete</a></span>
+                                        <span><a href="javascript:void(0)" class="del mlink" term_url="webadmin/posts/category/delete" term_type="articles" term_id="<?php echo $category->term_id;?>">Delete</a></span>
                                         <?php } ?>
-                                        <span><a href="<?php echo site_url('webadmin/blog/category/'.$category->slug) ?>"  target="_blank">View</a></span>
+                                        <span><a href="<?php echo site_url($type.'/category/'.$category->slug) ?>"  target="_blank">View</a></span>
                                     </div>
                                     </td>
                                     <td>
@@ -76,23 +83,23 @@
                                     <?php echo $category->slug;  ?>
                                     </td>
                                     <td>
-                                    <a class="ajax-link" href="<?php echo site_url('webadmin/post?type=blog&filter='.$category->slug) ?>" ><?php echo $category->count;  ?></a>
+                                    <a class="mlink" href="<?php echo site_url('webadmin/post?type='.$type.'&filter='.$category->slug) ?>" ><?php echo $category->count;  ?></a>
                                     
                                     </td>
                                 </tr>
 
                                 <?php 
-                                $data_term_parent = $this->Terms_m->get_terms('category-articles', $category->term_id)->result();
+                                $data_term_parent = $this->Terms_m->get_terms('category-'.$type, $category->term_id)->result();
                                         foreach($data_term_parent as $category_parent) { ?>
                                 <tr  class="row-cat" id="<?php echo $no;?>">
                                     <td>
                                     <strong><?php echo '— '.$category_parent->name; ?></strong>
                                     <div class="row-action" id="<?php echo 'action'.$no;?>">
-                                        <span><a class="ajax-link" href="<?php echo site_url('webadmin/post/edit_category/post/'.$category_parent->term_id) ?>">Edit</a></span>
+                                        <span><a class="mlinks" href="<?php echo site_url('webadmin/posts/category/edit/'.$type.'/'.$category->term_id) ?>">Edit</a></span>
                                         <?php if($category_parent->term_id != '1'){ ?>
-                                        <span><a class="del ajax-link" href="<?php echo site_url('webadmin/post/delete_category/post/'.$category_parent->term_id) ?>">Delete</a></span>
+                                            <span><a href="javascript:void(0)" class="del mlink" term_url="webadmin/posts/category/delete" term_type="articles" term_id="<?php echo $category_parent->term_id;?>">Delete</a></span>
                                         <?php } ?>
-                                        <span><a href="<?php echo site_url('webadmin/blog/category/'.$category_parent->slug) ?>"  target="_blank">View</a></span>
+                                        <span><a href="<?php echo site_url($type.'/category/'.$category_parent->slug) ?>"  target="_blank">View</a></span>
                                     </div>
                                     </td>
                                     <td>
@@ -102,7 +109,7 @@
                                     <?php echo $category_parent->slug;  ?>
                                     </td>
                                     <td>
-                                    <a class="ajax-link" href="<?php echo site_url('webadmin/post?type=blog&filter='.$category_parent->slug) ?>" ><?php echo $category_parent->count;  ?></a>
+                                    <a class="mlink" href="<?php echo site_url('webadmin/post?type='.$type.'&filter='.$category_parent->slug) ?>" ><?php echo $category_parent->count;  ?></a>
                                     </td>
                                 </tr>
                                 <?php } ?>

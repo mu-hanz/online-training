@@ -11,7 +11,7 @@ class Dashboard extends CI_Controller {
 		// Check Login
 		if(!$this->ion_auth->logged_in()) { 
             $this->session->set_userdata('redirect_login', current_url());
-            redirect('webadmin/login'); 
+            redirect('webadmin/login', 'refresh'); 
 		}
 		
 		$this->load->model('dashboard_m');
