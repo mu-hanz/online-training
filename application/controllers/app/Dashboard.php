@@ -41,10 +41,21 @@ class Dashboard extends CI_Controller {
 
 	public function starter()
 	{
+		$da = array (
+			'url' => base_url('submit'),
+			'name' => 'Muhanz'
+		);
+		$ct = "Nama saya {{setData.name}} hasil dari ganerate shortcode {{code}}";
+		$data = array(
+			'content_use_tpl' => $this->mustache->parser_tpl('index', $this->mustache->parser_tpl('form', $da)),
+			'content_not_tpl' => $this->mustache->parser($ct, $da)
+		);
+		
 		$this->output->set_title($this->muhanz->app_title('Starter'));
 
+		$this->load->view('app/starter1', $data);
 		// Load View
-		$this->load->view('app/starter');
+		
 	}
 
 	public function starter1()

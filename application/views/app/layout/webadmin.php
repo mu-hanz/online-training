@@ -16,10 +16,18 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href="<?php echo base_url('assets/app/images/favicon.png') ;?>">
 
+        <?php if($this->input->cookie('themes') == 'dark'){
+            $bsCss = base_url('assets/app/css/bootstrap-dark.min.css');
+            $appCss = base_url('assets/app/css/app-dark.min.css');
+        } else {
+            $bsCss = base_url('assets/app/css/bootstrap.min.css');
+            $appCss = base_url('assets/app/css/app.min.css');
+        }
+        ?>
         <!-- App css -->
-        <link href="<?php echo base_url('assets/app/css/bootstrap.min.css') ;?>" rel="stylesheet" type="text/css" />
+        <link href="<?php echo $bsCss;?>" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url('assets/app/css/icons.min.css') ;?>" rel="stylesheet" type="text/css" />
-        <link href="<?php echo base_url('assets/app/css/app.min.css') ;?>" rel="stylesheet" type="text/css" />
+        <link href="<?php echo $appCss;?>" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url('assets/app/css/styles.css') ;?>" rel="stylesheet" type="text/css" />
 
     </head>

@@ -4,8 +4,11 @@
   letter-spacing: 1px;
   margin-top: 29px;
   vertical-align: bottom;
-  color: #4b4b5a;
   font-size: 16px;
+}
+
+.topbar-nav .metismenu li a {
+  font-size: 0.95rem;
 }
 
 .spinner > div {
@@ -387,4 +390,8 @@ display: none;
 	pointer-events: none;
   opacity: 0.4;
 background-color: rgba(0, 0, 0, 0.1);
+}
+
+.navbar-custom .button-menu-mobile {
+  width:auto;
 }

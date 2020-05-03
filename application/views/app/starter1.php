@@ -9,7 +9,9 @@
                     <li class="breadcrumb-item active" aria-current="page">Starter</li>
                 </ol>
             </nav>
-            <h4 class="mb-1 mt-0">Starter Page</h4>
+            <?php echo $content_use_tpl;?><br>
+            <?php echo $content_not_tpl;?>
+        
         </div>
     </div>
 </div> <!-- container-fluid -->

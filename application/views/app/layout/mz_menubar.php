@@ -28,13 +28,46 @@
     
                                     <ul class="nav-second-level" aria-expanded="false">
                                         <li>
-                                            <a href="project-list.html">Add new</a>
+                                            <a href="<?php echo base_url('webadmin/posts/events/create/events');?>">New Event</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo base_url('webadmin/posts/events/create/content');?>">New Content</a>
                                         </li>
                                         <li>
                                             <a href="project-detail.html">List Events</a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo base_url('webadmin/posts/category/create/events');?>">Category</a>
+                                            <a href="<?php echo base_url('webadmin/posts/terms/create/events');?>">Category</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo base_url('webadmin/posts/terms/create/events-type');?>">Type</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo base_url('webadmin/posts/terms/create/certification');?>">Certificate</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo base_url('webadmin/posts/terms/create/location');?>">Location</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo base_url('webadmin/posts/terms/create/regional');?>">Regional</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript: void(0);">
+                                        <i data-feather="package"></i>
+                                        <span> Products </span>
+                                        <span class="menu-arrow"></span>
+                                    </a>
+                                    <ul class="nav-second-level" aria-expanded="false">
+                                        <li>
+                                            <a href="project-list.html">Add new</a>
+                                        </li>
+                                        <li>
+                                            <a href="project-detail.html">List Products</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo base_url('webadmin/posts/terms/create/products');?>">Category</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -53,7 +86,7 @@
                                             <a href="project-detail.html">List Articles</a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo base_url('webadmin/posts/category/create/articles');?>">Category</a>
+                                            <a href="<?php echo base_url('webadmin/posts/terms/create/articles');?>">Category</a>
                                         </li>
                                         <li>
                                             <a href="project-detail.html">Tags</a>
@@ -78,7 +111,7 @@
                                 </li>
                                 <li>
                                     <a href="javascript: void(0);">
-                                        <i data-feather="percent"></i>
+                                        <i data-feather="volume-2"></i>
                                         <span> Promotion </span>
                                         <span class="menu-arrow"></span>
                                     </a>
@@ -112,27 +145,6 @@
                                         </li>
                                         <li>
                                             <a href="#">Referals</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="javascript: void(0);">
-                                        <i data-feather="settings"></i>
-                                        <span> Settings </span>
-                                        <span class="menu-arrow"></span>
-                                    </a>
-                                    <ul class="nav-second-level" aria-expanded="false">
-                                        <li>
-                                            <a href="#">General</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Email</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Invoice</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Accounts</a>
                                         </li>
                                     </ul>
                                 </li>

@@ -16,12 +16,12 @@
                 <form role="form" class="ajaxForm" method="post" action="<?php echo $action; ?>" enctype="multipart/form-data">
                         <input type="hidden" id="csrftoken" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
                         <div class="form-group">
-                            <label >Nama</label>
-                            <input type="text" class="name_tax form-control" name="name" value="<?php echo $name;?>">
-                            <small id="emailHelp" class="form-text text-muted">Nama kategori yang akan muncul di situs.</small>
+                            <label >Name</label>
+                            <input type="text" class="name_tax form-control" name="name" value="<?php echo $name;?>" required>
                         </div>
+                        <?php if($type != 'events-type' && $type != 'certification'): ?>
                         <div class="form-group">
-                            <label >Kategori Induk</label>
+                            <label >Parent</label>
                             <select class="form-control" name="parent">
                             <option value="0"></option>
                             <?php foreach ($data_term as $category): ?>
@@ -32,10 +32,11 @@
                             </select>
                             <small id="emailHelp" class="form-text text-muted">Kategori Induk dapat memiliki hierarki. Misal Musik dan di bawahnya ada kategori Pop, Jazz. Opsional.</small>
                         </div>
+                        <?php endif;?>
                         <div class="form-group">
-                            <label for="namakategori">Deskripsi</label>
+                            <label for="namakategori">Description</label>
                             <textarea class="form-control" name="description"><?php echo $description;?></textarea>
-                            <small id="emailHelp" class="form-text text-muted">Keterangan Kategori. Opsional</small>
+                            <small id="emailHelp" class="form-text text-muted">Opsional</small>
                         </div>
                         <div class="form-group float-right">
                         
@@ -57,10 +58,12 @@
                     <table id="datatable" class="table table-hover">
                         <thead>
                         <tr>
-                        <th width="200px">Category Name</th>
+                        <th width="200px">Name</th>
                         <th>Description</th>
+                        <?php if($type != 'events-type' && $type != 'certification'): ?>
                         <th>Slug</th>
                         <th width="35px">Count</th>
+                        <?php endif;?>
                         </tr>
                         </thead>
                         <tbody class="body-row">
@@ -69,16 +72,16 @@
                                     <td>
                                     <strong><?php echo $category->name;?></strong>
                                     <div class="row-action" id="<?php echo 'action'.$no;?>">
-                                        <span><a class="mlinks" href="<?php echo site_url('webadmin/posts/category/edit/'.$type.'/'.$category->term_id) ?>">Edit</a></span>
-                                        <?php if($category->term_id != '1'){ ?>
-                                        <span><a href="javascript:void(0)" class="del mlink" term_url="webadmin/posts/category/delete" term_type="articles" term_id="<?php echo $category->term_id;?>">Delete</a></span>
+                                        <span><a class="mlinks" href="<?php echo site_url('webadmin/posts/terms/edit/'.$type.'/'.$category->term_id) ?>">Edit</a></span>
+                                        <?php if($category->term_id != '1' && $type != 'events-type' && $type != 'certification'){ ?>
+                                        <span><a href="javascript:void(0)" class="del mlink" term_url="webadmin/posts/terms/delete" term_type="articles" term_id="<?php echo $category->term_id;?>">Delete</a></span>
                                         <?php } ?>
-                                        <span><a href="<?php echo site_url($type.'/category/'.$category->slug) ?>"  target="_blank">View</a></span>
                                     </div>
                                     </td>
                                     <td>
                                     <?php if($category->description == ''){ echo '—'; } else { echo $category->description; }?>
                                     </td>
+                                    <?php if($type != 'events-type' && $type != 'certification'): ?>
                                     <td>
                                     <?php echo $category->slug;  ?>
                                     </td>
@@ -86,6 +89,7 @@
                                     <a class="mlink" href="<?php echo site_url('webadmin/post?type='.$type.'&filter='.$category->slug) ?>" ><?php echo $category->count;  ?></a>
                                     
                                     </td>
+                                    <?php endif;?>
                                 </tr>
 
                                 <?php 
@@ -95,22 +99,24 @@
                                     <td>
                                     <strong><?php echo '— '.$category_parent->name; ?></strong>
                                     <div class="row-action" id="<?php echo 'action'.$no;?>">
-                                        <span><a class="mlinks" href="<?php echo site_url('webadmin/posts/category/edit/'.$type.'/'.$category->term_id) ?>">Edit</a></span>
-                                        <?php if($category_parent->term_id != '1'){ ?>
-                                            <span><a href="javascript:void(0)" class="del mlink" term_url="webadmin/posts/category/delete" term_type="articles" term_id="<?php echo $category_parent->term_id;?>">Delete</a></span>
+                                        <span><a class="mlinks" href="<?php echo site_url('webadmin/posts/terms/edit/'.$type.'/'.$category->term_id) ?>">Edit</a></span>
+                                        <?php if($category->term_id != '1' && $type != 'events-type' && $type != 'certification'){ ?>
+                                            <span><a href="javascript:void(0)" class="del mlink" term_url="webadmin/posts/terms/delete" term_type="articles" term_id="<?php echo $category_parent->term_id;?>">Delete</a></span>
                                         <?php } ?>
-                                        <span><a href="<?php echo site_url($type.'/category/'.$category_parent->slug) ?>"  target="_blank">View</a></span>
+                                        
                                     </div>
                                     </td>
                                     <td>
                                     <?php if($category_parent->description == ''){ echo '—'; } else { echo $category_parent->description; }?>
                                     </td>
+                                    <?php if($type != 'events-type' && $type != 'certification'): ?>
                                     <td>
                                     <?php echo $category_parent->slug;  ?>
                                     </td>
                                     <td>
                                     <a class="mlink" href="<?php echo site_url('webadmin/post?type='.$type.'&filter='.$category_parent->slug) ?>" ><?php echo $category_parent->count;  ?></a>
                                     </td>
+                                    <?php endif;?>
                                 </tr>
                                 <?php } ?>
                                 <?php $no++; } ?>

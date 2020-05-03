@@ -1,5 +1,6 @@
 var muhanz = (function(muhanz) {
   "use strict";
+  	var base_url = window.location.origin;
 
     $.fn.tooltip && $('[data-toggle="tooltip"]').tooltip();
    
@@ -26,6 +27,33 @@ var muhanz = (function(muhanz) {
 		return this;
 	};
 
+	$(document).on('change','.changeThemes',function(){
+
+		
+		if($(this).is(':checked'))
+		{
+			var val = '1';
+		}
+		else
+		{
+			var val = '0';
+		}
+
+		var csrf =  muhanz.getcsrf("mz_cookie");
+          $.ajax({
+              url: base_url + '/webadmin/settings/change_themes',
+              type: 'POST',
+              data: {
+                  'themes': val,
+                  'mz_token': csrf
+              },
+              success: function() {
+				window.location.href
+				setTimeout(() => window.location.reload());
+              }
+          });
+	});
+
 	
   muhanz = {
       afterDOMReady: function() {
@@ -33,13 +61,13 @@ var muhanz = (function(muhanz) {
 		  this.activeNav();
 		  this.DataTable();
       },
-
-		getcsrf: function(name) {
+		  
+	  	getcsrf: function(name) {
 			var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
 			return v ? v[2] : null;
 		},
 
-		DataTable: function(name) {
+		DataTable: function() {
 			$('#datatable').exists(function() {
 				this.DataTable({
 

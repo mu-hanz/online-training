@@ -4,7 +4,7 @@
         <!-- LOGO -->
         <a href="<?php echo base_url('webadmin');?>" class="navbar-brand mr-0 mr-md-2 logo mlink">
             <span class="logo-lg">
-                <img src="<?php echo base_url('assets/app/images/logo.png');?>" alt="" height="24" />
+                <img src="<?php echo base_url('assets/app/images/'.($this->input->cookie('themes') == 'dark' ? 'logo-dark.png' : 'logo.png'));?>" alt="" height="24" />
                 <span class="d-inline h5 ml-1 text-logo"><?php echo $this->config->item('system_name');?></span>
             </span>
             <span class="logo-sm">
@@ -23,7 +23,7 @@
 
         <ul class="navbar-nav flex-row ml-auto d-flex list-unstyled topnav-menu float-right mb-0">
             <li class="d-none d-sm-block">
-                <div class="app-search">
+                <div class="app-search mr-4 pr-3">
                     <form>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search...">
@@ -32,7 +32,14 @@
                     </form>
                 </div>
             </li>
-
+            <li class="dropdown notification-list">
+                <a class="nav-link right-bar-toggle ml-2">
+                    <div class="custom-control custom-switch nav-link">
+                        <input type="checkbox" class="custom-control-input changeThemes" id="switchThemes" <?php echo ($this->input->cookie('themes') == 'dark' ? 'checked' : '');?>>
+                        <label class="custom-control-label" for="switchThemes" style="display:inline"><?php echo ($this->input->cookie('themes') == 'dark' ? 'Light <span class="d-none d-md-inline">Mode</span>' : 'Dark <span class="d-none d-md-inline">Mode</span>');?></label>
+                    </div>
+                </a>
+            </li>
             <li class="dropdown notification-list" data-toggle="tooltip" data-placement="left"
                 title="8 new unread notifications">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
@@ -121,37 +128,34 @@
                 </div>
             </li>
 
-            <li class="dropdown notification-list" data-toggle="tooltip" data-placement="bottom" title="Settings">
+            <li class="dropdown notification-list">
                 <a href="javascript:void(0);" class="nav-link right-bar-toggle" data-toggle="dropdown" href="#" role="button"
                     aria-haspopup="false" aria-expanded="false">
                     <i data-feather="settings"></i>
                 </a>
                 <div class="dropdown-menu profile-dropdown-items dropdown-menu-right">
-                    <a href="pages-profile.html" class="dropdown-item notify-item">
+                    <a href="<?php echo base_url('webadmin/settings/general');?>" class="dropdown-item notify-item">
+                        <i data-feather="monitor" class="icon-dual icon-xs mr-2"></i>
+                        <span>General</span>
+                    </a>
+
+                    <a href="<?php echo base_url('webadmin/settings/emails');?>" class="dropdown-item notify-item">
+                        <i data-feather="mail" class="icon-dual icon-xs mr-2"></i>
+                        <span>Email</span>
+                    </a>
+
+                    <a href="<?php echo base_url('webadmin/settings/invoice');?>" class="dropdown-item notify-item">
+                        <i data-feather="file-text" class="icon-dual icon-xs mr-2"></i>
+                        <span>Invoice</span>
+                    </a>
+
+                    <a href="<?php echo base_url('webadmin/users');?>" class="dropdown-item notify-item">
                         <i data-feather="user" class="icon-dual icon-xs mr-2"></i>
-                        <span>My Account</span>
+                        <span>Users</span>
                     </a>
-
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i data-feather="settings" class="icon-dual icon-xs mr-2"></i>
-                        <span>Settings</span>
-                    </a>
-
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i data-feather="help-circle" class="icon-dual icon-xs mr-2"></i>
-                        <span>Support</span>
-                    </a>
-
-                    <a href="pages-lock-screen.html" class="dropdown-item notify-item">
-                        <i data-feather="lock" class="icon-dual icon-xs mr-2"></i>
-                        <span>Lock Screen</span>
-                    </a>
-
-                    <div class="dropdown-divider"></div>
-
-                    <a href="<?php echo base_url('webadmin/auth/auth/logout');?>" class="dropdown-item notify-item">
-                        <i data-feather="log-out" class="icon-dual icon-xs mr-2"></i>
-                        <span>Logout</span>
+                    <a href="<?php echo base_url('webadmin/users/groups');?>" class="dropdown-item notify-item">
+                    <i data-feather="users" class="icon-dual icon-xs mr-2"></i>
+                        <span>Groups</span>
                     </a>
                 </div>
             </li>
@@ -175,22 +179,10 @@
                         <i data-feather="user" class="icon-dual icon-xs mr-2"></i>
                         <span>My Account</span>
                     </a>
-
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i data-feather="settings" class="icon-dual icon-xs mr-2"></i>
-                        <span>Settings</span>
-                    </a>
-
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <i data-feather="help-circle" class="icon-dual icon-xs mr-2"></i>
                         <span>Support</span>
                     </a>
-
-                    <a href="pages-lock-screen.html" class="dropdown-item notify-item">
-                        <i data-feather="lock" class="icon-dual icon-xs mr-2"></i>
-                        <span>Lock Screen</span>
-                    </a>
-
                     <div class="dropdown-divider"></div>
 
                     <a href="<?php echo base_url('webadmin/auth/auth/logout');?>" class="dropdown-item notify-item">

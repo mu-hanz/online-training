@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Category extends CI_Controller
+class Terms extends CI_Controller
 {
 
     //---Templating----//
@@ -52,26 +52,32 @@ class Category extends CI_Controller
         $this->load->js('assets/app/libs/datatables/dataTables.responsive.min.js');
         $this->load->js('assets/app/libs/datatables/responsive.bootstrap4.min.js');
         $this->load->js('assets/sweetalert/sweetalert2.all.min.js');
-        $this->load->js('assets/app/js/pages/category.init.js');
+        $this->load->js('assets/app/js/pages/terms.init.js');
 
         if ($type == 'events') {
             $terms = 'category-events';
-            $title = 'Events';
+            $title = 'Events Category';
+        } else if ($type == 'events-type'){
+            $terms = 'events-type';
+            $title = 'Events Type';
         } else if ($type == 'groups'){
             $terms = 'category-groups';
             $title = 'Groups';
         } else if ($type == 'products'){
             $terms = 'category-products';
-            $title = 'Products';
+            $title = 'Products Category';
+        } else if ($type == 'certification'){
+            $terms = 'certification-events';
+            $title = 'Certificate Events';
         } else {
             $terms = 'category-articles';
-            $title = 'Articles';
+            $title = 'Articles Category';
         }
 
         $data = array(
-            'title'       => $title .' Category', 
+            'title'       => $title, 
             'type'        => $type, 
-            'action'      => base_url('webadmin/posts/category/save/' . $type),
+            'action'      => base_url('webadmin/posts/terms/save/' . $type),
             'cancel'      => '',
             'parent'      => '',
             'name'        => '',
@@ -80,13 +86,13 @@ class Category extends CI_Controller
             'data_term'   => $this->Terms_m->get_terms($terms, '0')->result(), // default parent 0
         );
 
-        $this->output->set_title($this->muhanz->app_title($title. ' Category'));
+        $this->output->set_title($this->muhanz->app_title($title));
         // Breadcrumbs
 		$this->breadcrumbs->push('Dashboard', '/webadmin');
 		$this->breadcrumbs->push($title , '/webadmin/posts/'.$type);
-        $this->breadcrumbs->push('Category', '/webadmin/posts/category/create/articles');
+        $this->breadcrumbs->push('Category', '/webadmin/posts/terms/create/articles');
         // View
-        $this->load->view('app/post/category', $data);
+        $this->load->view('app/post/terms', $data);
 
     }
 
@@ -96,12 +102,22 @@ class Category extends CI_Controller
 
         if ($type == 'events') {
             $taxonomy = 'category-events';
+            $title = 'Events Category';
+        } else if ($type == 'events-type'){
+            $taxonomy = 'events-type';
+            $title = 'Events Type';
         } else if ($type == 'groups'){
             $taxonomy = 'category-groups';
+            $title = 'Groups';
         } else if ($type == 'products'){
             $taxonomy = 'category-products';
+            $title = 'Products Category';
+        } else if ($type == 'certification'){
+            $taxonomy = 'certification-events';
+            $title = 'Certificate Events';
         } else {
             $taxonomy = 'category-articles';
+            $title = 'Articles Category';
         }
 
         $data_term = array(
@@ -129,9 +145,9 @@ class Category extends CI_Controller
         $insert_tax = $this->Terms_m->insert_term('term_taxonomy', $data_tax);
 
         if ($insert_term && $insert_tax) {
-            $this->muhanz->success($this->lang->line('save_success'), 'webadmin/posts/category/create/' . $type);
+            $this->muhanz->success($this->lang->line('save_success'), 'webadmin/posts/terms/create/' . $type);
         } else {
-            $this->muhanz->error($this->lang->line('save_error'), 'webadmin/posts/category/create/' . $type);
+            $this->muhanz->error($this->lang->line('save_error'), 'webadmin/posts/terms/create/' . $type);
         }
 
     }
@@ -152,29 +168,35 @@ class Category extends CI_Controller
         $this->load->js('assets/app/libs/datatables/dataTables.responsive.min.js');
         $this->load->js('assets/app/libs/datatables/responsive.bootstrap4.min.js');
         $this->load->js('assets/sweetalert/sweetalert2.all.min.js');
-        $this->load->js('assets/app/js/pages/category.init.js');
+        $this->load->js('assets/app/js/pages/terms.init.js');
 
         if ($type == 'events') {
             $terms = 'category-events';
-            $title = 'Events';
+            $title = 'Events Category';
+        } else if ($type == 'events-type'){
+            $terms = 'events-type';
+            $title = 'Events Type';
         } else if ($type == 'groups'){
             $terms = 'category-groups';
             $title = 'Groups';
         } else if ($type == 'products'){
             $terms = 'category-products';
-            $title = 'Products';
+            $title = 'Products Category';
+        } else if ($type == 'certification'){
+            $terms = 'certification-events';
+            $title = 'Certificate Events';
         } else {
             $terms = 'category-articles';
-            $title = 'Articles';
+            $title = 'Articles Category';
         }
 
         $row = $this->Terms_m->edit_term($id, $terms);
 
         $data = array(
-            'title'       => $title .' Category',
+            'title'       => $title,
             'type'        => $type, 
-            'action'      => base_url('webadmin/posts/category/update/'. $type. '/'. $id),
-            'cancel'      => base_url('webadmin/posts/category/create/' . $type),
+            'action'      => base_url('webadmin/posts/terms/update/'. $type. '/'. $id),
+            'cancel'      => base_url('webadmin/posts/terms/create/' . $type),
             'term_id'     => $id,
             'parent'      => $row->parent,
             'name'        => $row->name,
@@ -185,14 +207,14 @@ class Category extends CI_Controller
 
         );
 
-        $this->output->set_title($this->muhanz->app_title('Edit '. $title. ' Category'));
+        $this->output->set_title($this->muhanz->app_title('Edit '. $title));
         // Breadcrumbs
 		$this->breadcrumbs->push('Dashboard', '/webadmin');
 		$this->breadcrumbs->push($title , '/webadmin/posts/'.$type);
-        $this->breadcrumbs->push('Category', '/webadmin/posts/category/create/'. $type);
-        $this->breadcrumbs->push($row->name, '/webadmin/posts/category/create/articles');
+        $this->breadcrumbs->push('Category', '/webadmin/posts/terms/create/'. $type);
+        $this->breadcrumbs->push($row->name, '/webadmin/posts/terms/create/articles');
         // View
-        $this->load->view('app/post/category', $data);
+        $this->load->view('app/post/terms', $data);
 
     }
 
@@ -200,7 +222,7 @@ class Category extends CI_Controller
     {
         $this->output->unset_template('layout');
 
-        $redirect_url = "webadmin/posts/category/create/". $type;
+        $redirect_url = "webadmin/posts/terms/create/". $type;
 
         $row = $this->Terms_m->edit_term($id);
 
@@ -227,7 +249,7 @@ class Category extends CI_Controller
         $this->output->unset_template();
         
         $id = $this->input->post('term_id');
-        $redirect_url = "webadmin/posts/category/create/". $type;
+        $redirect_url = "webadmin/posts/terms/create/". $type;
         $data = array('parent' => '0');
         if ($this->Terms_m->update_parent($id, $data)) {
             if ($this->Terms_m->delete_term($id)) {

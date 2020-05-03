@@ -134,7 +134,6 @@
                         </li>
                     </ul>
                     <h5 class="card-title mb-0 header-title">Revenue</h5>
-
                     <div id="revenue-chart" class="apex-charts mt-3"  dir="ltr"></div>
                 </div>
             </div>
