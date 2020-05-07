@@ -71,7 +71,28 @@ class Events extends CI_Controller
 		$this->breadcrumbs->push('Events' , '/webadmin/posts/events');
         $this->breadcrumbs->push('Create', '/webadmin/posts/events/create');
         // View
-        $this->load->view('app/post/form_events', $data);
+        $this->load->view('app/post/events_detail', $data);
+
+    }
+
+    public function content()
+    {   
+        $this->load->js('assets/tinymce/tinymce.min.js');
+        $this->load->js('assets/tinymce/tinymce.init.js');
+
+        $title = 'Create New Events';
+
+        $data = array(
+            'title' => $title
+        );
+
+        $this->output->set_title($this->muhanz->app_title($title));
+        // Breadcrumbs
+		$this->breadcrumbs->push('Dashboard', '/webadmin');
+		$this->breadcrumbs->push('Events' , '/webadmin/posts/events');
+        $this->breadcrumbs->push('Content', '/webadmin/posts/events/create/content');
+        // View
+        $this->load->view('app/post/events_content', $data);
 
     }
 

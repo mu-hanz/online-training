@@ -57,26 +57,42 @@ class Terms extends CI_Controller
         if ($type == 'events') {
             $terms = 'category-events';
             $title = 'Events Category';
+            $parent = true;
         } else if ($type == 'events-type'){
             $terms = 'events-type';
             $title = 'Events Type';
+            $parent = false;
         } else if ($type == 'groups'){
             $terms = 'category-groups';
             $title = 'Groups';
+            $parent = false;
         } else if ($type == 'products'){
             $terms = 'category-products';
             $title = 'Products Category';
+            $parent = true;
         } else if ($type == 'certification'){
             $terms = 'certification-events';
             $title = 'Certificate Events';
+            $parent = false;
+        } else if ($type == 'location'){
+            $terms = 'events-location';
+            $title = 'Events Location';
+            $parent = false;
+        } else if ($type == 'regional'){
+            $terms = 'events-regional';
+            $title = 'Events Regional';
+            $parent = false;
         } else {
             $terms = 'category-articles';
             $title = 'Articles Category';
+            $parent = true;
         }
 
         $data = array(
             'title'       => $title, 
             'type'        => $type, 
+            'terms'       => $terms,
+            'is_parent'   => $parent,
             'action'      => base_url('webadmin/posts/terms/save/' . $type),
             'cancel'      => '',
             'parent'      => '',
@@ -115,6 +131,12 @@ class Terms extends CI_Controller
         } else if ($type == 'certification'){
             $taxonomy = 'certification-events';
             $title = 'Certificate Events';
+        } else if ($type == 'location'){
+            $taxonomy = 'events-location';
+            $title = 'Events Location';
+        } else if ($type == 'regional'){
+            $taxonomy = 'events-regional';
+            $title = 'Events Regional';
         } else {
             $taxonomy = 'category-articles';
             $title = 'Articles Category';
@@ -173,21 +195,35 @@ class Terms extends CI_Controller
         if ($type == 'events') {
             $terms = 'category-events';
             $title = 'Events Category';
+            $parent = true;
         } else if ($type == 'events-type'){
             $terms = 'events-type';
             $title = 'Events Type';
+            $parent = false;
         } else if ($type == 'groups'){
             $terms = 'category-groups';
             $title = 'Groups';
+            $parent = false;
         } else if ($type == 'products'){
             $terms = 'category-products';
             $title = 'Products Category';
+            $parent = true;
         } else if ($type == 'certification'){
             $terms = 'certification-events';
             $title = 'Certificate Events';
+            $parent = false;
+        } else if ($type == 'location'){
+            $terms = 'events-location';
+            $title = 'Events Location';
+            $parent = false;
+        } else if ($type == 'regional'){
+            $terms = 'events-regional';
+            $title = 'Events Regional';
+            $parent = false;
         } else {
             $terms = 'category-articles';
             $title = 'Articles Category';
+            $parent = true;
         }
 
         $row = $this->Terms_m->edit_term($id, $terms);
@@ -195,6 +231,8 @@ class Terms extends CI_Controller
         $data = array(
             'title'       => $title,
             'type'        => $type, 
+            'terms'       => $terms,
+            'is_parent'   => $parent,
             'action'      => base_url('webadmin/posts/terms/update/'. $type. '/'. $id),
             'cancel'      => base_url('webadmin/posts/terms/create/' . $type),
             'term_id'     => $id,

@@ -19,7 +19,7 @@
                             <label >Name</label>
                             <input type="text" class="name_tax form-control" name="name" value="<?php echo $name;?>" required>
                         </div>
-                        <?php if($type != 'events-type' && $type != 'certification'): ?>
+                        <?php if($is_parent): ?>
                         <div class="form-group">
                             <label >Parent</label>
                             <select class="form-control" name="parent">
@@ -93,7 +93,7 @@
                                 </tr>
 
                                 <?php 
-                                $data_term_parent = $this->Terms_m->get_terms('category-'.$type, $category->term_id)->result();
+                                $data_term_parent = $this->Terms_m->get_terms($terms, $category->term_id)->result();
                                         foreach($data_term_parent as $category_parent) { ?>
                                 <tr  class="row-cat" id="<?php echo $no;?>">
                                     <td>
