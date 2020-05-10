@@ -34,7 +34,13 @@
                                             <a href="<?php echo base_url('webadmin/posts/events/content');?>">New Content</a>
                                         </li>
                                         <li>
-                                            <a href="project-detail.html">List Events</a>
+                                            <a href="<?php echo base_url('webadmin/posts/events/list_event');?>">List Events</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo base_url('webadmin/posts/events/list_content');?>">List Content</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo base_url('webadmin/posts/terms/create/groups');?>">Groups</a>
                                         </li>
                                         <li>
                                             <a href="<?php echo base_url('webadmin/posts/terms/create/events');?>">Category</a>

@@ -14,6 +14,19 @@ class Events extends CI_Controller
             redirect('webadmin/login');
         }
 
+        $this->load->model('Post_m');
+        $this->load->model('Terms_m');
+
+        $config = array(
+			'table'       => 'posts',
+			'id'          => 'post_id',
+			'field'       => 'post_slug',
+			'title'       => 'post_title',
+			'replacement' => 'dash', // Either dash or underscore
+        );
+        
+        $this->load->library('slug', $config);
+
     }
 
     private function _init()
@@ -57,14 +70,70 @@ class Events extends CI_Controller
         $this->load->view('system/post/list_post', $data);
     }
 
-    public function create()
-    {   
-        $title = 'Create New Events';
+    public function list_event()
+    {
+        
+
+        // css
+        $this->load->css('assets/app/libs/datatables/dataTables.bootstrap4.min.css');
+        $this->load->css('assets/app/libs/datatables/responsive.bootstrap4.min.css');
+        $this->load->css('assets/app/libs/datatables/buttons.bootstrap4.min.css');
+        $this->load->css('assets/app/libs/datatables/select.bootstrap4.min.css');
+        $this->load->css('assets/sweetalert/sweetalert2.min.css');
+        $this->load->css('assets/app/css/data-list-view.css');
+
+        // js
+        $this->load->js('assets/app/libs/datatables/jquery.dataTables.min.js');
+        $this->load->js('assets/app/libs/datatables/dataTables.bootstrap4.min.js');
+        $this->load->js('assets/app/libs/datatables/dataTables.responsive.min.js');
+        $this->load->js('assets/app/libs/datatables/responsive.bootstrap4.min.js');
+        $this->load->js('assets/sweetalert/sweetalert2.all.min.js');
+
+        $title = 'List Events';
 
         $data = array(
-            'title' => $title
+            'title'             => $title,
         );
 
+        $this->output->set_title($this->muhanz->app_title($title));
+        // Breadcrumbs
+		$this->breadcrumbs->push('Dashboard', '/webadmin');
+		$this->breadcrumbs->push('Events' , '/webadmin/posts/events');
+        $this->breadcrumbs->push('Create', '/webadmin/posts/events/create');
+        // View
+        $this->load->view('app/post/event_list', $data);
+    }
+
+    public function list_content()
+    {
+        $this->load->view('app/sample');
+    }
+
+    public function create()
+    {   
+        $this->load->css('assets/sweetalert/sweetalert2.min.css');
+        
+        $this->load->js('assets/sweetalert/sweetalert2.all.min.js');
+        $this->load->js('assets/app/libs/select2/select2.min.js');
+        $this->load->js('assets/app/libs/flatpickr/flatpickr.min.js');
+        $this->load->js('assets/app/js/pages/form-advanced.init.js');
+        $this->load->js('assets/app/js/pages/event-content.init.js');
+        $title = 'Create New Events';
+        
+        $data = array(
+            'title'             => $title,
+            'action'            => base_url('webadmin/posts/events/save_event'),
+            'cancel'            => false,
+            'data_content'      => $this->Post_m->data_content(),
+            'data_group'        => $this->Terms_m->get_terms('category-groups', '0')->result(),
+            'data_certificate'  => $this->Terms_m->get_terms('certification-events', '0')->result(),
+            'data_category'     => $this->Terms_m->get_terms('category-events', '0')->result(),
+            'data_type'         => $this->Terms_m->get_terms('events-type', '0')->result(),
+            'data_regional'     => $this->Terms_m->get_terms('events-regional', '0')->result(),
+            'data_location'     => $this->Terms_m->get_terms('events-location', '0')->result(),
+        );
+
+        
         $this->output->set_title($this->muhanz->app_title($title));
         // Breadcrumbs
 		$this->breadcrumbs->push('Dashboard', '/webadmin');
@@ -75,15 +144,84 @@ class Events extends CI_Controller
 
     }
 
+    public function save_event()
+    {
+        $this->output->unset_template();
+
+        $sc = $this->input->post('schedule_date');
+
+        if($sc){
+            $schedule_date = date('Y-m-d H:i:s', strtotime($this->input->post('schedule_date').' '.$this->input->post('schedule_time')));
+            $schedule_status = '1';
+            $event_status = 'on_schedule';
+            $redirect_url = 'webadmin/posts/events/create';
+        } else {
+            $schedule_date = date('Y-m-d H:i:s', now());
+            $schedule_status = '0';
+            $event_status = 'publish';
+            $redirect_url = 'webadmin/posts/events/list_event';
+        }
+
+        $type_to_initial = explode(" ", $this->input->post('type_id_name'));
+        $type_initial = "";
+        foreach ($type_to_initial as $i) {
+            $type_initial .= $i[0];
+        }
+
+        $data = array(
+            'post_id'           => $this->input->post('post_content'),
+            'group_id'          => $this->input->post('group_id'),
+            'certificate_id'    => $this->input->post('certificate_id'),
+            'type_id'           => $this->input->post('type_id'),
+            'location_id'       => $this->input->post('location_id'),
+            'regional_id'       => $this->input->post('regional_id'),
+            'category_id'       => $this->input->post('category_id'),
+            'link_streaming'    => $this->input->post('link_streaming'),
+            'streaming_id'      => $this->input->post('streaming_id'),
+            'streaming_key'     => $this->input->post('streaming_key'),
+            'event_name'        => $this->input->post('event_name'),
+            'event_subtitle'    => $this->input->post('event_subtitle'),
+            'event_sku'         => $this->input->post('event_sku'),
+            'event_slug'        => $this->slug->create_uri($this->input->post('event_name').'-'.$type_initial.'-'.$this->input->post('group_id_name').'-'.$this->input->post('regional_id_name')),
+            'event_images'      => str_ireplace('media/', "", $this->input->post('cover')),
+            'event_thumbs'      => str_ireplace('media/', "", $this->input->post('thumbs')),
+            'event_author'      => $this->ion_auth->user()->row()->id,
+            'event_cost'        => $this->input->post('event_cost'),
+            'event_cost_promo'  => $this->input->post('event_cost_promo'),
+            'event_duration'    => $this->input->post('event_duration'),
+            'event_start_date'  => $this->input->post('event_start_date'),
+            'event_start_time'  => $this->input->post('event_start_time'),
+            'event_end_date'    => $this->input->post('event_end_date'),
+            'event_end_time'    => $this->input->post('event_end_time'),
+            'event_schedule'    => $schedule_status,
+            'event_schedule_date'    => $schedule_date,
+            'event_status'      => $event_status,
+        );
+
+        $insert_event = $this->Post_m->insert_event($data);
+        if ($insert_event) {
+            $this->muhanz->success($this->lang->line('save_success'), $redirect_url);
+        } else {
+            $this->muhanz->error($this->lang->line('save_error'), $redirect_url);
+        }
+
+    }
+
     public function content()
     {   
+        $this->load->css('assets/sweetalert/sweetalert2.min.css');
+        
+        $this->load->js('assets/sweetalert/sweetalert2.all.min.js');
         $this->load->js('assets/tinymce/tinymce.min.js');
         $this->load->js('assets/tinymce/tinymce.init.js');
+        $this->load->js('assets/app/js/pages/event-content.init.js');
 
         $title = 'Create New Events';
 
         $data = array(
-            'title' => $title
+            'title'             => $title,
+            'action'            => base_url('webadmin/posts/events/save_content'),
+            'cancel'            => false,
         );
 
         $this->output->set_title($this->muhanz->app_title($title));
@@ -93,6 +231,38 @@ class Events extends CI_Controller
         $this->breadcrumbs->push('Content', '/webadmin/posts/events/create/content');
         // View
         $this->load->view('app/post/events_content', $data);
+
+    }
+
+    public function save_content()
+    {
+        $this->output->unset_template();
+
+        if (!empty($_POST['draft'])) {
+            $post_status = 'draft';
+        } else {
+            $post_status = 'publish';
+        }
+
+        $data = array(
+            'post_title'    => $this->input->post('post_title'),
+            'post_author'   => $this->ion_auth->user()->row()->id,
+            'post_content'  => $this->input->post('post_content'),
+            'post_slug'     => $this->slug->create_uri($this->input->post('post_title')),
+            'post_type'     => 'events-content',
+            'post_date'     => date('Y-m-d H:i:s', now()),
+            'post_modifed'  => date('Y-m-d H:i:s', now()),
+            'post_status'   => $post_status,
+            'post_image'    => str_ireplace(base_url('media/'), "", $this->input->post('cover')),
+            'post_thumbs'   => str_ireplace(base_url('media/'), "", $this->input->post('thumbs')),
+        );
+
+        $insert_content = $this->Post_m->insert_content($data);
+        if ($insert_content) {
+            $this->muhanz->success($this->lang->line('save_success'), 'webadmin/posts/events/list_content');
+        } else {
+            $this->muhanz->error($this->lang->line('save_error'), 'webadmin/posts/events/list_content');
+        }
 
     }
 

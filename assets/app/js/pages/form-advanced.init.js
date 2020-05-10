@@ -1,1 +1,68 @@
-!function(o){"use strict";function t(){}t.prototype.initCustomSelect=function(){o('[data-plugin="customselect"]').select2()},t.prototype.initMultiSelect=function(){0<o('[data-plugin="multiselect"]').length&&o('[data-plugin="multiselect"]').multiSelect(o(this).data())},t.prototype.initFlatpickr=function(){o("#basic-datepicker").flatpickr(),o("#datetime-datepicker").flatpickr({enableTime:!0,dateFormat:"Y-m-d H:i"}),o("#humanfd-datepicker").flatpickr({altInput:!0,altFormat:"F j, Y",dateFormat:"Y-m-d"}),o("#minmax-datepicker").flatpickr({minDate:"2020-01",maxDate:"2020-03"}),o("#disable-datepicker").flatpickr({onReady:function(){this.jumpToDate("2025-01")},disable:["2025-01-10","2025-01-21","2025-01-30",new Date(2025,4,9)],dateFormat:"Y-m-d"}),o("#multiple-datepicker").flatpickr({mode:"multiple",dateFormat:"Y-m-d"}),o("#conjunction-datepicker").flatpickr({mode:"multiple",dateFormat:"Y-m-d",conjunction:" :: "}),o("#range-datepicker").flatpickr({mode:"range"}),o("#inline-datepicker").flatpickr({inline:!0}),o("#basic-timepicker").flatpickr({enableTime:!0,noCalendar:!0,dateFormat:"H:i"}),o("#24hours-timepicker").flatpickr({enableTime:!0,noCalendar:!0,dateFormat:"H:i",time_24hr:!0}),o("#minmax-timepicker").flatpickr({enableTime:!0,noCalendar:!0,dateFormat:"H:i",minDate:"16:00",maxDate:"22:30"}),o("#preloading-timepicker").flatpickr({enableTime:!0,noCalendar:!0,dateFormat:"H:i",defaultDate:"01:45"})},t.prototype.initColorpicker=function(){o("#basic-colorpicker").colorpicker(),o("#hexa-colorpicker").colorpicker({format:"auto"}),o("#component-colorpicker").colorpicker({format:null}),o("#horizontal-colorpicker").colorpicker({horizontal:!0}),o("#inline-colorpicker").colorpicker({color:"#DD0F20",inline:!0,container:!0})},t.prototype.initTouchspin=function(){var a={};o('[data-toggle="touchspin"]').each(function(t,i){var e=o.extend({},a,o(i).data());o(i).TouchSpin(e)})},t.prototype.init=function(){this.initCustomSelect(),this.initMultiSelect(),this.initFlatpickr(),this.initColorpicker(),this.initTouchspin()},o.Components=new t,o.Components.Constructor=t}(window.jQuery),function(){"use strict";window.jQuery.Components.init()}();
+
+var base_url = window.location.origin;
+var select = $('[data-plugin="customselect"]');
+
+select.select2()
+
+select.on('select2:select', function (e) {
+
+    var title = select.select2().find(":selected").data("title");
+    var thumbs = select.select2().find(":selected").data("thumbs");
+    var cover = select.select2().find(":selected").data("cover");
+
+    $('#post_thumbs').val(thumbs);
+    $('#thumbs').attr('src', '/media/'+thumbs);
+    $('#post_cover').val(cover);
+    $('#cover').attr('src', '/media/'+ cover);
+    $('#title').val(title);
+
+    $('#overlay-cover').addClass('box-overlay');
+    $('#overlay-thumbs').addClass('box-overlay');
+});
+
+
+
+var selectRegional = $('[data-plugin="customselectRegional"]');
+selectRegional.select2()
+selectRegional.on('select2:select', function (e) {
+    var regional = selectRegional.select2().find(":selected").data("regional");
+    $('#regional').val(regional);
+});
+
+
+var selectGroup = $('[data-plugin="customselectGroup"]');
+selectGroup.select2()
+selectGroup.on('select2:select', function (e) {
+    var group = selectGroup.select2().find(":selected").data("group");
+    $('#group').val(group);
+});
+
+
+
+var selectType = $('[data-plugin="customselectType"]');
+selectType.select2()
+selectType.on('select2:select', function (e) {
+    var type = selectType.select2().find(":selected").data("training");
+    $('#type').val(type);
+    if(type == 'Virtual Training'){
+        $('.urlStreaming').slideDown();
+    } else {
+        $('.urlStreaming').slideUp();
+    }
+});
+
+$(".datepicker").flatpickr({
+    enableTime: false,
+    dateFormat: "Y-m-d"
+})
+
+$(".time24").flatpickr({
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    time_24hr: true
+})
+
+$("#createnew").click(function() {
+    $("#form").prepend('<input type="hidden" name="createnew" value="createnew">');
+});
