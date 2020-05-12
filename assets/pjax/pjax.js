@@ -828,9 +828,9 @@ module.exports = function(switches, switchesOptions, selectors, fromEl, toEl, op
     if (this.log) {
       this.log("Pjax switch", selector, newEls, oldEls)
     }
-    // if (newEls.length !== oldEls.length) {
-    //   throw "DOM doesn’t look the same on new loaded page: ’" + selector + "’ - new " + newEls.length + ", old " + oldEls.length
-    // }
+    if (newEls.length !== oldEls.length) {
+      throw "DOM doesn’t look the same on new loaded page: ’" + selector + "’ - new " + newEls.length + ", old " + oldEls.length
+    }
 
     forEachEls(newEls, function(newEl, i) {
       var oldEl = oldEls[i]
