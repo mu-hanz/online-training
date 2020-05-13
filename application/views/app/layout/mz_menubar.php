@@ -28,10 +28,10 @@
     
                                     <ul class="nav-second-level" aria-expanded="false">
                                         <li>
-                                            <a href="<?php echo base_url('webadmin/posts/events/create');?>">New Event</a>
+                                            <a href="<?php echo base_url('webadmin/posts/events/create');?>"><i data-feather="uil-edit-alt"></i> Create Event</a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo base_url('webadmin/posts/events/content');?>">New Content</a>
+                                            <a href="<?php echo base_url('webadmin/posts/events/content');?>">Create Content</a>
                                         </li>
                                         <li>
                                             <a href="<?php echo base_url('webadmin/posts/events/list_event');?>">List Events</a>
