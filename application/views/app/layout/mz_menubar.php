@@ -117,19 +117,19 @@
                                     </a>
                                     <ul class="nav-second-level" aria-expanded="false">
                                         <li>
-                                            <a href="#">Campaign</a>
+                                            <a href="<?=base_url();?>webadmin/promotions/campaign">Campaign</a>
                                         </li>
                                         <li>
-                                            <a href="#">Voucher</a>
+                                            <a href="<?=base_url();?>webadmin/promotions/voucher">Voucher</a>
                                         </li>
                                         <li>
-                                            <a href="#">Flexi Combo</a>
+                                            <a href="<?=base_url();?>webadmin/promotions/flexi_combo">Flexi Combo</a>
                                         </li>
                                         <li>
-                                            <a href="#">Slider</a>
+                                            <a href="<?=base_url();?>webadmin/promotions/slider">Slider</a>
                                         </li>
                                         <li>
-                                            <a href="#">Banner</a>
+                                            <a href="<?=base_url();?>webadmin/promotions/banner">Banner</a>
                                         </li>
                                     </ul>
                                 </li>

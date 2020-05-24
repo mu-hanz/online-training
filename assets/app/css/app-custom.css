@@ -1,0 +1,72 @@
+/*
+Template Name: Shreyu - Responsive Bootstrap 4 Admin Dashboard
+Author: CoderThemes
+Version: 1.0.0
+Website: https://coderthemes.com/
+Contact: support@coderthemes.com
+File: Main Css File
+*/
+/* =======================
+    TABLE OF CSS
+    1. Form Wizards
+    2. Card 
+    3. Datatable
+    4. Form
+   ======================= */
+/* 1. Form Wizards */
+.container-fw-custom {
+    box-shadow: none;
+    border: 1px solid #dbe1ee;
+    border-radius: .25rem !important;
+}
+.row-fw-custom {
+    padding: 25px 15px;
+}
+.header-fw-custom {
+    width: 100%;
+}
+.nav-pills-custom {
+    padding: 0px;
+    border-bottom: 1px solid #dbe1ee;
+    border-radius: 0 .25rem 0 .25rem !important;
+}
+.nav-pills-custom li {
+    padding: 10px 30px;
+}
+.nav-pills-custom li.active {
+    border-bottom: 2px solid #5369f8;
+}
+.nav-pills-custom > li.active > a {
+    color: #5369f8 !important;
+}
+/* 2. Card */
+.card-promotion-tiers-custom {
+    border: 1px solid #dbe1ee;
+}
+.header-card-promotion-tiers-custom {
+    background: #dbe1ee;
+    padding: 15px 15px 0px 15px;
+}
+.container-button-add-tier {
+    margin-top: -11px;
+    margin-bottom: 11px;
+}
+.hide-tier {
+    display: none;
+}
+/* 3. Datatable */
+table.dataTable tbody > tr.selected {
+    background-color: #dbe1ee;
+}
+table.dataTable tbody > tr.selected td {
+    border-bottom: 1px solid #ffffff;
+    border-top: 1px solid #ffffff;
+}
+/* 4. Form */
+input[type=text]:disabled {
+    background: #dddddd;
+}
+/* 5. Summernote */
+.note-editor.note-frame {
+    border: none;
+}
