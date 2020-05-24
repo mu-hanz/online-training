@@ -28,13 +28,19 @@
     
                                     <ul class="nav-second-level" aria-expanded="false">
                                         <li>
-                                            <a href="<?php echo base_url('webadmin/posts/events/create/events');?>">New Event</a>
+                                            <a href="<?php echo base_url('webadmin/posts/events/create');?>"><i data-feather="uil-edit-alt"></i> Create Event</a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo base_url('webadmin/posts/events/create/content');?>">New Content</a>
+                                            <a href="<?php echo base_url('webadmin/posts/events/content');?>">Create Content</a>
                                         </li>
                                         <li>
-                                            <a href="project-detail.html">List Events</a>
+                                            <a href="<?php echo base_url('webadmin/posts/events/list_event');?>">List Events</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo base_url('webadmin/posts/events/list_content');?>">List Content</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo base_url('webadmin/posts/terms/create/groups');?>">Groups</a>
                                         </li>
                                         <li>
                                             <a href="<?php echo base_url('webadmin/posts/terms/create/events');?>">Category</a>

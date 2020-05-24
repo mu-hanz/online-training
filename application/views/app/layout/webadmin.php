@@ -25,6 +25,8 @@
         }
         ?>
         <!-- App css -->
+        <link href="<?php echo base_url('assets/app/libs/select2/select2.min.css') ;?>" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url('assets/app/libs/flatpickr/flatpickr.min.css') ;?>" rel="stylesheet" type="text/css" />
         <link href="<?php echo $bsCss;?>" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url('assets/app/css/icons.min.css') ;?>" rel="stylesheet" type="text/css" />
         <link href="<?php echo $appCss;?>" rel="stylesheet" type="text/css" />

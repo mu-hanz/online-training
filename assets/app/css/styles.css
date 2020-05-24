@@ -10,6 +10,51 @@
 .topbar-nav .metismenu li a {
   font-size: 0.95rem;
 }
+.mce-branding{
+  display: none;
+}
+.mce-tinymce{
+  box-shadow: none;
+}
+
+.image-overlay {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle-overlay {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.box-overlay:hover .image-overlay {
+  opacity: 0.3;
+}
+
+.box-overlay:hover .middle-overlay {
+  opacity: 1;
+}
+
+.delete-text {
+  background-color: #1e2139;
+  color: white;
+  font-size: 16px;
+  padding: 8px 16px;
+}
+
+.delete-text:hover {
+  color: white;
+}
 
 .spinner > div {
   width: 20px;
