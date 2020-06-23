@@ -212,7 +212,7 @@
                                                                     <input type="text" id="price-campaign<?=$xx;?>" class="form-control" value="<?=$price_campaign;?>" name="price_campaign<?=$xx;?>">
                                                                 </div>
                                                             </td>
-                                                            <td><?=$row->event_location;?></td>
+                                                            <td><?=$row->name;?></td>
                                                         </tr>
                                                         <?php $xx++; } ?>
                                                     </tbody>

@@ -331,7 +331,7 @@
                                                             </td>
                                                             <td><?=$row->post_title;?></td>
                                                             <td>IDR <?=number_format($row->event_cost);?></td>
-                                                            <td><?=$row->event_location;?></td>
+                                                            <td><?=$row->name;?></td>
                                                         </tr>
                                                         <?php $xx++; } ?>
                                                     </tbody>

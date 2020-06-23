@@ -11,10 +11,11 @@ class Promotions_m extends CI_Model {
     var $order          = array('promotions.promotions_id' => 'asc');
 
     var $table2         = 'events';
-    var $join_table2_1  = 'events_contents';
+    // var $join_table2_1  = 'events_contents';
     var $join_table2_2  = 'posts';
-    var $column_order2  = array(null, 'events.event_id', 'posts.post_title', 'events.event_cost', 'events.event_location');
-    var $column_search2 = array('posts.post_title', 'events.event_cost', 'events.event_location'); 
+    var $join_table2_3  = 'terms';
+    var $column_order2  = array(null, 'events.event_id', 'posts.post_title', 'events.event_cost', 'terms.name');
+    var $column_search2 = array('posts.post_title', 'events.event_cost', 'terms.name'); 
     var $order2         = array('events.event_id' => 'desc'); 
 
     var $table3         = 'banners';
@@ -97,8 +98,9 @@ class Promotions_m extends CI_Model {
     {
         $this->db->select($this->column_order2);
         $this->db->from($this->table2);
-        $this->db->join($this->join_table2_1, $this->join_table2_1.'.event_id = '.$this->table2.'.event_id', 'left');
-        $this->db->join($this->join_table2_2, $this->join_table2_2.'.id_post = '.$this->join_table2_1.'.id_post', 'left');
+        // $this->db->join($this->join_table2_1, $this->join_table2_1.'.event_id = '.$this->table2.'.event_id', 'left');
+        $this->db->join($this->join_table2_2, $this->join_table2_2.'.id_post = '.$this->table2.'.post_id', 'left');
+        $this->db->join($this->join_table2_3, $this->join_table2_3.'.term_id = '.$this->table2.'.location_id', 'left');
         // $this->db->where('contract.status_delete !=', '9');
         $i = 0;
         foreach ($this->column_search2 as $item) 
@@ -150,8 +152,9 @@ class Promotions_m extends CI_Model {
     public function count_all2()
     {
         $this->db->from($this->table2);
-        $this->db->join($this->join_table2_1, $this->join_table2_1.'.event_id = '.$this->table2.'.event_id', 'left');
-        $this->db->join($this->join_table2_2, $this->join_table2_2.'.id_post = '.$this->join_table2_1.'.id_post', 'left');
+        // $this->db->join($this->join_table2_1, $this->join_table2_1.'.event_id = '.$this->table2.'.event_id', 'left');
+        $this->db->join($this->join_table2_2, $this->join_table2_2.'.id_post = '.$this->table2.'.post_id', 'left');
+        $this->db->join($this->join_table2_3, $this->join_table2_3.'.term_id = '.$this->table2.'.location_id', 'left');
         // $this->db->where('contract.status_delete !=', '9');
         return $this->db->count_all_results();
     }
@@ -422,16 +425,18 @@ class Promotions_m extends CI_Model {
     function get_data_training(){
         $this->db->select($this->column_order2);
         $this->db->from($this->table2);
-        $this->db->join($this->join_table2_1, $this->join_table2_1.'.event_id = '.$this->table2.'.event_id', 'left');
-        $this->db->join($this->join_table2_2, $this->join_table2_2.'.id_post = '.$this->join_table2_1.'.id_post', 'left');
+        // $this->db->join($this->join_table2_1, $this->join_table2_1.'.event_id = '.$this->table2.'.event_id', 'left');
+        $this->db->join($this->join_table2_2, $this->join_table2_2.'.id_post = '.$this->table2.'.post_id', 'left');
+        $this->db->join($this->join_table2_3, $this->join_table2_3.'.term_id = '.$this->table2.'.location_id', 'left');
         return $this->db->get()->result();
     }
 
     public function count_data_training()
     {
         $this->db->from($this->table2);
-        $this->db->join($this->join_table2_1, $this->join_table2_1.'.event_id = '.$this->table2.'.event_id', 'left');
-        $this->db->join($this->join_table2_2, $this->join_table2_2.'.id_post = '.$this->join_table2_1.'.id_post', 'left');
+        // $this->db->join($this->join_table2_1, $this->join_table2_1.'.event_id = '.$this->table2.'.event_id', 'left');
+        $this->db->join($this->join_table2_2, $this->join_table2_2.'.id_post = '.$this->table2.'.post_id', 'left');
+        $this->db->join($this->join_table2_3, $this->join_table2_3.'.term_id = '.$this->table2.'.location_id', 'left');
         return $this->db->count_all_results();
     }
 
