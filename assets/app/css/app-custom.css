@@ -12,6 +12,8 @@ File: Main Css File
     2. Card 
     3. Datatable
     4. Form
+    5. Summernote
+    6. Tab
    ======================= */
 /* 1. Form Wizards */
 .container-fw-custom {
@@ -62,11 +64,22 @@ table.dataTable tbody > tr.selected td {
     border-bottom: 1px solid #ffffff;
     border-top: 1px solid #ffffff;
 }
+.row-cat-product {
+    width: 100%;
+    height: 115px;
+}
 /* 4. Form */
 input[type=text]:disabled {
     background: #dddddd;
 }
+.remove-btn-removeRow {
+    margin-top: 28px;
+}
 /* 5. Summernote */
 .note-editor.note-frame {
     border: none;
+}
+/* 6. Tab */
+.nav-tabs li a.active-custom {
+    border-bottom: 2px solid #5369f8 !important;
 }

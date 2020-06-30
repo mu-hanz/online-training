@@ -28,7 +28,7 @@
     
                                     <ul class="nav-second-level" aria-expanded="false">
                                         <li>
-                                            <a href="<?php echo base_url('webadmin/posts/events/create');?>"><i data-feather="uil-edit-alt"></i> Create Event</a>
+                                            <a href="<?php echo base_url('webadmin/posts/events/create');?>"> Create Event</a>
                                         </li>
                                         <li>
                                             <a href="<?php echo base_url('webadmin/posts/events/content');?>">Create Content</a>
@@ -67,10 +67,10 @@
                                     </a>
                                     <ul class="nav-second-level" aria-expanded="false">
                                         <li>
-                                            <a href="project-list.html">Add new</a>
+                                            <a href="<?php echo base_url('webadmin/products/products/create');?>">Add new</a>
                                         </li>
                                         <li>
-                                            <a href="project-detail.html">List Products</a>
+                                            <a href="<?php echo base_url('webadmin/products/products');?>">List Products</a>
                                         </li>
                                         <li>
                                             <a href="<?php echo base_url('webadmin/posts/terms/create/products');?>">Category</a>
