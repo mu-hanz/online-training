@@ -15,11 +15,13 @@ class Home extends CI_Controller {
     {
         $this->output->set_template('store/layout/store');
 		$this->load->section('mainmenu', 'store/layout/main_menu');
+		
 		$this->load->section('footer', 'store/layout/footer');
 	}
 	
 	public function index()
 	{
+		$this->load->section('slider', 'store/layout/slider');
 		$this->load->view('store/home');
 	}
 

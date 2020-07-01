@@ -1,478 +1,293 @@
-<div class="wrapper">
+<section id="hero_in" class="courses">
+			<div class="wrapper">
+				<div class="container">
+					<h1 class="fadeInUp"><span></span>Online course detail</h1>
+				</div>
+			</div>
+		</section>
+		<!--/hero_in-->
 
-    <div class="breadcrumb-wrap">
-        <div class="container py-3">
-            <div class="row d-flex justify-content-md-between justify-content-sm-center">
-                <div class="col-md-4">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb mb-0">
-                            <li class="breadcrumb-item mr-1 font-weight-bold"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item ml-1 font-weight-bold active" aria-current="page">
-                                Library
-                            </li>
-                        </ol>
-                    </nav>
-                </div>
-                <div class="header-actions">
-                    <button class="btn btn-ghost grey-dark font-weight-bold">
-                        <i class="las la-share-alt"></i>
-                        <span>Share</span>
-                    </button>
-                    <button class="btn btn-ghost grey-dark like-button font-weight-bold">
-                        <i class="las la-hand-holding-heart"></i>
-                        <span>150 Likes</span>
-                    </button>
-                    <button class="btn btn-ghost grey-dark font-weight-bold">
-                        <i class="las la-bookmark"></i>
-                        <span><span>Save for Later</span></span>
-                    </button>
+		<div class="bg_color_1">
+			<nav class="secondary_nav sticky_horizontal">
+				<div class="container">
+					<ul class="clearfix">
+						<li><a href="#description" class="active">Description</a></li>
+						<li><a href="#lessons">Programme</a></li>
+						<li><a href="#teachers">Teachers</a></li>
+					</ul>
+				</div>
+			</nav>
+			<div class="container margin_60_35">
+				<div class="row">
+					<div class="col-lg-8">
+						<section id="description">
+							<div class="box_highlight">
+								<ul class="additional_info">
+									<li><i class="pe-7s-timer"></i>Course Duration<strong>3 Years</strong></li>
+									<li><i class="pe-7s-date"></i>Course Start<strong>10 Sept. 2017</strong></li>
+									<li><i class="pe-7s-wallet"></i>Course Fee<strong>2900 USD</strong></li>
+								</ul>
+							</div>
+							<!-- /box_highlight -->
+							<h2>Description</h2>
+							<p>Per consequat adolescens ex, cu nibh commune temporibus vim, ad sumo viris <strong>eloquentiam sed</strong>. Mea appareat omittantur eloquentiam ad, nam ei quas oportere democritum. Prima causae admodum id est, ei timeam inimicus sed. Sit an meis aliquam, cetero inermis vel ut. An sit illum euismod facilisis, tamquam <strong>vulputate</strong> pertinacia eum at.</p>
+							<p>Mea appareat omittantur eloquentiam ad, nam ei quas oportere democritum. Prima causae admodum id est, ei timeam inimicus sed. Sit an meis aliquam, cetero inermis vel ut. An sit illum euismod facilisis, tamquam vulputate pertinacia eum at.</p>
+							<div class="row">
+								<div class="col-lg-6">
+									<ul class="bullets">
+										<li>Dolorem mediocritatem</li>
+										<li>Mea appareat</li>
+										<li>Prima causae</li>
+										<li>Singulis indoctum</li>
+									</ul>
+								</div>
+								<div class="col-lg-6">
+									<ul class="bullets">
+										<li>Timeam inimicus</li>
+										<li>Oportere democritum</li>
+										<li>Cetero inermis</li>
+										<li>Pertinacia eum</li>
+									</ul>
+								</div>
+							</div>
+							<!-- /row -->
+						</section>
+						<!-- /section -->
+						
+						<section id="lessons">
+							<div class="intro_title">
+								<h2>Programme</h2>
+							</div>
+							<div id="accordion_lessons" role="tablist" class="add_bottom_45">
+								<div class="card">
+									<div class="card-header" role="tab" id="headingOne">
+										<h5 class="mb-0">
+											<a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><i class="indicator ti-minus"></i> Year 1</a>
+										</h5>
+									</div>
 
-                    <!---->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-7 col-lg-9">
-                    <div class="product-info">
-
-                        <!-- Item Img Slider -->
-                        <div class="swiper-container rounded border">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="<?php echo base_url('assets/store/img/950x500.png');?>" alt="">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="<?php echo base_url('assets/store/img/950x500.png');?>" alt="">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="<?php echo base_url('assets/store/img/950x500.png');?>" alt="">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="<?php echo base_url('assets/store/img/950x500.png');?>" alt="">
-                                </div>
-                            </div>
-                            <!-- Add Pagination -->
-                            <div class="swiper-pagination"></div>
-                        </div>
-                    </div>
-                    <div class="demo-bar card rounded mt-3 card px-3 text-sm-center">
-                        <div class="row d-flex justify-content-between justify-content-md-center align-items-center my-3">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
-                                <a href="#" class="btn btn-success-alt btn-block">Live Preview<i class="las la-desktop ml-2"></i></a>
-                            </div>
-
-                            <div class="col-sm-12 col-md-12 col-lg-4">
-                                <p class="m-0 text-lg-right text-md-right text-md-center">Spread the word and earn !</p>
-                            </div>
-                            <div class="col-sm-12 col-md-12 col-lg-4">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Send link to somene" aria-label="Recipient's username" aria-describedby="basic-addon2" />
-                                    <div class="input-group-append">
-                                        <button class="btn btn-success-alt text-success" type="button">Send <i class="las la-envelope"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-description-text pr-lg-2">
-                        <h1 class="mt-4 mb-4">
-                            Front-end UI kit to create a e-commerce websites with html templates
-                            and code snippets.
-                        </h1>
-                        <p class="lead">
-                            Ecommerce code UI Kit for e-commerece projects on Bootstrap 4. The
-                            developer version of Bootstrap-ecommerce comes with clearly-coded
-                            and with files in HTML, CSS and SASS. Fully customizable and
-                            easy-to-use and easy-to-implement in any e-commerce projects.
-                        </p>
-                        <p>
-                            Cicero famously orated against his political opponent Lucius Sergius
-                            Catilina. Occasionally the first Oration against Catiline is taken
-                            for type specimens: Quo usque tandem abutere.
-                        </p>
-                        <p>
-                            Catilina, patientia nostra? Quam diu etiam furor iste tuus nos
-                            eludet? (How long, O Catiline, will you abuse our patience? And for
-                            how long will that madness of yours mock us?) Cicero's version of
-                            Liber Primus (first Book), sections 1.10.32–3 (fragments included in
-                            most Lorem Ipsum variants in red):
-                        </p>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="sidebar-widget bg-light-soft">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <span class="sidebar-widget-title--sm">Features</span>
-                                            <ul class="list-unstyled mb-0">
-                                                <li>
-                                                    <i class="las la-check mr-2 text-success"></i>25 Illustrations
-                                                </li>
-                                                <li>
-                                                    <i class="las la-check mr-2 text-success"></i>Bright &amp; Modern Style
-                                                </li>
-                                                <li><i class="las la-check mr-2 text-success"></i>Fully Vector</li>
-                                                <li>
-                                                    <i class="las la-check mr-2 text-success"></i>AI, SVG, PNG Sources
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-8">
-                                <h6 class="mb-2">Frequently asked questions</h6>
-                                <p>
-                                    Catilina, patientia nostra? Quam diu etiam furor iste tuus nos
-                                    eludet? (How long, O Catiline, will you abuse our patience?
-                                </p>
-                                <p> And for
-                                    how long will that madness of yours mock us?)
-                                </p>
-                                <h6 class="mb-2">Frequently asked questions</h6>
-                                <p> Cicero's version of
-                                    Liber Primus (first Book), sections 1.10.32–3 (fragments included in
-                                    most Lorem Ipsum variants in red):
-                                </p>
-                            </div>
-                        </div>
-                        <img src="<?php echo base_url('assets/store/img/950x700.png');?>" alt="" class="img-fluid mt-5 rounded" />
-                        <img src="<?php echo base_url('assets/store/img/950x700.png');?>" alt="" class="img-fluid my-5  rounded" />
-                        <div class="row mb-4 d-flex justify-content-between">
-                            <div class="col-md-8">
-                                <h6 class="mb-2">Frequently asked questions</h6>
-                                <p>
-                                    For anything else (licensing, billing, etc), please visit our
-                                    <a href="#" clas="btn btn-link">Help Center</a>.
-                                </p>
-                            </div>
-                            <div class="col-md-4">
-                                <a href="#" class="btn btn-link float-right"><i class="las la-envelope mr-1"></i>Need additional help?
-                                </a>
-                            </div>
-                        </div>
-                        <!-- Accordions-->
-                        <div id="faq-accordion" class="mb-5">
-                            <div class="card mb-2 mb-md-3">
-                                <a href="#accordion-1" data-toggle="collapse" role="button" aria-expanded="false" class="p-3 p-md-4">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <h6 class="mb-0 mr-2">How do I contact support?</h6>
-                                        <i class="las la-arrow-right icon"></i>
-                                    </div>
-                                </a>
-                                <div class="collapse" id="accordion-1" data-parent="#faq-accordion">
-                                    <div class="px-3 px-md-4 pb-3 pb-md-4">
-                                        f you need help with the product, please contact the shop
-                                        owner by visiting their shop profile and sending them a
-                                        message. For anything else (licensing, billing, etc), please
-                                        visit our Help Center.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card mb-2 mb-md-3">
-                                <a href="#accordion-2" data-toggle="collapse" role="button" aria-expanded="false" class="p-3 p-md-4">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <h6 class="mb-0 mr-2">How can I unzip product files?</h6>
-                                        <i class="las la-arrow-right icon"></i>
-                                    </div>
-                                </a>
-                                <div class="collapse" id="accordion-2" data-parent="#faq-accordion">
-                                    <div class="px-3 px-md-4 pb-3 pb-md-4">
-                                        PC: To extract a single file or folder, double-click the
-                                        compressed folder to open it. Then, drag the file or folder
-                                        from the compressed folder to a new location. To extract the
-                                        entire contents of the compressed folder, right-click the
-                                        folder, click Extract All, and then follow the instructions.
-                                        Mac: Double click the .zip file, then search for the product
-                                        folder or product file. If you continue to have trouble, check
-                                        out this help file for more tips.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card mb-2 mb-md-3">
-                                <a href="#accordion-3" data-toggle="collapse" role="button" aria-expanded="false" class="p-3 p-md-4">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <h6 class="mb-0 mr-2">
-                                            What happens when my support expires?
-                                        </h6>
-                                        <i class="las la-arrow-right icon"></i>
-                                    </div>
-                                </a>
-                                <div class="collapse" id="accordion-3" data-parent="#faq-accordion">
-                                    <div class="px-3 px-md-4 pb-3 pb-md-4">
-                                        Cicero famously orated against his political opponent Lucius
-                                        Sergius Catilina. Occasionally the first Oration against
-                                        Catiline is taken for type specimens:
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card mb-2 mb-md-3">
-                                <a href="#accordion-4" data-toggle="collapse" role="button" aria-expanded="false" class="p-3 p-md-4 collapsed">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <h6 class="mb-0 mr-2">What payment option do we have?</h6>
-                                        <i class="las la-arrow-right icon"></i>
-                                    </div>
-                                </a>
-                                <div class="collapse" id="accordion-4" data-parent="#faq-accordion">
-                                    <div class="px-3 px-md-4 pb-3 pb-md-4">
-                                        Cicero famously orated against his political opponent Lucius
-                                        Sergius Catilina. Occasionally the first Oration against
-                                        Catiline is taken for type specimens: Quo usque tandem
-                                        abutere, Catilina, patientia nostra? Quam diu etiam furor iste
-                                        tuus nos eludet? (How long, O Catiline, will you abuse our
-                                        patience? And for how long will that madness of yours mock
-                                        us?)
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--/ end: accordion -->
-                    </div>
-                    <hr />
-                    <section class="my-5">
-                        <div class="row mb-4 d-flex justify-content-between">
-                            <div class="col-md-8">
-                                <h6 class="mb-2">Exclusive Icons &amp; Illustrations</h6>
-                                <p>Checkout our latest themes, templates and illustrations.</p>
-                            </div>
-                            <div class="col-md-4">
-                                <a href="#" class="btn btn-link float-right">Explore all → </a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="card item-card h-100 border-0">
-                                    <div class="item-card__image rounded">
-                                        <a href="single-product.html">
-                                            <img src="<?php echo base_url('assets/store/img/520x400.png');?>" class="img-fluid rounded" alt="">
-                                        </a>
-                                        <div class="hover-icons">
-                                            <ul class="list-unstyled">
-                                                <li><a href="single-product.html" data-toggle="tooltip" data-placement="left" title="Demo"><i class="las la-desktop"></i></a></li>
-                                                <li><a href="#" data-toggle="tooltip" data-placement="left" title="Bookmark"><i class="lar la-bookmark"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- end: Item card image -->
-                                    <div class="card-body px-0 pt-3">
-                                        <div class="d-flex justify-content-between align-items-start">
-                                            <div class="item-title">
-                                                <a href="#">
-                                                    <h3 class="h5 mb-0 text-truncate">Mockup Bundle Vol 3</h3>
-                                                </a>
-                                            </div>
-                                            <div class="item-price">
-                                                <span>$14</span>
-                                            </div>
-                                        </div>
-                                        <!-- end: Card info -->
-                                        <div class="d-flex justify-content-between align-items-center item-meta">
-                                            <div class="short-description mb-0">
-                                                <p class="mb-0 extension-text"><a href="#">UI Kit</a><span class="ml-1">in</span> <a href="#">Corporate</a> </p>
-                                            </div>
-                                        </div>
-                                        <!-- end: Card meta -->
-                                    </div>
-                                    <!-- edn:Card body -->
-                                </div>
-                                <!-- end: Card -->
-                            </div>
-
-                            <div class="col-lg-4">
-                                <div class="card item-card h-100 border-0">
-                                    <div class="item-card__image rounded">
-                                        <a href="single-product.html" class="swap-link">
-                                            <img src="<?php echo base_url('assets/store/img/520x400.png');?>" class="img-fluid rounded" alt="">
-                                        </a>
-                                        <div class="hover-icons">
-                                            <ul class="list-unstyled">
-                                                <li><a href="single-product.html"><i class="las la-desktop"></i></a></li>
-                                                <li><a href="#"><i class="lar la-bookmark"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- end: Item card image -->
-                                    <div class="card-body px-0 pt-3">
-                                        <div class="d-flex justify-content-between align-items-start">
-                                            <div class="item-title">
-                                                <a href="#">
-                                                    <h3 class="h5 mb-0 text-truncate">Font Bundle 99% OFF</h3>
-                                                </a>
-                                            </div>
-                                            <div class="item-price">
-                                                <span>$14</span>
-                                            </div>
-                                        </div>
-                                        <!-- end: Card info -->
-                                        <div class="d-flex justify-content-start align-items-center item-meta">
-                                            <div class="short-description mb-0">
-                                                <p class="mb-0 extension-text"><a href="#">WordPress</a><span class="ml-1">in</span> <a href="#">Creative</a> </p>
-                                            </div>
-                                        </div>
-                                        <!-- end: Card meta -->
-                                    </div>
-                                    <!-- edn:Card body -->
-                                </div>
-                                <!-- end: Card -->
-                            </div>
-
-                            <div class="col-lg-4">
-                                <div class="card item-card h-100 border-0">
-                                    <div class="item-card__image rounded">
-                                        <a href="single-product.html" class="swap-link">
-                                            <img src="<?php echo base_url('assets/store/img/520x400.png');?>" class="img-fluid rounded" alt="">
-                                        </a>
-                                        <div class="hover-icons">
-                                            <ul class="list-unstyled">
-                                                <li><a href="single-product.html"><i class="las la-desktop"></i></a></li>
-                                                <li><a href="#"><i class="lar la-bookmark"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- end: Item card image -->
-                                    <div class="card-body px-0 pt-3">
-                                        <div class="d-flex justify-content-between align-items-start">
-                                            <div class="item-title">
-                                                <a href="#">
-                                                    <h3 class="h5 mb-0 text-truncate">Retro Font</h3>
-                                                </a>
-                                            </div>
-                                            <div class="item-price">
-                                                <span>$14</span>
-                                            </div>
-                                        </div>
-                                        <!-- end: Card info -->
-                                        <div class="d-flex justify-content-start align-items-center item-meta">
-                                            <div class="short-description mb-0">
-                                                <p class="mb-0 extension-text"><a href="#">HTML</a><span class="ml-1">in</span> <a href="#">Landing page</a> </p>
-                                            </div>
-                                        </div>
-                                        <!-- end: Card meta -->
-                                    </div>
-                                    <!-- edn:Card body -->
-                                </div>
-                                <!-- end: Card -->
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <!-- edn: Col 9 -->
-                <div class="col-md-5 col-lg-3">
-                    <div class="sidebar sticky-lg-top sticky-md-top">
-                        <div class="sidebar-widget">
-                            <h3 class="mb-4">Front-end UI kit to create a websites</h3>
-                            <div class="row d-flex justify-content-between align-items-center">
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <select id="inputState" class="form-control">
-                                            <option selected="">Regular licence</option>
-                                            <option>Extended licence</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group text-md-right text-sm-center">
-                                        <h2 class="item-widget-price">$28</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row d-flex justify-content-between align-items-center">
-                                <div class="col-12">
-                                    <div class="custom-control custom-radio mt-3 mb-2 d-flex justify-content-between align-items-center">
-                                        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" />
-                                        <label class="custom-control-label" for="customRadio1">Install Theme</label>
-                                        <div class="label-price">$15</div>
-
-                                    </div>
-                                    <div class="custom-control custom-radio mb-4 d-flex justify-content-between align-items-center">
-                                        <input type="radio" checked="" id="customRadio2" name="customRadio" class="custom-control-input" />
-                                        <label class="custom-control-label" for="customRadio2">+1 year Support</label>
-                                        <div class="label-price">$49</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary btn-block" type="button">
-                                Purchase → <span class="price"> $77</span>
-                            </button>
-                        </div>
-
-                        <div class="sidebar-widget">
-                            <div class="row">
-                                <div class="col-12">
-                                    <span class="sidebar-widget-title--sm">Compatible with</span>
-                                    <!-- FULL COMPATIBILITY -->
-                                    <div class="compatibility d-flex">
-                                        <div class="col-2 p-0 text-center">
-                                            <img src="<?php echo base_url('assets/store/img/icons/photoshop.svg');?>" alt="PS" width="#" title="Adobe After Effects" height="22px" />
-                                        </div>
-                                        <div class="col-2 p-0 text-center">
-                                            <img src="<?php echo base_url('assets/store/img/icons/ae-icon.svg');?>" alt="Ae" width="#" title="Adobe After Effects" height="25px" />
-                                        </div>
-                                        <div class="col-2 p-0 text-center">
-                                            <img src="<?php echo base_url('assets/store/img/icons/xd-icon.svg');?>" alt="Xd" title="#" width="25px" height="25px" />
-                                        </div>
-                                        <div class="col-2 p-0 text-center">
-                                            <img src="<?php echo base_url('assets/store/img/icons/sketch-icon.svg');?>" alt="Sketch" title="#" width="25px" height="25px" />
-                                        </div>
-                                        <div class="col-2 p-0 text-center">
-                                            <img src="<?php echo base_url('assets/store/img/icons/figma-icon.svg');?>" alt="#" title="Figma" width="25px" height="25px" />
-                                        </div>
-                                        <div class="col-2 p-0 text-center">
-                                            <img src="<?php echo base_url('assets/store/img/icons/ai-icon.svg');?>" alt="Ai" title="#" width="25px" height="25px" />
-                                        </div>
-                                    </div>
-                                    <hr />
-                                    <span class="sidebar-widget-title--sm">Features</span>
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            <i class="las la-check mr-2 text-success"></i>25 Illustrations
-                                        </li>
-                                        <li>
-                                            <i class="las la-check mr-2 text-success"></i>Bright & Modern Style
-                                        </li>
-                                        <li>
-                                            <i class="las la-check mr-2 text-success"></i>AI, SVG, PNG Sources
-                                        </li>
-                                    </ul>
-                                    <hr />
-
-                                    <span class="sidebar-widget-title--sm">Compatible Browsers</span>
-                                    <ul class="list-unstyled">
-                                        <li><i class="las la-check mr-2 text-success"></i>Chrome</li>
-                                        <li><i class="las la-check mr-2 text-success"></i>Firefox</li>
-                                        <li><i class="las la-check mr-2 text-success"></i>Edge</li>
-                                    </ul>
-                                    <hr />
-
-                                    <span class="sidebar-widget-title--sm">Tags</span>
-                                    <div class="tags">
-                                        <a href="#" class="badge badge-soft-success text-success mb-1">CSS</a>
-                                        <a href="#" class="badge badge-soft-success text-success mb-1">Bootstrap</a>
-                                        <a href="#" class="badge badge-soft-success text-success mb-1">WordPress</a>
-                                        <a href="#" class="badge badge-soft-success text-success mb-1">Digital</a>
-                                    </div>
-                                    <hr />
-
-                                    <div class="col-12 p-0">
-                                        <div class="d-flex flex-row justify-content-between">
-                                            <span class="small">File size</span>
-                                            <strong class="small text-dark">1 GB</strong>
-                                        </div>
-                                        <div class="d-flex flex-row justify-content-between">
-                                            <span class="small">Update</span>
-                                            <strong class="small text-dark">Januar 03, 2020</strong>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
+									<div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+										<div class="card-body">
+											<p>Lorem ipsum dolor sit amet, pro ea <strong>mediocrem sapientem</strong>. Et his copiosae vivendum, corpora contentiones vel ei. Ne etiam graecis vis. Nec omnis alienum no, in quas corpora inimicus his, nec pertinacia disputando voluptatibus ei. In eam suas perpetua accusamus. Ad sit virtute rationibus efficiantur, sed hinc explicari ea.</p>
+											<h6>Semester 1</h6>
+											<div class="list_lessons_2">
+												<ul>
+													<li>Health Science<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>Health and Social Care<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>History<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>Healthcare Science<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>Audiology<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+												</ul>
+											</div>
+											<h6>Semester 2</h6>
+											<div class="list_lessons_2">
+												<ul>
+													<li>Health Science<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>Health and Social Care<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>History<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>Healthcare Science<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>Audiology<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /card -->
+								<div class="card">
+									<div class="card-header" role="tab" id="headingTwo">
+										<h5 class="mb-0">
+											<a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+												<i class="indicator ti-plus"></i>Year 2
+											</a>
+										</h5>
+									</div>
+									<div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+										<div class="card-body">
+											<p>Lorem ipsum dolor sit amet, pro ea <strong>mediocrem sapientem</strong>. Et his copiosae vivendum, corpora contentiones vel ei. Ne etiam graecis vis. Nec omnis alienum no, in quas corpora inimicus his, nec pertinacia disputando voluptatibus ei. In eam suas perpetua accusamus. Ad sit virtute rationibus efficiantur, sed hinc explicari ea.</p>
+											<h6>Semester 1</h6>
+											<div class="list_lessons_2">
+												<ul>
+													<li>Health Science<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>Health and Social Care<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>History<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>Healthcare Science<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>Audiology<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+												</ul>
+											</div>
+											<h6>Semester 2</h6>
+											<div class="list_lessons_2">
+												<ul>
+													<li>Health Science<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>Health and Social Care<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>History<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>Healthcare Science<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>Audiology<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /card -->
+								<div class="card">
+									<div class="card-header" role="tab" id="headingThree">
+										<h5 class="mb-0">
+											<a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+												<i class="indicator ti-plus"></i>Year 3
+											</a>
+										</h5>
+									</div>
+									<div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+										<div class="card-body">
+											<p>Lorem ipsum dolor sit amet, pro ea <strong>mediocrem sapientem</strong>. Et his copiosae vivendum, corpora contentiones vel ei. Ne etiam graecis vis. Nec omnis alienum no, in quas corpora inimicus his, nec pertinacia disputando voluptatibus ei. In eam suas perpetua accusamus. Ad sit virtute rationibus efficiantur, sed hinc explicari ea.</p>
+											<h6>Semester 1</h6>
+											<div class="list_lessons_2">
+												<ul>
+													<li>Health Science<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>Health and Social Care<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>History<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>Healthcare Science<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>Audiology<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+												</ul>
+											</div>
+											<h6>Semester 2</h6>
+											<div class="list_lessons_2">
+												<ul>
+													<li>Health Science<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>Health and Social Care<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>History<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>Healthcare Science<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+													<li>Audiology<span><a href="#0"><i class="icon_download"></i> PDF</a></span></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /card -->								
+							</div>
+							<!-- /accordion -->
+						</section>
+						<!-- /section -->
+						<section id="teachers">
+							<div class="intro_title">
+								<h2>Teachers</h2>
+							</div>
+							<p>Zril causae ancillae sit ea. Dicam veritus mediocritatem sea ex, nec id agam eius. Te pri facete latine salutandi, scripta mediocrem et sed, cum ne mundi vulputate. Ne his sint graeco detraxit, posse exerci volutpat has in.</p>
+							<div class="row add_top_20 add_bottom_30">
+								<div class="col-lg-6">
+									<ul class="list_teachers">
+										<li>
+											<a href="teacher-detail.html">
+												<figure><img src="http://via.placeholder.com/150x150/ccc/fff/teacher_1_thumb.jpg" alt=""></figure>
+												<h5>Tomas Hegel</h5>
+												<p>Mathematics</p><i class="pe-7s-angle-right-circle"></i></a>
+										</li>
+										<li>
+											<a href="teacher-detail.html">
+												<figure><img src="http://via.placeholder.com/150x150/ccc/fff/teacher_2_thumb.jpg" alt=""></figure>
+												<h5>Tomas Hegel</h5>
+												<p>Mathematics</p><i class="pe-7s-angle-right-circle"></i></a>
+										</li>
+										<li>
+											<a href="teacher-detail.html">
+												<figure><img src="http://via.placeholder.com/150x150/ccc/fff/teacher_3_thumb.jpg" alt=""></figure>
+												<h5>Tomas Hegel</h5>
+												<p>Mathematics</p><i class="pe-7s-angle-right-circle"></i></a>
+										</li>
+									</ul>
+								</div>
+								<div class="col-lg-6">
+									<ul class="list_teachers">
+										<li>
+											<a href="teacher-detail.html">
+												<figure><img src="http://via.placeholder.com/150x150/ccc/fff/teacher_4_thumb.jpg" alt=""></figure>
+												<h5>Tomas Hegel</h5>
+												<p>Mathematics</p><i class="pe-7s-angle-right-circle"></i></a>
+										</li>
+										<li>
+											<a href="teacher-detail.html">
+												<figure><img src="http://via.placeholder.com/150x150/ccc/fff/teacher_5_thumb.jpg" alt=""></figure>
+												<h5>Tomas Hegel</h5>
+												<p>Mathematics</p><i class="pe-7s-angle-right-circle"></i></a>
+										</li>
+										<li>
+											<a href="teacher-detail.html">
+												<figure><img src="http://via.placeholder.com/150x150/ccc/fff/teacher_6_thumb.jpg" alt=""></figure>
+												<h5>Tomas Hegel</h5>
+												<p>Mathematics</p><i class="pe-7s-angle-right-circle"></i></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<!-- /row -->
+						</section>
+						<!-- /section -->
+					</div>
+					<!-- /col -->
+					
+					<aside class="col-lg-4" id="sidebar">
+						<div class="box_detail">
+							<h4>Enquire now</h4>
+							<p class="nopadding">Ex quem dicta delicata usu, zril vocibus maiestatis in qui.</p>
+							<div id="message-contact"></div>
+							<form method="post" action="assets/contact.php" id="contactform" autocomplete="off">
+								<div class="row">
+									<div class="col-xl-6 col-lg-12 col-sm-6">
+										<span class="input">
+											<input class="input_field" type="text" id="name_contact" name="name_contact">
+											<label class="input_label">
+												<span class="input__label-content">Your Name</span>
+											</label>
+										</span>
+									</div>
+									<div class="col-xl-6 col-lg-12 col-sm-6">
+										<span class="input">
+											<input class="input_field" type="text" id="lastname_contact" name="lastname_contact">
+											<label class="input_label">
+												<span class="input__label-content">Last name</span>
+											</label>
+										</span>
+									</div>
+								</div>
+								<!-- /row -->
+								<div class="row">
+									<div class="col-xl-6 col-lg-12 col-sm-6">
+										<span class="input">
+											<input class="input_field" type="email" id="email_contact" name="email_contact">
+											<label class="input_label">
+												<span class="input__label-content">Your email</span>
+											</label>
+										</span>
+									</div>
+									<div class="col-xl-6 col-lg-12 col-sm-6">
+										<span class="input">
+											<input class="input_field" type="text" id="phone_contact" name="phone_contact">
+											<label class="input_label">
+												<span class="input__label-content">Your telephone</span>
+											</label>
+										</span>
+									</div>
+								</div>
+								<!-- /row -->
+								<span class="input">
+										<textarea class="input_field" id="message_contact" name="message_contact" style="height:120px;"></textarea>
+										<label class="input_label">
+											<span class="input__label-content">Your message</span>
+										</label>
+								</span>
+								<span class="input">
+										<input class="input_field" type="text" id="verify_contact" name="verify_contact">
+										<label class="input_label">
+										<span class="input__label-content">Are you human? 3 + 1 =</span>
+										</label>
+								</span>
+								<hr>
+								<div style="position:relative;"><input type="submit" value="Enquire Now" class="btn_1 full-width" id="submit-contact"></div>
+							</form>
+							</div>
+					</aside>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /bg_color_1 -->

@@ -1,70 +1,82 @@
-<header class="nav-wrap bg-dark fixed-top">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark px-lg-0">
-                <a class="navbar-brand mr-3 swap-link mlink" href="<?php echo base_url();?>">Online <span class="text-light font-weight-bold">Training</span></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-                    <ul class="navbar-nav mz-menu">
-                        <li class="nav-item swap-link"> <a href="<?php echo base_url();?>" class="nav-link">Home</a> </li>
-                        <li class="nav-item swap-link"> <a href="<?php echo base_url('starter');?>" class="nav-link">Starter</a> </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Pages</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="search-page.html">Result grid</a>
-                                <a class="dropdown-item" href="search-page-list.html">Resulst list</a>
-                                <a class="dropdown-item" href="single-product.html">Single item</a>
-                                <a class="dropdown-item" href="dashboard.html">Dashboard</a>
-                                <a class="dropdown-item" href="cart.html">Cart</a>
-                                <a class="dropdown-item" href="pricing.html">Pricing</a>
-                                <a class="dropdown-item" href="faq.html">Faq</a>
-                                <a class="dropdown-item" href="contact.html">Contact</a>
-                                <a class="dropdown-item" href="signup.html">Sign up</a>
-                                <a class="dropdown-item" href="author-signup.html">Author Sign-Up</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="documentation.html"><i class="las la-file-code bg-danger-alt text-danger p-1 rounded"></i> Documentation</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Blog</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item swap-link" href="blog-2.html">Blog V.1</a>
-                                <a class="dropdown-item swap-link" href="blog.html">Blog V.2</a>
-                                <a class="dropdown-item swap-link" href="blog-post.html">Blog post</a>
-                            </div>
-                        </li>
-                        <li class="nav-item swap-link"> <a href="pricing.html" class="nav-link">Unlimited Access</a> </li>
-                    </ul>
-                    <ul class="navbar-nav">
-                        <li class="nav-item dropdown megamenu">
-                            <a class="nav-link dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown" aria-expanded="false"><i class="las la-user mr-2" style="font-size:22px;"></i></a>
-                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                <a class="dropdown-item font-weight-bold swap-link" href="dashboard.html"><i class="las la-user bg-info-alt p-1 rounded text-info"></i> Profile</a>
-                                <a class="dropdown-item swap-link" href="dash-settings.html"><i class="las la-sign-out-alt bg-warning-alt text-warning p-1 rounded"></i> Settings</a>
-                                <a class="dropdown-item swap-link" href="dash-downloads.html"><i class="las la-cloud-download-alt bg-success-alt text-success p-1 rounded"></i> Downloads</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item swap-link" href="dashboard.html"><i class="dropdown-icon"></i> Dashboard</a>
-                                <a class="dropdown-item swap-link" href="dash-my-items.html"><i class="dropdown-icon"></i> My Items</a>
-                                <a class="dropdown-item swap-link" href="dash-settings.html"><i class="dropdown-icon"></i> Settings
-                                    <span class="badge badge-soft-success ml-2">25 New</span></a>
-                                <a class="dropdown-item swap-link" href="dash-invoice.html"><i class="dropdown-icon"></i> Invoice</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item swap-link" href="javascript:void(0)"><i class="las la-sign-out-alt bg-danger-alt text-danger p-1 rounded"></i> Logout</a>
-                            </div>
-                        </li>
-                        <li class="nav-item d-flex align-items-center">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle no-arrow btn btn-primary swap-link text-white" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Sign up</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item swap-link" href="signup.html">Signup</a>
-                                <a class="dropdown-item swap-link" href="author-signup.html">Author signup</a>
-                            </div>
-                        </li>
-                        </li>
-                    </ul>
-                    
-                </div>
-            </nav>
-        </div>
-    </header>
+
+		<div id="logo">
+			<a href="<?php echo base_url();?>"><img src="<?php echo base_url('assets/store/img/logo.png');?>" width="149" height="42" data-retina="true" alt=""></a>
+		</div>
+		<ul id="top_menu">
+			<li><a href="login.html" class="login">Login</a></li>
+			<li><a href="#0" class="search-overlay-menu-btn">Search</a></li>
+			<li class="hidden_tablet"><a href="admission.html" class="btn_1 rounded">Admission</a></li>
+		</ul>
+		<!-- /top_menu -->
+		<a href="#menu" class="btn_mobile">
+			<div class="hamburger hamburger--spin" id="hamburger">
+				<div class="hamburger-box">
+					<div class="hamburger-inner"></div>
+				</div>
+			</div>
+		</a>
+		<nav id="menu" class="main-menu">
+			<ul class="mz-menu">
+				<li><span><a href="#0">Home</a></span>
+					<ul>
+						<li><a href="<?php echo base_url('starter');?>">Home version 1</a></li>
+						<li><a href="index-2.html">Home version 2</a></li>
+						<li><a href="index-6.html">Home version 3</a></li>
+						<li><a href="index-3.html">Home version 4</a></li>
+						<li><a href="index-4.html">Home version 5</a></li>
+						<li><a href="index-5.html">With Cookie bar (EU law)</a></li>
+					</ul>
+				</li>
+				<li><span><a href="#0">Courses</a></span>
+					<ul>
+						<li><a href="courses-grid.html">Courses grid</a></li>
+						<li><a href="courses-grid-sidebar.html">Courses grid sidebar</a></li>
+						<li><a href="courses-list.html">Courses list</a></li>
+						<li><a href="courses-list-sidebar.html">Courses list sidebar</a></li>
+						<li><a href="course-detail.html">Course detail</a></li>
+                        <li><a href="course-detail-2.html">Course detail working form</a></li>
+						<li><a href="admission.html">Admission wizard</a></li>
+						<li><a href="teacher-detail.html">Teacher detail</a></li>
+					</ul>
+				</li>
+				<li><span><a href="#0">Pages</a></span>
+					<ul>
+						<li><a href="#0">Menu 2</a></li>
+						<li><a href="about.html">About</a></li>
+						<li><a href="blog.html">Blog</a></li>
+						<li><a href="login.html">Login</a></li>
+						<li><a href="register.html">Register</a></li>
+						<li><a href="contacts.html">Contacts</a></li>
+						<li><a href="404.html">404 page</a></li>
+						<li><a href="agenda-calendar.html">Agenda Calendar</a></li>
+						<li><a href="faq.html">Faq</a></li>
+						<li><a href="help.html">Help</a></li>
+					</ul>
+				</li>
+				<li><span><a href="#0">Extra Pages</a></span>
+					<ul>
+						<li><a href="media-gallery.html">Media gallery</a></li>
+						<li><a href="cart-1.html">Cart page 1</a></li>
+						<li><a href="cart-2.html">Cart page 2</a></li>
+						<li><a href="cart-3.html">Cart page 3</a></li>
+						<li><a href="pricing-tables.html">Responsive pricing tables</a></li>
+						<li><a href="coming_soon/index.html">Coming soon</a></li>
+						<li><a href="icon-pack-1.html">Icon pack 1</a></li>
+						<li><a href="icon-pack-2.html">Icon pack 2</a></li>
+						<li><a href="icon-pack-3.html">Icon pack 3</a></li>
+						<li><a href="icon-pack-4.html">Icon pack 4</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+		<!-- Search Menu -->
+		<div class="search-overlay-menu">
+			<span class="search-overlay-close"><span class="closebt"><i class="ti-close"></i></span></span>
+			<form role="search" id="searchform" method="get">
+				<input value="" name="q" type="search" placeholder="Search..." />
+				<button type="submit"><i class="icon_search"></i>
+				</button>
+			</form>
+		</div><!-- End Search Menu -->
+
+

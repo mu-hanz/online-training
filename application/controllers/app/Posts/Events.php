@@ -80,7 +80,13 @@ class Events extends CI_Controller
         $this->load->css('assets/app/libs/datatables/buttons.bootstrap4.min.css');
         $this->load->css('assets/app/libs/datatables/select.bootstrap4.min.css');
         $this->load->css('assets/sweetalert/sweetalert2.min.css');
-        $this->load->css('assets/app/css/data-list-view.css');
+        if($this->input->cookie('themes') == 'dark'){
+            $this->load->css('assets/app/css/data-list-view-dark.css');
+        } else {
+            $this->load->css('assets/app/css/data-list-view.css');
+        }
+
+       
 
         // js
         $this->load->js('assets/app/libs/datatables/jquery.dataTables.min.js');
@@ -107,7 +113,34 @@ class Events extends CI_Controller
 
     public function list_content()
     {
-        $this->load->view('app/sample');
+        // css
+        $this->load->css('assets/app/libs/datatables/dataTables.bootstrap4.min.css');
+        $this->load->css('assets/app/libs/datatables/responsive.bootstrap4.min.css');
+        $this->load->css('assets/app/libs/datatables/buttons.bootstrap4.min.css');
+        $this->load->css('assets/app/libs/datatables/select.bootstrap4.min.css');
+        $this->load->css('assets/sweetalert/sweetalert2.min.css');
+
+        // js
+        $this->load->js('assets/app/libs/datatables/jquery.dataTables.min.js');
+        $this->load->js('assets/app/libs/datatables/dataTables.bootstrap4.min.js');
+        $this->load->js('assets/app/libs/datatables/dataTables.responsive.min.js');
+        $this->load->js('assets/app/libs/datatables/responsive.bootstrap4.min.js');
+        $this->load->js('assets/sweetalert/sweetalert2.all.min.js');
+        $this->load->js('assets/app/js/pages/content.datatables.js');
+
+        $title = 'List Content';
+
+        $data = array(
+            'title'             => $title,
+        );
+
+        $this->output->set_title($this->muhanz->app_title($title));
+        // Breadcrumbs
+		$this->breadcrumbs->push('Dashboard', '/webadmin');
+		$this->breadcrumbs->push('Events' , '/webadmin/posts/events');
+        $this->breadcrumbs->push('Content', '/webadmin/posts/events/content');
+        // View
+        $this->load->view('app/post/content_list', $data);
     }
 
     public function create()
@@ -1400,7 +1433,7 @@ class Events extends CI_Controller
             $type_to_initial = explode(" ", $type);
             $type_initial = "";
             foreach ($type_to_initial as $i) {
-                $type_initial .= $i[0];
+                $type_initial .= $i;
             }
 
             $data = '
@@ -1458,6 +1491,32 @@ class Events extends CI_Controller
         $this->datatables->add_column('action', '$1', "is_action('event_id')");
         
       
+        return print_r($this->datatables->generate());
+    }
+
+    public function json_content()
+    {
+        $this->output->unset_template('layout');
+        function is_action($id_post)
+        {
+    
+            $data = '<button class="btn btn-primary btn-sm btn-block"><i class="uil uil-edit"></i> Edit</button>
+   
+            <button class="btn btn-danger btn-sm  btn-block"><i class="uil uil-trash-alt"></i> Delete</button>';
+            
+            return $data;
+        }
+      
+
+        $this->datatables->select('id_post, post_status, post_title, post_date, post_modifed, a.first_name as author_name, e.first_name as author_name_edit');
+        $this->datatables->from('posts');
+        $this->datatables->join('users as a', 'a.id = posts.post_author', 'left');
+        $this->datatables->join('users as e', 'e.id = posts.post_author_modifed', 'left');
+        $this->datatables->where('post_type','events-content');
+        $this->datatables->order_by('id_post', 'desc');
+        $this->datatables->group_by('id_post');
+        $this->datatables->add_column('action', '$1', "is_action('id_post')");
+        
         return print_r($this->datatables->generate());
     }
 

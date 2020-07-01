@@ -1,108 +1,59 @@
-<div class="section-footer bg-dark position-relative">
-        <section class="footer py-5">
-            <div class="container">
-                <div class="row pb-3">
-                    <aside class="col-md-2">
-                        <div class="footer-logo">
-                            <h4 class="text-white font-weight-bold">Theme<span class="text-muted">Shop</span></h4>
-                        </div>
-                    </aside>
-                    <aside class="col-md">
-                        <h6 class="title">Company</h6>
-                        <ul class="list-unstyled">
-                            <li> <a href="#">About us</a></li>
-                            <li> <a href="#">Career</a></li>
-                            <li> <a href="#">Find a store</a></li>
-                            <li> <a href="#">Rules and terms</a></li>
-                            <li> <a href="#">Sitemap</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-md">
-                        <h6 class="title">Help</h6>
-                        <ul class="list-unstyled">
-                            <li> <a href="#">Contact us</a></li>
-                            <li> <a href="#">Money refund</a></li>
-                            <li> <a href="#">Order status</a></li>
-                            <li> <a href="#">Shipping info</a></li>
-                            <li> <a href="#">Open dispute</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-md">
-                        <h6 class="title">Account</h6>
-                        <ul class="list-unstyled">
-                            <li> <a href="#"> User Login </a></li>
-                            <li> <a href="#"> User register </a></li>
-                            <li> <a href="#"> Account Setting </a></li>
-                            <li> <a href="#"> My Orders </a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-md">
-                        <h6><i class="las la-coffee mr-2"></i>Stay Up-to-Date!</h6>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control bg-dark" placeholder="Subscribe" aria-label="Subscribe.." aria-describedby="button-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary text-white" type="button" id="button-addon2">@</button>
-                            </div>
-                        </div>
-                    </aside>
-                </div>
-                <!-- row.// -->
-            </div>
-            <!-- //container -->
-        </section>
-        <!-- footer-top.// -->
-        <section class="pt-3 pb-4">
-            <div class="container">
-                <div class="footer-cta rounded border-dark">
-                    <div class="row no-gutters d-flex justify-content-between align-items-center">
-                        <div class="col-5 col-md-4 affiliate d-flex align-items-center">
-                            <div class="aff-btn">
-                                <a href="/affiliate" class="btn btn-primary btn-sm">
-                                    Affiliate
-                                </a>
-                            </div>
-                            <div>
-                                <p class="text-white d-none d-md-block m-0 w-75 small ml-3">
-                                    Earn 55% and more on all sales
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div class="d-flex flex-row justify-content-between">
-                                <div class="fact">
-                                    <h6 class="mb-1">12,961</h6>
-                                    <p class="mb-0">Downloads</p>
-                                </div>
-                                <div class="fact">
-                                    <h6 class="mb-1">90</h6>
-                                    <p class="mb-0">Authors</p>
-                                </div>
-                                <div class="fact">
-                                    <h6 class="mb-1">270</h6>
-                                    <p class="mb-0">Themes</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="footer-bottom border-top border-dark white pt-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <span class="pr-2">© 2019 Company name</span>
-                        <span class="pr-2"><a href="#">Privacy policy</a></span>
-                        <span class="pr-2"><a href="#">Terms of use</a></span>
-                    </div>
-                    <div class="col-md-6 text-md-right">
-                        <a href="#" class="mr-2"><img src="<?php echo base_url('assets/store/img/payment/footer-visa.svg');?>" width="42"></a>
-                        <a href="#" class="mr-2"><img src="<?php echo base_url('assets/store/img/payment/footer-mastercard.svg');?>" width="42"></a>
-                        <a href="#"><img src="<?php echo base_url('assets/store/img/payment/footer-paypal.svg');?>" width="42"></a>
-                    </div>
-                </div>
-                <!-- row.// -->
-            </div>
-            <!-- //container -->
-        </section>
-    </div> <!-- build:js -->
+<div class="container margin_120_95">
+			<div class="row">
+				<div class="col-lg-5 col-md-12 p-r-5">
+					<p><img src="img/logo.png" width="149" height="42" data-retina="true" alt=""></p>
+					<p>Mea nibh meis philosophia eu. Duis legimus efficiantur ea sea. Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu. Nihil facilisi indoctum an vix, ut delectus expetendis vis.</p>
+					<div class="follow_us">
+						<ul>
+							<li>Follow us</li>
+							<li><a href="#0"><i class="ti-facebook"></i></a></li>
+							<li><a href="#0"><i class="ti-twitter-alt"></i></a></li>
+							<li><a href="#0"><i class="ti-google"></i></a></li>
+							<li><a href="#0"><i class="ti-pinterest"></i></a></li>
+							<li><a href="#0"><i class="ti-instagram"></i></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 ml-lg-auto">
+					<h5>Useful links</h5>
+					<ul class="links">
+						<li><a href="#0">Admission</a></li>
+						<li><a href="#0">About</a></li>
+						<li><a href="#0">Login</a></li>
+						<li><a href="#0">Register</a></li>
+						<li><a href="#0">News &amp; Events</a></li>
+						<li><a href="#0">Contacts</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<h5>Contact with Us</h5>
+					<ul class="contacts">
+						<li><a href="tel://61280932400"><i class="ti-mobile"></i> + 61 23 8093 3400</a></li>
+						<li><a href="mailto:info@udema.com"><i class="ti-email"></i> info@udema.com</a></li>
+					</ul>
+					<div id="newsletter">
+					<h6>Newsletter</h6>
+					<div id="message-newsletter"></div>
+					<form method="post" action="assets/newsletter.php" name="newsletter_form" id="newsletter_form">
+						<div class="form-group">
+							<input type="email" name="email_newsletter" id="email_newsletter" class="form-control" placeholder="Your email">
+							<input type="submit" value="Submit" id="submit-newsletter">
+						</div>
+					</form>
+					</div>
+				</div>
+			</div>
+			<!--/row-->
+			<hr>
+			<div class="row">
+				<div class="col-md-8">
+					<ul id="additional_links">
+						<li><a href="#0">Terms and conditions</a></li>
+						<li><a href="#0">Privacy</a></li>
+					</ul>
+				</div>
+				<div class="col-md-4">
+					<div id="copy">© 2017 Udema</div>
+				</div>
+			</div>
+		</div>
