@@ -75,11 +75,10 @@ input[type=text]:disabled {
 .remove-btn-removeRow {
     margin-top: 28px;
 }
-/* 5. Summernote */
-.note-editor.note-frame {
-    border: none;
-}
+
 /* 6. Tab */
 .nav-tabs li a.active-custom {
     border-bottom: 2px solid #5369f8 !important;
 }
+
+

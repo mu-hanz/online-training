@@ -11,19 +11,8 @@
 		$(window).scroll();
 	});
 	
-	// Sticky nav
-	$(window).on('scroll', function () {
-		if ($(this).scrollTop() > 1) {
-			$('.header').addClass("sticky");
-		} else {
-			$('.header').removeClass("sticky");
-		}
-	});
 	
-	// Sticky sidebar
-	$('#sidebar').theiaStickySidebar({
-		additionalMarginTop: 150
-	});
+	
 	
 	// Mobile Mmenu
 	var $menu = $("nav#menu").mmenu({
@@ -36,7 +25,7 @@
 		navbar: {
 			title: 'MENU'
 		},
-		navbars: [{position:'bottom',content: ['<a href="#0">© 2017 Udema</a>']}]}, 
+		navbars: [{position:'bottom',content: ['<a href="'+window.location.origin+'">© 2020 Training Center</a>']}]}, 
 		{
 		// configuration
 		clone: true,
@@ -47,6 +36,7 @@
 			}
 		}
 	});
+
 	var $icon = $("#hamburger");
 	var API = $menu.data("mmenu");
 	$icon.on("click", function () {
@@ -91,6 +81,61 @@
 	  }
 	);
 	wow.init();
+
+
+	var login ='<div id="login-1">'+
+			  '<form>'+
+				
+				'<div class="form-group">'+
+					'<span class="input">'+
+					'<input class="input_field" type="email" autocomplete="off" name="email">'+
+						'<label class="input_label">'+
+						'<span class="input__label-content">Your email</span>'+
+					'</label>'+
+					'</span>'+
+
+					'<span class="input">'+
+					'<input class="input_field" type="password" autocomplete="new-password" name="password">'+
+						'<label class="input_label">'+
+						'<span class="input__label-content">Your password</span>'+
+					'</label>'+
+					'</span>'+
+					'<small><a href="#0">Forgot password?</a></small>'+
+				'</div>'+
+				'<a href="#0" class="btn_1 rounded full-width add_top_60">Login to Udema</a>'+
+				'<div class="text-center add_top_10">New to Udema? <strong><a href="register.html">Sign up!</a></strong></div>'+
+			'</form>'+
+		'</div>';
+
+	$('.login').magnificPopup({
+		items: {
+			src: login,
+			type: 'inline',
+		},
+		closeOnBgClick : false,
+		removalDelay: 300,
+		mainClass: 'mfp-with-zoom', // this class is for CSS animation below
+
+		zoom: {
+			enabled: true, // By default it's false, so don't forget to enable it
+
+			duration: 300, // duration of the effect, in milliseconds
+			easing: 'ease-in-out', // CSS transition easing function
+
+			
+		}
+	  });
+
+
+	 
+// Sticky nav
+$(window).on('scroll', function () {
+    if ($(this).scrollTop() > 1) {
+        $('.header').addClass("sticky");
+    } else {
+        $('.header').removeClass("sticky");
+    }
+});
 	
 	/*  video popups */
 	$('.video').magnificPopup({type:'iframe'});	/* video modal*/
@@ -205,26 +250,7 @@
 		}
 	});
 	
-	$('#reccomended').owlCarousel({
-		center: true,
-		items: 2,
-		loop: true,
-		margin: 0,
-		responsive: {
-			0: {
-				items: 1
-			},
-			767: {
-				items: 2
-			},
-			1000: {
-				items: 3
-			},
-			1400: {
-				items: 4
-			}
-		}
-	});
+	
 
 	// Sticky filters
 	$(window).bind('load resize', function () {

@@ -1,4 +1,8 @@
 /*-------- Blog --------*/
+
+main{
+  background-color: #fff;
+}
 article.blog {
   min-height: 200px;
   margin-bottom: 30px;
@@ -264,21 +268,35 @@ article.blog .post_info ul li:last-child {
 /*Blog Post*/
 .singlepost {
   background-color: #fff;
-  padding: 30px 30px 5px 30px;
+  padding: 0px 30px 5px 30px;
   margin-bottom: 25px;
-  -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.05);
-  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.05);
 }
 .singlepost h1 {
-  font-size: 32px;
+  font-size: 28px;
   font-size: 2rem;
 }
+.singlepost p {
+  font-size: 1.2em;
+  text-align: justify;
+text-justify: inter-word;
+}
+.sideblog{
+  padding-top: 20px;
+  background-color: #fcfcfc;
+}
+
 @media (max-width: 767px) {
   .singlepost h1 {
-    font-size: 21px;
+    font-size: 22px;
     font-size: 1.3125rem;
   }
+  #hero_in .wrapper h1 {
+    font-size: 22px;
+}
+.sideblog{
+  padding: 25px;
+  border-top: 1px solid #eee;
+}
 }
 .singlepost p {
   line-height: 1.8;
@@ -301,16 +319,20 @@ article.blog .post_info ul li:last-child {
   color: #392779;
 }
 
-.dropcaps p:first-child::first-letter {
-  color: #fff;
-  background-color: #662d91;
-  float: left;
-  font-size: 64px;
-  font-size: 4rem;
-  line-height: 1;
-  margin: 10px 15px 0 0 !important;
-  padding: 12px;
+@media (min-width: 768px) {
+  .dropcaps p:first-child::first-letter {
+    color: #fff;
+    background-color: #74c261;
+    float: left;
+    font-size: 60px;
+    font-size: 3.5rem;
+    line-height: 1;
+    margin: 5px 15px 0 0 !important;
+    padding: 12px;
+  }
 }
+
+
 
 #comments {
   padding: 10px 0 0px 0;
@@ -332,6 +354,12 @@ article.blog .post_info ul li:last-child {
   #comments .replied-to {
     margin-left: 20px;
   }
+
+  .singlepost {
+    padding: 0px 10px 5px 10px;
+    margin-bottom: 25px;
+}
+
 }
 
 .avatar {

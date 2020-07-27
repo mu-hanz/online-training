@@ -1,11 +1,12 @@
 
 		<div id="logo">
-			<a href="<?php echo base_url();?>"><img src="<?php echo base_url('assets/store/img/logo.png');?>" width="149" height="42" data-retina="true" alt=""></a>
+			<a href="<?php echo base_url();?>" class="mlink"><img src="<?php echo base_url('assets/store/img/logo.png');?>" width="149" height="42" data-retina="true" alt=""></a>
 		</div>
 		<ul id="top_menu">
-			<li><a href="login.html" class="login">Login</a></li>
+			<li><a href="#" data-effect="mfp-zoom-in" class="cart">Login</a></li>
+			<li><a href="#" data-effect="mfp-zoom-in" class="login">Login</a></li>
 			<li><a href="#0" class="search-overlay-menu-btn">Search</a></li>
-			<li class="hidden_tablet"><a href="admission.html" class="btn_1 rounded">Admission</a></li>
+			<li class="hidden_tablet"><a href="admission.html" class="btn_1 rounded">Hubungi</a></li>
 		</ul>
 		<!-- /top_menu -->
 		<a href="#menu" class="btn_mobile">
@@ -17,56 +18,19 @@
 		</a>
 		<nav id="menu" class="main-menu">
 			<ul class="mz-menu">
-				<li><span><a href="#0">Home</a></span>
+				<li><span><a href="<?php echo base_url();?>">Home</a></span></li>
+				<li><span><a href="#0">Program Pelatihan</a></span>
 					<ul>
-						<li><a href="<?php echo base_url('starter');?>">Home version 1</a></li>
-						<li><a href="index-2.html">Home version 2</a></li>
-						<li><a href="index-6.html">Home version 3</a></li>
-						<li><a href="index-3.html">Home version 4</a></li>
-						<li><a href="index-4.html">Home version 5</a></li>
-						<li><a href="index-5.html">With Cookie bar (EU law)</a></li>
+						<li><a href="courses-grid.html">Safety Professional</a></li>
+						<li><a href="courses-grid-sidebar.html">Quality & EHS</a></li>
+						<li><a href="courses-list.html">Food Safety-Quality</a></li>
+						<li><a href="courses-list-sidebar.html">Leadership & Service Quality</a></li>
+						<li><a href="course-detail.html">Health Care Training</a></li>
+                        <li><a href="course-detail-2.html">Virtual Training</a></li>
 					</ul>
 				</li>
-				<li><span><a href="#0">Courses</a></span>
-					<ul>
-						<li><a href="courses-grid.html">Courses grid</a></li>
-						<li><a href="courses-grid-sidebar.html">Courses grid sidebar</a></li>
-						<li><a href="courses-list.html">Courses list</a></li>
-						<li><a href="courses-list-sidebar.html">Courses list sidebar</a></li>
-						<li><a href="course-detail.html">Course detail</a></li>
-                        <li><a href="course-detail-2.html">Course detail working form</a></li>
-						<li><a href="admission.html">Admission wizard</a></li>
-						<li><a href="teacher-detail.html">Teacher detail</a></li>
-					</ul>
-				</li>
-				<li><span><a href="#0">Pages</a></span>
-					<ul>
-						<li><a href="#0">Menu 2</a></li>
-						<li><a href="about.html">About</a></li>
-						<li><a href="blog.html">Blog</a></li>
-						<li><a href="login.html">Login</a></li>
-						<li><a href="register.html">Register</a></li>
-						<li><a href="contacts.html">Contacts</a></li>
-						<li><a href="404.html">404 page</a></li>
-						<li><a href="agenda-calendar.html">Agenda Calendar</a></li>
-						<li><a href="faq.html">Faq</a></li>
-						<li><a href="help.html">Help</a></li>
-					</ul>
-				</li>
-				<li><span><a href="#0">Extra Pages</a></span>
-					<ul>
-						<li><a href="media-gallery.html">Media gallery</a></li>
-						<li><a href="cart-1.html">Cart page 1</a></li>
-						<li><a href="cart-2.html">Cart page 2</a></li>
-						<li><a href="cart-3.html">Cart page 3</a></li>
-						<li><a href="pricing-tables.html">Responsive pricing tables</a></li>
-						<li><a href="coming_soon/index.html">Coming soon</a></li>
-						<li><a href="icon-pack-1.html">Icon pack 1</a></li>
-						<li><a href="icon-pack-2.html">Icon pack 2</a></li>
-						<li><a href="icon-pack-3.html">Icon pack 3</a></li>
-						<li><a href="icon-pack-4.html">Icon pack 4</a></li>
-					</ul>
-				</li>
+				<li><span><a href="#0">Tentang Kami</a></span></li>
+				<li><span><a href="<?php echo base_url('articles/all-articles');?>">Artikel</a></span></li>
 			</ul>
 		</nav>
 		<!-- Search Menu -->

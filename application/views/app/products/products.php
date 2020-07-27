@@ -20,7 +20,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="border-bottom pb-3 mb-3 text-right">
-                        <a href="<?=base_url();?>webadmin/<?=$folder;?>/<?=$file;?>/create" class="btn btn-primary">
+                        <a href="<?=base_url();?>webadmin/<?=$folder;?>/<?=$file;?>/create" class="btn btn-primary mlink">
                             <i class="uil uil-file-plus-alt ml-1"></i> Add Data
                         </a>
                     </div>
@@ -112,9 +112,7 @@
                                         <label for="promotionName">Ordering</label>
                                         <input type="text" class="form-control" name="ordering_image[]" id="simpleinput">
                                     </div>
-                                    <div class="col-lg-2 text-right">
-                                        <button id="removeRow" type="button" class="btn btn-danger remove-btn-removeRow">Remove</button>
-                                    </div>
+                                    
                                 </div>
                                 <div id="newRow"></div>
                                 <div class="form-group row">
@@ -264,8 +262,10 @@
                         </div>
                         <div class="row mt-2">
                             <div class="col-md-12 text-right">
-                                <a href="<?=base_url();?>webadmin/<?=$folder;?>/<?=$file;?>" class="btn btn-danger">Cancel</a>
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <?php if($cancel): ?>
+                                <a href="<?=base_url();?>webadmin/<?=$folder;?>/<?=$file;?>" class="btn btn-danger mlink"><i class="icon"><span data-feather="x"></span></i> Cancel</a>
+                                <?php endif ?>
+                                <button type="submit" class="btn btn-primary"><i class="icon"><span data-feather="check-circle"></span></i> <?php echo ($cancel ? 'Update' : 'Save');?></button>
                             </div>
                         </div>
                     </div>

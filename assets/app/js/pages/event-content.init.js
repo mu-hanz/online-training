@@ -25,7 +25,7 @@ jQuery("#modal-media").modal("hide");
 $(".remove-images").click(function(e) {
 e.preventDefault();
 var field_id = $(this).attr('data-id');
-$('#post_'+field_id).val();
+$('#post_'+field_id).val('');
 $('#' + field_id).attr('src', base_url + '/assets/app/images/small/img-1.jpg');
 $('#overlay-'+field_id).removeClass('box-overlay');
 });

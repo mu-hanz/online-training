@@ -60,6 +60,11 @@ function initStart() {
 	Pace.start();
 	// remove svg apexchart
 	$( "svg" ).not( ".feather" ).remove();
+	$( ".note-popover" ).remove();
+};
+
+function initSuccess() {
+	feather.replace();
 };
 
 function initEnd() {
@@ -69,6 +74,7 @@ function initEnd() {
 
 
 document.addEventListener("pjax:send", initStart);
+document.addEventListener("pjax:success", initSuccess);
 document.addEventListener("pjax:complete", initEnd);
 
 // Form submit

@@ -1,11 +1,25 @@
 var base_url = window.location.origin;
 
+
+function getThemes (name) {
+  var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+  return v ? v[2] : null;
+};
+
+var getThemes = getThemes("themes");
+
+if(getThemes == 'dark'){
+  var skin = 'darkgray';
+} else {
+  var skin = 'lightgray';
+}
+
   tinymce.init({
     selector: '#content',
     height: 600,
     remove_script_host: false,
     relative_urls: false,
-    theme: 'modern',
+    skin: skin,
     branding: false,
     plugins: 'print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor code toc insertdatetime advlist lists textcolor wordcount imagetools  contextmenu colorpicker textpattern',
     toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link image media | alignleft aligncenter alignright alignjustify  | numlist bullist removeformat code',

@@ -42,9 +42,9 @@
                         
                         <?php if($cancel): ?>
                             <a href="<?php echo $cancel; ?>"
-                                class="btn btn-danger mlinks">Cancel</a>
+                                class="btn btn-danger mlinks"><i class="icon"><span data-feather="x"></span></i> Cancel</a>
                         <?php endif ?>
-                        <button type="submit" class="btn btn-primary"><?php echo ($cancel ? 'Update' : 'Save');?></button>
+                        <button type="submit" class="btn btn-primary"> <i class="icon"><span data-feather="check-circle"></span></i> <?php echo ($cancel ? 'Update' : 'Save');?></button>
                         </div>
                     </form>
 
@@ -60,7 +60,7 @@
                         <tr>
                         <th width="200px">Name</th>
                         <th>Description</th>
-                        <?php if($type != 'events-type' && $type != 'certification'): ?>
+                        <?php if($type != 'events-type' && $type != 'certification' && $type != 'location'): ?>
                         <th>Slug</th>
                         <th width="35px">Count</th>
                         <?php endif;?>
@@ -81,7 +81,7 @@
                                     <td>
                                     <?php if($category->description == ''){ echo '—'; } else { echo $category->description; }?>
                                     </td>
-                                    <?php if($type != 'events-type' && $type != 'certification'): ?>
+                                    <?php if($type != 'events-type' && $type != 'certification'  && $type != 'location'): ?>
                                     <td>
                                     <?php echo $category->slug;  ?>
                                     </td>

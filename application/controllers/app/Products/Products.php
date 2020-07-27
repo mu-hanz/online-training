@@ -26,8 +26,14 @@ class Products extends CI_Controller
 		$this->load->section('topbar', 'app/layout/mz_topbar');
         $this->load->section('menubar', 'app/layout/mz_menubar');
         
+
+        if($this->input->cookie('themes') == 'dark'){
+            $this->load->css('assets/app/libs/summernote/summernote-bs4-dark.css');
+        } else {
+            $this->load->css('assets/app/libs/summernote/summernote-bs4.css');
+        }
+
         // css
-        $this->load->css('assets/app/libs/summernote/summernote-bs4.css');
         $this->load->css('assets/app/css/app-custom.css');
         $this->load->css('assets/app/libs/datatables/dataTables.bootstrap4.min.css');
         $this->load->css('assets/app/libs/datatables/responsive.bootstrap4.min.css');
@@ -37,7 +43,6 @@ class Products extends CI_Controller
         $this->load->css('assets/sweetalert/sweetalert2.min.css');
 
         // js
-        
         $this->load->js('assets/app/libs/datatables/jquery.dataTables.min.js');
         $this->load->js('assets/app/libs/datatables/dataTables.bootstrap4.min.js');
         $this->load->js('assets/app/libs/datatables/dataTables.responsive.min.js');
@@ -119,6 +124,7 @@ class Products extends CI_Controller
 
     public function create()
     {
+        
         $this->load->js('assets/app/libs/summernote/summernote-bs4.min.js');
         $this->load->js('assets/app/js/pages/'.strtolower($this->file).'_create.init.js');
 
@@ -129,7 +135,7 @@ class Products extends CI_Controller
             'folder'                    => strtolower($this->folder),
             'file'                      => strtolower($this->file),
             'action'                    => base_url('webadmin/'.strtolower($this->folder).'/'.strtolower($this->file).'/save'),
-            'cancel'                                => '',
+            'cancel'                                => false,
             'parent'                                => '',
             'name'                                  => '',
             'description'                           => '',
@@ -291,7 +297,7 @@ class Products extends CI_Controller
             'folder'                                => strtolower($this->folder),
             'file'                                  => strtolower($this->file),
             'action'                                => base_url('webadmin/'.strtolower($this->folder).'/'.strtolower($this->file).'/update'),
-            'cancel'                                => '',
+            'cancel'                                => true,
             'parent'                                => '',
             'name'                                  => '',
             'description'                           => '',

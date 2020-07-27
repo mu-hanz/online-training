@@ -41,14 +41,15 @@ File: Icons Css File
   font-variant: normal;
   text-transform: none;
   /* fix buttons height, for twitter bootstrap */
-  line-height: 1em;
+  line-height: 0em;
   /* Animation center compensation - margins should be symmetric */
   /* remove if not needed */
   /* you can be more comfortable with increased icons size */
-  font-size: 120%;
+  font-size: 140%;
   /* Font smoothing. That was taken from TWBS */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  vertical-align: middle;
   /* Uncomment for 3D effect */
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */ }
 

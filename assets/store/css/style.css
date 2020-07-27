@@ -231,7 +231,7 @@ Author URI: http://themeforest.net/user/Ansonika/
   -moz-animation: circle infinite .95s linear;
   -o-animation: circle infinite .95s linear;
   animation: circle infinite .95s linear;
-  border: 2px solid #662d91;
+  border: 4px solid #73c15d;
   border-top-color: rgba(0, 0, 0, 0.2);
   border-right-color: rgba(0, 0, 0, 0.2);
   border-bottom-color: rgba(0, 0, 0, 0.2);
@@ -706,7 +706,7 @@ ul#top_menu li a:hover {
   color: #fff;
   opacity: 0.7;
 }
-ul#top_menu li a.login, ul#top_menu li a.search-overlay-menu-btn {
+ul#top_menu li a.login, ul#top_menu li a.search-overlay-menu-btn, ul#top_menu li a.cart {
   display: block;
   width: 25px;
   height: 25px;
@@ -714,23 +714,27 @@ ul#top_menu li a.login, ul#top_menu li a.search-overlay-menu-btn {
   position: relative;
   top: -5px;
 }
-ul#top_menu li a.login:before, ul#top_menu li a.search-overlay-menu-btn:before {
-  font-family: 'ElegantIcons';
-  font-size: 24px;
-  font-size: 1.5rem;
+ul#top_menu li a.login:before, ul#top_menu li a.search-overlay-menu-btn:before, ul#top_menu li a.cart:before {
+  font-family: 'Pe-icon-7-stroke';
+  font-size: 1.8rem;
   color: #fff;
   text-indent: 0;
   position: absolute;
   left: 0;
   top: 0;
-  font-weight: normal;
+  font-weight: bold;
   line-height: 1;
 }
+
+
+ul#top_menu li a.cart:before {
+  content: "\e66e";
+}
 ul#top_menu li a.login:before {
-  content: "\7e";
+  content: "\e605";
 }
 ul#top_menu li a.search-overlay-menu-btn:before {
-  content: "\55";
+  content: "\e618";
 }
 ul#top_menu li a.btn_1 {
   background-color: #FFC107;
@@ -790,15 +794,13 @@ ul#top_menu li a.btn_1:hover {
   background-color: rgba(57, 39, 121, 0.8);
 }
 #hero_in.courses:before {
-  background: url(http://via.placeholder.com/1600x1067/ccc/fff/bg_courses.jpg) center center no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 #hero_in.courses .wrapper {
-  background-color: #372675;
-  background-color: rgba(57, 39, 121, 0.8);
+  background-color:rgba(0, 0, 0, 0.6);
 }
 #hero_in.contacts:before {
   background: url(http://via.placeholder.com/1600x1067/ccc/fff/bg_contacts.jpg) center center no-repeat;

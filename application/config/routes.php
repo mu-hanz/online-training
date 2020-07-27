@@ -62,5 +62,12 @@ $route['webadmin/([a-z]+)/(:any)/(:any)'] = "App/$1/$2/$3";
 $route['webadmin/([a-z]+)/(:any)/(:any)/(:any)'] = "App/$1/$2/$3/$4";
 $route['webadmin/([a-z]+)/(:any)/(:any)/(:any)/(:any)'] = "App/$1/$2/$3/$4/$5";
 
+// event
+$route['events/detail/(:any)'] = "store/events/index/$1";
+$route['events/all-events'] = "store/events/all_events";
+$route['events/all-events/ajax'] = "store/events/load_events_ajax";
 
-$route['starter'] = "home/starter";
+// articles
+$route['articles/detail/(:any)'] = "store/articles/index/$1";
+$route['articles/all-articles'] = "store/articles/all_articles";
+$route['articles/all-articles/ajax'] = "store/articles/load_articles_ajax";

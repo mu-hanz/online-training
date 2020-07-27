@@ -7,8 +7,9 @@ class Home extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->_init();
-        
+		$this->_init();
+		
+        $this->load->model('Post_m');
     }
 
     private function _init()
@@ -20,9 +21,25 @@ class Home extends CI_Controller {
 	}
 	
 	public function index()
-	{
-		$this->load->section('slider', 'store/layout/slider');
-		$this->load->view('store/home');
+	{	
+
+		$this->load->js('assets/store/js/jquery.flexslider.js');
+		$this->load->js('assets/store/js/slider.js');
+
+		$data_slider = array(
+			'data_content'      => $this->Post_m->get_event_all('4'),
+		);
+		$this->load->section('slider', 'store/layout/slider', $data_slider);
+
+
+		$data_home = array(
+			'event_popular'      => $this->Post_m->get_event_all('5'),
+			'data_articles'      => $this->Post_m->get_articles_all('4'),
+		);
+
+		$this->output->set_title($this->muhanz->app_title('Training Center'));
+
+		$this->load->view('store/home', $data_home);
 	}
 
 	public function starter()

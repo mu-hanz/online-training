@@ -17,3 +17,223 @@ header.header.sticky {
     background: linear-gradient(to right, #75c25f, #16aed7);
     padding: 15px 20px;
 }
+
+.event-detail p{
+font-size: 1.2em;
+text-align: justify;
+  text-justify: inter-word;
+}
+
+.event-detail h1{
+    font-size: 2em;
+}
+.btn_home_align {
+  text-align: center;
+  margin-top: 20px;
+}
+a.box_news:hover img{
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+#carousel_slider_wp {
+  padding: 40px 60px 45px 60px;
+}
+.event-name1 {
+  font-size: 1.2em;
+}
+
+.event-name1:hover {
+  color: #3f9fff;
+}
+
+a.box_news figure img{
+  left: 0;
+top: 0;
+object-fit: cover;
+height: 150px;
+  -webkit-transform: scale(1);
+-moz-transform: scale(1);
+-ms-transform: scale(1);
+-o-transform: scale(1);
+transform: scale(1);
+-moz-transition: all 0.3s ease-in-out;
+-o-transition: all 0.3s ease-in-out;
+-webkit-transition: all 0.3s ease-in-out;
+-ms-transition: all 0.3s ease-in-out;
+transition: all 0.3s ease-in-out;
+backface-visibility: hidden;
+}
+
+
+.event-detail h2{
+    font-size: 1.6em;
+}
+.event-detail h3{
+    font-size: 1.4em;
+}
+
+.event-detail img{
+    width: 100%;
+    height: auto;
+    }
+    .white-popup {
+        position: relative;
+        background: #FFF;
+        padding: 20px;
+        width: auto;
+        max-width: 500px;
+        margin: 20px auto;
+        
+      }
+
+      #login-1 {
+        max-width: 500px;
+        padding: 45px 60px 60px 60px;
+        position: relative;
+        overflow-y: auto;
+        background-color: #fff;
+
+    }
+
+    .mfp-ajax-holder .mfp-content, .mfp-inline-holder .mfp-content {
+        width: auto;
+        cursor: auto;
+    }
+
+    .blog-grid{
+      min-height: 235px;
+    }
+    .blog-grid-img{
+      object-fit: cover;
+height: 235px;
+    }
+
+    @media (max-width: 767px) {
+        #login-1 {
+          width: 100%;
+          min-height: 100vh;
+        }
+        .white-popup {
+            width: 100%;
+          }
+
+          .mfp-container {
+            padding: 0;
+        }
+       
+      }
+
+      
+
+
+      .mfp-with-zoom .mfp-container,
+      .mfp-with-zoom.mfp-bg {
+        opacity: 0;
+        -webkit-backface-visibility: hidden;
+        /* ideally, transition speed should match zoom duration */
+        -webkit-transition: all 0.3s ease-out;
+        -moz-transition: all 0.3s ease-out;
+        -o-transition: all 0.3s ease-out;
+        transition: all 0.3s ease-out;
+      }
+      
+      .mfp-with-zoom.mfp-ready .mfp-container {
+          opacity: 1;
+      }
+      .mfp-with-zoom.mfp-ready.mfp-bg {
+          opacity: 0.8;
+      }
+      
+      .mfp-with-zoom.mfp-removing .mfp-container,
+      .mfp-with-zoom.mfp-removing.mfp-bg {
+        opacity: 0;
+      }
+
+      .sbHolder {
+        min-width: 150px;
+    }
+
+
+    @-webkit-keyframes spinner-border {
+      to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+    
+    @keyframes spinner-border {
+      to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+    
+    .spinner-border {
+      display: inline-block;
+      width: 2rem;
+      height: 2rem;
+      vertical-align: middle;
+      border: 0.25em solid currentColor;
+      border-right-color: transparent;
+      border-radius: 50%;
+      -webkit-animation: spinner-border .75s linear infinite;
+      animation: spinner-border .75s linear infinite;
+    }
+    
+    .spinner-border-sm {
+      width: 1rem;
+      height: 1rem;
+      border-width: 0.2em;
+      margin-right: 10px;
+    }
+    
+    @-webkit-keyframes spinner-grow {
+      0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+    
+    @keyframes spinner-grow {
+      0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+    
+    .spinner-grow {
+      display: inline-block;
+      width: 2rem;
+      height: 2rem;
+      vertical-align: middle;
+      background-color: currentColor;
+      border-radius: 50%;
+      opacity: 0;
+      -webkit-animation: spinner-grow .75s linear infinite;
+      animation: spinner-grow .75s linear infinite;
+    }
+    
+    .spinner-grow-sm {
+      width: 1rem;
+      height: 1rem;
+      margin-right: 10px;
+    }
+
+
+    .event-name{
+      font-size: 1.2em;
+    }
+
+    .animated .block-horizzontal{
+      background: #75c260;
+    }

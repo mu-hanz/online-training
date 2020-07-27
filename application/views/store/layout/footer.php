@@ -1,8 +1,8 @@
 <div class="container margin_120_95">
 			<div class="row">
 				<div class="col-lg-5 col-md-12 p-r-5">
-					<p><img src="img/logo.png" width="149" height="42" data-retina="true" alt=""></p>
-					<p>Mea nibh meis philosophia eu. Duis legimus efficiantur ea sea. Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu. Nihil facilisi indoctum an vix, ut delectus expetendis vis.</p>
+					<p><img src="<?php echo base_url('assets/store/img/logo.png');?>" width="149" height="42" data-retina="true" alt=""></p>
+					<p>Kami menyediakan berbagai macam informasi seputar Program Training Strategic and Improvement Management yang bertujuan untuk memberikan kemudahan dalam membantu kebutuhan Training di Perusahaan Anda.</p>
 					<div class="follow_us">
 						<ul>
 							<li>Follow us</li>
@@ -28,8 +28,8 @@
 				<div class="col-lg-3 col-md-6">
 					<h5>Contact with Us</h5>
 					<ul class="contacts">
-						<li><a href="tel://61280932400"><i class="ti-mobile"></i> + 61 23 8093 3400</a></li>
-						<li><a href="mailto:info@udema.com"><i class="ti-email"></i> info@udema.com</a></li>
+						<li><a href="https://wa.me/6281298262727?text=%2AHallo%2C%20dengan%20siapa%20saya%20berbicara%3F%2A%0ANama%20%3A%0AEmail%20%3A%0APertanyaan%20%3A%0A"><i class="ti-mobile"></i> + 62 812 9826 2727</a></li>
+						<li><a href="mailto:info@trainingcenter.events"><i class="ti-email"></i> info@trainingcenter.events</a></li>
 					</ul>
 					<div id="newsletter">
 					<h6>Newsletter</h6>
@@ -53,7 +53,7 @@
 					</ul>
 				</div>
 				<div class="col-md-4">
-					<div id="copy">© 2017 Udema</div>
+					<div id="copy">© 2020 Training Center</div>
 				</div>
 			</div>
 		</div>

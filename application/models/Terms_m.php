@@ -79,20 +79,21 @@ class Terms_m extends CI_Model
         return $this->db->delete('terms', array('term_id' => $id));
     }
 
-    public function get_terms($term, $parent = false)
+    public function get_terms($term, $parent = false, $object_id = false)
     {
-		$this->db->cache_off();
-
         $this->db->select('*');
         $this->db->from('terms');
         $this->db->join('term_taxonomy', 'term_taxonomy.term_id = terms.term_id', 'left');
+        $this->db->join('term_relationships', 'term_relationships.term_taxonomy_id = term_taxonomy.term_taxonomy_id', 'left');
         $this->db->where('term_taxonomy.taxonomy', $term);
 
         if ($parent != '') {
             $this->db->where('term_taxonomy.parent', $parent);
         }
 
-
+        if ($object_id) {
+            $this->db->where('term_relationships.object_id', $object_id);
+        }
 
         $this->db->order_by('terms.term_id', 'desc');
         $this->db->group_by('terms.term_id');

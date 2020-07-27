@@ -1,7 +1,7 @@
 var pjax = new Pjax({
     elements: [".mz-menu a, .mlink, .breadcrumb a"],
     cacheBust: false,
-    history: false,
+    history: true,
     debug: false,
     currentUrlFullReload: false, //jika di klik lagi link yg sama maka akan melakukan reload
 	selectors: ["title",".css-majax", ".js-majax", ".ajax-content"],
@@ -28,11 +28,13 @@ function loadingPage() {
 }
 
 function initStart() {
-	Pace.start();
+	$('[data-loader="circle-side"]').show(); // will first fade out the loading animation
+	$('#preloader').show(); // will fade out the white DIV that covers the website.
 };
 
 function initEnd() {
-	Pace.stop();
+	$('[data-loader="circle-side"]').fadeOut(); // will first fade out the loading animation
+	$('#preloader').delay(250).fadeOut(); // will fade out the white DIV that covers the website.
 };
 
 
@@ -42,9 +44,6 @@ document.addEventListener("pjax:complete", initEnd);
 
 // Form submit
 function showResponse(data) {
-
-	// remove loading ui block
-	$.unblockUI();
 	
 	//sweetalert
 	const Toast = Swal.mixin({

@@ -43,7 +43,8 @@
     </div>
     <!-- End Load Dynamically CSS -->
         
-    <header class="header menu_2">
+    <header class="header menu_2 sticky">
+    <div id="preloader"><div data-loader="circle-side"></div></div><!-- /Preload -->
         <?php echo $this->load->get_section('mainmenu'); ?>
     </header>
     
@@ -60,6 +61,7 @@
         <?php echo $this->load->get_section('footer'); ?>
     </footer>
     
+    
     </div>
     
     
@@ -67,43 +69,12 @@
     <script src="<?php echo base_url('assets/store/js/jquery-2.2.4.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/store/js/common_scripts.js'); ?>"></script>
     <script src="<?php echo base_url('assets/store/js/main.js'); ?>"></script>
-	<script src="<?php echo base_url('assets/store/assets/validate.js'); ?>"></script>
 
     <script src="<?php echo base_url('assets/aform/jquery.form.min.js') ;?>"></script>
     <script src="<?php echo base_url('assets/pjax/pjax.js') ;?>"></script>
     <script data-pace-options='{ "ajax": false }' src='<?php echo base_url('assets/app/js/pace.min.js') ;?>'></script>
     <script src="<?php echo base_url('assets/scripts/store.pjax.js') ;?>"></script>
-    
-    <!-- FlexSlider -->
-	<script defer src="<?php echo base_url('assets/store/js/jquery.flexslider.js') ;?>"></script>
-	<script>
-		$(window).load(function() {
-			'use strict';
-			$('#carousel_slider').flexslider({
-				animation: "slide",
-				controlNav: false,
-				animationLoop: false,
-				slideshow: false,
-				itemWidth: 280,
-				itemMargin: 25,
-				asNavFor: '#slider'
-			});
-			$('#carousel_slider ul.slides li').on('mouseover', function() {
-				$(this).trigger('click');
-			});
-			$('#slider').flexslider({
-				animation: "fade",
-				controlNav: false,
-				animationLoop: false,
-				slideshow: false,
-				sync: "#carousel_slider",
-				start: function(slider) {
-					$('body').removeClass('loading');
-				}
-			});
-		});
-    </script>
-    
+
     <!-- Load Dynamically JS -->
     <div class="js-majax">
         <?php foreach($js as $file){ echo "\n\t\t"; ?>

@@ -86,16 +86,13 @@
     
                                     <ul class="nav-second-level" aria-expanded="false">
                                         <li>
-                                            <a href="project-list.html">Add new</a>
+                                            <a href="<?php echo base_url('webadmin/posts/articles/create');?>">Add new</a>
                                         </li>
                                         <li>
-                                            <a href="project-detail.html">List Articles</a>
+                                            <a href="<?php echo base_url('webadmin/posts/articles/list');?>">List Articles</a>
                                         </li>
                                         <li>
                                             <a href="<?php echo base_url('webadmin/posts/terms/create/articles');?>">Category</a>
-                                        </li>
-                                        <li>
-                                            <a href="project-detail.html">Tags</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -108,10 +105,10 @@
     
                                     <ul class="nav-second-level" aria-expanded="false">
                                         <li>
-                                            <a href="task-list.html">Add Pages</a>
+                                            <a href="<?php echo base_url('webadmin/posts/pages/create');?>">Add Pages</a>
                                         </li>
                                         <li>
-                                            <a href="task-board.html">List Pages</a>
+                                            <a href="<?php echo base_url('webadmin/posts/pages/list');?>">List Pages</a>
                                         </li>
                                     </ul>
                                 </li>
