@@ -4194,11 +4194,11 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
   }
 
   .table.cart-list td:nth-of-type(2):before {
-    content: "Discount";
+    content: "Qty";
   }
 
   .table.cart-list td:nth-of-type(3):before {
-    content: "Total";
+    content: "Price";
   }
 
   .table.cart-list td:nth-of-type(4):before {

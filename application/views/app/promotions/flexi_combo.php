@@ -496,7 +496,16 @@
                                                                 </div>
                                                             </td>
                                                             <td><?=$row->post_title;?></td>
-                                                            <td>IDR <?=number_format($row->event_cost);?></td>
+                                                            <td>
+                                                                <?php
+                                                                if ($row->event_cost_promo != '0' OR $row->event_cost_promo != '') {
+                                                                ?>
+                                                                    <s>IDR <?=number_format($row->event_cost);?></s><br>
+                                                                    IDR <?=number_format($row->event_cost_promo);?>
+                                                                <?php } else { ?>
+                                                                    IDR <?=number_format($row->event_cost);?>
+                                                                <?php } ?>
+                                                            </td>
                                                             <td><?=$row->name;?></td>
                                                         </tr>
                                                         <?php $xx++; } ?>

@@ -80,7 +80,28 @@ var scroll  = function(){
     }, 1000);
 };
 
-
+$(".container-collectible-voucher").click(function(){
+    var id              = $(this).attr('id'); 
+    var id_user         = $('.id_user').val();
+    var base_url        = window.location.origin;
+    $.ajax({
+        url : base_url + '/shopping-cart/save-collectible-voucher',
+        method : "POST",
+        data : {id: id, 'mz_token': getcsrf("mz_cookie"), id_user: id_user},
+        async : true,
+        dataType : 'json',
+        success: function(data){
+            if (data.status == 'Success') {
+                $('.alert-danger').hide();
+                $('.alert-success').show();
+            } else {
+                $('.alert-success').hide();
+                $('.alert-danger').show();
+            }
+        },
+    });
+    return false;
+});
 
 
 

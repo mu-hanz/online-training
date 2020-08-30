@@ -1,0 +1,103 @@
+/*
+Template Name: Shreyu - Responsive Bootstrap 4 Admin Dashboard
+Author: CoderThemes
+Version: 1.0.0
+Website: https://coderthemes.com/
+Contact: support@coderthemes.com
+File: Main Css File
+*/
+/* =======================
+    TABLE OF CSS
+    1. Shopping Cart
+    2. Detail Event
+   ======================= */
+
+/* 1. Shopping Cart */
+.thumb_cart img.custom {
+    width: 60px;
+    height: 60px;
+}
+.container-thumb-cart-custom {
+    width: 25%;
+    float: left;
+}
+.container-item-cart-custom {
+    width: 75%;
+    float: right;
+}
+.discount-info-custom {
+    font-size: 10px;
+    font-style: italic;
+}
+.box-cart-custom-blur {
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+.loader-shopping-cart-custom {
+    border: 9px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 9px solid #3498db;
+    width: 60px;
+    height: 60px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    position: absolute;
+    z-index: 1;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    top: 0;
+    bottom: 0;
+}
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+} 
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.column-qty-shopping-cart {
+    width: 75px;
+}
+.delete-row-shopping-cart {
+    cursor: pointer;
+}
+.cart-is-empty, .container-discount-voucher {
+    display: none;
+}
+.alert-voucher {
+    color: red;
+    display: none;
+}
+
+/* 2. Detail Event */
+.container-collectible-voucher {
+    background-color: #343a40;
+    border-color: #343a40;
+    border: 1px solid #dee2e6;
+    width: 100%;
+    border-radius: 10px;
+}
+.border-white {
+    border-color: #fff;
+}
+.border-bottom-1 {
+    border-bottom: 1px solid #dee2e6;
+}
+.display-none {
+    display: none;
+}
+
+@media only screen and (max-width: 991px) {
+    .container-item-cart-custom {
+        width: 100%;
+    }
+}

@@ -233,56 +233,70 @@ class Campaign extends CI_Controller
         } else {
             $status = 'On Progress';
         }
-        
-        if (!empty($_FILES['promotions_image']['name'])) {
-            $config['upload_path']      = './assets/app/images/promotions/';
-            $config['allowed_types']    = 'jpg|jpeg|png|gif';
-            $config['max_size']         = 2048;
-            $this->upload->initialize($config);
-            if(!$this->upload->do_upload('promotions_image')){
-                $promotions_image = '';
-                return $this->muhanz->error($this->lang->line('save_error'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
-            }else{
-                $data = array('upload_data' => $this->upload->data());
-                $promotions_image = $data['upload_data']['file_name']; 
-            }
-        } else {
-            $promotions_image = '';
-        }
-        
-        $data_promotions = array(
-            'type'                      => strtolower($this->file),
-            'promotions_name'           => $this->input->post('promotions_name'),
-            'promotions_content'        => $this->input->post('contents',FALSE),
-            'promotions_image'          => $promotions_image,
-            'start_date'                => $this->input->post('start_date'),
-            'end_date'                  => $this->input->post('end_date'),
-            'valid_on'                  => $this->input->post('valid_on'),
-            'status'                    => $status,
-            'edited_by'                 => $this->ion_auth->get_user_id(),
-            'edited_date'               => $currentDateTime
-        );
-        $last_id_promotions     = $this->Promotions_m->save_promotions($data_promotions);
+
         $count_data_training    = $this->input->post('count_data_training');
         $valid_on               = $this->input->post('valid_on');
+        $temp_count             = 0;
         for($i=1; $i <= $count_data_training; $i++){
             $id                 = $this->input->post('id'.$i);
             $price_campaign     = $this->input->post('price_campaign'.$i);
-            if (isset($id)) {
-                $data_promotions_detail = array(
-                    'promotions_id'     => $last_id_promotions,
-                    'event_id'          => $id,
-                    'price_campaign'    => str_replace(',', '', $price_campaign),
-                );
-                if ($price_campaign != '0' && $price_campaign != '') {
-                    $insert_promotions_detail = $this->Promotions_m->save_promotions_detail($data_promotions_detail);
+
+            $count_row          = $this->Promotions_m->get_data_promotions_campaign($id);
+            $temp_count+= $count_row;
+        }
+
+        if ($temp_count >= '1') {
+            $this->muhanz->error($this->lang->line('save_error'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+        } else {
+            if (!empty($_FILES['promotions_image']['name'])) {
+                $config['upload_path']      = './assets/app/images/promotions/';
+                $config['allowed_types']    = 'jpg|jpeg|png|gif';
+                $config['max_size']         = 2048;
+                $this->upload->initialize($config);
+                if(!$this->upload->do_upload('promotions_image')){
+                    $promotions_image = '';
+                    return $this->muhanz->error($this->lang->line('save_error'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+                }else{
+                    $data = array('upload_data' => $this->upload->data());
+                    $promotions_image = $data['upload_data']['file_name']; 
+                }
+            } else {
+                $promotions_image = '';
+            }
+            
+            $data_promotions = array(
+                'type'                      => strtolower($this->file),
+                'promotions_name'           => $this->input->post('promotions_name'),
+                'promotions_content'        => $this->input->post('contents',FALSE),
+                'promotions_image'          => $promotions_image,
+                'start_date'                => $this->input->post('start_date'),
+                'end_date'                  => $this->input->post('end_date'),
+                'valid_on'                  => $this->input->post('valid_on'),
+                'status'                    => $status,
+                'edited_by'                 => $this->ion_auth->get_user_id(),
+                'edited_date'               => $currentDateTime
+            );
+            $last_id_promotions     = $this->Promotions_m->save_promotions($data_promotions);
+            
+            for($i=1; $i <= $count_data_training; $i++){
+                $id                 = $this->input->post('id'.$i);
+                $price_campaign     = $this->input->post('price_campaign'.$i);
+                if (isset($id)) {
+                    $data_promotions_detail = array(
+                        'promotions_id'     => $last_id_promotions,
+                        'event_id'          => $id,
+                        'price_campaign'    => str_replace(',', '', $price_campaign),
+                    );
+                    if ($price_campaign != '0' && $price_campaign != '') {
+                        $insert_promotions_detail = $this->Promotions_m->save_promotions_detail($data_promotions_detail);
+                    }
                 }
             }
-        }
-        if ($last_id_promotions) {
-            $this->muhanz->success($this->lang->line('save_success'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
-        } else {
-            $this->muhanz->error($this->lang->line('save_error'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+            if ($last_id_promotions) {
+                $this->muhanz->success($this->lang->line('save_success'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+            } else {
+                $this->muhanz->error($this->lang->line('save_error'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+            }
         }
     }
 
@@ -343,62 +357,74 @@ class Campaign extends CI_Controller
         } else {
             $status = 'On Progress';
         }
-        
-        if (!empty($_FILES['promotions_image']['name'])) {
-            $config['upload_path']      = './assets/app/images/promotions/';
-            $config['allowed_types']    = 'jpg|jpeg|png|gif';
-            $config['max_size']         = 2048;
-            $this->upload->initialize($config);
-            if(!$this->upload->do_upload('promotions_image')){
-                $promotions_image = '';
-                return $this->muhanz->error($this->lang->line('save_error'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
-            }else{
-                $data = array('upload_data' => $this->upload->data());
-                $promotions_image = $data['upload_data']['file_name']; 
-            }
-            $data_promotions = array(
-                'promotions_image'          => $promotions_image
-            );
-            $update_promotions          = $this->Promotions_m->update_promotions($id_data, $data_promotions);
-        } else {
-            
-        }
-        
-        $data_promotions = array(
-            'type'                      => strtolower($this->file),
-            'promotions_name'           => $this->input->post('promotions_name'),
-            'promotions_content'        => $this->input->post('contents',TRUE),
-            'start_date'                => $this->input->post('start_date'),
-            'end_date'                  => $this->input->post('end_date'),
-            'valid_on'                  => $this->input->post('valid_on'),
-            'status'                    => $status,
-            'edited_by'                 => $this->ion_auth->get_user_id(),
-            'edited_date'               => $currentDateTime
-        );
-        $update_promotions          = $this->Promotions_m->update_promotions($id_data, $data_promotions);
-        $delete_promotions_detail   = $this->Promotions_m->delete_promotions_detail($id_data);
+
         $count_data_training        = $this->input->post('count_data_training');
         $valid_on                   = $this->input->post('valid_on');
+        $temp_count                 = 0;
         for($i=1; $i <= $count_data_training; $i++){
             $id                 = $this->input->post('id'.$i);
             $price_campaign     = $this->input->post('price_campaign'.$i);
-            if (isset($id)) {
-                $data_promotions_detail = array(
-                    'promotions_id'     => $id_data,
-                    'event_id'          => $id,
-                    'price_campaign'    => str_replace(',', '', $price_campaign),
+
+            $count_row          = $this->Promotions_m->get_data_promotions_campaign_update($id, $id_data);
+            $temp_count+= $count_row;
+        }
+        if ($temp_count >= '1') {
+            $this->muhanz->error($this->lang->line('save_error'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+        } else {
+            if (!empty($_FILES['promotions_image']['name'])) {
+                $config['upload_path']      = './assets/app/images/promotions/';
+                $config['allowed_types']    = 'jpg|jpeg|png|gif';
+                $config['max_size']         = 2048;
+                $this->upload->initialize($config);
+                if(!$this->upload->do_upload('promotions_image')){
+                    $promotions_image = '';
+                    return $this->muhanz->error($this->lang->line('save_error'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+                }else{
+                    $data = array('upload_data' => $this->upload->data());
+                    $promotions_image = $data['upload_data']['file_name']; 
+                }
+                $data_promotions = array(
+                    'promotions_image'          => $promotions_image
                 );
-                if ($price_campaign != '0' && $price_campaign != '') {
-                    $insert_promotions_detail = $this->Promotions_m->save_promotions_detail($data_promotions_detail);
+                $update_promotions          = $this->Promotions_m->update_promotions($id_data, $data_promotions);
+            } else {
+                
+            }
+            
+            $data_promotions = array(
+                'type'                      => strtolower($this->file),
+                'promotions_name'           => $this->input->post('promotions_name'),
+                'promotions_content'        => $this->input->post('contents',TRUE),
+                'start_date'                => $this->input->post('start_date'),
+                'end_date'                  => $this->input->post('end_date'),
+                'valid_on'                  => $this->input->post('valid_on'),
+                'status'                    => $status,
+                'edited_by'                 => $this->ion_auth->get_user_id(),
+                'edited_date'               => $currentDateTime
+            );
+            $update_promotions          = $this->Promotions_m->update_promotions($id_data, $data_promotions);
+            $delete_promotions_detail   = $this->Promotions_m->delete_promotions_detail($id_data);
+            
+            for($i=1; $i <= $count_data_training; $i++){
+                $id                 = $this->input->post('id'.$i);
+                $price_campaign     = $this->input->post('price_campaign'.$i);
+                if (isset($id)) {
+                    $data_promotions_detail = array(
+                        'promotions_id'     => $id_data,
+                        'event_id'          => $id,
+                        'price_campaign'    => str_replace(',', '', $price_campaign),
+                    );
+                    if ($price_campaign != '0' && $price_campaign != '') {
+                        $insert_promotions_detail = $this->Promotions_m->save_promotions_detail($data_promotions_detail);
+                    }
                 }
             }
-        }
-
-        if ($update_promotions) {
-            $this->muhanz->success($this->lang->line('save_success'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
-        } else {
-            $this->muhanz->error($this->lang->line('save_error'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
-        }
+            if ($update_promotions) {
+                $this->muhanz->success($this->lang->line('save_success'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+            } else {
+                $this->muhanz->error($this->lang->line('save_error'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+            }
+        } 
     }
 
     public function delete()

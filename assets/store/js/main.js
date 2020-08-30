@@ -81,8 +81,7 @@
 	  }
 	);
 	wow.init();
-
-
+    
 	var login ='<div id="login-1">'+
 			  '<form>'+
 				

@@ -167,8 +167,8 @@
                                                                 </div>
                                                             </th>
                                                             <th>Title</th>
-                                                            <th>Price</th>
-                                                            <th>Price Campaign</th>
+                                                            <th>Cost</th>
+                                                            <th>Cost Campaign</th>
                                                             <th>Location</th>
                                                         </tr>
                                                     </thead>
@@ -203,7 +203,16 @@
                                                                 </div>
                                                             </td>
                                                             <td><?=$row->post_title;?></td>
-                                                            <td>IDR <?=number_format($row->event_cost);?></td>
+                                                            <td>
+                                                                <?php
+                                                                if ($row->event_cost_promo != '0' OR $row->event_cost_promo != '') {
+                                                                ?>
+                                                                    <s>IDR <?=number_format($row->event_cost);?></s><br>
+                                                                    IDR <?=number_format($row->event_cost_promo);?>
+                                                                <?php } else { ?>
+                                                                    IDR <?=number_format($row->event_cost);?>
+                                                                <?php } ?>
+                                                            </td>
                                                             <td>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">

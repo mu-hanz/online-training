@@ -6,6 +6,90 @@ if (!defined('BASEPATH')) {
 
 class Post_m extends CI_Model
 {
+
+    var $table_promotions           = 'promotions';
+    var $join_table_promotions      = 'promotions_detail';
+    var $join_table_promotions2     = 'promotions_tier';
+    var $join_table_promotions3     = 'promotions_type';
+
+    public function list_collectible_voucher($id)
+    {
+        $this->db->select('*');
+        $this->db->from($this->join_table_promotions);
+        $this->db->join($this->table_promotions, $this->join_table_promotions.'.promotions_id = '.$this->table_promotions.'.promotions_id', 'left');
+        $this->db->join($this->join_table_promotions3, $this->table_promotions.'.promotions_id = '.$this->join_table_promotions3.'.promotions_id', 'left');
+        $this->db->where($this->join_table_promotions.'.event_id', $id);
+        $this->db->where($this->table_promotions.'.status', 'On Progress');
+        $this->db->where($this->table_promotions.'.type_voucher', 'Collectible');
+        $this->db->where($this->join_table_promotions.'.status_delete', '0');
+        return $this->db->get()->result();
+    }
+
+    public function count_data_promotions_flexi_combo($id)
+    {
+        $this->db->select('*');
+        $this->db->from($this->join_table_promotions);
+        $this->db->join($this->table_promotions, $this->join_table_promotions.'.promotions_id = '.$this->table_promotions.'.promotions_id', 'left');
+        $this->db->where($this->join_table_promotions.'.event_id', $id);
+        $this->db->where($this->table_promotions.'.status', 'On Progress');
+        $this->db->where($this->table_promotions.'.type', 'flexi_combo');
+        $this->db->where($this->join_table_promotions.'.status_delete', '0');
+        return $this->db->get()->num_rows();
+    }
+
+    public function count_collectible_voucher($id)
+    {
+        $this->db->select('*');
+        $this->db->from($this->join_table_promotions);
+        $this->db->join($this->table_promotions, $this->join_table_promotions.'.promotions_id = '.$this->table_promotions.'.promotions_id', 'left');
+        $this->db->where($this->join_table_promotions.'.event_id', $id);
+        $this->db->where($this->table_promotions.'.status', 'On Progress');
+        $this->db->where($this->table_promotions.'.type_voucher', 'Collectible');
+        $this->db->where($this->join_table_promotions.'.status_delete', '0');
+        return $this->db->get()->num_rows();
+    }
+
+    
+
+    public function get_data_promotions_flexi_combo_tier($id)
+    {
+        $this->db->select('*');
+        $this->db->from($this->join_table_promotions);
+        $this->db->join($this->table_promotions, $this->join_table_promotions.'.promotions_id = '.$this->table_promotions.'.promotions_id', 'left');
+        $this->db->join($this->join_table_promotions2, $this->table_promotions.'.promotions_id = '.$this->join_table_promotions2.'.promotions_id', 'left');
+        $this->db->where($this->join_table_promotions.'.event_id', $id);
+        $this->db->where($this->table_promotions.'.status', 'On Progress');
+        $this->db->where($this->table_promotions.'.type', 'flexi_combo');
+        $this->db->where($this->join_table_promotions.'.status_delete', '0');
+        return $this->db->get()->result();
+    }
+
+    public function count_data_promotions_campaign($id)
+    {
+        $this->db->select('*');
+        $this->db->from($this->join_table_promotions);
+        $this->db->join($this->table_promotions, $this->join_table_promotions.'.promotions_id = '.$this->table_promotions.'.promotions_id', 'left');
+        $this->db->where($this->join_table_promotions.'.event_id', $id);
+        $this->db->where($this->table_promotions.'.status', 'On Progress');
+        $this->db->where($this->table_promotions.'.type', 'campaign');
+        $this->db->where($this->join_table_promotions.'.status_delete', '0');
+        return $this->db->get()->num_rows();
+    }
+
+    public function get_data_promotions_campaign($id)
+    {
+        $this->db->select('*');
+        $this->db->from($this->join_table_promotions);
+        $this->db->join($this->table_promotions, $this->join_table_promotions.'.promotions_id = '.$this->table_promotions.'.promotions_id', 'left');
+        $this->db->join($this->join_table_promotions2, $this->table_promotions.'.promotions_id = '.$this->join_table_promotions2.'.promotions_id', 'left');
+        $this->db->where($this->join_table_promotions.'.event_id', $id);
+        $this->db->where($this->table_promotions.'.status', 'On Progress');
+        $this->db->where($this->table_promotions.'.type', 'campaign');
+        $this->db->where($this->join_table_promotions.'.status_delete', '0');
+        $query = $this->db->get();
+        return $query->row();
+    }
+
     public function insert_post($data)
     {
         $this->db->insert('posts', $data);

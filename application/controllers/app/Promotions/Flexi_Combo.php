@@ -207,109 +207,125 @@ class Flexi_Combo extends CI_Controller
         } else {
             $status = 'On Progress';
         }
-        $data_promotions = array(
-            'type'                      => strtolower($this->file),
-            'promotions_name'           => $this->input->post('promotions_name'),
-            'start_date'                => $this->input->post('start_date'),
-            'end_date'                  => $this->input->post('end_date'),
-            'valid_on'                  => $this->input->post('valid_on'),
-            'limit_promotion'           => $this->input->post('limit_promotion'),
-            'limit_user'                => $this->input->post('limit_user'),
-            'limit_user_referral'       => $this->input->post('limit_user_referral'),
-            'type_discount_referral'    => $this->input->post('type_discount_referral'),
-            'status'                    => $status,
-            'edited_by'                 => $this->ion_auth->get_user_id(),
-            'edited_date'               => $currentDateTime
-        );
-        $last_id_promotions = $this->Promotions_m->save_promotions($data_promotions);
-        if (isset($_POST['amount_discount_referral'])) {
-            $amount_discount_referral = str_replace(',', '', $_POST['amount_discount_referral']);
-            for($i=0;$i<count($amount_discount_referral);$i++){
-                $data_promotions_type = array(
-                    'promotions_id'                 => $last_id_promotions,
-                    'type_discount'                 => 'referral',
-                    'amount_discount_referral'      => $amount_discount_referral[$i],
-                );
-                if ($amount_discount_referral[$i] != '0' OR $amount_discount_referral[$i] != '') {
-                    $insert_promotions_type = $this->Promotions_m->save_promotions_type($data_promotions_type);
-                }
-            }
-        }
-        $max_field_tiers    = $this->input->post('max_field_tiers');
-        for ($i = 1; $i <= $max_field_tiers; $i++) {
-            if (isset($_POST['customRadio'.$i]) OR isset($_POST['customRadiox'.$i])) {
-                if (isset($_POST['customRadio'.$i])) {
-                    $customRadio    = $_POST['customRadio'.$i];
-                } else {
-                    $customRadio    = '';
-                }
-                if (isset($_POST['customRadiox'.$i])) {
-                    $customRadiox    = $_POST['customRadiox'.$i];
-                } else {
-                    $customRadiox    = '';
-                }
-                $name_tier      = $_POST['name_tier'.$i];
-                if ($customRadio == 'criteria_qty') {
-                    $criteria_qty   = $_POST['criteria_qty'.$i];
-                    if ($customRadiox == 'discount_percent') {
-                        $discount_percent   = $_POST['discount_percent'.$i];
-                        $data_promotions_tier = array(
-                            'promotions_id'     => $last_id_promotions,
-                            'name_tier'         => $name_tier,
-                            'criteria_qty'      => $criteria_qty,
-                            'discount_percent'  => $discount_percent,
-                        );
-                    } else {
-                        $discount_price = $_POST['discount_price'.$i];
-                        $data_promotions_tier = array(
-                            'promotions_id'     => $last_id_promotions,
-                            'name_tier'         => $name_tier,
-                            'criteria_qty'      => $criteria_qty,
-                            'discount_price'    => str_replace(',', '', $discount_price),
-                        );
-                    }
-                    $insert_promotions_tier = $this->Promotions_m->save_promotions_tier($data_promotions_tier);
-                } else {
-                    $criteria_price = $_POST['criteria_price'.$i];
-                    if ($customRadiox == 'discount_percent') {
-                        $discount_percent   = $_POST['discount_percent'.$i];
-                        $data_promotions_tier = array(
-                            'promotions_id'     => $last_id_promotions,
-                            'name_tier'         => $name_tier,
-                            'criteria_price'    => str_replace(',', '', $criteria_price),
-                            'discount_percent'  => $discount_percent,
-                        );
-                    } else {
-                        $discount_price = $_POST['discount_price'.$i];
-                        $data_promotions_tier = array(
-                            'promotions_id'     => $last_id_promotions,
-                            'name_tier'         => $name_tier,
-                            'criteria_price'    => str_replace(',', '', $criteria_price),
-                            'discount_price'    => str_replace(',', '', $discount_price),
-                        );
-                    }
-                    $insert_promotions_tier = $this->Promotions_m->save_promotions_tier($data_promotions_tier);  
-                }
-            }
-        }
+
         $count_data_training    = $this->input->post('count_data_training');
         $valid_on               = $this->input->post('valid_on');
+        $temp_count             = 0;
         for($i=1; $i <= $count_data_training; $i++){
             $id                 = $this->input->post('id'.$i);
-            if (isset($id)) {
-                $data_promotions_detail = array(
-                    'promotions_id'     => $last_id_promotions,
-                    'event_id'          => $id,
-                );
-                $insert_promotions_detail = $this->Promotions_m->save_promotions_detail($data_promotions_detail);
-                
-            }
+            $price_campaign     = $this->input->post('price_campaign'.$i);
+
+            $count_row          = $this->Promotions_m->get_data_promotions_flexi_combo($id);
+            $temp_count+= $count_row;
         }
 
-        if ($last_id_promotions) {
-            $this->muhanz->success($this->lang->line('save_success'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
-        } else {
+        if ($temp_count >= '1') {
             $this->muhanz->error($this->lang->line('save_error'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+        } else {
+
+            $data_promotions = array(
+                'type'                      => strtolower($this->file),
+                'promotions_name'           => $this->input->post('promotions_name'),
+                'start_date'                => $this->input->post('start_date'),
+                'end_date'                  => $this->input->post('end_date'),
+                'valid_on'                  => $this->input->post('valid_on'),
+                'limit_promotion'           => $this->input->post('limit_promotion'),
+                'limit_user'                => $this->input->post('limit_user'),
+                'limit_user_referral'       => $this->input->post('limit_user_referral'),
+                'type_discount_referral'    => $this->input->post('type_discount_referral'),
+                'status'                    => $status,
+                'edited_by'                 => $this->ion_auth->get_user_id(),
+                'edited_date'               => $currentDateTime
+            );
+            $last_id_promotions = $this->Promotions_m->save_promotions($data_promotions);
+            if (isset($_POST['amount_discount_referral'])) {
+                $amount_discount_referral = str_replace(',', '', $_POST['amount_discount_referral']);
+                for($i=0;$i<count($amount_discount_referral);$i++){
+                    $data_promotions_type = array(
+                        'promotions_id'                 => $last_id_promotions,
+                        'type_discount'                 => 'referral',
+                        'amount_discount_referral'      => $amount_discount_referral[$i],
+                    );
+                    if ($amount_discount_referral[$i] != '0' OR $amount_discount_referral[$i] != '') {
+                        $insert_promotions_type = $this->Promotions_m->save_promotions_type($data_promotions_type);
+                    }
+                }
+            }
+            $max_field_tiers    = $this->input->post('max_field_tiers');
+            for ($i = 1; $i <= $max_field_tiers; $i++) {
+                if (isset($_POST['customRadio'.$i]) OR isset($_POST['customRadiox'.$i])) {
+                    if (isset($_POST['customRadio'.$i])) {
+                        $customRadio    = $_POST['customRadio'.$i];
+                    } else {
+                        $customRadio    = '';
+                    }
+                    if (isset($_POST['customRadiox'.$i])) {
+                        $customRadiox    = $_POST['customRadiox'.$i];
+                    } else {
+                        $customRadiox    = '';
+                    }
+                    $name_tier      = $_POST['name_tier'.$i];
+                    if ($customRadio == 'criteria_qty') {
+                        $criteria_qty   = $_POST['criteria_qty'.$i];
+                        if ($customRadiox == 'discount_percent') {
+                            $discount_percent   = $_POST['discount_percent'.$i];
+                            $data_promotions_tier = array(
+                                'promotions_id'     => $last_id_promotions,
+                                'name_tier'         => $name_tier,
+                                'criteria_qty'      => $criteria_qty,
+                                'discount_percent'  => $discount_percent,
+                            );
+                        } else {
+                            $discount_price = $_POST['discount_price'.$i];
+                            $data_promotions_tier = array(
+                                'promotions_id'     => $last_id_promotions,
+                                'name_tier'         => $name_tier,
+                                'criteria_qty'      => $criteria_qty,
+                                'discount_price'    => str_replace(',', '', $discount_price),
+                            );
+                        }
+                        $insert_promotions_tier = $this->Promotions_m->save_promotions_tier($data_promotions_tier);
+                    } else {
+                        $criteria_price = $_POST['criteria_price'.$i];
+                        if ($customRadiox == 'discount_percent') {
+                            $discount_percent   = $_POST['discount_percent'.$i];
+                            $data_promotions_tier = array(
+                                'promotions_id'     => $last_id_promotions,
+                                'name_tier'         => $name_tier,
+                                'criteria_price'    => str_replace(',', '', $criteria_price),
+                                'discount_percent'  => $discount_percent,
+                            );
+                        } else {
+                            $discount_price = $_POST['discount_price'.$i];
+                            $data_promotions_tier = array(
+                                'promotions_id'     => $last_id_promotions,
+                                'name_tier'         => $name_tier,
+                                'criteria_price'    => str_replace(',', '', $criteria_price),
+                                'discount_price'    => str_replace(',', '', $discount_price),
+                            );
+                        }
+                        $insert_promotions_tier = $this->Promotions_m->save_promotions_tier($data_promotions_tier);  
+                    }
+                }
+            }
+            
+            for($i=1; $i <= $count_data_training; $i++){
+                $id                 = $this->input->post('id'.$i);
+                if (isset($id)) {
+                    $data_promotions_detail = array(
+                        'promotions_id'     => $last_id_promotions,
+                        'event_id'          => $id,
+                    );
+                    $insert_promotions_detail = $this->Promotions_m->save_promotions_detail($data_promotions_detail);
+                    
+                }
+            }
+
+            if ($last_id_promotions) {
+                $this->muhanz->success($this->lang->line('save_success'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+            } else {
+                $this->muhanz->error($this->lang->line('save_error'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+            }
         }
     }
 
@@ -375,114 +391,129 @@ class Flexi_Combo extends CI_Controller
         } else {
             $status = 'On Progress';
         }
-        $data_promotions = array(
-            'type'                      => strtolower($this->file),
-            'promotions_name'           => $this->input->post('promotions_name'),
-            'start_date'                => $this->input->post('start_date'),
-            'end_date'                  => $this->input->post('end_date'),
-            'valid_on'                  => $this->input->post('valid_on'),
-            'limit_promotion'           => $this->input->post('limit_promotion'),
-            'limit_user'                => $this->input->post('limit_user'),
-            'limit_user_referral'       => $this->input->post('limit_user_referral'),
-            'type_discount_referral'    => $this->input->post('type_discount_referral'),
-            'status'                    => $status,
-            'edited_by'                 => $this->ion_auth->get_user_id(),
-            'edited_date'               => $currentDateTime
-        );
-        $update_promotions      = $this->Promotions_m->update_promotions($id_data, $data_promotions);
 
-        $delete_promotions_type = $this->Promotions_m->delete_promotions_type($id_data);
-        if (isset($_POST['amount_discount_referral'])) {
-            $amount_discount_referral = str_replace(',', '', $_POST['amount_discount_referral']);
-            for($i=0;$i<count($amount_discount_referral);$i++){
-                $data_promotions_type = array(
-                    'promotions_id'                 => $id_data,
-                    'type_discount'                 => 'referral',
-                    'amount_discount_referral'      => $amount_discount_referral[$i],
-                );
-                if ($amount_discount_referral[$i] != '0' OR $amount_discount_referral[$i] != '') {
-                    $insert_promotions_type = $this->Promotions_m->save_promotions_type($data_promotions_type);
-                }
-            }
-        }
-
-        $delete_promotions_tier = $this->Promotions_m->delete_promotions_tier($id_data);
-        $max_field_tiers    = $this->input->post('max_field_tiers');
-        for ($i = 1; $i <= $max_field_tiers; $i++) {
-            if (isset($_POST['customRadio'.$i]) OR isset($_POST['customRadiox'.$i])) {
-                if (isset($_POST['customRadio'.$i])) {
-                    $customRadio    = $_POST['customRadio'.$i];
-                } else {
-                    $customRadio    = '';
-                }
-                if (isset($_POST['customRadiox'.$i])) {
-                    $customRadiox    = $_POST['customRadiox'.$i];
-                } else {
-                    $customRadiox    = '';
-                }
-                $name_tier      = $_POST['name_tier'.$i];
-                if ($customRadio == 'criteria_qty') {
-                    $criteria_qty   = $_POST['criteria_qty'.$i];
-                    if ($customRadiox == 'discount_percent') {
-                        $discount_percent   = $_POST['discount_percent'.$i];
-                        $data_promotions_tier = array(
-                            'promotions_id'     => $id_data,
-                            'name_tier'         => $name_tier,
-                            'criteria_qty'      => $criteria_qty,
-                            'discount_percent'  => $discount_percent,
-                        );
-                    } else {
-                        $discount_price = $_POST['discount_price'.$i];
-                        $data_promotions_tier = array(
-                            'promotions_id'     => $id_data,
-                            'name_tier'         => $name_tier,
-                            'criteria_qty'      => $criteria_qty,
-                            'discount_price'    => str_replace(',', '', $discount_price),
-                        );
-                    }
-                    $insert_promotions_tier = $this->Promotions_m->save_promotions_tier($data_promotions_tier);
-                } else {
-                    $criteria_price = $_POST['criteria_price'.$i];
-                    if ($customRadiox == 'discount_percent') {
-                        $discount_percent   = $_POST['discount_percent'.$i];
-                        $data_promotions_tier = array(
-                            'promotions_id'     => $id_data,
-                            'name_tier'         => $name_tier,
-                            'criteria_price'    => str_replace(',', '', $criteria_price),
-                            'discount_percent'  => $discount_percent,
-                        );
-                    } else {
-                        $discount_price = $_POST['discount_price'.$i];
-                        $data_promotions_tier = array(
-                            'promotions_id'     => $id_data,
-                            'name_tier'         => $name_tier,
-                            'criteria_price'    => str_replace(',', '', $criteria_price),
-                            'discount_price'    => str_replace(',', '', $discount_price),
-                        );
-                    }
-                    $insert_promotions_tier = $this->Promotions_m->save_promotions_tier($data_promotions_tier);  
-                }
-            }
-        }
-        $delete_promotions_detail = $this->Promotions_m->delete_promotions_detail($id_data);
         $count_data_training        = $this->input->post('count_data_training');
         $valid_on                   = $this->input->post('valid_on');
+        $temp_count                 = 0;
         for($i=1; $i <= $count_data_training; $i++){
             $id                 = $this->input->post('id'.$i);
-            if (isset($id)) {
-                $data_promotions_detail = array(
-                    'promotions_id'     => $id_data,
-                    'event_id'          => $id,
-                );
-                $insert_promotions_detail = $this->Promotions_m->save_promotions_detail($data_promotions_detail);
-                
-            }
-        }
+            $price_campaign     = $this->input->post('price_campaign'.$i);
 
-        if ($update_promotions) {
-            $this->muhanz->success($this->lang->line('save_success'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
-        } else {
+            $count_row          = $this->Promotions_m->get_data_promotions_flexi_combo_update($id, $id_data);
+            $temp_count+= $count_row;
+        }
+        if ($temp_count >= '1') {
             $this->muhanz->error($this->lang->line('save_error'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+        } else {
+
+            $data_promotions = array(
+                'type'                      => strtolower($this->file),
+                'promotions_name'           => $this->input->post('promotions_name'),
+                'start_date'                => $this->input->post('start_date'),
+                'end_date'                  => $this->input->post('end_date'),
+                'valid_on'                  => $this->input->post('valid_on'),
+                'limit_promotion'           => $this->input->post('limit_promotion'),
+                'limit_user'                => $this->input->post('limit_user'),
+                'limit_user_referral'       => $this->input->post('limit_user_referral'),
+                'type_discount_referral'    => $this->input->post('type_discount_referral'),
+                'status'                    => $status,
+                'edited_by'                 => $this->ion_auth->get_user_id(),
+                'edited_date'               => $currentDateTime
+            );
+            $update_promotions      = $this->Promotions_m->update_promotions($id_data, $data_promotions);
+
+            $delete_promotions_type = $this->Promotions_m->delete_promotions_type($id_data);
+            if (isset($_POST['amount_discount_referral'])) {
+                $amount_discount_referral = str_replace(',', '', $_POST['amount_discount_referral']);
+                for($i=0;$i<count($amount_discount_referral);$i++){
+                    $data_promotions_type = array(
+                        'promotions_id'                 => $id_data,
+                        'type_discount'                 => 'referral',
+                        'amount_discount_referral'      => $amount_discount_referral[$i],
+                    );
+                    if ($amount_discount_referral[$i] != '0' OR $amount_discount_referral[$i] != '') {
+                        $insert_promotions_type = $this->Promotions_m->save_promotions_type($data_promotions_type);
+                    }
+                }
+            }
+
+            $delete_promotions_tier = $this->Promotions_m->delete_promotions_tier($id_data);
+            $max_field_tiers    = $this->input->post('max_field_tiers');
+            for ($i = 1; $i <= $max_field_tiers; $i++) {
+                if (isset($_POST['customRadio'.$i]) OR isset($_POST['customRadiox'.$i])) {
+                    if (isset($_POST['customRadio'.$i])) {
+                        $customRadio    = $_POST['customRadio'.$i];
+                    } else {
+                        $customRadio    = '';
+                    }
+                    if (isset($_POST['customRadiox'.$i])) {
+                        $customRadiox    = $_POST['customRadiox'.$i];
+                    } else {
+                        $customRadiox    = '';
+                    }
+                    $name_tier      = $_POST['name_tier'.$i];
+                    if ($customRadio == 'criteria_qty') {
+                        $criteria_qty   = $_POST['criteria_qty'.$i];
+                        if ($customRadiox == 'discount_percent') {
+                            $discount_percent   = $_POST['discount_percent'.$i];
+                            $data_promotions_tier = array(
+                                'promotions_id'     => $id_data,
+                                'name_tier'         => $name_tier,
+                                'criteria_qty'      => $criteria_qty,
+                                'discount_percent'  => $discount_percent,
+                            );
+                        } else {
+                            $discount_price = $_POST['discount_price'.$i];
+                            $data_promotions_tier = array(
+                                'promotions_id'     => $id_data,
+                                'name_tier'         => $name_tier,
+                                'criteria_qty'      => $criteria_qty,
+                                'discount_price'    => str_replace(',', '', $discount_price),
+                            );
+                        }
+                        $insert_promotions_tier = $this->Promotions_m->save_promotions_tier($data_promotions_tier);
+                    } else {
+                        $criteria_price = $_POST['criteria_price'.$i];
+                        if ($customRadiox == 'discount_percent') {
+                            $discount_percent   = $_POST['discount_percent'.$i];
+                            $data_promotions_tier = array(
+                                'promotions_id'     => $id_data,
+                                'name_tier'         => $name_tier,
+                                'criteria_price'    => str_replace(',', '', $criteria_price),
+                                'discount_percent'  => $discount_percent,
+                            );
+                        } else {
+                            $discount_price = $_POST['discount_price'.$i];
+                            $data_promotions_tier = array(
+                                'promotions_id'     => $id_data,
+                                'name_tier'         => $name_tier,
+                                'criteria_price'    => str_replace(',', '', $criteria_price),
+                                'discount_price'    => str_replace(',', '', $discount_price),
+                            );
+                        }
+                        $insert_promotions_tier = $this->Promotions_m->save_promotions_tier($data_promotions_tier);  
+                    }
+                }
+            }
+            $delete_promotions_detail = $this->Promotions_m->delete_promotions_detail($id_data);
+            
+            for($i=1; $i <= $count_data_training; $i++){
+                $id                 = $this->input->post('id'.$i);
+                if (isset($id)) {
+                    $data_promotions_detail = array(
+                        'promotions_id'     => $id_data,
+                        'event_id'          => $id,
+                    );
+                    $insert_promotions_detail = $this->Promotions_m->save_promotions_detail($data_promotions_detail);
+                    
+                }
+            }
+
+            if ($update_promotions) {
+                $this->muhanz->success($this->lang->line('save_success'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+            } else {
+                $this->muhanz->error($this->lang->line('save_error'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+            }
         }
     }
 

@@ -24,7 +24,7 @@ class Events extends CI_Controller {
 
     public function index($slug)
 	{	
-
+        $this->load->css('assets/store/css/style-custom.css');
         $this->load->js('assets/store/js/events.init.js');
 
 
@@ -41,7 +41,13 @@ class Events extends CI_Controller {
         $event = $data_event->row();
 
 		$data = array(
-			'event'      => $event,
+            'event'                     => $event,
+            'flexi_combo'               => $this->Post_m->count_data_promotions_flexi_combo($event->event_id),
+            'flexi_combo_tier'          => $this->Post_m->get_data_promotions_flexi_combo_tier($event->event_id),
+            'count_campaign'            => $this->Post_m->count_data_promotions_campaign($event->event_id),
+            'campaign'                  => $this->Post_m->get_data_promotions_campaign($event->event_id),
+            'count_collectible_voucher' => $this->Post_m->count_collectible_voucher($event->event_id),
+            'list_collectible_voucher'  => $this->Post_m->list_collectible_voucher($event->event_id),
 		);
 
 		$this->output->set_title($this->muhanz->app_title($event->event_name));

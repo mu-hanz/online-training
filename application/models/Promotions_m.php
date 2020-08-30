@@ -14,7 +14,7 @@ class Promotions_m extends CI_Model {
     // var $join_table2_1  = 'events_contents';
     var $join_table2_2  = 'posts';
     var $join_table2_3  = 'terms';
-    var $column_order2  = array(null, 'events.event_id', 'posts.post_title', 'events.event_cost', 'terms.name');
+    var $column_order2  = array(null, 'events.event_id', 'posts.post_title', 'events.event_cost', 'events.event_cost_promo', 'terms.name');
     var $column_search2 = array('posts.post_title', 'events.event_cost', 'terms.name'); 
     var $order2         = array('events.event_id' => 'desc'); 
 
@@ -27,6 +27,60 @@ class Promotions_m extends CI_Model {
     {
         parent::__construct();
         $this->load->database();
+    }
+
+    public function get_data_promotions_campaign($id)
+    {
+        $this->db->select('*');
+        $this->db->from($this->join_table2);
+        $this->db->join($this->table, $this->join_table2.'.promotions_id = '.$this->table.'.promotions_id', 'left');
+        $this->db->join($this->join_table, $this->table.'.promotions_id = '.$this->join_table.'.promotions_id', 'left');
+        $this->db->where($this->join_table2.'.event_id', $id);
+        $this->db->where($this->table.'.status', 'On Progress');
+        $this->db->where($this->table.'.type', 'campaign');
+        $this->db->where($this->join_table2.'.status_delete', '0');
+        return $this->db->get()->num_rows();
+    }
+
+    public function get_data_promotions_campaign_update($id, $id_data)
+    {
+        $this->db->select('*');
+        $this->db->from($this->join_table2);
+        $this->db->join($this->table, $this->join_table2.'.promotions_id = '.$this->table.'.promotions_id', 'left');
+        $this->db->join($this->join_table, $this->table.'.promotions_id = '.$this->join_table.'.promotions_id', 'left');
+        $this->db->where($this->join_table2.'.event_id', $id);
+        $this->db->where($this->join_table2.'.promotions_id !=', $id_data);
+        $this->db->where($this->table.'.status', 'On Progress');
+        $this->db->where($this->table.'.type', 'campaign');
+        $this->db->where($this->join_table2.'.status_delete', '0');
+        return $this->db->get()->num_rows();
+    }
+
+    public function get_data_promotions_flexi_combo($id)
+    {
+        $this->db->select('*');
+        $this->db->from($this->join_table2);
+        $this->db->join($this->table, $this->join_table2.'.promotions_id = '.$this->table.'.promotions_id', 'left');
+        $this->db->join($this->join_table, $this->table.'.promotions_id = '.$this->join_table.'.promotions_id', 'left');
+        $this->db->where($this->join_table2.'.event_id', $id);
+        $this->db->where($this->table.'.status', 'On Progress');
+        $this->db->where($this->table.'.type', 'flexi_combo');
+        $this->db->where($this->join_table2.'.status_delete', '0');
+        return $this->db->get()->num_rows();
+    }
+
+    public function get_data_promotions_flexi_combo_update($id, $id_data)
+    {
+        $this->db->select('*');
+        $this->db->from($this->join_table2);
+        $this->db->join($this->table, $this->join_table2.'.promotions_id = '.$this->table.'.promotions_id', 'left');
+        $this->db->join($this->join_table, $this->table.'.promotions_id = '.$this->join_table.'.promotions_id', 'left');
+        $this->db->where($this->join_table2.'.event_id', $id);
+        $this->db->where($this->join_table2.'.promotions_id !=', $id_data);
+        $this->db->where($this->table.'.status', 'On Progress');
+        $this->db->where($this->table.'.type', 'flexi_combo');
+        $this->db->where($this->join_table2.'.status_delete', '0');
+        return $this->db->get()->num_rows();
     }
 
     private function _get_datatables_query()

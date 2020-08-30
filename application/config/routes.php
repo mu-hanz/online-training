@@ -71,3 +71,9 @@ $route['events/all-events/ajax'] = "store/events/load_events_ajax";
 $route['articles/detail/(:any)'] = "store/articles/index/$1";
 $route['articles/all-articles'] = "store/articles/all_articles";
 $route['articles/all-articles/ajax'] = "store/articles/load_articles_ajax";
+
+// shopping cart
+$route['shopping-cart']         = "store/shopping_cart";
+$route['shopping-cart/save']    = "store/shopping_cart/save";
+$route['shopping-cart/update']  = "store/shopping_cart/update";
+$route['shopping-cart/save-collectible-voucher']  = "store/shopping_cart/save_collectible_voucher";
