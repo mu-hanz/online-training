@@ -83,7 +83,8 @@ $(document).ready(function() {
 
     // Amount Discount For Next Referral //
     if (page == 'create') {
-        $("#field_amount_discount_referral").hide();
+        // $("#field_amount_discount_referral").hide();
+        $("#field_amount_discount_referral").show();
     } else {
         $("#field_amount_discount_referral").show();
     }

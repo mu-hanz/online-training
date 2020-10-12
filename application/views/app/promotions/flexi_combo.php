@@ -126,66 +126,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label>Usage Limit User Referral</label>
-                                            <input type="text" class="form-control" value="<?=$limit_user_referral;?>" name="limit_user_referral">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label>Type Discounted For Next User Referral</label>
-                                            <select class="custom-select mb-2" name="type_discount_referral">
-                                                <?php
-                                                if ($page == 'create') {
-                                                ?>
-                                                    <option value=""></option>
-                                                    <option value="Flat">Flat</option>
-                                                    <option value="Accumulation">Accumulation</option>
-                                                    <option value="Custom">Custom</option>
-                                                <?php } else { ?>
-                                                    <option selected="<?=$type_discount_referral;?>"><?=$type_discount_referral;?></option>
-                                                    <?php if ($type_discount_referral == 'Flat') { ?>
-                                                        <option value="Accumulation">Accumulation</option>
-                                                        <option value="Custom">Custom</option>
-                                                    <?php } else if ($type_discount_referral == 'Accumulation') { ?>
-                                                        <option value="Flat">Flat</option>
-                                                        <option value="Custom">Custom</option>
-                                                    <?php } else { ?>
-                                                        <option value="Flat">Flat</option>
-                                                        <option value="Accumulation">Accumulation</option>
-                                                    <?php } ?>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row container-discount-referral" id="field_amount_discount_referral">
-                                        <?php if ($page == 'create') { ?>
-                                        <div class="form-group col-md-6">
-                                            <label for="promotionName">Amount Discount For Next User Referral <span id="number-referral">1</span></label>
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">IDR</div>
-                                                </div>
-                                                <input type="text" class="form-control" id="inlineFormInputGroupxx1" name="amount_discount_referral[]">
-                                            </div>
-                                        </div>
-                                        <?php } else { ?>
-                                        <input type="hidden" name="count_data_promotions_type_referral" id="count_data_promotions_type_referral" value="<?=$count_data_promotions_type_referral;?>">
-                                        <?php
-                                        $xx = 1; 
-                                        foreach ($promotions_type_referral as $row) {
-                                        ?>
-                                        <div class="form-group col-md-6" id="divreferral_<?=$xx;?>">
-                                            <label for="promotionName">Amount Discount For Next User Referral <span id="number-referral"><?=$xx;?></span></label>
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">IDR</div>
-                                                </div>
-                                                <input type="text" class="form-control" id="inlineFormInputGroupxx1" value="<?=number_format($row->amount_discount_referral);?>" name="amount_discount_referral[]">
-                                            </div>
-                                        </div>
-                                        <?php $xx++; } ?>
-                                        <?php } ?>
-                                    </div>
+
                                     <div class="row container-tier">  
                                         <input type="hidden" name="max_field_tiers" id="max_field_tiers" value="<?=$max_field_tiers;?>">
                                         <input type="hidden" name="count_data_promotions_tier" id="count_data_promotions_tier" <?php if ($page == 'create') { ?> value="1" <?php } else { ?> value="<?=$count_data_promotions_tier;?>" <?php } ?>>
@@ -193,17 +134,17 @@
                                         if ($page == 'create') {
                                         ?> 
                                         <div class="form-group col-md-12 element-tier" id='div_1'>
-                                            <label>Promotion Tiers (Max <?=$max_field_tiers;?> Tier) </label>
+                                            <label>Promotion Tiers</label>
                                             <div class="card card-promotion-tiers-custom">
                                                 <div class="header-card-promotion-tiers-custom">
-                                                    <div class="float-right container-button-add-tier">
+                                                    <!-- <div class="float-right container-button-add-tier">
                                                         <div class="btn btn-danger btn-sm mt-2 button-remove-tier">Remove Tier</div>
                                                         <div id="button-add-tier" class="btn btn-primary btn-sm mt-2">
                                                             Add Tier
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="float-left">
-                                                        <span class="mb-4">Tier 1 <input type="hidden" name="name_tier1" value="Tier 1"></span>
+                                                        <span class="mb-4">Tier <input type="hidden" name="name_tier1" value="Tier 1"></span>
                                                     </div>
                                                     <div class="clearfix">&nbsp;</div>
                                                 </div>

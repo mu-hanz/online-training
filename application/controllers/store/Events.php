@@ -16,16 +16,15 @@ class Events extends CI_Controller {
 
     private function _init()
     {
-        $this->output->set_template('store/layout/store');
-		$this->load->section('mainmenu', 'store/layout/main_menu');
-		
-		$this->load->section('footer', 'store/layout/footer');
+        $this->output->set_template('main/layout/index');
+		$this->load->section('header', 'main/layout/header');
+		$this->load->section('footer', 'main/layout/footer');
     }
 
     public function index($slug)
 	{	
-        $this->load->css('assets/store/css/style-custom.css');
-        $this->load->js('assets/store/js/events.init.js');
+
+        $this->load->js('assets/main/scripts/events.init.js');
 
 
         if(!$slug){
@@ -44,7 +43,6 @@ class Events extends CI_Controller {
             'event'                     => $event,
             'flexi_combo'               => $this->Post_m->count_data_promotions_flexi_combo($event->event_id),
             'flexi_combo_tier'          => $this->Post_m->get_data_promotions_flexi_combo_tier($event->event_id),
-            'count_campaign'            => $this->Post_m->count_data_promotions_campaign($event->event_id),
             'campaign'                  => $this->Post_m->get_data_promotions_campaign($event->event_id),
             'count_collectible_voucher' => $this->Post_m->count_collectible_voucher($event->event_id),
             'list_collectible_voucher'  => $this->Post_m->list_collectible_voucher($event->event_id),
@@ -52,72 +50,227 @@ class Events extends CI_Controller {
 
 		$this->output->set_title($this->muhanz->app_title($event->event_name));
 
-		$this->load->view('store/event_detail', $data);
+		$this->load->view('main/event_detail', $data);
     }
     
     public function all_events()
 	{	
-        // echo $this->input->get('s', TRUE);
+        
+        $config["base_url"]             = base_url() . "events/all-events";
+        $config['total_rows']           = $this->Post_m->get_event_all()->num_rows();
+        $config['per_page']             = '9';
+        $config['uri_segment']          = 3;
+        $config['attributes'] = array('class' => 'page-link');
 
-        $this->load->js('assets/store/js/events.init.js');
+        $config['full_tag_open']  = '<ul class="pagination justify-content-center mb-0">';
+        $config['full_tag_close'] = '</ul>';
+
+        $config['first_link']      = 'Start';
+        $config['first_tag_open']  = '<li class="page-item">';
+        $config['first_tag_close'] = '</li>';
+
+        $config['last_link']      = 'End';
+        $config['last_tag_open']  = '<li class="page-item">';
+        $config['last_tag_close'] = '</li>';
+
+        $config['next_link']      = 'Next';
+        $config['next_tag_open']  = '<li class="page-item">';
+        $config['next_tag_close'] = '</li>';
+
+        $config['prev_link']      = 'Prev';
+        $config['prev_tag_open']  = '<li class="page-item">';
+        $config['prev_tag_close'] = '</li>';
+
+        $config['cur_tag_open']  = '<li class="page-item active"><a class="page-link">';
+        $config['cur_tag_close'] = '</a></li>';
+
+        $config['num_tag_open']  = '<li class="page-item">';
+        $config['num_tag_close'] = '</li>';
+
+        $this->pagination->initialize($config);
+        $from = $this->uri->segment(3);
+
 
         
         $this->output->set_title($this->muhanz->app_title('Semua Pelatihan'));
 
         $data = array(
-			'event'      => $this->Post_m->get_event_all($this->perPage),
+			'event'      => $this->Post_m->get_event_all($config["per_page"], $from)->result(),
         );
         
-		$this->load->view('store/event_grid', $data);
+		$this->load->view('main/events', $data);
     }
 
-
-    public function group($group)
-	{	
-
-        $this->load->js('assets/store/js/events.init.js');
-
-        
-        $this->output->set_title($this->muhanz->app_title('Semua Pelatihan'));
-
-        $data = array(
-			'event'      => $this->Post_m->get_event_all($this->perPage),
-        );
-        
-		$this->load->view('store/event_grid', $data);
-    }
-
-    public function load_events_ajax()
-	{	
-
+    public function search_events_ajax()
+	{
         $this->output->unset_template();
-        $offset = $this->perPage * $this->input->post('offset');
-		$event     = $this->Post_m->get_event_all($this->perPage, $offset);
-        
-        foreach($event as $data){
 
-            echo '<div class="col-xl-4 col-lg-6 col-md-6 new-grid">
-					<div class="box_grid wow">
-					<figure class="block-reveal">	
-					<div class="block-horizzontal"></div>
-						<a href="'.base_url('events/detail/'.$data->event_slug).'" class="mlink">
-							<div class="preview"><span>Lihat Training</span></div><img src="'.base_url($data->event_thumbs).'" class="img-fluid" alt="'.$data->event_name.'">
-						</a>
-						</figure>
-						<div class="wrapper">
-							<small>'.$data->group_name.'</small>
-							<h4 class="event-name">'.$data->event_name.'</h4>
-						</div>
-						<ul>
-							<li><i class="icon_shield_alt  text-primary"></i> '.$data->cert_name.'</li>
-							<li><a href="'.base_url('events/detail/'.$data->event_slug).'" class="mlink">View Detail</a></li>
-						</ul>
-					</div>
-                </div>';
-                
+        $data = [
+            'url' => base_url('events-search?keyword='.$this->input->get('keyword',TRUE))
+        ];
+       echo json_encode($data);
+    }
+
+    public function search_events()
+	{	
+        // $this->output->unset_template();
+        $query      = $this->input->get('keyword',TRUE);
+        $per_page = $this->input->get('page', TRUE);
+
+        if (isset($per_page)){
+            $from = $per_page;
+        } else {
+            $from ='0';
         }
+
+        $perpage = 9;
+
+        $count = $this->Post_m->get_event_search_count($query)->num_rows();
+
+        $config["base_url"]             = base_url() . "events-search";
+        $config['total_rows']           = $count;
+        $config['per_page']             = $perpage;
+        $config['query_string_segment'] = 'page';
+        $config['page_query_string'] = TRUE;
+        $config['reuse_query_string'] = TRUE;
+
+        $config['attributes'] = array('class' => 'page-link');
+
+        $config['full_tag_open']  = '<ul class="pagination justify-content-center mb-0">';
+        $config['full_tag_close'] = '</ul>';
+
+        $config['first_link']      = 'Start';
+        $config['first_tag_open']  = '<li class="page-item">';
+        $config['first_tag_close'] = '</li>';
+
+        $config['last_link']      = 'End';
+        $config['last_tag_open']  = '<li class="page-item">';
+        $config['last_tag_close'] = '</li>';
+
+        $config['next_link']      = 'Next';
+        $config['next_tag_open']  = '<li class="page-item">';
+        $config['next_tag_close'] = '</li>';
+
+        $config['prev_link']      = 'Prev';
+        $config['prev_tag_open']  = '<li class="page-item">';
+        $config['prev_tag_close'] = '</li>';
+
+        $config['cur_tag_open']  = '<li class="page-item active"><a class="page-link">';
+        $config['cur_tag_close'] = '</a></li>';
+
+        $config['num_tag_open']  = '<li class="page-item">';
+        $config['num_tag_close'] = '</li>';
+
+        $this->pagination->initialize($config);
         
-		exit;
+    
+        $this->output->set_title($this->muhanz->app_title('Pencarian: '.$query));
+
+        $data = array(
+            'event'      => $this->Post_m->get_event_all($config["per_page"], $from, $query)->result(),
+            'keyword'    => $query,
+            'count'     => $count
+        );
+        
+		$this->load->view('main/event_search', $data);
+    }
+
+    public function events_group($termid, $group)
+	{	
+        
+        $config["base_url"]             = base_url() . "events-groups/".$termid.'/'.$group;
+        $config['total_rows']           = $this->Post_m->get_event_group_count($termid)->num_rows();
+        $config['per_page']             = '9';
+        $config['uri_segment']          = 4;
+        $config['query_string_segment'] = 'start';
+        $config['attributes'] = array('class' => 'page-link');
+
+        $config['full_tag_open']  = '<ul class="pagination justify-content-center mb-0">';
+        $config['full_tag_close'] = '</ul>';
+
+        $config['first_link']      = 'Start';
+        $config['first_tag_open']  = '<li class="page-item">';
+        $config['first_tag_close'] = '</li>';
+
+        $config['last_link']      = 'End';
+        $config['last_tag_open']  = '<li class="page-item">';
+        $config['last_tag_close'] = '</li>';
+
+        $config['next_link']      = 'Next';
+        $config['next_tag_open']  = '<li class="page-item">';
+        $config['next_tag_close'] = '</li>';
+
+        $config['prev_link']      = 'Prev';
+        $config['prev_tag_open']  = '<li class="page-item">';
+        $config['prev_tag_close'] = '</li>';
+
+        $config['cur_tag_open']  = '<li class="page-item active"><a class="page-link">';
+        $config['cur_tag_close'] = '</a></li>';
+
+        $config['num_tag_open']  = '<li class="page-item">';
+        $config['num_tag_close'] = '</li>';
+
+        $this->pagination->initialize($config);
+        $from = $this->uri->segment(4);
+
+
+        
+        $this->output->set_title($this->muhanz->app_title('Semua Pelatihan'));
+
+        $data = array(
+			'event'      => $this->Post_m->get_event_group($config["per_page"], $from, $termid)->result(),
+        );
+        
+		$this->load->view('main/events', $data);
+    }
+
+    public function events_type($termid, $type)
+	{	
+        
+        $config["base_url"]             = base_url() . "events-type/".$termid.'/'.$type;
+        $config['total_rows']           = $this->Post_m->get_event_type_count($termid)->num_rows();
+        $config['per_page']             = '9';
+        $config['uri_segment']          = 4;
+        $config['query_string_segment'] = 'start';
+        $config['attributes'] = array('class' => 'page-link');
+
+        $config['full_tag_open']  = '<ul class="pagination justify-content-center mb-0">';
+        $config['full_tag_close'] = '</ul>';
+
+        $config['first_link']      = 'Start';
+        $config['first_tag_open']  = '<li class="page-item">';
+        $config['first_tag_close'] = '</li>';
+
+        $config['last_link']      = 'End';
+        $config['last_tag_open']  = '<li class="page-item">';
+        $config['last_tag_close'] = '</li>';
+
+        $config['next_link']      = 'Next';
+        $config['next_tag_open']  = '<li class="page-item">';
+        $config['next_tag_close'] = '</li>';
+
+        $config['prev_link']      = 'Prev';
+        $config['prev_tag_open']  = '<li class="page-item">';
+        $config['prev_tag_close'] = '</li>';
+
+        $config['cur_tag_open']  = '<li class="page-item active"><a class="page-link">';
+        $config['cur_tag_close'] = '</a></li>';
+
+        $config['num_tag_open']  = '<li class="page-item">';
+        $config['num_tag_close'] = '</li>';
+
+        $this->pagination->initialize($config);
+        $from = $this->uri->segment(4);
+
+
+        
+        $this->output->set_title($this->muhanz->app_title('Semua Pelatihan'));
+
+        $data = array(
+			'event'      => $this->Post_m->get_event_type($config["per_page"], $from, $termid)->result(),
+        );
+        
+		$this->load->view('main/events', $data);
     }
     
 }

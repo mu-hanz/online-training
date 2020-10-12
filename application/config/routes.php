@@ -53,6 +53,8 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+
+
 //webadmin
 $route['webadmin'] = "App/dashboard";
 $route['webadmin/login'] = "App/auth/auth/login";
@@ -62,18 +64,64 @@ $route['webadmin/([a-z]+)/(:any)/(:any)'] = "App/$1/$2/$3";
 $route['webadmin/([a-z]+)/(:any)/(:any)/(:any)'] = "App/$1/$2/$3/$4";
 $route['webadmin/([a-z]+)/(:any)/(:any)/(:any)/(:any)'] = "App/$1/$2/$3/$4/$5";
 
+// contact
+$route['contact-us'] = "home/contact";
+
+// maichimp
+$route['mailchimp'] = "home/mailchimp";
+
 // event
 $route['events/detail/(:any)'] = "store/events/index/$1";
 $route['events/all-events'] = "store/events/all_events";
-$route['events/all-events/ajax'] = "store/events/load_events_ajax";
+$route['events/all-events/(:any)'] = "store/events/all_events/$1";
+$route['events-search'] = "store/events/search_events";
+$route['events-search-ajax'] = "store/events/search_events_ajax";
+$route['events-groups/(:any)/(:any)'] = "store/events/events_group/$1/$2";
+$route['events-groups/(:any)/(:any)/(:any)'] = "store/events/events_group/$1/$2/$3";
+$route['events-type/(:any)/(:any)'] = "store/events/events_type/$1/$2";
+$route['events-type/(:any)/(:any)/(:any)'] = "store/events/events_type/$1/$2/$3";
+
+
 
 // articles
 $route['articles/detail/(:any)'] = "store/articles/index/$1";
 $route['articles/all-articles'] = "store/articles/all_articles";
-$route['articles/all-articles/ajax'] = "store/articles/load_articles_ajax";
+$route['articles/all-articles/(:any)'] = "store/articles/all_articles/$1";
+$route['articles/category/(:any)'] = "store/articles/category_articles/$1";
+$route['articles/category/(:any)/(:any)'] = "store/articles/category_articles/$1/$2";
 
 // shopping cart
-$route['shopping-cart']         = "store/shopping_cart";
+$route['events-cart']               = "store/cart/index";
+$route['events-show-cart-sweet']    = "store/cart/show_cart_sweet";
+$route['events-add-cart']           = "store/cart/add_cart";
+$route['events-update-cart']        = "store/cart/update_cart";
+$route['events-remove-cart']        = "store/cart/remove_cart";
+
+// promotions
+$route['events-apply-voucher']        = "store/cart/apply_voucher";
+
+
 $route['shopping-cart/save']    = "store/shopping_cart/save";
 $route['shopping-cart/update']  = "store/shopping_cart/update";
 $route['shopping-cart/save-collectible-voucher']  = "store/shopping_cart/save_collectible_voucher";
+
+
+// users
+$route['account/login'] = "store/users/users/login";
+$route['account/register'] = "store/users/users/register";
+$route['account/lost-password'] = "store/users/users/lost_password";
+
+$route['users/email_activation'] = "store/users/users/send_email";
+$route['users/email_confirmation/(:any)/(:any)'] = "app/auth/auth/activate/$1/$2";
+
+$route['users/dashboard'] = "store/users/dashboard";
+$route['users/dashboard/(:any)'] = "store/users/dashboard/$1";
+$route['users/dashboard/(:any)/(:any)'] = "store/users/dashboard/$1/$2";
+$route['users/dashboard/(:any)/(:any)/(:any)'] = "store/users/dashboard/$1/$2/$3";
+
+//auth users front
+$route['account/auth/login'] = 'app/auth/auth/login';
+$route['account/auth/register'] = 'app/auth/auth/create_user';
+$route['account/auth/logout'] = 'app/auth/auth/logout';
+$route['socialconnect/auth/(.+)'] = 'store/users/connect/index/$1';
+

@@ -13,7 +13,11 @@
 	"require": {
 		"php": ">=5.3.7",
 		"dompdf/dompdf": "^0.8.5",
-		"mustache/mustache": "~2.5"
+		"mustache/mustache": "~2.5",
+		"hybridauth/hybridauth": "^3.5",
+		"drewm/mailchimp-api": "^2.5",
+		"socialconnect/auth": "^3.2",
+		"socialconnect/http-client": "^1.0"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"

@@ -227,6 +227,55 @@ class Shopping_cart_m extends CI_Model
         return $this->db->delete($this->table);
     }
 
+
+    public function check_flexi($event_id)
+    {
+        $this->db->select('promotions.*');
+        $this->db->from('promotions_detail');
+        $this->db->join('promotions','promotions.promotions_id = promotions_detail.promotions_id', 'left');
+        $this->db->where('promotions_detail.event_id', $event_id);
+        $this->db->where('promotions_code', $code);
+        return $this->db->get();
+    }
+
+
+    public function check_voucher($code)
+    {
+        $this->db->select('*');
+        $this->db->from('promotions');
+        $this->db->where('type', 'voucher');
+        $this->db->where('promotions_code', $code);
+        return $this->db->get();
+    }
+
+    public function check_events_voucher($id_event, $promotions_id)
+    {
+        $this->db->select('promotions_id');
+        $this->db->from('promotions_detail');
+        $this->db->where('event_id', $id_event);
+        $this->db->where('promotions_id', $promotions_id);
+        return $this->db->get();
+    }
+
+    public function apply_voucher($promotions_id)
+    {
+        $this->db->select('*');
+        $this->db->from('promotions_type');
+        $this->db->where('promotions_id', $promotions_id);
+        return $this->db->get()->row();
+    }
+
+    public function apply_voucher1($id_user)
+    {
+        $this->db->select('*');
+        $this->db->from($this->join_table7);
+        $this->db->join($this->join_table4, $this->join_table7.'.id_voucher = '.$this->join_table4.'.promotions_id', 'left');
+        $this->db->where($this->join_table7.'.id_user', $id_user);
+        $this->db->where($this->join_table4.'.status', 'On Progress');
+        return $this->db->get()->result();
+    }
+
+
     // public function get_data_promotions_flexi_combo_tier($id)
     // {
     //     $this->db->select('*');

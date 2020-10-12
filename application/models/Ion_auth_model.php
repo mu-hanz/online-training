@@ -384,21 +384,23 @@ class Ion_auth_model extends CI_Model
 	public function get_user_by_activation_code($user_code)
 	{
 		// Retrieve the token object from the code
-		$token = $this->_retrieve_selector_validator_couple($user_code);
+		// $token = $this->_retrieve_selector_validator_couple($user_code);
 
-		if ($token) 
+		if ($user_code) 
 		{
 			// Retrieve the user according to this selector
-			$user = $this->where('activation_selector', $token->selector)->users()->row();
+			// $user = $this->where('activation_selector', $token->selector)->users()->row();
+			$user = $this->where('activation_selector', $user_code)->users()->row();
 
-			if ($user)
-			{
-				// Check the hash against the validator
-				if ($this->verify_password($token->validator, $user->activation_code))
-				{
-					return $user;
-				}
-			}
+			// if ($user)
+			// {
+			// 	// Check the hash against the validator
+			// 	if ($this->verify_password($token->validator, $user->activation_code))
+			// 	{
+			// 		return $user;
+			// 	}
+			// }
+			return $user;
 		}
 
 		return FALSE;
@@ -929,13 +931,13 @@ class Ion_auth_model extends CI_Model
 
 			if ($this->verify_password($password, $user->password, $identity))
 			{
-				if ($user->active == 0)
-				{
-					$this->trigger_events('post_login_unsuccessful');
-					$this->set_error('login_unsuccessful_not_active');
+				// if ($user->active == 0)
+				// {
+				// 	$this->trigger_events('post_login_unsuccessful');
+				// 	$this->set_error('login_unsuccessful_not_active');
 
-					return FALSE;
-				}
+				// 	return FALSE;
+				// }
 
 				$this->set_session($user);
 
@@ -1001,8 +1003,7 @@ class Ion_auth_model extends CI_Model
 			{
 				$query = $this->db->select('id')
 								  ->where([
-									  $this->identity_column => $this->session->userdata('identity'),
-									  'active' => '1'
+									  $this->identity_column => $this->session->userdata('identity')
 								  ])
 								  ->limit(1)
 								  ->order_by('id', 'desc')
@@ -2039,7 +2040,6 @@ class Ion_auth_model extends CI_Model
 		$this->trigger_events('extra_where');
 		$query = $this->db->select($this->identity_column . ', id, email, remember_code, last_login')
 						  ->where('remember_selector', $token->selector)
-						  ->where('active', 1)
 						  ->limit(1)
 						  ->get($this->tables['users']);
 

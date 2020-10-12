@@ -82,48 +82,207 @@
 	);
 	wow.init();
     
-	var login ='<div id="login-1">'+
-			  '<form>'+
-				
-				'<div class="form-group">'+
-					'<span class="input">'+
-					'<input class="input_field" type="email" autocomplete="off" name="email">'+
-						'<label class="input_label">'+
-						'<span class="input__label-content">Your email</span>'+
-					'</label>'+
-					'</span>'+
 
-					'<span class="input">'+
-					'<input class="input_field" type="password" autocomplete="new-password" name="password">'+
-						'<label class="input_label">'+
-						'<span class="input__label-content">Your password</span>'+
-					'</label>'+
-					'</span>'+
-					'<small><a href="#0">Forgot password?</a></small>'+
-				'</div>'+
-				'<a href="#0" class="btn_1 rounded full-width add_top_60">Login to Udema</a>'+
-				'<div class="text-center add_top_10">New to Udema? <strong><a href="register.html">Sign up!</a></strong></div>'+
-			'</form>'+
-		'</div>';
+		var base_url        = window.location.origin;
+	function logPop(token){
+		var loginVar="";
+			loginVar += "<div id='popEl' class='form-body without-side'>";
+			loginVar += "        <div class='row'>";
+			loginVar += "            <div class='form-holder'>";
+			loginVar += "                <div class='form-content'>";
+			loginVar += "                    <div class='form-items'>";
+			loginVar += "        <div class='website-logo'>";
+			loginVar += "            <a href='" + base_url +"'>";
+			loginVar += "                <div>";
+			loginVar += "                    <img class='logo-size' src='" + base_url +"/assets/store/img/logo_black_2x.png' alt='Training Center'>";
+			loginVar += "                </div>";
+			loginVar += "            </a>";
+			loginVar += "        </div>";
+			loginVar += "                        <h3>Masuk ke akun saya</h3>";
+			loginVar += "                        <p>Access to the most powerfull<br> Online and Virtual Training.</p>";
+			loginVar += "                        <form class='ajaxFormAuth' action='" + base_url + "/webadmin/auth/auth/login' method='post'>";
+			loginVar += "                        <input type='hidden' id='mz-csrf' name='mz_token' value='"+token+"'>";
+			loginVar += "                            <input class='form-control' type='text' name='identity' placeholder='Email' required=''>";
+			loginVar += "                            <input class='form-control' type='password' name='password' placeholder='Password' required=''>";
+			loginVar += "                            <div class='form-button'>";
+			loginVar += "                                <button id='submit' type='submit' class='ibtn'>Masuk</button> <a href='#' class='resetPassword' data-id='3'>Lupa password?</a>";
+			loginVar += "                            </div>";
+			loginVar += "                        </form>";
+			loginVar += "                        <div class='other-links'>";
+			loginVar += "                            <div class='text'>Atau</div>";
+			loginVar += "                            <a href='#'><i class='fab fa-google'></i>Google</a>";
+			loginVar += "                            <a href='#' class='register' data-id='2'><i class='fas fa-user-plus'></i> Daftar baru</a>";
+			loginVar += "                          ";
+			loginVar += "                        </div>";
+			loginVar += "                    </div>";
+			loginVar += "                </div>";
+			loginVar += "            </div>";
+			loginVar += "        </div>";
+			loginVar += "    </div>";
 
-	$('.login').magnificPopup({
-		items: {
-			src: login,
-			type: 'inline',
-		},
-		closeOnBgClick : false,
-		removalDelay: 300,
-		mainClass: 'mfp-with-zoom', // this class is for CSS animation below
-
-		zoom: {
-			enabled: true, // By default it's false, so don't forget to enable it
-
-			duration: 300, // duration of the effect, in milliseconds
-			easing: 'ease-in-out', // CSS transition easing function
-
-			
+			return loginVar;
 		}
+
+		function regPop(token){
+			var regVar="";
+			regVar += "<div id='popEl' class='form-body without-side'>";
+			regVar += "        <div class='row'>";
+			regVar += "            <div class='form-holder'>";
+			regVar += "                <div class='form-content'>";
+			regVar += "                    <div class='form-items'>";
+			regVar += "        <div class='website-logo'>";
+			regVar += "            <a href='" + base_url +"'>";
+			regVar += "                <div>";
+			regVar += "                    <img class='logo-size' src='" + base_url +"/assets/store/img/logo_black_2x.png' alt='Training Center'>";
+			regVar += "                </div>";
+			regVar += "            </a>";
+			regVar += "        </div>";
+			regVar += "                        <h3>Daftar Akun Baru</h3>";
+			regVar += "                        <p>Access to the most powerfull<br> Online and Virtual Training.</p>";
+			regVar += "                        <form class='ajaxFormAuth' action='" + base_url + "/webadmin/auth/auth/create_user' method='post'>";
+			regVar += "                        <input type='hidden' id='mz-csrf-reg' name='mz_token' value='"+token+"'>";
+			regVar += "						   <div class='form-row'>";
+			regVar += "                          <div class='col'>";
+			regVar += "                               <input type='text' class='form-control' name='first_name' placeholder='Nama depan' required=''>";
+			regVar += "                           </div>";
+			regVar += "                           <div class='col'>";
+			regVar += "                                <input type='text' class='form-control' name='last_name' placeholder='Nama belakang' required=''>";
+			regVar += "                           </div>";
+			regVar += "                         </div>";
+			regVar += "                            <input class='form-control' type='text' name='email' placeholder='Email' required=''>";
+			regVar += "                            <input class='form-control' type='password' name='password' placeholder='Password' required=''>";
+			regVar += "                            <div class='form-button'> ";
+			regVar += "                                <button id='submit' type='submit' class='ibtn'>Daftar</button><a href='#' class='resetPassword' data-id='3'>Lupa password?</a>";
+			regVar += "                            </div>";
+			regVar += "                        </form>";
+			regVar += "                        <div class='other-links'>";
+			regVar += "                            <div class='text'>Atau</div>";
+			regVar += "                            <a href='#'><i class='fab fa-google'></i>Google</a>";
+			regVar += "                               <a href='#' class='loginpop' data-id='1'><i class='fas fa-lock'></i> Login ke akun saya</a>";
+			regVar += "                          ";
+			regVar += "                        </div>";
+			regVar += "                    </div>";
+			regVar += "                </div>";
+			regVar += "            </div>";
+			regVar += "        </div>";
+			regVar += "    </div>";
+			return regVar;
+		}
+
+		function lostPop(token){
+			var lostVar="";
+				lostVar += "<div id='popEl' class='form-body without-side'>";
+				lostVar += "        <div class='row'>";
+				lostVar += "            <div class='form-holder'>";
+				lostVar += "                <div class='form-content'>";
+				lostVar += "                    <div class='form-items'>";
+				lostVar += "        <div class='website-logo'>";
+				lostVar += "            <a href='" + base_url +"'>";
+				lostVar += "                <div>";
+				lostVar += "                    <img class='logo-size' src='" + base_url +"/assets/store/img/logo_black_2x.png' alt='Training Center'>";
+				lostVar += "                </div>";
+				lostVar += "            </a>";
+				lostVar += "        </div>";
+				lostVar += "                        <h3>Password Reset</h3>";
+				lostVar += "                        <p>Untuk mengatur ulang kata sandi Anda, masukkan alamat email</p>";
+				lostVar += "                        <form class='ajaxFormAuth' action='" + base_url + "/webadmin/auth/auth/login' method='post'>";
+				lostVar += "                        <input type='hidden' id='mz-csrf' name='mz_token' value='"+token+"'>";
+				lostVar += "                            <input class='form-control' type='text' name='identity' placeholder='Email' required=''>";
+				lostVar += "                            <div class='form-button full-width'>";
+				lostVar += "                                <button id='submit' type='submit' class='ibtn btn-forget'>Kirim link reset</button>";
+				lostVar += "                            </div>";
+				lostVar += "                        </form>";
+				lostVar += "                        <div class='page-links'>";
+				lostVar += "                            <div class='other-links'>";
+				lostVar += "                            <div class='text'>Atau</div>";
+				lostVar += "                                 <a href='#' class='loginpop' data-id='1'><i class='fas fa-lock'></i> Login ke akun saya</a>";
+				lostVar += "                                 <a href='#' class='register' data-id='2'><i class='fas fa-user-plus'></i> Buat akun baru</a>";
+				lostVar += "                            </div>";
+				lostVar += "                        </div>";
+				lostVar += "                    </div>";
+				lostVar += "                </div>";
+				lostVar += "            </div>";
+				lostVar += "        </div>";
+				lostVar += "    </div>";
+		
+				return lostVar;
+			}
+
+
+
+	function get_token(name){
+		var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+		return v ? v[2] : null;
+	}
+
+	  $(document).on('click', '.loginpop, .register, .resetPassword', function () {
+
+		var varDom;
+		if($(this).data( "id" ) == 1){
+			varDom = logPop(get_token("mz_cookie"));
+		} else if($(this).data( "id" ) == 2) {
+			varDom = regPop(get_token("mz_cookie"));
+		} else {
+			varDom = lostPop(get_token("mz_cookie"));
+		}
+
+			$.magnificPopup.open({
+				items: {
+					src: varDom,
+					type: 'inline',
+				},
+				closeOnBgClick : false,
+				closeBtnInside:true,
+				removalDelay: 300,
+				mainClass: 'mfp-with-zoom', // this class is for CSS animation below
+		
+				zoom: {
+					enabled: true, // By default it's false, so don't forget to enable it
+		
+					duration: 300, // duration of the effect, in milliseconds
+					easing: 'ease-in-out', // CSS transition easing function
+		
+					
+				}
+			});
+	
 	  });
+
+
+	//   $(document).on('click', '.login', function () {
+	 
+	// 	// $.magnificPopup.close();
+	// 		$.magnificPopup.open({
+	// 			items: {
+	// 				src: loginVar,
+	// 				type: 'inline',
+	// 			},
+	// 			closeOnBgClick : false,
+	// 			removalDelay: 300,
+	// 			mainClass: 'mfp-with-zoom', // this class is for CSS animation below
+		
+	// 			zoom: {
+	// 				enabled: true, // By default it's false, so don't forget to enable it
+		
+	// 				duration: 300, // duration of the effect, in milliseconds
+	// 				easing: 'ease-in-out', // CSS transition easing function
+		
+					
+	// 			},
+	// 			callbacks: {
+	// 				open: function() {
+	// 					$('#mz-csrf').val(get_token("mz_cookie"))
+	// 				},
+	// 				change: function() {
+	// 				  console.log('Content changed2');
+	// 				  console.log(this.content); // Direct reference to your popup element
+	// 				},
+	// 			}
+	// 		});
+	
+	//   });
+
+
 
 
 	 

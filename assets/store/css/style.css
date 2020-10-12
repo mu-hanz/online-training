@@ -706,7 +706,7 @@ ul#top_menu li a:hover {
   color: #fff;
   opacity: 0.7;
 }
-ul#top_menu li a.login, ul#top_menu li a.search-overlay-menu-btn, ul#top_menu li a.cart {
+ul#top_menu li a.login,a.logout, ul#top_menu li a.search-overlay-menu-btn, ul#top_menu li a.cart {
   display: block;
   width: 25px;
   height: 25px;
@@ -714,7 +714,7 @@ ul#top_menu li a.login, ul#top_menu li a.search-overlay-menu-btn, ul#top_menu li
   position: relative;
   top: -5px;
 }
-ul#top_menu li a.login:before, ul#top_menu li a.search-overlay-menu-btn:before, ul#top_menu li a.cart:before {
+ul#top_menu li a.login:before,a.logout:before, ul#top_menu li a.search-overlay-menu-btn:before, ul#top_menu li a.cart:before {
   font-family: 'Pe-icon-7-stroke';
   font-size: 1.8rem;
   color: #fff;
@@ -733,6 +733,11 @@ ul#top_menu li a.cart:before {
 ul#top_menu li a.login:before {
   content: "\e605";
 }
+
+ul#top_menu li a.logout:before {
+  content: "\e621";
+}
+
 ul#top_menu li a.search-overlay-menu-btn:before {
   content: "\e618";
 }

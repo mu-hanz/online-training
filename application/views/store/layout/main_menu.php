@@ -3,8 +3,14 @@
 			<a href="<?php echo base_url();?>" class="mlink"><img src="<?php echo base_url('assets/store/img/logo.png');?>" width="149" height="42" data-retina="true" alt=""></a>
 		</div>
 		<ul id="top_menu">
-			<li><a href="#" data-effect="mfp-zoom-in" class="cart">Login</a></li>
-			<li><a href="#" data-effect="mfp-zoom-in" class="login">Login</a></li>
+			<li><a href="#" data-effect="mfp-zoom-in" class="cart">Cart</a></li>
+			<?php  if (!$this->ion_auth->logged_in()){?>
+				<li><a href="#" class="loginpop login" data-id="1">Login</a></li>
+			<?php } else { ?>
+				<li><a href="<?php echo base_url('users/dashboard');?>" class="login">Dashboard</a></li>
+				<li><a href="<?php echo base_url('webadmin/auth/auth/logout');?>" class="logout">Logout</a></li>
+			<?php } ?>
+
 			<li><a href="#0" class="search-overlay-menu-btn">Search</a></li>
 			<li class="hidden_tablet"><a href="admission.html" class="btn_1 rounded">Hubungi</a></li>
 		</ul>

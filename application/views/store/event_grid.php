@@ -11,12 +11,18 @@
 				<ul class="clearfix">
 					<li>
 						<div class="switch-field">
-							<input type="radio" id="all" name="listing_filter" value="all" checked>
-							<label for="all">All</label>
-							<input type="radio" id="popular" name="listing_filter" value="popular">
-							<label for="popular">Popular</label>
-							<input type="radio" id="latest" name="listing_filter" value="latest">
-							<label for="latest">Latest</label>
+							<a href="<?php echo base_url('webadmin/post?type=' . $_GET['filter'] . '&filter=publish'); ?>" class="ajax-link ">
+								<input type="radio" id="latest" name="listing_filter" value="latest" class="filter_events" checked>
+								<label class="rounded-0" for="all">All  <?php echo $_GET['filter'];?></label>
+							</a>
+							<a href="<?php echo base_url('webadmin/post?type=' . $_GET['filter'] . '&filter=publish'); ?>" class="ajax-link ">
+								<input type="radio" id="latest" name="listing_filter" value="latest" class="filter_events">
+								<label class="rounded-0" for="popular">Popular</label>
+							</a>
+							<a href="<?php echo base_url('webadmin/post?type=' . $_GET['filter'] . '&filter=publish'); ?>" class="ajax-link ">
+								<input type="radio" id="latest" name="listing_filter" value="latest" class="filter_events">
+								<label class="rounded-0" for="latest">Latest</label>
+							</a>
 						</div>
 					</li>
 					<li>

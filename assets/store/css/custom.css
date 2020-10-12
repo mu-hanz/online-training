@@ -99,10 +99,7 @@ backface-visibility: hidden;
 
     }
 
-    .mfp-ajax-holder .mfp-content, .mfp-inline-holder .mfp-content {
-        width: auto;
-        cursor: auto;
-    }
+    
 
     .blog-grid{
       min-height: 235px;
@@ -237,3 +234,5 @@ height: 235px;
     .animated .block-horizzontal{
       background: #75c260;
     }
+
+    

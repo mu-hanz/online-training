@@ -68,30 +68,8 @@
                             <div class="row setup-content row-fw-custom" id="step-1">
                                 <div class="col-md-12 well">
                                     <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label>Type Voucher</label>
-                                            <select class="custom-select mb-2" name="type_voucher" required>
-                                                <?php
-                                                if ($page == 'create') {
-                                                ?>
-                                                <option value=""></option>
-                                                <option value="Collectible">Collectible</option>
-                                                <option value="Code Voucher">Code Voucher</option>
-                                                <?php } else { ?>
-                                                    <?php if ($type_voucher == 'Collectible') { ?>
-                                                        <option value="<?=$type_voucher;?>" selected="selected"><?=$type_voucher;?></option>
-                                                        <option value="Code Voucher">Code Voucher</option>
-                                                    <?php } else { ?>
-                                                        <option value="<?=$type_voucher;?>" selected="selected"><?=$type_voucher;?></option>
-                                                        <option value="Collectible">Collectible</option>
-                                                    <?php } ?>
-                                                <?php } ?>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                This value is required
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-6">
+                                      
+                                        <div class="form-group col-md-12">
                                             <label for="promotionName">Promotion Name</label>
                                             <input type="text" class="form-control" id="promotions_name" name="promotions_name" value="<?=$promotions_name;?>" required>
                                             <div class="invalid-feedback">
@@ -196,7 +174,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6" id="nominal1">
-                                            <label for="promotionName">Nominal Limit</label>
+                                            <label for="promotionName">Nominal Minimum Order</label>
                                             <div class="input-group mb-2">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">IDR</div>
@@ -228,7 +206,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-md-4" id="percent1">
-                                            <label for="promotionName">Percent Limit</label>
+                                            <label for="promotionName">Nominal Minimum Order</label>
                                             <div class="input-group mb-2">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">IDR</div>
@@ -248,7 +226,7 @@
                                             <input type="text" class="form-control" value="<?=$percent_discount;?>" name="percent_discount">
                                         </div>
                                         <div class="form-group col-md-4" id="percent3">
-                                            <label for="promotionName">Percent Max Discount</label>
+                                            <label for="promotionName">Max Discount</label>
                                             <div class="input-group mb-2">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">IDR</div>

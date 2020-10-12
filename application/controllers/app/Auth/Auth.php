@@ -80,10 +80,14 @@ class Auth extends CI_Controller
 
 				if ($this->ion_auth->in_group('members')) // remove this elseif if you want to enable this for non-admins
 				{
-					$this->ion_auth->logout();
-					// redirect them to the home page because they must be an administrator to view this
-					// show_error('You must be an administrator to view this page.');
-					$this->load->view('app/auth/not_authorized');
+					// $this->ion_auth->logout();
+					// // redirect them to the home page because they must be an administrator to view this
+					// // show_error('You must be an administrator to view this page.');
+					// $this->load->view('app/auth/not_authorized');
+
+					$this->muhanz->success($this->lang->line('auth_success'), 'users/dashboard');
+
+
 				} else {
 
 					if ($this->session->userdata('redirect_login')) {
@@ -104,15 +108,29 @@ class Auth extends CI_Controller
 			else
 			{
 
-				$message = array(
-					'url'     => base_url('webadmin/login'),
-					'status'  => 'error',
-					'type'    => 'danger',
-					'csrf_hash' => $this->security->get_csrf_hash(),
-					'message' => strip_tags($this->lang->line('auth_error'))
-				);
-		
-				echo json_encode($message);
+				if ($this->ion_auth->in_group('members')) // remove this elseif if you want to enable this for non-admins
+				{
+					$message = array(
+						'url'     => base_url('users/login'),
+						'status'  => 'error',
+						'type'    => 'danger',
+						'csrf_hash' => $this->security->get_csrf_hash(),
+						'message' => strip_tags($this->lang->line('auth_error'))
+					);
+			
+					echo json_encode($message);
+				} else {
+					$message = array(
+						'url'     => base_url('webadmin/login'),
+						'status'  => 'error',
+						'type'    => 'danger',
+						'csrf_hash' => $this->security->get_csrf_hash(),
+						'message' => strip_tags($this->lang->line('auth_error'))
+					);
+			
+					echo json_encode($message);
+				}
+				
 			}
 		}
 		else
@@ -149,12 +167,21 @@ class Auth extends CI_Controller
 	 */
 	public function logout()
 	{
-
 		// log the user out
-		$this->ion_auth->logout();
+		
+		if (!$this->ion_auth->in_group('member'))
+		{
+			$this->ion_auth->logout();
+			redirect('', 'refresh');
+		} else {
+			$this->ion_auth->logout();
+			// redirect them to the login page
+			redirect('webadmin/login', 'refresh');
+		}
+		
+		
 
-		// redirect them to the login page
-		redirect('webadmin/login', 'refresh');
+		
 		
 	}
 
@@ -412,6 +439,7 @@ class Auth extends CI_Controller
 	{
 		$activation = FALSE;
 
+
 		if ($code !== FALSE)
 		{
 			$activation = $this->ion_auth->activate($id, $code);
@@ -425,13 +453,14 @@ class Auth extends CI_Controller
 		{
 			// redirect them to the auth page
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("webadmin/auth", 'refresh');
+			redirect("users/dashboard", 'refresh');
 		}
 		else
 		{
 			// redirect them to the forgot password page
-			$this->session->set_flashdata('message', $this->ion_auth->errors());
-			redirect("webadmin/auth/forgot_password", 'refresh');
+			// $this->session->set_flashdata('message', $this->ion_auth->errors());
+			// redirect("webadmin/auth/forgot_password", 'refresh');
+			echo  $this->ion_auth->errors();
 		}
 	}
 
@@ -490,12 +519,12 @@ class Auth extends CI_Controller
 	 */
 	public function create_user()
 	{
-		$this->data['title'] = $this->lang->line('create_user_heading');
+		// $this->data['title'] = $this->lang->line('create_user_heading');
 
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			redirect('auth', 'refresh');
-		}
+		// if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		// {
+		// 	redirect('auth', 'refresh');
+		// }
 
 		$tables = $this->config->item('tables', 'ion_auth');
 		$identity_column = $this->config->item('identity', 'ion_auth');
@@ -513,10 +542,8 @@ class Auth extends CI_Controller
 		{
 			$this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'trim|required|valid_email|is_unique[' . $tables['users'] . '.email]');
 		}
-		$this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim');
-		$this->form_validation->set_rules('company', $this->lang->line('create_user_validation_company_label'), 'trim');
-		$this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|matches[password_confirm]');
-		$this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
+
+		$this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']');
 
 		if ($this->form_validation->run() === TRUE)
 		{
@@ -527,73 +554,37 @@ class Auth extends CI_Controller
 			$additional_data = [
 				'first_name' => $this->input->post('first_name'),
 				'last_name' => $this->input->post('last_name'),
-				'company' => $this->input->post('company'),
-				'phone' => $this->input->post('phone'),
 			];
 		}
 		if ($this->form_validation->run() === TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data))
 		{
-			// check to see if we are creating the user
-			// redirect them back to the admin page
-			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("webadmin/auth", 'refresh');
+			if ($this->ion_auth->login($identity, $password))
+			{
+				
+				$this->muhanz->success('Registered', 'users/dashboard');
+				
+			} else {
+				$message = array(
+					'url'     => base_url(),
+					'status'  => 'error',
+					'type'    => 'danger',
+					'message' => strip_tags($this->session->flashdata('message'))
+				);
+	
+				echo json_encode($message);
+			}
+
 		}
 		else
 		{
-			// display the create user form
-			// set the flash data error message if there is one
-			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
+			$message = array(
+				'url'     => base_url(),
+				'status'  => 'error',
+				'type'    => 'danger',
+				'message' => strip_tags($this->session->flashdata('message'))
+			);
 
-			$this->data['first_name'] = [
-				'name' => 'first_name',
-				'id' => 'first_name',
-				'type' => 'text',
-				'value' => $this->form_validation->set_value('first_name'),
-			];
-			$this->data['last_name'] = [
-				'name' => 'last_name',
-				'id' => 'last_name',
-				'type' => 'text',
-				'value' => $this->form_validation->set_value('last_name'),
-			];
-			$this->data['identity'] = [
-				'name' => 'identity',
-				'id' => 'identity',
-				'type' => 'text',
-				'value' => $this->form_validation->set_value('identity'),
-			];
-			$this->data['email'] = [
-				'name' => 'email',
-				'id' => 'email',
-				'type' => 'text',
-				'value' => $this->form_validation->set_value('email'),
-			];
-			$this->data['company'] = [
-				'name' => 'company',
-				'id' => 'company',
-				'type' => 'text',
-				'value' => $this->form_validation->set_value('company'),
-			];
-			$this->data['phone'] = [
-				'name' => 'phone',
-				'id' => 'phone',
-				'type' => 'text',
-				'value' => $this->form_validation->set_value('phone'),
-			];
-			$this->data['password'] = [
-				'name' => 'password',
-				'id' => 'password',
-				'type' => 'password',
-				'value' => $this->form_validation->set_value('password'),
-			];
-			$this->data['password_confirm'] = [
-				'name' => 'password_confirm',
-				'id' => 'password_confirm',
-				'type' => 'password',
-				'value' => $this->form_validation->set_value('password_confirm'),
-			];
-
-			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'create_user', $this->data);
+			echo json_encode($message);
 		}
 	}
 	/**

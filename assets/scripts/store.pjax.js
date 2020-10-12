@@ -1,10 +1,10 @@
 var pjax = new Pjax({
-    elements: [".mz-menu a, .mlink, .breadcrumb a"],
+    elements: [".mz-menu a, .mlink, .breadcrumb a, .pagination a"],
     cacheBust: false,
     history: true,
     debug: false,
     currentUrlFullReload: false, //jika di klik lagi link yg sama maka akan melakukan reload
-	selectors: ["title",".css-majax", ".js-majax", ".ajax-content"],
+	selectors: ["title",".css-majax", ".js-majax", ".ajax-content",".box-users","#navigation"],
 	switches: {
 		  ".ajax-content": Pjax.switches.outerHTML
     }
@@ -28,35 +28,87 @@ function loadingPage() {
 }
 
 function initStart() {
-	$('[data-loader="circle-side"]').show(); // will first fade out the loading animation
-	$('#preloader').show(); // will fade out the white DIV that covers the website.
+	$('.tooltip').remove();
 };
+
 
 function initEnd() {
-	$('[data-loader="circle-side"]').fadeOut(); // will first fade out the loading animation
-	$('#preloader').delay(250).fadeOut(); // will fade out the white DIV that covers the website.
-};
+	var pathname = window.location.pathname;
 
+	if(pathname == '/events/all-events'){
+		var location = pathname;
+	} else {
+		var location = pathname.slice(0, -2)
+	}
+
+	if(pathname == '/events-search'){
+		var location = pathname;
+	} else {
+		var location = pathname.substring(0, 14);
+	}
+
+	if(pathname == '/events-groups'){
+		var location = pathname;
+	} else {
+		var location = pathname.substring(0, 14);
+	}
+
+	if(pathname == '/events-type'){
+		var location = pathname;
+	} else {
+		var location = pathname.substring(0, 13);
+	}
+
+	if(pathname == '/events/all-events'){
+		var location = pathname;
+	} else {
+		var location = pathname.substring(0, 18);
+	}
+	
+	if(location == '/events/all-events') {
+		$('html, body').animate({
+			scrollTop: $('.ajax-content').offset().top
+		}, 'swing');
+	}
+
+	if(location == '/events-search') {
+		$('html, body').animate({
+			scrollTop: $('.section').offset().top
+		}, 'swing');
+	}
+
+	if(location == '/events-groups') {
+		$('html, body').animate({
+			scrollTop: $('.section').offset().top
+		}, 'swing');
+	}
+
+	if(location == '/events-type') {
+		$('html, body').animate({
+			scrollTop: $('.section').offset().top
+		}, 'swing');
+	}
+
+	if(location == '/events/all-events') {
+		$('html, body').animate({
+			scrollTop: $('.section').offset().top
+		}, 'swing');
+	}
+
+	// console.log(pathname);
+
+};
 
 
 document.addEventListener("pjax:send", initStart);
 document.addEventListener("pjax:complete", initEnd);
 
+
 // Form submit
 function showResponse(data) {
-	
-	//sweetalert
-	const Toast = Swal.mixin({
-        toast: true,
-        position: 'center',
-        showConfirmButton: false,
-        timer: 2000
-      });
-      
-      Toast.fire({
-        type: data.status,
-        title: data.message
-      })
+
+	// remove loading ui block
+	$('.overlay-search').unblock(); 
 	
 	// pjax load page
 	pjax.options.requestOptions = {}
@@ -64,8 +116,18 @@ function showResponse(data) {
 }
 
 function showRequest() {
-	//loading ui block
-	loadingPage();
+	$('.overlay-search').block({
+		message: '<div id="preloader"><div id="status"><div class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div></div></div>',
+		overlayCSS: {
+			backgroundColor: "#fff",
+			cursor: 'wait',
+		},
+		css: {
+			border: 0,
+			padding: 0,
+			backgroundColor: 'none'
+		}
+    });
 }
 
 // ajax form submit
@@ -82,4 +144,3 @@ $(document).on('submit', '.ajaxForm', function(e) {
 	$(this).ajaxSubmit(options);
 	return false;
 });
-

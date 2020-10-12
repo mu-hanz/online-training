@@ -1,0 +1,96 @@
+.pace {
+    -webkit-pointer-events: none;
+    pointer-events: none;
+  
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+  
+  .pace-inactive {
+    display: none;
+  }
+  
+  .pace .pace-progress {
+    background: #6dc77a;
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    right: 100%;
+    width: 100%;
+    height: 2px;
+  }
+  
+
+.fea.icon-md {
+    height: 25px;
+    width: 25px;
+}
+
+.bg-half {
+    padding: 150px 0 90px;
+}
+
+.job-facts li{
+    display: block;
+}
+
+#preloader {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(45deg, #ffffff, #ffffff);
+    z-index: 9999999;
+}
+
+.bg-profile {
+    padding: 0;
+}
+
+.bg-profile .public-profile {
+    top: 100px;
+}
+
+.bg-cart{
+    padding: 70px 0px 20px 0px;
+}
+
+.bg-blog{
+    padding: 70px 0px 20px 0px;
+}
+
+.b-content{
+    padding: 30px 0;
+}
+
+.recent-blog {
+    object-fit: cover;
+    height: 233px;
+}
+
+.img-blog {
+    object-fit: cover;
+    height: 200px;
+}
+
+@media (max-width: 767px) {
+    .bg-cart{
+        padding: 100px 0px 15px 0px;
+    }
+
+    .bg-blog{
+        display: none;
+    }
+
+    .bg-home, .bg-half-170, .bg-half-260, .main-slider .slides .bg-slider, .bg-marketing, .swiper-slider-hero .swiper-container .swiper-slide {
+        padding: 100px 0;
+    
+    }
+
+    .b-content{
+        padding: 100px 0;
+    }
+   
+  }

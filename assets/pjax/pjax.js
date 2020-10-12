@@ -149,6 +149,7 @@ Pjax.prototype = {
     this.abortRequest(this.request)
 
     trigger(document, "pjax:send", options)
+    
 
     // Do the request
     options.requestOptions.timeout = this.options.timeout

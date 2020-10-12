@@ -213,7 +213,8 @@ class Voucher extends CI_Controller
         } else {
             $status = 'On Progress';
         }
-        $type_voucher = $this->input->post('type_voucher');
+        // $type_voucher = $this->input->post('type_voucher');
+         $type_voucher = 'Code Voucher';
         if ($type_voucher == 'Collectible') {
             $collected_voucher_date = $this->input->post('collected_voucher_date');
             $area_display_voucher   = $this->input->post('area_display_voucher');
@@ -353,7 +354,8 @@ class Voucher extends CI_Controller
         } else {
             $status = 'On Progress';
         }
-        $type_voucher       = $this->input->post('type_voucher');
+        // $type_voucher       = $this->input->post('type_voucher');
+        $type_voucher       = 'Code Voucher';
         if ($type_voucher == 'Collectible') {
             $collected_voucher_date = $this->input->post('collected_voucher_date');
             $area_display_voucher   = $this->input->post('area_display_voucher');

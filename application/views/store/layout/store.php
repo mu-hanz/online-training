@@ -24,13 +24,22 @@
     <link href="<?php echo base_url('assets/store/css/style.css') ;?>" rel="stylesheet">
 	<link href="<?php echo base_url('assets/store/css/vendors.css') ;?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/store/css/icon_fonts/css/all_icons.min.css') ;?>" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/login/bootstrap.css') ;?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/login/fontawesome-all.css') ;?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/login/style.css') ;?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/login/custom.css') ;?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/sweetalert/sweetalert2.min.css') ;?>">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?php echo base_url('assets/store/css/custom.css') ;?>">
     
     <!-- MODERNIZR SLIDER -->
     <script src="<?php echo base_url('assets/store/js/modernizr_slider.js') ;?>"></script>
-    
+    <style>
+        .swal2-container{
+    z-index: 3000;
+}
+    </style>
 </head>
 
 <body>
@@ -73,7 +82,11 @@
     <script src="<?php echo base_url('assets/aform/jquery.form.min.js') ;?>"></script>
     <script src="<?php echo base_url('assets/pjax/pjax.js') ;?>"></script>
     <script data-pace-options='{ "ajax": false }' src='<?php echo base_url('assets/app/js/pace.min.js') ;?>'></script>
+    <script src="<?php echo base_url('assets/app/js/blockUI.min.js') ;?>"></script>
+    <script src="<?php echo base_url('assets/sweetalert/sweetalert2.all.min.js') ;?>"></script>
     <script src="<?php echo base_url('assets/scripts/store.pjax.js') ;?>"></script>
+    <script src="<?php echo base_url('assets/login/login.init.js') ;?>"></script>
+            
 
     <!-- Load Dynamically JS -->
     <div class="js-majax">

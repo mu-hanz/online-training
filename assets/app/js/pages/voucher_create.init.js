@@ -76,8 +76,8 @@ $(document).ready(function() {
     var page            = $('#page').val();
     if (page == 'create') {
         $('#collectible').hide();
-        $('#code_voucher').hide();
-        $('#type_discount').hide();
+        // $('#code_voucher').hide();
+        // $('#type_discount').hide();
         $('#percent1').hide();
         $('#percent2').hide();
         $('#percent3').hide();
