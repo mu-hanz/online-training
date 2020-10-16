@@ -119,6 +119,10 @@ $route['users/dashboard/(:any)'] = "store/users/dashboard/$1";
 $route['users/dashboard/(:any)/(:any)'] = "store/users/dashboard/$1/$2";
 $route['users/dashboard/(:any)/(:any)/(:any)'] = "store/users/dashboard/$1/$2/$3";
 
+$route['users/profile'] = "store/users/dashboard/profile";
+$route['members'] = "store/users/dashboard/members";
+$route['members-edit/(:any)'] = "store/users/dashboard/edit_members/$1";
+
 //auth users front
 $route['account/auth/login'] = 'app/auth/auth/login';
 $route['account/auth/register'] = 'app/auth/auth/create_user';

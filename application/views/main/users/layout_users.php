@@ -28,6 +28,11 @@
         <link href="<?php echo base_url('assets/main/css/style.css') ;?>" rel="stylesheet" type="text/css" id="theme-opt" />
         <link href="<?php echo base_url('assets/main/css/colors/green.css') ;?>" rel="stylesheet" id="color-opt">
         <link href="<?php echo base_url('assets/main/css/main.css') ;?>" rel="stylesheet">
+        <link href="<?php echo base_url('assets/sweetalert/sweetalert2.min.css') ;?>" rel="stylesheet" type="text/css" />
+
+        <?php foreach($css as $file){ echo "\n\t\t"; ?>
+            <link rel="stylesheet" href="<?php echo $file; ?>" type="text/css"/>
+        <?php } echo "\n\t"; ?>
     
     </head>
 
@@ -83,7 +88,7 @@
                                                     </div><!--end col-->
                                                     <div class="col-md-5 text-md-right text-center">
                                                         <div class="social-icon social mb-0 mt-4">
-                                                           <a href="account-setting.html" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Edit Profil">Edit Profil <i data-feather="edit" class="fea icon-sm fea-social"></i></a>
+                                                           <a href="<?=base_url();?>users/profile" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Edit Profil">Edit Profil <i data-feather="edit" class="fea icon-sm fea-social"></i></a>
                                                            <a href="<?php echo base_url('account/auth/logout');?>" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Logout">Logout <i data-feather="log-out" class="fea icon-sm fea-social"></i></a>
                                                         </div><!--end icon-->
                                                     </div><!--end col-->
@@ -156,7 +161,10 @@
 
         <!-- Main Js -->
         <script src="<?php echo base_url('assets/main/js/app.js');?>"></script>
-
+        
+        <?php foreach($js as $file){ echo "\n\t\t"; ?>
+        <script src="<?php echo $file; ?>"></script>
+        <?php } echo "\n\t"; ?>
        
     </body>
 </html>

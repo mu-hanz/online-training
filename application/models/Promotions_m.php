@@ -29,6 +29,34 @@ class Promotions_m extends CI_Model {
         $this->load->database();
     }
 
+    public function count_check_active_flexi_combo($id)
+    {
+        $this->db->from($this->join_table2);
+        $this->db->join($this->table, $this->join_table2.'.promotions_id = '.$this->table.'.promotions_id', 'left');
+        $this->db->where($this->table.'.type', 'flexi_combo');
+        $this->db->where($this->table.'.status', 'On Progress');
+        $this->db->where($this->table.'.status_delete', '0');
+        $this->db->where($this->join_table2.'.event_id', $id);
+        return $this->db->count_all_results();
+    }
+
+    public function count_check_active_flexi_combo_update($id, $id_data)
+    {
+        $this->db->from($this->join_table2);
+        $this->db->join($this->table, $this->join_table2.'.promotions_id = '.$this->table.'.promotions_id', 'left');
+        $this->db->where($this->table.'.type', 'flexi_combo');
+        $this->db->where($this->table.'.status', 'On Progress');
+        $this->db->where($this->table.'.status_delete', '0');
+        $this->db->where($this->join_table2.'.event_id', $id);
+        $this->db->where($this->join_table2.'.promotions_id !=', $id_data);
+        return $this->db->count_all_results();
+    }
+
+
+
+
+
+
     public function get_data_promotions_campaign($id)
     {
         $this->db->select('*');

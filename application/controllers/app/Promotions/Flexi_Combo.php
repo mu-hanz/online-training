@@ -312,6 +312,17 @@ class Flexi_Combo extends CI_Controller
             for($i=1; $i <= $count_data_training; $i++){
                 $id                 = $this->input->post('id'.$i);
                 if (isset($id)) {
+
+                    // Validation Duplicate Id Training / Flexi Combo On Progress
+                    $count_check_active_flexi_combo = $this->Promotions_m->count_check_active_flexi_combo($id);
+                    if ($count_check_active_flexi_combo >= 1) {
+                        $this->Promotions_m->delete_promotions_type($last_id_promotions);
+                        $this->Promotions_m->delete_promotions_tier($last_id_promotions);
+                        $this->Promotions_m->delete_promotions_detail($last_id_promotions);
+                        $this->Promotions_m->delete_promotions($last_id_promotions);
+                        $this->muhanz->error($this->lang->line('save_error'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+                    }
+
                     $data_promotions_detail = array(
                         'promotions_id'     => $last_id_promotions,
                         'event_id'          => $id,
@@ -393,6 +404,19 @@ class Flexi_Combo extends CI_Controller
         }
 
         $count_data_training        = $this->input->post('count_data_training');
+
+        // Validation Duplicate Id Training / Flexi Combo On Progress
+        for($i=1; $i <= $count_data_training; $i++){
+            $id                 = $this->input->post('id'.$i);
+            if (isset($id)) {
+                $count_check_active_flexi_combo_update = $this->Promotions_m->count_check_active_flexi_combo_update($id, $id_data);
+                if ($count_check_active_flexi_combo_update >= 1) {
+                    break 1;
+                    $this->muhanz->error($this->lang->line('save_error'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+                }
+            }
+        }
+
         $valid_on                   = $this->input->post('valid_on');
         $temp_count                 = 0;
         for($i=1; $i <= $count_data_training; $i++){

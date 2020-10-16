@@ -72,6 +72,15 @@ class Users extends CI_Controller {
 
     }
 
+    public function update_profile()
+	{	
+        $data = array(
+            'user'      => $this->ion_auth->user()->row(),
+            'action'    => base_url('store/users/users/update_profile')
+        );
+		$this->output->set_title($this->muhanz->app_title('Profile'));
 
+		$this->load->view('main/users/profile', $data);
+    }
 
 }

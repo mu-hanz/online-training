@@ -11,6 +11,43 @@ class Dashboard_m extends CI_Model
         parent::__construct();
     }
 
+    function update_profile($id, $data){
+        $this->db->where('id', $id);
+        return $this->db->update('users', $data); 
+    }
+
+    function list_members($id){
+        $this->db->select('*');
+        $this->db->from('members');
+        $this->db->where('members.id_users', $id);
+        return $this->db->get()->result();
+    }
+
+    public function edit_members($id)
+    {
+        $this->db->select('*');
+        $this->db->from('members');
+        $this->db->where('members.id_members', $id);
+        $query = $this->db->get();
+        return $query->row();
+    }
+
+    function update_members($id, $data){
+        $this->db->where('id_members', $id);
+        return $this->db->update('members', $data); 
+    }
+
+    function delete_members($id){
+        $this->db->where('id_members', $id);
+        return $this->db->delete('members');
+    }
+
+
+
+
+
+
+
     public function get_visitor() {
         $this->db->select('SUM(hits) as total_all_viewers', FALSE);
         $this->db->from('viewers');

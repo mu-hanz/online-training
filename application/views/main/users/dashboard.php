@@ -13,7 +13,7 @@
                             <div class="alert alert-danger alert-pills mb-0 mt-3" role="alert">
                                 <span class="badge badge-pill badge-light"> Complete Your Profile </span>
                                 <span class="alert-content mr-5"> Silahkan lengkapi data profil kamu! </span>
-                                <a href="<?php echo base_url('users/email_activation');?>"><span class="badge badge-pill badge-dark"> Edit Profil </span></a>
+                                <a href="<?php echo base_url('users/profile');?>"><span class="badge badge-pill badge-dark"> Edit Profil </span></a>
                             </div> 
                         </div>
                         <?php } ?>

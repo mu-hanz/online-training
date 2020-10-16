@@ -144,6 +144,7 @@ $lang['member'] = 'Member';
 $lang['list_member'] = 'List Member';
 $lang['name_users'] = 'Name';
 $lang['address_users'] = 'Address';
+$lang['confirm_password_not_match'] = 'Confirm Password Did Not Match';
 
 // Slider
 $lang['add_slider'] = 'Add Slider';
