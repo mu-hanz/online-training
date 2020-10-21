@@ -371,4 +371,50 @@ class Post_m extends CI_Model
         return false;
     }
 
+    public function get_promotions_all($limit = false, $offset = false)
+    {
+        $this->db->select('*');
+        $this->db->from('promotions');
+        $this->db->where('status', 'On Progress');
+        $this->db->where('status_delete', '0');
+        $this->db->where('type', 'campaign');
+        $this->db->order_by('promotions_id','desc');
+
+        if($limit && $offset){
+            $this->db->limit($limit, $offset);
+        } elseif ($limit && $offset == false){
+            $this->db->limit($limit);
+        }
+
+        return $this->db->get();
+    }
+
+    public function get_data_promotions($slug)
+    {
+        $this->db->select('*');
+        $this->db->from('promotions');
+        $this->db->where('slug', $slug);
+        $query = $this->db->get();
+        return $query->row();
+    }
+
+    public function get_detail_promotions_all($promotions_id, $limit = false, $offset = false)
+    {
+        $this->db->select('events.*, g.name as group_name, c.name as cert_name');
+        $this->db->from('promotions_detail');
+        $this->db->join('events', 'events.event_id = promotions_detail.event_id', 'left');
+        $this->db->join('terms g', 'g.term_id = events.group_id', 'left');
+        $this->db->join('terms c', 'c.term_id = events.certificate_id', 'left');
+        $this->db->where('promotions_id', $promotions_id);
+        $this->db->where('event_status', 'publish');
+
+        if($limit && $offset){
+            $this->db->limit($limit, $offset);
+        } elseif ($limit && $offset == false){
+            $this->db->limit($limit);
+        }
+
+        return $this->db->get();
+    }
+
 }

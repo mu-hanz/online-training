@@ -43,61 +43,57 @@
 
         <section class="section pt-4" id="courses">
             <div class="container">
-                            <div class="row justify-content-center">
-                                    <div class="col-12 text-center">
-                                        <div class="section-title  pb-2">
-                                            <h4 class="title mb-0">Promo Bulan ini</h4>
+                <div class="row justify-content-center">
+                        <div class="col-12 text-center">
+                            <div class="section-title  pb-2">
+                                <h4 class="title mb-0">Promo Bulan ini</h4>
+                            </div>
+                        </div><!--end col-->
+                    </div>
+                    <div class="row">
+                        <?php foreach ($data_promotions as $row) { ?>
+                        <div class="col-lg-6 mt-4 pt-2">
+                            <div class="card event-schedule rounded border">
+                                <div class="card-body">
+                                    <div class="media">
+                                        <ul class="date text-center text-primary mr-3 mb-0 list-unstyled">
+                                            <?php
+                                            $newdate    = strtotime($row->start_date);
+                                            $date       = date('d', $newdate);
+                                            $month      = date('F', $newdate);
+                                            ?>
+                                            <li class="day font-weight-bold mb-2"><?=$date;?></li>
+                                            <li class="month font-weight-bold"><?=$month;?></li>
+                                        </ul>
+                                        <div class="media-body content">
+                                            <div class="alert alert-outline-primary alert-pills" role="alert">
+                                                <span class="badge badge-pill badge-danger"> New </span>
+                                                <span class="alert-content"> 
+                                                <?php if ($row->type == 'voucher') { ?>
+                                                    Voucher
+                                                <?php } else if ($row->type == 'flexi_combo') { ?>
+                                                    Flexi Combo
+                                                <?php } else { ?>
+                                                    Campaign
+                                                <?php } ?>
+                                                </span>
                                             </div>
-                                    </div><!--end col-->
-                                </div>
-                            <div class="row">
-                                    <div class="col-lg-6 mt-4 pt-2">
-                                        <div class="card event-schedule rounded border">
-                                            <div class="card-body">
-                                                <div class="media">
-                                                    <ul class="date text-center text-primary mr-3 mb-0 list-unstyled">
-                                                        <li class="day font-weight-bold mb-2">17</li>
-                                                        <li class="month font-weight-bold">AGT</li>
-                                                    </ul>
-                                                    <div class="media-body content">
-                                                    <div class="alert alert-outline-primary alert-pills" role="alert">
-                                                            <span class="badge badge-pill badge-danger"> New </span>
-                                                            <span class="alert-content"> FLEXI COMBO </span>
-                                                            </div>
-                                                        <h4><a href="javascript:void(0)" class="text-dark title">
-                                                             Promo Hut Kemerdekaan RI ke 77</a></h4>
-                                                        <p class="text-muted location-time"><span class="text-muted h6">Promo Flexi Combo beli banyak makin banyak potongan harganya.</p>
-                                                        <a href="#" class="btn btn-sm btn-primary mouse-down">Lihat Promo</a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <h4>
+                                                <a href="javascript:void(0)" class="text-dark title"><?=$row->promotions_name;?></a>
+                                            </h4>
+                                            <p class="text-muted location-time"><span class="text-muted h6"><?=$row->promotions_content;?></p>
+                                            <a href="<?=base_url();?>promotions/detail-promotion/<?=$row->slug;?>" class="btn btn-sm btn-primary mouse-down">Lihat Promo</a>
                                         </div>
-                                    </div><!--end col-->
-                                    
-                                    <div class="col-lg-6 mt-4 pt-2">
-                                        <div class="card event-schedule rounded border">
-                                            <div class="card-body">
-                                                <div class="media">
-                                                    <ul class="date text-center text-primary mr-3 mb-0 list-unstyled">
-                                                        <li class="day font-weight-bold mb-2">17</li>
-                                                        <li class="month font-weight-bold">AGT</li>
-                                                    </ul>
-                                                    <div class="media-body content">
-                                                    <div class="alert alert-outline-primary alert-pills" role="alert">
-                                                            <span class="badge badge-pill badge-danger"> New </span>
-                                                            <span class="alert-content"> DISKON UP TO 70% </span>
-                                                            </div>
-                                                        <h4><a href="javascript:void(0)" class="text-dark title">
-                                                             Promo Hut Kemerdekaan RI ke 77</a></h4>
-                                                        <p class="text-muted location-time"><span class="text-muted h6">Promo Flexi Combo beli banyak makin banyak potongan harganya.</p>
-                                                        <a href="#" class="btn btn-sm btn-primary mouse-down">Lihat Promo</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div><!--end col-->
-                                    
+                                    </div>
                                 </div>
+                            </div>
+                        </div><!--end col-->    
+                        <?php } ?> 
+                        <div class="col-lg-12 mt-4 pt-2 text-right">
+                            <a href="<?=base_url();?>promotions/all-promotions" class="mt-3 h6 text-primary">Find Out More <i class="mdi mdi-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div><!--end container fluid-->
         </section>
 <!-- Courses Start -->

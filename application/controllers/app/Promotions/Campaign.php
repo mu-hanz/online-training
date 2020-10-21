@@ -18,6 +18,7 @@ class Campaign extends CI_Controller
         }
         $this->load->model($this->folder.'_m');
         $this->load->library('upload');
+        $this->load->library('slug');
     }
 
     private function _init()
@@ -267,6 +268,7 @@ class Campaign extends CI_Controller
             $data_promotions = array(
                 'type'                      => strtolower($this->file),
                 'promotions_name'           => $this->input->post('promotions_name'),
+                'slug'                      => $this->slug->create_slug($this->input->post('promotions_name')),
                 'promotions_content'        => $this->input->post('contents',FALSE),
                 'promotions_image'          => $promotions_image,
                 'start_date'                => $this->input->post('start_date'),
@@ -394,6 +396,7 @@ class Campaign extends CI_Controller
             $data_promotions = array(
                 'type'                      => strtolower($this->file),
                 'promotions_name'           => $this->input->post('promotions_name'),
+                'slug'                      => $this->slug->create_slug($this->input->post('promotions_name')),
                 'promotions_content'        => $this->input->post('contents',TRUE),
                 'start_date'                => $this->input->post('start_date'),
                 'end_date'                  => $this->input->post('end_date'),

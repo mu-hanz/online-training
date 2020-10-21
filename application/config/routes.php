@@ -98,7 +98,11 @@ $route['events-update-cart']        = "store/cart/update_cart";
 $route['events-remove-cart']        = "store/cart/remove_cart";
 
 // promotions
-$route['events-apply-voucher']        = "store/cart/apply_voucher";
+$route['events-apply-voucher']                      = "store/cart/apply_voucher";
+$route['promotions/all-promotions']                 = "store/promotions/all_promotions";
+$route['promotions/all-promotions/(:any)']          = "store/promotions/all_promotions/$1";
+$route['promotions/detail-promotion/(:any)']        = "store/promotions/detail_promotions/$1";
+$route['promotions/detail-promotion/(:any)/(:any)'] = "store/promotions/detail_promotions/$1/$2";
 
 
 $route['shopping-cart/save']    = "store/shopping_cart/save";

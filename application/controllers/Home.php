@@ -38,6 +38,7 @@ class Home extends CI_Controller {
 		$data_home = array(
 			'event_popular'      => $this->Post_m->get_event_all('9')->result(),
 			'data_articles'      => $this->Post_m->get_articles_all('3')->result(),
+			'data_promotions'    => $this->Post_m->get_promotions_all('2')->result(),
 		);
 
 		$this->output->set_title($this->muhanz->app_title('Training Center'));
