@@ -337,10 +337,6 @@ class Post_m extends CI_Model
 <<<<<<< Updated upstream
         }
         $this->db->order_by('posts.id_post','desc');
-=======
-        } 
-
->>>>>>> Stashed changes
         return $this->db->get();
     }
     
