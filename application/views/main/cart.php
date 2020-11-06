@@ -149,7 +149,7 @@
                 </div><!--end row-->
                 <div class="row">
                     <div class="col-lg-8 col-md-6 mt-4 pt-2">
-                        <a href="<?= base_url();?>" class="btn btn-primary"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>  Continue Order</a>
+                        <a href="<?= base_url('events/all-events');?>" class="btn btn-primary"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>  Continue Order</a>
                         <a href="javascript:void(0)" class="btn btn-soft-primary ml-2 apply-coupon" <?php if($used_voucher){echo 'style="display:none"';}?>>Apply Coupon</a>
                     </div>
                     <div class="col-lg-4 col-md-6 ml-auto mt-4 pt-2">

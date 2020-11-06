@@ -101,3 +101,11 @@
     text-decoration: line-through;
   }
 
+
+.play-icon i:hover {
+    -webkit-text-fill-color: #fff;
+}
+.play-icon i, .play-icon i:hover {
+    -webkit-text-stroke: 2px #fff;
+}
+

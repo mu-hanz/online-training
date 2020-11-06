@@ -55,7 +55,7 @@
                                     <div class="job-overlay bg-white"></div>
                                     <div class="play-icon">
                                         <a href="<?=$event->event_video;?>" class="play-btn video-play-icon">
-                                            <i class="mdi mdi-play text-primary rounded-circle bg-white shadow"></i>
+                                            <i class="mdi mdi-play text-primary rounded-circle bg-danger shadow"></i>
                                         </a>
                                     </div>
                                 </div>

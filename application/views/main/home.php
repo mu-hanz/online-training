@@ -23,24 +23,25 @@
                                         </div>
                                     </div>
                                 </div><!--end col-->
-
+                                <a href="https://www.youtube.com/watch?v=DE_iYhYJLSk" class="video-play-icon">
                                 <div class="col-lg-5 col-md-6 col-12 mt-4 pt-2 mt-sm-0 pt-sm-0">
                                     <div class="position-relative">
                                         <img src="<?= base_url('assets/main/images/testimonial.jpg');?>" class="rounded img-fluid mx-auto d-block" alt="">
                                         <div class="play-icon">
                                             <a href="https://www.youtube.com/watch?v=DE_iYhYJLSk" class="play-btn video-play-icon">
-                                                <i class="mdi mdi-play text-primary rounded-circle bg-white shadow"></i>
+                                                <i class="mdi mdi-play text-primary rounded-circle bg-danger shadow"></i>
                                             </a>
                                         </div>
                                     </div>
                                 </div><!--end col-->
+                                </a>
                             </div><!--end row-->
                         </div><!--end container-->
                     </div><!--end row-->
                 </div><!--end div-->
             </div><!--end container fluid-->
         </section>
-
+        <?php if(is_array($data_promotions)){?>
         <section class="section pt-4" id="courses">
             <div class="container">
                 <div class="row justify-content-center">
@@ -89,13 +90,16 @@
                             </div>
                         </div><!--end col-->    
                         <?php } ?> 
-                        <div class="col-lg-12 mt-4 pt-2 text-right">
-                            <a href="<?=base_url();?>promotions/all-promotions" class="mt-3 h6 text-primary mlink">Find Out More <i class="mdi mdi-chevron-right"></i></a>
-                        </div>
+
+                        <div class="col-12 mt-4 pt-2 text-center">
+                        <a href="<?php echo base_url('promotions/all-promotions');?>" class="btn btn-primary mlink">Find Out More <i class="mdi mdi-chevron-right"></i></a>
+                    </div>
+
                     </div>
                 </div>
             </div><!--end container fluid-->
         </section>
+        <?php } ?> 
 <!-- Courses Start -->
         <section class="section pt-4" id="courses">
             <div class="container">
@@ -390,6 +394,29 @@
             <div class="col-12 mt-4 pt-2 text-center">
                         <a href="<?php echo base_url('articles/all-articles');?>" class="btn btn-primary mlink">See More Articles <i class="mdi mdi-chevron-right"></i></a>
                     </div>
+
+
+            <!-- youtube -->
+            <div class="container mt-100 mt-60">
+                <div class="row justify-content-center">
+                    <div class="col-12 text-center">
+                        <div class="section-title mb-4 pb-2">
+                            <h4 class="title mb-4">Latest Videos</h4>
+                            <p class="text-muted para-desc mx-auto mb-0">Berbagi pengalaman yang kami miliki untuk menjawab tantangan di setiap perusahaan.</p>
+                        </div>
+                    </div><!--end col-->
+                </div><!--end row-->
+
+                <div class="row" id="videoYoutube">
+                
+            
+                </div><!--end row-->
+            </div><!--end container-->
+            <!-- youtube End -->
+
+            <div class="col-12 mt-4 pt-2 text-center">
+                        <a href="https://www.youtube.com/channel/UCvwUtIPkSiqlL6b5lTqi9fA" target="_blank" class="btn btn-danger"><i class="mdi mdi-youtube"></i> See More Videos <i class="mdi mdi-chevron-right"></i></a>
+                    </div>
                     
         </section><!--end section-->
         <!-- End -->
@@ -421,3 +448,5 @@
             </div><!--end container-->
         </section><!--end section-->
         <!-- Testi Subscribe End -->
+
+ 

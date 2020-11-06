@@ -31,6 +31,7 @@ class Home extends CI_Controller {
 		$this->load->js('assets/main/js/flexslider.init.js');
 
 		$this->load->js('assets/main/scripts/main.init.js');
+		$this->load->js('assets/main/scripts/youtube.init.js');
 
 		
 		$this->load->section('slider', 'main/layout/slider');

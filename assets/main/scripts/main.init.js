@@ -49,4 +49,5 @@ $('#newssubscribebtn').click(function (e) {
     });
 });
 
+
 })(window.jQuery); 

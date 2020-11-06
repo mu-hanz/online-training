@@ -94,9 +94,7 @@
         <script src="<?php echo base_url('assets/sweetalert/sweetalert2.all.min.js') ;?>"></script>
         <script src="<?php echo base_url('assets/scripts/store.pjax.js') ;?>"></script>
 
-        
-        
-
+   
 
         <!-- Javascript End -->
 
