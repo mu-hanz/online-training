@@ -11,11 +11,8 @@ class Voucher extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->muhanz->check_auth();
         $this->_init();
-        if (!$this->ion_auth->logged_in()) {
-            $this->session->set_userdata('redirect_login', $this->agent->referrer());
-            redirect('webadmin/login', 'refresh');
-        }
         $this->load->model($this->folder.'_m');
     }
 
@@ -226,7 +223,7 @@ class Voucher extends CI_Controller
         }
         $data_promotions = array(
             'type'                      => strtolower($this->file),
-            'type_voucher'              => $this->input->post('type_voucher'),
+            'type_voucher'              => 'Code Voucher',
             'promotions_name'           => $this->input->post('promotions_name'),
             'promotions_code'           => $promotions_code,
             'area_display_voucher'      => $area_display_voucher,
@@ -367,7 +364,7 @@ class Voucher extends CI_Controller
         }
         $data_promotions = array(
             'type'                      => strtolower($this->file),
-            'type_voucher'              => $this->input->post('type_voucher'),
+            'type_voucher'              => 'Code Voucher',
             'promotions_name'           => $this->input->post('promotions_name'),
             'promotions_code'           => $promotions_code,
             'area_display_voucher'      => $area_display_voucher,

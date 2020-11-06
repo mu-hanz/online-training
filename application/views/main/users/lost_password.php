@@ -8,18 +8,19 @@
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-6">
-                        <div class="card login_page shadow rounded border-0">
+                        <div class="card login_page shadow rounded border-0 form-body">
                             <div class="card-body">
                                 <h4 class="card-title text-center">Recover Account</h4>  
 
-                                <form class="login-form mt-4">
+                                <form class="ajaxFormAuth login-form mt-4" action="<?php echo base_url('account/forgot-password'); ?>" method="post">
+                                <input type="hidden" id="mz-csrf" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">    
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <p class="text-muted">Please enter your email address. You will receive a link to create a new password via email.</p>
                                             <div class="form-group position-relative">
                                                 <label>Email address <span class="text-danger">*</span></label>
                                                 <i data-feather="mail" class="fea icon-sm icons"></i>
-                                                <input type="email" class="form-control pl-5" placeholder="Enter Your Email Address" name="email" required="">
+                                                <input type="email" class="form-control pl-5" placeholder="Enter Your Email Address" name="identity" required="">
                                             </div>
                                         </div>
                                         <div class="col-lg-12">

@@ -65,6 +65,9 @@ $(document).ready(function() {
             "data": "post_modifed",
             'className': 'align-middle text-center'
         }, {
+            "data": "view",
+            'className': 'align-middle text-center'
+        }, {
             "data": "action",
             'orderable': false,
             'className': 'text-center'

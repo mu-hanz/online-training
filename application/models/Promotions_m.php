@@ -14,7 +14,7 @@ class Promotions_m extends CI_Model {
     // var $join_table2_1  = 'events_contents';
     var $join_table2_2  = 'posts';
     var $join_table2_3  = 'terms';
-    var $column_order2  = array(null, 'events.event_id', 'posts.post_title', 'events.event_cost', 'events.event_cost_promo', 'terms.name');
+    var $column_order2  = array(null, 'events.event_id', 'posts.post_title', 'events.event_cost', 'events.event_cost_promo', 'events.event_on_sale', 'terms.name');
     var $column_search2 = array('posts.post_title', 'events.event_cost', 'terms.name'); 
     var $order2         = array('events.event_id' => 'desc'); 
 
@@ -504,21 +504,27 @@ class Promotions_m extends CI_Model {
         return $this->db->count_all_results();
     }
 
-    function get_data_training(){
+    function get_data_training($edit = false){
         $this->db->select($this->column_order2);
         $this->db->from($this->table2);
         // $this->db->join($this->join_table2_1, $this->join_table2_1.'.event_id = '.$this->table2.'.event_id', 'left');
         $this->db->join($this->join_table2_2, $this->join_table2_2.'.id_post = '.$this->table2.'.post_id', 'left');
         $this->db->join($this->join_table2_3, $this->join_table2_3.'.term_id = '.$this->table2.'.location_id', 'left');
+        if($edit){
+            $this->db->where($this->table2.'.event_on_sale !=', '1');
+        }
         return $this->db->get()->result();
     }
 
-    public function count_data_training()
+    public function count_data_training($edit = false)
     {
         $this->db->from($this->table2);
         // $this->db->join($this->join_table2_1, $this->join_table2_1.'.event_id = '.$this->table2.'.event_id', 'left');
         $this->db->join($this->join_table2_2, $this->join_table2_2.'.id_post = '.$this->table2.'.post_id', 'left');
         $this->db->join($this->join_table2_3, $this->join_table2_3.'.term_id = '.$this->table2.'.location_id', 'left');
+        if($edit){
+            $this->db->where($this->table2.'.event_on_sale !=', '1');
+        }
         return $this->db->count_all_results();
     }
 
@@ -527,6 +533,12 @@ class Promotions_m extends CI_Model {
         $this->db->from($this->join_table2);
         $this->db->where($this->join_table2.'.promotions_id', $id);
         return $this->db->get()->result();
+    }
+
+    function update_event_on_sale($id, $status){
+        $this->db->set('event_on_sale', $status, FALSE);
+        $this->db->where('event_id', $id);
+        return $this->db->update($this->table2);
     }
 
 

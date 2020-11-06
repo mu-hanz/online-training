@@ -12,34 +12,65 @@ class Connect extends CI_Controller
 
     public function index($provider)
     {
+     
         try {
 			$adapter = $this->hybridauth->HA->authenticate($provider);
 			$profile = $adapter->getUserProfile();
 
-            $check_user = $this->Connect_m->checkUser($profile);
+            $isConnected = $adapter->isConnected();
 
-            if($check_user){
+            if($isConnected){
+ 
+                $check_user = $this->Connect_m->checkUser($profile);
+            
 
-                if ($this->ion_auth->login($profile->email, $profile->identifier))
-                {
-                    $adapter->disconnect();
-                    // redirect('users/dashboard');
-                    echo "
-                    <script>
-                        if (window.opener.closeAuthWindow) {
-                            window.opener.closeAuthWindow();
-                            window.opener.location.reload();
+                if($check_user){
+
+                    if ($this->ion_auth->login($profile->email, $profile->identifier))
+                    {
+                        $this->hybridauth->HA->disconnectAllAdapters();
+                        // redirect('users/dashboard');
+                        echo "
+                        <script>
+                            if (window.opener.closeAuthWindow) {
+                                window.opener.closeAuthWindow();
+                                window.opener.location.reload();
+                            }
+                        </script>";
+                        
+                    } else {
+
+                        if ($this->ion_auth->login_connect($profile->email, $profile->identifier)) {
+
+                            $this->hybridauth->HA->disconnectAllAdapters();
+                            // redirect('users/dashboard');
+                            echo "
+                            <script>
+                                if (window.opener.closeAuthWindow) {
+                                    window.opener.closeAuthWindow();
+                                    window.opener.location.reload();
+                                }
+                            </script>";
+    
+                        } else {
+                            $this->hybridauth->HA->disconnectAllAdapters();
+                            redirect('account/login');
                         }
-                    </script>";
+
+
+                    }
                     
+                    
+                    
+
                 } else {
-
-                    redirect('users/login');
-
+                    $this->hybridauth->HA->disconnectAllAdapters();
+                    redirect('account/login');
                 }
 
             } else {
-                redirect('users/login');
+                $this->hybridauth->HA->disconnectAllAdapters();
+                redirect('account/login');
             }
             
             

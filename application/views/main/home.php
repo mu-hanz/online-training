@@ -82,7 +82,7 @@
                                                 <a href="javascript:void(0)" class="text-dark title"><?=$row->promotions_name;?></a>
                                             </h4>
                                             <p class="text-muted location-time"><span class="text-muted h6"><?=$row->promotions_content;?></p>
-                                            <a href="<?=base_url();?>promotions/detail-promotion/<?=$row->slug;?>" class="btn btn-sm btn-primary mouse-down">Lihat Promo</a>
+                                            <a href="<?=base_url();?>promotions/detail-promotion/<?=$row->slug;?>" class="btn btn-sm btn-primary mouse-down mlink">Lihat Promo</a>
                                         </div>
                                     </div>
                                 </div>
@@ -90,7 +90,7 @@
                         </div><!--end col-->    
                         <?php } ?> 
                         <div class="col-lg-12 mt-4 pt-2 text-right">
-                            <a href="<?=base_url();?>promotions/all-promotions" class="mt-3 h6 text-primary">Find Out More <i class="mdi mdi-chevron-right"></i></a>
+                            <a href="<?=base_url();?>promotions/all-promotions" class="mt-3 h6 text-primary mlink">Find Out More <i class="mdi mdi-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
 
                 <div class="row">
                     <?php foreach($event_popular as $pop){?>
-
+                        <a href="<?php echo base_url('events/detail/'.$pop->event_slug);?>" class="mlink"> 
                         <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                         <div class="card blog rounded border-0 shadow overflow-hidden">
                             <div class="position-relative">
@@ -130,7 +130,7 @@
                                 </div>
                             </div>
                             <div class="card-body content">
-                                <small><a href="javascript:void(0)" class="text-primary h6"><?=$pop->group_name;?></a></small>
+                                <small><a href="<?=base_url('events-groups/'.$pop->groupid.'/'.$pop->group_slug);?>" class="text-primary h6"><?=$pop->group_name;?></a></small>
                                 <h5 class="mt-2"><a href="<?php echo base_url('events/detail/'.$pop->event_slug);?>" class="title text-dark mlink"><?=$pop->event_name;?></a></h5>
                                 <ul class="list-unstyled d-flex justify-content-between border-top mt-3 pt-3 mb-0">
                                     <li class="text-muted small"><i data-feather="award" class="fea icon-sm text-info"></i> <?=$pop->cert_name;?></li>
@@ -139,7 +139,7 @@
                             </div>
                         </div> <!--end card / course-blog-->
                     </div><!--end col-->
-
+                    </a>
                     <?php }?>
 
 
@@ -363,6 +363,7 @@
                 <div class="row">
 
                 <?php foreach($data_articles as $articles){?>
+                    <a href="<?php echo base_url('articles/detail/'.$articles->post_slug);?>" class="mlink"> 
                     <div class="col-lg-4 col-md-6 mt-4 pt-2">
                         <div class="card blog rounded border-0 shadow">
                             <div class="position-relative">
@@ -372,9 +373,6 @@
                             <div class="card-body content">
                                 <h5><a href="<?php echo base_url('articles/detail/'.$articles->post_slug);?>" class="card-title title text-dark mlink"><?php $post_title = strip_tags($articles->post_title); echo character_limiter($post_title, 100);?></a></h5>
                                 <div class="post-meta d-flex justify-content-between mt-3">
-                                    <ul class="list-unstyled mb-0">
-                                        <li class="list-inline-item mr-2 mb-0"><a href="javascript:void(0)" class="text-muted like"><i class="mdi mdi-eye-outline mr-1"></i><?= $articles->post_view;?></a></li>
-                                    </ul>
                                     <a href="<?php echo base_url('articles/detail/'.$articles->post_slug);?>" class="text-muted readmore mlink">Read More <i class="mdi mdi-chevron-right"></i></a>
                                 </div>
                             </div>
@@ -383,6 +381,7 @@
                             </div>
                         </div>
                     </div><!--end col-->
+                    </a>
                     <?php } ?>
                 </div><!--end row-->
             </div><!--end container-->

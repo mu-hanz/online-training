@@ -8,12 +8,8 @@ class Pages extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->muhanz->check_auth();
         $this->_init();
-        if (!$this->ion_auth->logged_in()) {
-            $this->session->set_userdata('redirect_login', $this->agent->referrer());
-            redirect('webadmin/login');
-        }
-
         $this->load->model('Post_m');
 
         $config = array(
@@ -247,9 +243,16 @@ class Pages extends CI_Controller
         
             return $data;
         }
+
+        function is_view($slug)
+        {
+            $data = '';
+            $data .= '<a href="'.base_url('pages/'.$slug).'" class="btn btn-primary btn-sm btn-block" target="_blank"><i class="uil uil-eye"></i> View</a>';
+            return $data;
+        }
       
 
-        $this->datatables->select('id_post, post_status, post_title, post_date, post_modifed, a.first_name as author_name, e.first_name as author_name_edit');
+        $this->datatables->select('id_post, post_status, post_title, post_date, post_modifed, post_slug, a.first_name as author_name, e.first_name as author_name_edit');
         $this->datatables->from('posts');
         $this->datatables->join('users as a', 'a.id = posts.post_author', 'left');
         $this->datatables->join('users as e', 'e.id = posts.post_author_modifed', 'left');
@@ -257,6 +260,7 @@ class Pages extends CI_Controller
         $this->datatables->order_by('id_post', 'desc');
         $this->datatables->group_by('id_post');
         $this->datatables->add_column('action', '$1', "is_action('id_post')");
+        $this->datatables->add_column('view', '$1', "is_view('post_slug')");
         
         return print_r($this->datatables->generate());
     }

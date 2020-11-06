@@ -1,13 +1,13 @@
                         <style>.dataTables_wrapper .dataTables_paginate .paginate_button {padding:0px;}</style>
                         <div class="border-bottom pb-4 data-loading">
-
-                            <h5 class="mt-4 mb-0">Members</h5>
+                            <a href="<?=base_url('users/dashboard/add_participant');?>" class="btn btn-primary mt-2 text-right" >Tambah Participant</a>
+                            <h5 class="mt-4 mb-0">Participant</h5>
                             <?php if ($page == 'index') { ?> 
                             <div class="row mt-2">
                                 <div class="col-md-12">
                                     <input type="hidden" id="csrftoken" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
                                     <input type="hidden" name="redirect_sweetalert" id="redirect_sweetalert" value="<?=$redirect_sweetalert;?>">
-                                    <table id="datatable-responsive" class="responsive display nowrap" cellspacing="0" width="100%">
+                                    <table id="datatable-responsive" class="responsive table display nowrap" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th data-priority="1">Name</th>
@@ -24,7 +24,7 @@
                                                 <td><?=$row->email;?></td>
                                                 <td><?=$row->job_title;?></td>
                                                 <td><?=$row->phone;?></td>
-                                                <td><a href="<?=base_url();?>members-edit/<?=$row->id_members;?>" class="btn btn-info btn-sm"><i data-feather="edit" class="fea icon-sm fea-social"></i></a> <a href="javascript:void(0)" class="btn btn-danger btn-sm del" term_id="<?=$row->id_members;?>" term_url="store/users/dashboard/delete_members"><i data-feather="trash-2" class="fea icon-sm fea-social"></i></a></td>
+                                                <td><a href="<?=base_url('users/dashboard/edit_participant/'.$row->id_members);?>" class="mlink btn btn-info btn-sm"><i data-feather="edit" class="fea icon-sm fea-social"></i></a> <a href="javascript:void(0)" class="btn btn-danger btn-sm del" term_id="<?=$row->id_members;?>" term_url="store/users/dashboard/delete_members"><i data-feather="trash-2" class="fea icon-sm fea-social"></i></a></td>
                                             </tr>
                                             <?php } ?>
                                         </tbody>
@@ -70,6 +70,7 @@
                                 <div class="row mt-2">
                                     <div class="col-lg-12">
                                         <input type="submit" id="submit" name="Save" class="btn btn-primary" value="Save Changes">
+                                        <a href="<?=base_url('users/dashboard/participant');?>" class="btn btn-secondary mlink">Cancel</a>
                                     </div>
                                 </div>
                             </form>

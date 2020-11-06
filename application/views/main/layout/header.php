@@ -26,17 +26,34 @@
                     }
 
                     if(!empty($this->cart->contents())){
+                        $cart =  true;
                         $css="px-2";
-                        $count = count($this->cart->contents());
+
+                        $used = 0;
+                        foreach($this->cart->contents() as $items){
+                
+                            if($items['sku'] == 'voucher'){
+                                $used = 1;
+                                break;
+                            }
+                        }
+
+                        if($used == 1){
+                            $count_cart = $this->cart->total_items() - 1;
+                        } else {
+                            $count_cart = $this->cart->total_items();
+                        }
+                        
                     } else {
+                        $cart =  false;
                         $css="";
                     }
                     ?> 
                     <a href="<?php echo $link;?>" class="btn btn-primary mlink" data-toggle="tooltip" data-placement="bottom" title="<?=$tooltip;?>"><?=$icon;?></a>
                     <a href="<?php echo base_url('events-cart');?>" class="btn btn-secondary mlink cart-btn <?php echo $css;?>" data-toggle="tooltip" data-placement="bottom" title="Click to View Cart">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                        <?php if(!empty($this->cart->contents())){ ?>
-                            <span class="badge badge-pill badge-primary" id="cart-btn-count"> <?php echo $count;?></span>
+                        <?php if($cart){ ?>
+                            <span class="badge badge-pill badge-primary" id="cart-btn-count"> <?php echo $count_cart;?></span>
                             <?php } ?>
                         </a>
                 </div>
@@ -67,7 +84,7 @@
                             <ul class="submenu megamenu">
                                 <li>
                                     <ul>
-                                    <li><a href="<?= base_url('events-type/27/e-learning');?>">E-Learning <span class="badge badge-info rounded"> New</span></a></li>
+                                    <li><a href="<?= base_url('events-type/27/e-training');?>">E-Training <span class="badge badge-info rounded"> New</span></a></li>
                                         <li><a href="<?= base_url('events-type/11/virtual-training');?>">Virtual Training <span class="badge badge-info rounded"> New</span></a></li>
                                         <li><a href="<?= base_url('events-type/9/inhouse-training');?>">In-House Training</a></li>
                                         <li><a href="<?= base_url('events-type/10/public-training');?>">Public Training</a></li>
@@ -88,6 +105,7 @@
                                 </li>  
                             </ul>
                         </li>
+                        <li><a href="<?php echo base_url('/promotions/all-promotions');?>">Promo</a></li>
                         <li><a href="<?php echo base_url('articles/all-articles');?>">Artikel</a></li>
         
                         <li><a href="<?php echo base_url('contact-us');?>">Hubungi Kami</a></li>

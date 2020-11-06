@@ -46,7 +46,7 @@ class Articles extends CI_Controller {
 
 		$data = array(
             'articles'      => $articles,
-            'data_articles'      => $this->Post_m->get_articles_all('2'),
+            'data_articles'      => $this->Post_m->get_articles_all('2')->result(),
             'data_category'     => $this->Terms_m->get_terms('category-articles', '')->result(),
 		);
 
@@ -61,7 +61,7 @@ class Articles extends CI_Controller {
 
         $config["base_url"]             = base_url() . "articles/all-articles";
         $config['total_rows']           = $this->Post_m->get_articles_all()->num_rows();
-        $config['per_page']             = '2';
+        $config['per_page']             = '8';
         $config['uri_segment']          = 3;
         $config['attributes'] = array('class' => 'page-link');
 

@@ -24,6 +24,8 @@ class Events extends CI_Controller {
     public function index($slug)
 	{	
 
+        $this->load->js('assets/main/js/jquery.magnific-popup.min.js');
+		$this->load->js('assets/main/js/magnific.init.js');
         $this->load->js('assets/main/scripts/events.init.js');
 
 
@@ -41,16 +43,16 @@ class Events extends CI_Controller {
 
 		$data = array(
             'event'                     => $event,
-            'flexi_combo'               => $this->Post_m->count_data_promotions_flexi_combo($event->event_id),
-            'flexi_combo_tier'          => $this->Post_m->get_data_promotions_flexi_combo_tier($event->event_id),
+            'promo_flexi'               => $this->Post_m->promo_flexi($event->event_id)->row(),
+ 
             'campaign'                  => $this->Post_m->get_data_promotions_campaign($event->event_id),
-            'count_collectible_voucher' => $this->Post_m->count_collectible_voucher($event->event_id),
-            'list_collectible_voucher'  => $this->Post_m->list_collectible_voucher($event->event_id),
 		);
 
 		$this->output->set_title($this->muhanz->app_title($event->event_name));
 
-		$this->load->view('main/event_detail', $data);
+        $this->load->view('main/event_detail', $data);
+        
+        
     }
     
     public function all_events()
@@ -98,7 +100,9 @@ class Events extends CI_Controller {
 			'event'      => $this->Post_m->get_event_all($config["per_page"], $from)->result(),
         );
         
-		$this->load->view('main/events', $data);
+        $this->load->view('main/events', $data);
+        
+        // print_r($this->Post_m->get_event_all($config["per_page"], $from)->result());
     }
 
     public function search_events_ajax()

@@ -73,18 +73,24 @@
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label for="promotionName">Promotion Name</label>
-                                            <input type="text" class="form-control" id="promotions_name" name="promotions_name" value="<?=$promotions_name;?>" required>
+                                            <input type="text" class="form-control " id="promotions_name" name="promotions_name" value="<?=$promotions_name;?>" required>
                                             <div class="invalid-feedback">
                                                 This value is required
                                             </div>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="datetime-datepicker">Start Date</label>
-                                            <input type="text" id="datetime-datepicker" class="form-control flatpickr-input" name="start_date" value="<?=$start_date;?>" required>
+                                            <input type="text" id="datetime-datepicker" class="form-control flatpickr-input readonly" name="start_date" value="<?=$start_date;?>" required>
+                                            <div class="invalid-feedback">
+                                                This value is required
+                                            </div>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>End Date</label>
-                                            <input type="text" id="datetime-datepicker2" class="form-control flatpickr-input" name="end_date" value="<?=$end_date;?>" readonly="readonly">
+                                            <input type="text" id="datetime-datepicker2" class="form-control flatpickr-input readonly" name="end_date" value="<?=$end_date;?>" required>
+                                            <div class="invalid-feedback">
+                                                This value is required
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -113,14 +119,14 @@
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>Usage Limit Promotion</label>
-                                            <input type="text" class="form-control" value="<?=$limit_promotion;?>" name="limit_promotion" required>
+                                            <input type="text" class="form-control is_number" value="<?=$limit_promotion;?>" name="limit_promotion" required>
                                             <div class="invalid-feedback">
                                                 This value is required
                                             </div>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>Usage Limit User</label>
-                                            <input type="text" class="form-control" value="<?=$limit_user;?>" name="limit_user" required>
+                                            <input type="text" class="form-control is_number" value="<?=$limit_user;?>" name="limit_user" required>
                                             <div class="invalid-feedback">
                                                 This value is required
                                             </div>
@@ -137,12 +143,7 @@
                                             <label>Promotion Tiers</label>
                                             <div class="card card-promotion-tiers-custom">
                                                 <div class="header-card-promotion-tiers-custom">
-                                                    <!-- <div class="float-right container-button-add-tier">
-                                                        <div class="btn btn-danger btn-sm mt-2 button-remove-tier">Remove Tier</div>
-                                                        <div id="button-add-tier" class="btn btn-primary btn-sm mt-2">
-                                                            Add Tier
-                                                        </div>
-                                                    </div> -->
+
                                                     <div class="float-left">
                                                         <span class="mb-4">Tier <input type="hidden" name="name_tier1" value="Tier 1"></span>
                                                     </div>
@@ -160,10 +161,10 @@
                                                     <div class="row">
                                                         <div class="form-group col-md-6">
                                                             <div class="custom-control custom-radio mb-2">
-                                                                <input type="radio" id="customRadio1" name="customRadio1" value="criteria_qty" class="customRadio1 custom-control-input">
+                                                                <input type="radio" id="customRadio1" name="customRadio1" value="criteria_qty" class="customRadio1 custom-control-input "  required>
                                                                 <label class="custom-control-label" for="customRadio1">Amount Of Training >=</label>
                                                             </div>
-                                                            <input type="text" class="form-control criteria_qty1" name="criteria_qty1" disabled>
+                                                            <input type="text" class="form-control criteria_qty1 is_number" name="criteria_qty1" disabled>
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <div class="custom-control custom-radio mb-2">
@@ -189,7 +190,7 @@
                                                     <div class="row">
                                                         <div class="form-group col-md-6 mb-0">
                                                             <div class="custom-control custom-radio mb-2">
-                                                                <input type="radio" id="customRadiox1" name="customRadiox1" class="customRadiox1 custom-control-input" value="discount_percent">
+                                                                <input type="radio" id="customRadiox1" name="customRadiox1" class="customRadiox1 custom-control-input" value="discount_percent"  required>
                                                                 <label class="custom-control-label" for="customRadiox1">Discount Percentage</label>
                                                             </div>
                                                             <div class="input-group mb-2">
@@ -222,22 +223,13 @@
                                         ?>
                                         <div class="form-group col-md-12 element-tier" id='div_<?=$x;?>'>
                                             <?php if ($row->name_tier == 'Tier 1') { ?>
-                                            <label>Promotion Tiers (Max <?=$max_field_tiers;?> Tier) </label>
+                                            <label>Promotion Tiers </label>
                                             <?php } ?>
                                             <div class="card card-promotion-tiers-custom">
                                                 <div class="header-card-promotion-tiers-custom">
-                                                    <div class="float-right container-button-add-tier">
-                                                        <?php
-                                                        if ($x == '1') {
-                                                        ?>
-                                                        <div class="btn btn-danger btn-sm mt-2 button-remove-tier">Remove Tier</div>
-                                                        <div id="button-add-tier" class="btn btn-primary btn-sm mt-2">
-                                                            Add Tier
-                                                        </div>
-                                                        <?php } ?>
-                                                    </div>
+                                                   
                                                     <div class="float-left mb-3">
-                                                        <span class="mb-4"><?=$row->name_tier;?> <input type="hidden" name="name_tier1" value="Tier 1"></span>
+                                                        <span class="mb-4">Tier <input type="hidden" name="name_tier1" value="Tier"></span>
                                                     </div>
                                                     <div class="clearfix">&nbsp;</div>
                                                 </div>
@@ -271,7 +263,7 @@
                                                             } else {
                                                                 $criteria_qty = $row->criteria_qty;
                                                             } ?>
-                                                            <input type="text" class="form-control criteria_qty<?=$x;?>" name="criteria_qty<?=$x;?>" value="<?=$criteria_qty;?>" <?=$disabled_criteria_qty;?>>
+                                                            <input type="text" class="form-control is_number criteria_qty<?=$x;?>" name="criteria_qty<?=$x;?>" value="<?=$criteria_qty;?>" <?=$disabled_criteria_qty;?>>
                                                         </div>
                                                         <?php
                                                         if ($row->criteria_price != '0' && $row->criteria_price != '')  {
@@ -412,27 +404,49 @@
                                                         foreach ($get_data_training as $row) {
                                                         ?>
                                                             <?php if ($page != 'create') {
+                                                                $disabled = '';
                                                                 $checked        = '';
                                                                 $price_campaign = '';
+
+                                                                if($row->event_on_sale == 1){
+                                                                    $disabled = 'disabled';
+                                                                } else {
+                                                                    $disabled = '';
+                                                                }
+
                                                                 foreach ($get_data_training_detail as $row2) {
                                                                     if ($row->event_id === $row2->event_id) {
                                                                         $checked        = 'checked';
                                                                         $price_campaign = number_format($row2->price_campaign);
+                                                                        $disabled = '';
                                                                         break;
                                                                     } else {
                                                                         $checked        = '';
                                                                         $price_campaign = '';
+                                                                        if($row->event_on_sale == 1){
+                                                                            $disabled = 'disabled';
+                                                                        } else {
+                                                                            $disabled = '';
+                                                                        }
                                                                     }
+
                                                                 }
+
+                                                                
+
+                                                                
+
+                                                                
                                                             } else {
+                                                                $disabled = '';
                                                                 $checked        = '';
                                                                 $price_campaign = '';
                                                             }
                                                             ?>
-                                                        <tr>
+                                                        <tr <?php echo ($disabled != '' ? 'style="background-color: #ffe8e8;"' :'');?>>
                                                             <td>
                                                                 <div class="custom-control custom-switch mb-2">
-                                                                    <input type="checkbox" class="custom-control-input check-training" name="id<?=$xx;?>" value="<?=$row->event_id;?>" id="customSwitch<?=$xx;?>" <?=$checked;?>>
+                                                                    <input type="checkbox" class="custom-control-input check-training" name="id<?=$xx;?>" value="<?=$row->event_id;?>" id="customSwitch<?=$xx;?>" <?=$checked;?> <?=$disabled;?> >
                                                                     <label class="custom-control-label" for="customSwitch<?=$xx;?>">&nbsp;</label>
                                                                 </div>
                                                             </td>

@@ -9,7 +9,7 @@
                         <a href="#" class="logo-footer">
                             <img src="<?php echo base_url('assets/main/images/logo-light.png');?>" height="50" alt="">
                         </a>
-                        <p class="mt-4">Premysis Consulting is a management consulting firm dedicated to support organizations in all sectors of business, industry and government, in envisioning change as well as undertaking change initiatives. To accomplish our objectives, we provide a wide range of consulting and training services in the areas of Strategic, Quality, Environmental, Healthcare, Occupational Health & Safety, Environmental, Human Resources, Leadership & Service Quality, and Food Safety.</p>
+                        <p class="mt-4"><strong class="text-primary">Training Center</strong> is a management consulting firm dedicated to support organizations in all sectors of business, industry and government, in envisioning change as well as undertaking change initiatives. To accomplish our objectives, we provide a wide range of consulting and training services in the areas of Strategic, Quality, Environmental, Healthcare, Occupational Health & Safety, Environmental, Human Resources, Leadership & Service Quality, and Food Safety.</p>
                         <ul class="list-unstyled social-icon social mb-0 mt-4">
                             <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="facebook" class="fea icon-sm fea-social"></i></a></li>
                             <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="instagram" class="fea icon-sm fea-social"></i></a></li>
@@ -18,27 +18,23 @@
                     </div><!--end col-->
                     
                     <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                        <h4 class="text-light footer-head">Company</h4>
+                        <h4 class="text-light footer-head  mt-5">Company</h4>
                         <ul class="list-unstyled footer-list mt-4">
-                            <li><a href="page-aboutus.html" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> About us</a></li>
-                            <li><a href="page-services.html" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Services</a></li>
-                            <li><a href="page-team.html" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Team</a></li>
-                            <li><a href="page-pricing.html" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Pricing</a></li>
-                            <li><a href="page-work-modern.html" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Project</a></li>
-                            <li><a href="page-jobs.html" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Careers</a></li>
-                            <li><a href="page-blog-grid.html" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Blog</a></li>
-                            <li><a href="auth-cover-login.html" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Login</a></li>
+                            <li><a href="<?=base_url('pages/about-us');?>" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> About us</a></li>
+                            <li><a href="<?=base_url('events/all-events');?>" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Services</a></li>
+                            <li><a href="<?=base_url('articles/all-articles');?>" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Articles</a></li>
+                            <li><a href="<?=base_url('account/login');?>" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Login</a></li>
                         </ul>
                     </div><!--end col-->
                     
                     <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                        <h4 class="text-light footer-head">Usefull Links</h4>
+                        <h4 class="text-light footer-head  mt-5">Usefull Links</h4>
                         <ul class="list-unstyled footer-list mt-4">
-                            <li><a href="page-terms.html" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Terms of Services</a></li>
-                            <li><a href="page-privacy.html" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Privacy Policy</a></li>
-                            <li><a href="documentation.html" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Documentation</a></li>
-                            <li><a href="changelog.html" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Changelog</a></li>
-                            <li><a href="components.html" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Components</a></li>
+                            <li><a href="<?=base_url('pages/terms-of-services');?>" class="text-foot mlink"><i class="mdi mdi-chevron-right mr-1"></i> Terms of Services</a></li>
+                            <li><a href="<?=base_url('pages/privacy-policy');?>" class="text-foot mlink"><i class="mdi mdi-chevron-right mr-1"></i> Privacy Policy</a></li>
+                            <li><a href="<?=base_url('pages/cookie-policy');?>" class="text-foot mlink"><i class="mdi mdi-chevron-right mr-1"></i> Cookie Policy</a></li>
+                            <li><a href="<?=base_url('pages/disclaimer');?>" class="text-foot mlink"><i class="mdi mdi-chevron-right mr-1"></i> Disclaimer</a></li>
+                            
                         </ul>
                     </div><!--end col-->
 

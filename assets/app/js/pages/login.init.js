@@ -1,6 +1,11 @@
 // Form submit
 function showResponse(data) {
-    
+	
+	if(data.not_admin){
+		setTimeout(() => window.location.href = data.url);
+		return;
+	}
+
 	const Toast = Swal.mixin({
         toast: true,
         position: 'center',
@@ -11,14 +16,15 @@ function showResponse(data) {
       Toast.fire({
         type: data.status,
         title: data.message
-      })
+	  })
+	
     
     if(data.status == 'error'){
         $('#mz-csrf').val(data.csrf_hash);
-        $('.data-loading').unblock();
+		$('.data-loading').unblock();
     } else {
 
-		setTimeout(() => window.location.href = '/webadmin', 2000)
+		setTimeout(() => window.location.href = data.url, 2000)
 		
 
     }

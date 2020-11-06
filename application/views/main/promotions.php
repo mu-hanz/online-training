@@ -64,7 +64,7 @@
                                     <a href="javascript:void(0)" class="text-dark title"><?=$row->promotions_name;?></a>
                                 </h4>
                                 <p class="text-muted location-time"><span class="text-muted h6"><?=$row->promotions_content;?></p>
-                                <a href="<?=base_url();?>promotions/detail-promotion/<?=$row->slug;?>" class="btn btn-sm btn-primary mouse-down">Lihat Promo</a>
+                                <a href="<?=base_url();?>promotions/detail-promotion/<?=$row->slug;?>" class="btn btn-sm btn-primary mouse-down mlink">Lihat Promo</a>
                             </div>
                         </div>
                     </div>

@@ -8,12 +8,8 @@ class Events extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->muhanz->check_auth();
         $this->_init();
-        if (!$this->ion_auth->logged_in()) {
-            $this->session->set_userdata('redirect_login', $this->agent->referrer());
-            redirect('webadmin/login');
-        }
-
         $this->load->model('Post_m');
         $this->load->model('Terms_m');
 
@@ -471,14 +467,25 @@ class Events extends CI_Controller
         }
 
 
-        function is_date($event_start_date, $event_start_time, $event_end_date, $event_end_time, $event_duration)
+        function is_date($event_start_date, $event_start_time, $event_end_date, $event_end_time, $event_duration, $event_type)
         {
             $start_date = date("d M Y H:i:s", strtotime($event_start_date.' '.$event_start_time));
-            $end_date = date("d M Y H:i:s", strtotime($event_start_date.' '.$event_start_time));
+            $end_date = date("d M Y H:i:s", strtotime($event_end_date.' '.$event_end_time));
 
             $data = 'Start Date : '.$start_date.'<br> End Date : '.$end_date.'<br> Duration : '.$event_duration;
             
+            if($event_type !== 'e-training' && $event_type !== 'in-house-training'){
+            
+                $data = 'Start Date : '.$start_date.'<br> End Date : '.$end_date.'<br> Duration : '.$event_duration;
+            
+            } else {
+                
+                $data = 'Start Date : -<br> End Date : -<br> Duration : '.$event_duration;
+                
+            }
+            
             return $data;
+            
         }
 
         function is_event($event_name, $event_subtitle, $event_sku, $category, $type, $group, $certificate, $regional, $address, $location)
@@ -492,7 +499,7 @@ class Events extends CI_Controller
 
             $data = '
             <div class="row">
-                <div class="col-lg-8 mb-2">
+                <div class="col-lg-12 mb-2">
                     <strong>'.$event_name.' <i>('.$type_initial.')</i></strong><br>
                     <small><i>'.$event_subtitle.'</i></small>
                 </div>
@@ -515,18 +522,18 @@ class Events extends CI_Controller
             return $data;
         }
 
-        function is_action($event_id)
+        function is_action($event_id, $event_slug)
         {
     
             $data = '<a href="'.base_url('webadmin/posts/events/edit_event/'.$event_id).'" class="btn btn-primary btn-sm btn-block mlink"><i class="uil uil-edit"></i> Edit</a>
-            <br>
+            <a href="'.base_url('events/detail/'.$event_slug).'" target="_blank" class="btn btn-secondary btn-sm btn-block"><i class="uil uil-eye"></i> View</a>
             <button class="btn btn-danger btn-sm  btn-block"><i class="uil uil-trash-alt"></i> Delete</button>';
             
             return $data;
         }
       
 
-        $this->datatables->select('event_id, event_thumbs, event_images, event_name, event_subtitle, event_sku, event_duration, event_start_date, event_start_time, event_end_date, event_end_time, c.name as category, t.name as type, g.name as group, ct.name as certificate, r.name as regional, l1.description as address, l.name as location');
+        $this->datatables->select('event_id, event_thumbs, event_images, event_name, event_subtitle, event_sku, event_duration, event_start_date, event_start_time, event_end_date, event_end_time, event_type,event_slug, c.name as category, t.name as type, g.name as group, ct.name as certificate, r.name as regional, l1.description as address, l.name as location');
         $this->datatables->from('events');
         $this->datatables->join('terms as c', 'c.term_id = events.category_id', 'left');
         $this->datatables->join('terms as t', 't.term_id = events.type_id', 'left');
@@ -540,9 +547,9 @@ class Events extends CI_Controller
         $this->datatables->group_by('event_id');
 
         $this->datatables->add_column('detail_event', '$1', "is_event('event_name','event_subtitle','event_sku','category','type','group','certificate','regional','address', 'location')");
-        $this->datatables->add_column('event_date', '$1', "is_date('event_start_date','event_start_time','event_end_date','event_end_time','event_duration')");
+        $this->datatables->add_column('event_date', '$1', "is_date('event_start_date','event_start_time','event_end_date','event_end_time','event_duration','event_type')");
         $this->datatables->add_column('event_img', '$1', "is_img('event_thumbs','event_images')");
-        $this->datatables->add_column('action', '$1', "is_action('event_id')");
+        $this->datatables->add_column('action', '$1', "is_action('event_id','event_slug')");
         
       
         return print_r($this->datatables->generate());

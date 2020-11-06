@@ -29,7 +29,7 @@
                                             <div class="form-group position-relative">
                                                 <label>Password <span class="text-danger">*</span></label>
                                                 <i data-feather="key" class="fea icon-sm icons"></i>
-                                                <input type="password" class="form-control pl-5" placeholder="Password" name="password" required="">
+                                                <input type="password" class="form-control pl-5" pattern=".{8,}"   required title="8 characters minimum" placeholder="Password" name="password" required="">
                                             </div>
                                         </div>
 

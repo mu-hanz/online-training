@@ -60,7 +60,20 @@ var muhanz = (function(muhanz) {
 		  this.getcsrf();
 		  this.activeNav();
 		  this.DataTable();
-      },
+		  this.Validation();
+	  },
+	  
+	  	Validation: function() {
+			$(".needs-validation").on('submit', function (event) {
+				$(this).addClass('was-validated');
+				if ($(this)[0].checkValidity() === false) {
+					event.preventDefault();
+					event.stopPropagation();
+					return false;
+				}
+				return true;
+			});
+		},
 		  
 	  	getcsrf: function(name) {
 			var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');

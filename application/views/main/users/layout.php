@@ -58,17 +58,17 @@
 
         <!-- Main Js -->
         <script src="<?php echo base_url('assets/main/js/app.js');?>"></script>
-
+       
         <script>
             $(document).on('click', '.google-sign-in', function(e) {
                 e.preventDefault();
-            
+                var base_url = window.location.origin;
                 var popupWinWidth = 500;
                 var popupWinHeight = 600;
                 var left = (screen.width - popupWinWidth) / 2; 
                 var top = (screen.height - popupWinHeight) / 2; 
                 
-                var authWindow = window.open('http://onlinetraining.mz/socialconnect/auth/Google', 'Google Sign-in - Training Center',  
+                var authWindow = window.open(base_url + '/socialconnect/auth/Google', 'Google Sign-in - Training Center',  
                         'resizable=yes, width=' + popupWinWidth 
                         + ', height=' + popupWinHeight + ', top=' 
                         + top + ', left=' + left); 

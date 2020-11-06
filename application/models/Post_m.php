@@ -68,16 +68,40 @@ class Post_m extends CI_Model
 
     public function get_data_promotions_campaign($id)
     {
+        $dateNow = date('Y-m-d H:i:s', now());
+
         $this->db->select('*');
         $this->db->from($this->join_table_promotions);
         $this->db->join($this->table_promotions, $this->join_table_promotions.'.promotions_id = '.$this->table_promotions.'.promotions_id', 'left');
         $this->db->join($this->join_table_promotions2, $this->table_promotions.'.promotions_id = '.$this->join_table_promotions2.'.promotions_id', 'left');
         $this->db->where($this->join_table_promotions.'.event_id', $id);
+        $this->db->where($this->table_promotions.'.start_date <=', $dateNow);
+        $this->db->where($this->table_promotions.'.end_date >=', $dateNow);
         $this->db->where($this->table_promotions.'.status', 'On Progress');
         $this->db->where($this->table_promotions.'.type', 'campaign');
         $this->db->where($this->join_table_promotions.'.status_delete', '0');
         return $this->db->get();
     }
+
+
+
+    public function promo_flexi($id)
+    {
+        $dateNow = date('Y-m-d H:i:s', now());
+
+        $this->db->select('*');
+        $this->db->from('promotions');
+        $this->db->join('promotions_detail', 'promotions_detail.promotions_id = promotions.promotions_id', 'left');
+        $this->db->join('promotions_tier', 'promotions_tier.promotions_id = promotions.promotions_id', 'left');
+        $this->db->where('promotions.start_date <=', $dateNow);
+        $this->db->where('promotions.end_date >=', $dateNow);
+        $this->db->where('promotions.status', 'On Progress');
+        $this->db->where('promotions.type', 'flexi_combo');
+        $this->db->where('promotions.status_delete', '0');
+        $this->db->where('event_id', $id);
+        return $this->db->get();
+    }
+
 
     public function insert_post($data)
     {
@@ -196,7 +220,7 @@ class Post_m extends CI_Model
 
     public function get_event_all($limit = false, $offset = false, $search = false)
     {
-        $this->db->select('events.*, g.name as group_name, c.name as cert_name ');
+        $this->db->select('events.*, g.name as group_name, g.slug as group_slug, g.term_id as groupid, c.name as cert_name ');
         $this->db->from('events');
         $this->db->join('terms g', 'g.term_id = events.group_id', 'left');
         $this->db->join('terms c', 'c.term_id = events.certificate_id', 'left');
@@ -210,13 +234,15 @@ class Post_m extends CI_Model
         } elseif ($limit && $offset == false){
             $this->db->limit($limit);
         }
+
+        $this->db->order_by('events.event_id','desc');
         
         return $this->db->get();
     }
 
     public function get_event_group($limit = false, $offset = false, $group = false)
     {
-        $this->db->select('events.*, g.name as group_name, c.name as cert_name ');
+        $this->db->select('events.*, g.name as group_name, g.slug as group_slug, g.term_id as groupid, c.name as cert_name ');
         $this->db->from('events');
         $this->db->join('terms g', 'g.term_id = events.group_id', 'left');
         $this->db->join('terms c', 'c.term_id = events.certificate_id', 'left');
@@ -231,12 +257,13 @@ class Post_m extends CI_Model
             $this->db->limit($limit);
         }
         $this->db->group_by('event_id');
+        $this->db->order_by('events.event_id','desc');
         return $this->db->get();
     }
 
     public function get_event_type($limit = false, $offset = false, $type = false)
     {
-        $this->db->select('events.*, g.name as group_name, c.name as cert_name ');
+        $this->db->select('events.*, g.name as group_name, g.slug as group_slug, g.term_id as groupid, c.name as cert_name ');
         $this->db->from('events');
         $this->db->join('terms g', 'g.term_id = events.group_id', 'left');
         $this->db->join('terms c', 'c.term_id = events.certificate_id', 'left');
@@ -252,6 +279,7 @@ class Post_m extends CI_Model
             $this->db->limit($limit);
         }
         $this->db->group_by('event_id');
+        $this->db->order_by('events.event_id','desc');
         return $this->db->get();
     }
 
@@ -263,6 +291,7 @@ class Post_m extends CI_Model
         $this->db->join('terms c', 'c.term_id = events.certificate_id', 'left');
         $this->db->where('event_status', 'publish');
         $this->db->like('event_name', $search);
+        $this->db->order_by('events.event_id','desc');
         return $this->db->get();
     }
 
@@ -306,7 +335,7 @@ class Post_m extends CI_Model
         } elseif ($limit && $offset == false){
             $this->db->limit($limit);
         }
-
+        $this->db->order_by('posts.id_post','desc');
         return $this->db->get();
     }
 
@@ -326,7 +355,7 @@ class Post_m extends CI_Model
 
     public function view_event($slug)
     {
-        $this->db->select('events.*,posts.*, g.name as group_name, c.name as cert_name, r.name as reg_name, t.name as type_name ');
+        $this->db->select('events.*,posts.*, g.name as group_name, g.slug as group_slug, g.term_id as group_id_type, c.name as cert_name, r.name as reg_name, t.name as type_name ');
         $this->db->from('events');
         $this->db->join('posts', 'posts.id_post = events.post_id', 'left');
         $this->db->join('terms g', 'g.term_id = events.group_id', 'left');
@@ -385,7 +414,7 @@ class Post_m extends CI_Model
         } elseif ($limit && $offset == false){
             $this->db->limit($limit);
         }
-
+        
         return $this->db->get();
     }
 

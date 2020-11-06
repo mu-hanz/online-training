@@ -1,6 +1,6 @@
 <!-- Start Content-->
 <div class="container-fluid">
-    <form role="form" id="form" class="ajaxForm" method="post" action="<?php echo $action; ?>" enctype="multipart/form-data">
+    <form role="form" id="form" class="ajaxForm  needs-validation" method="post" action="<?php echo $action; ?>" enctype="multipart/form-data">
     <input type="hidden" id="csrftoken" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
     <div class="row page-title align-items-center">
         <div class="col-xl-6 col-sm-12">
@@ -40,12 +40,18 @@
                                                 <option value="<?php echo $content->id_post;?>" data-thumbs="<?php echo $content->post_thumbs;?>" data-cover="<?php echo $content->post_image;?>" data-title="<?php echo $content->post_title;?>" <?php echo ($data_event && $content->id_post ==  $data_event->post_id) ? 'selected' : "" ;?>><?php echo $content->post_title;?></option>
                                             <?php endforeach;?>
                                         </select>
+                                        <div class="invalid-feedback">
+                                            This value is required
+                                        </div> 
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
                                     <label class="col-lg-1 col-form-label">Title</label>
                                     <div class="col-lg-7">
                                         <input type="text" class="form-control" id="title" name="event_name"  value="<?php echo ($data_event ? $data_event->event_name : "") ;?>" required>
+                                        <div class="invalid-feedback">
+                                            This value is required
+                                        </div> 
                                     </div>
                                     <label class="col-lg-1 col-form-label text-lg-center">Register</label>
                                     <div class="col-lg-3">
@@ -68,7 +74,7 @@
                                     </div>
                                     <label for="sku" class="col-lg-1 col-form-label text-lg-center">Sku</label>
                                     <div class="col-lg-3">
-                                        <input type="text" class="form-control" id="sku" name="event_sku" value="<?php echo ($data_event ? $data_event->event_sku : strtoupper("TCID-".random_string('nozero', 5))) ;?>" required>
+                                        <input type="text" class="form-control" id="sku" name="event_sku" value="<?php echo ($data_event ? $data_event->event_sku : strtoupper("TCID-".random_string('nozero', 5))) ;?>" required readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
@@ -95,7 +101,7 @@
                                     </div>
                                     <label for="Title" class="col-lg-1 col-form-label text-lg-center">Category</label>
                                     <div class="col-lg-3">
-                                        <select data-plugin="customselectone" class="form-control" data-placeholder="Select Category"  name="category_id" required>
+                                        <select data-plugin="customselectone" class="form-control" data-placeholder="Select Category"  name="category_id">
                                             <option></option>
                                             <?php foreach($data_category as $data):?>
                                                 <option value="<?php echo $data->term_id;?>" <?php echo ($data_event && $data->term_id ==  $data_event->category_id) ? 'selected' : "" ;?>><?php echo $data->name;?></option>
@@ -106,7 +112,7 @@
                                 <div class="form-group row mb-3">
                                     <label class="col-lg-1 col-form-label">Regional</label>
                                     <div class="col-lg-3">
-                                        <select data-plugin="customselectone" class="form-control" data-placeholder="Select Regional" name="regional_id" required>
+                                        <select data-plugin="customselectone" class="form-control" data-placeholder="Select Regional" name="regional_id">
                                             <option></option>
                                             <?php foreach($data_regional as $data):?>
                                                 <option value="<?php echo $data->term_id;?>" data-regional="<?php echo $data->name;?>" <?php echo ($data_event && $data->term_id ==  $data_event->regional_id) ? 'selected' : "" ;?>><?php echo $data->name;?></option>
@@ -115,7 +121,7 @@
                                     </div>
                                     <label class="col-lg-1 col-form-label text-lg-center">Location</label>
                                     <div class="col-lg-3">
-                                        <select data-plugin="customselectone" class="form-control" data-placeholder="Select Location" name="location_id"  required>
+                                        <select data-plugin="customselectone" class="form-control" data-placeholder="Select Location" name="location_id" >
                                             <option></option>
                                             <?php foreach($data_location as $data):?>
                                                 <option value="<?php echo $data->term_id;?>" <?php echo ($data_event && $data->term_id ==  $data_event->location_id) ? 'selected' : "" ;?>><?php echo $data->name;?> ( <?php echo $data->description;?> )</option>
@@ -222,11 +228,11 @@
                                 <div class="form-group row mb-3">
                                     <label class="col-lg-1 col-form-label">Event Cost</label>
                                     <div class="col-lg-5">
-                                        <input type="text" class="form-control" name="event_cost" value="<?php echo ($data_event ? $data_event->event_cost : "") ;?>">
+                                        <input type="text" class="form-control" name="event_cost" value="<?php echo ($data_event ? $data_event->event_cost : "") ;?>" required>
                                     </div>
                                     <label class="col-lg-1 col-form-label">Cost Promo</label>
                                     <div class="col-lg-5">
-                                        <input type="text" class="form-control" name="event_cost_promo" value="<?php echo ($data_event ? $data_event->event_cost_promo : "") ;?>">
+                                        <input type="text" class="form-control" name="event_cost_promo" value="<?php echo ($data_event ? $data_event->event_cost_promo : "") ;?>" required>
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
@@ -236,28 +242,34 @@
                                     </div>
                                     <label class="col-lg-1 col-form-label">Max User</label>
                                     <div class="col-lg-5">
-                                        <input type="text" class="form-control" name="event_max_participant" value="<?php echo ($data_event ? $data_event->event_max_participant : "") ;?>" placeholder="Set 0 to Unlimited" required>
+                                        <input type="text" class="form-control" name="event_max_participant" value="<?php echo ($data_event ? $data_event->event_max_participant : "100") ;?>" placeholder="Default 100" required>
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
                                     <label class="col-lg-1 col-form-label">Event Date</label>
                                     <div class="col-lg-5">
                                         <div class="input-group mb-2">
-                                        <input type="text" class="form-control datepicker text-center" name="event_start_date" value="<?php echo ($data_event ? $data_event->event_start_date : "") ;?>">
+                                        <input type="text" class="form-control text-center"  id="datepickerStart" name="event_start_date" value="<?php echo ($data_event && $data_event->event_start_date != '0000-00-00' ? $data_event->event_start_date : "") ;?>">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text border-left-0">Time</div>
                                             </div>
-                                            <input type="text" class="form-control time24 text-center"  name="event_start_time" value="<?php echo ($data_event ? $data_event->event_start_time : "") ;?>">
+                                            <input type="text" class="form-control text-center"  id="timepickerStart"  name="event_start_time" value="<?php echo ($data_event && $data_event->event_start_time != '00:00:00' ? $data_event->event_start_time : "") ;?>">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text border-left-0"><a href="javascript:void(0);" id="cleardateStart">Clear</a></div>
+                                            </div>
                                         </div>
                                     </div>
                                     <label for="Title" class="col-lg-1 col-form-label">End Date</label>
                                     <div class="col-lg-5">
                                         <div class="input-group mb-2">
-                                        <input type="text" class="form-control datepicker text-center"  name="event_end_date" value="<?php echo ($data_event ? $data_event->event_end_date : "") ;?>">
+                                        <input type="text" class="form-control text-center"  id="datepickerEnd" name="event_end_date" value="<?php echo ($data_event && $data_event->event_start_date != '0000-00-00' ? $data_event->event_end_date : "") ;?>">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text border-left-0">Time</div>
                                             </div>
-                                            <input type="text" class="form-control time24 text-center"  name="event_end_time" value="<?php echo ($data_event ? $data_event->event_end_time : "") ;?>">
+                                            <input type="text" class="form-control text-center"  id="timepickerEnd" name="event_end_time" value="<?php echo ($data_event && $data_event->event_end_time != '00:00:00' ? $data_event->event_end_time : "") ;?>">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text border-left-0"><a href="javascript:void(0);" id="cleardateEnd">Clear</a></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -265,11 +277,14 @@
                                 <label for="title" class="col-lg-1 col-form-label">Reg Close</label>
                                 <div class="col-lg-5">
                                         <div class="input-group mb-2">
-                                        <input type="text" class="form-control datepicker text-center" name="event_close_date" value="<?php echo ($data_event ? $data_event->event_close_date : "") ;?>">
+                                        <input type="text" class="form-control text-center" id="datepickerReg" name="event_close_date" value="<?php echo ($data_event ? $data_event->event_close_date : "") ;?>"  required>
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text border-left-0">Time</div>
                                             </div>
-                                            <input type="text" class="form-control time24 text-center"  name="event_close_time"  value="<?php echo ($data_event ? $data_event->event_close_time : "") ;?>">
+                                            <input type="text" class="form-control text-center" id="timepickerReg"  name="event_close_time"  value="<?php echo ($data_event ? $data_event->event_close_time : "") ;?>"  required>
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text border-left-0"><a href="javascript:void(0);" id="cleardateReg">Clear</a></div>
+                                            </div>
                                         </div>
                                     </div>
                                 <label for="Title" class="col-lg-1 col-form-label"><?php echo ($data_event && $data_event->event_schedule == 0 ? 'Publish On' : "Schedule") ;?></label>
@@ -279,11 +294,14 @@
                                     <?php else:?>
                                     
                                         <div class="input-group mb-2">
-                                        <input type="text" class="form-control datepicker text-center" name="schedule_date" value="<?php echo ($data_event ? date('Y-m-d', strtotime($data_event->event_schedule_date)) : "") ;?>">
+                                        <input type="text" class="form-control text-center"  id="datepickerSC" name="schedule_date" value="<?php echo ($data_event ? date('Y-m-d', strtotime($data_event->event_schedule_date)) : "") ;?>">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text border-left-0">Time</div>
                                             </div>
-                                            <input type="text" class="form-control time24 text-center"  name="schedule_time"  value="<?php echo ($data_event ? date('H:i', strtotime($data_event->event_schedule_date)) : "") ;?>">
+                                            <input type="text" class="form-control text-center" id="timepickerSC" name="schedule_time"  value="<?php echo ($data_event ? date('H:i', strtotime($data_event->event_schedule_date)) : "") ;?>">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text border-left-0"><a href="javascript:void(0);" id="cleardateSC">Clear</a></div>
+                                            </div>
                                         </div>
                                     <?php endif;?>
                                     </div>

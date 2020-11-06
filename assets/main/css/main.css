@@ -92,5 +92,12 @@
     .b-content{
         padding: 100px 0;
     }
-   
+    .title-heading .heading {
+        font-size: 30px !important;
+      }
   }
+
+  .del-text{
+    text-decoration: line-through;
+  }
+

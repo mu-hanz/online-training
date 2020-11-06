@@ -64,6 +64,21 @@
 
         <!-- Javascript Start -->
         <!-- javascript -->
+        <!-- Main Js -->
+        <?php $this->load->config('midtrans', true);
+
+        $production         = $this->config->item('production', 'midtrans');
+
+        if ($production) {
+            $client_key         = $this->config->item('client_key', 'midtrans');
+            $url_js = $this->config->item('url', 'midtrans');
+        } else {
+            $client_key = $this->config->item('client_key_sandbox', 'midtrans'); // sandbox
+            $url_js = $this->config->item('url_sandbox', 'midtrans'); // sandbox
+        }
+
+        ?>
+        <script type="text/javascript" src="<?=$url_js;?>" data-client-key="<?=$client_key;?>"></script>
         <script src="<?php echo base_url('assets/main/js/jquery-3.5.1.min.js');?>"></script>
         <script src="<?php echo base_url('assets/main/js/bootstrap.bundle.min.js');?>"></script>
         <script src="<?php echo base_url('assets/main/js/jquery.easing.min.js');?>"></script>
@@ -79,12 +94,15 @@
         <script src="<?php echo base_url('assets/sweetalert/sweetalert2.all.min.js') ;?>"></script>
         <script src="<?php echo base_url('assets/scripts/store.pjax.js') ;?>"></script>
 
-        <!-- Main Js -->
         
+        
+
+
         <!-- Javascript End -->
 
         <!-- Load Dynamically JS -->
         <div class="js-majax">
+        
         <script src="<?php echo base_url('assets/main/js/app.js');?>"></script>
             <?php foreach($js as $file){ echo "\n\t\t"; ?>
             <script src="<?php echo $file; ?>"></script>

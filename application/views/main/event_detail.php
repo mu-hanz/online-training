@@ -40,12 +40,7 @@
                                 <?php echo htmlspecialchars_decode(stripslashes($event->post_content)); ?>
                                 </div>
 
-                                    <div class="post-meta mt-3">
-                                    <ul class="list-unstyled mb-0">
-                                        <li class="list-inline-item mr-2"><a href="javascript:void(0)" class="text-muted like"><i class="mdi mdi-heart-outline mr-1"></i>33</a></li>
-                                        <li class="list-inline-item"><a href="javascript:void(0)" class="text-muted comments"><i class="mdi mdi-comment-outline mr-1"></i>08</a></li>
-                                    </ul>
-                                </div>
+                                    
                             </div>
                         </div>
                     </div><!--end col-->
@@ -53,35 +48,48 @@
 
                     <!-- START SIDEBAR -->
                     <div class="col-lg-4 col-md-6 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-
-                    <div class="card border-0 job-box sidebar sticky-bar rounded shadow">
-                        <?php if($event->event_video != null){ ?>
+                    <?php if($event->event_video != null){ ?>
                             <div class="border-bottom">
                                 <div class="position-relative">
                                     <img src="<?php echo base_url($event->event_thumbs);?>" class="rounded-bottom-0 img-fluid mx-auto d-block" alt="">
                                     <div class="job-overlay bg-white"></div>
                                     <div class="play-icon">
-                                        <a href="http://vimeo.com/287684225" class="play-btn video-play-icon">
+                                        <a href="<?=$event->event_video;?>" class="play-btn video-play-icon">
                                             <i class="mdi mdi-play text-primary rounded-circle bg-white shadow"></i>
                                         </a>
                                     </div>
                                 </div>
-                               
-                                <ul class="list-unstyled head mb-0">
-                                    <li class="badge badge-danger badge-pill">Demo</li>
-                                </ul>
                             </div>
                             <?php } ?>
+                    <div class="card border-0 job-box sidebar sticky-bar rounded shadow">
+                        
                             <div class="card-body content position-relative">
-                                <!-- <div class="alert alert-outline-success alert-pills" role="alert">
-                                    <span class="badge badge-pill badge-success"> Vouhcer </span>
-                                    <span class="alert-content"> KJHSYEIW</span>
-                                </div>  -->
+                          
 
+                                <?php if($promo_flexi):?>
+                                <?php if($promo_flexi->criteria_qty != 0){
+                                    $text = 'Buy more than '.$promo_flexi->criteria_qty;
+                                    
+                                } else {
+                                    $text = 'Spend more than '.rupiah($promo_flexi->criteria_price);
+                                }
+                                
+                                if($promo_flexi->discount_percent != 0){
+                                    $info = 'Extra Discount - '.$promo_flexi->discount_percent.'%';
+
+                                } else {
+                                    $info = 'Extra Discount - '.rupiah($promo_flexi->discount_price);
+                                }
+                                ?>
+
+                                
                                 <div class="alert alert-outline-danger alert-pills" role="alert">
                                     <span class="badge badge-pill badge-danger"> HOT </span>
-                                    <span class="alert-content"> Beli 2 Gratis 1</span>
+                                    <span class="alert-content"> <?=$text;?> </span>
+                                    <span class="alert-content" style="display: block;margin-left: 43px;"> <?=$info;?> </span>
+                                   
                                 </div> 
+                                <?php endif;?>
 
                                 <div class="company-detail mt-3">
                                     <del><h5 class="mb-0 text-muted"><?=rupiah($event->event_cost);?></h5></del>
@@ -93,40 +101,71 @@
                                 </div>
                                 <ul class="job-facts list-unstyled mt-4">
 
-                                   
+                                    <?php if($event->event_type !== 'e-training' && $event->event_type !== 'in-house-training'){?>
                                     <li class="list-inline-item text-muted">
                                     <span class="text-primary h5 mr-2"><span class="uim-svg" style=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em"><path class="uim-primary" d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z" opacity=".99"></path><path class="uim-tertiary" d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z"></path></svg></span></span>
                                     <?=date("d M", strtotime($event->event_start_date)).' - '.date("d M Y", strtotime($event->event_end_date));?></li>
-
+                                    <?php } ?>  
+                                    
+                                    <?php if($event->event_duration != null ){?>
                                     <li class="list-inline-item text-muted">
                                     <span class="text-primary h5 mr-2"><span class="uim-svg" style=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em"><path class="uim-primary" d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z" opacity=".99"></path><path class="uim-tertiary" d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z"></path></svg></span></span>
                                     <?=$event->event_duration;?></li>
-
+                                    <?php } ?>
+                                    
+                                    <?php if($event->cert_name != null ){?>
                                     <li class="list-inline-item text-muted">
                                     <span class="text-primary h5 mr-2"><span class="uim-svg" style=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em"><path class="uim-primary" d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z" opacity=".99"></path><path class="uim-tertiary" d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z"></path></svg></span></span>
                                     Certificate (<?=$event->cert_name;?>)</li>
+                                    <?php } ?>  
 
+                                    <?php if($event->group_name != null ){?>
                                     <li class="list-inline-item text-muted">
                                     <span class="text-primary h5 mr-2"><span class="uim-svg" style=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em"><path class="uim-primary" d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z" opacity=".99"></path><path class="uim-tertiary" d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z"></path></svg></span></span>
                                     Provided by <?=$event->group_name;?></li>
+                                    <?php } ?>  
 
+                                    <?php if($event->reg_name != null ){?>
                                     <li class="list-inline-item text-muted">
                                     <span class="text-primary h5 mr-2"><span class="uim-svg" style=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em"><path class="uim-primary" d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z" opacity=".99"></path><path class="uim-tertiary" d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z"></path></svg></span></span>
                                     Regional <?=$event->reg_name;?></li>
+                                    <?php } ?>  
 
+                                    <?php if($event->type_name != null ){?>
                                     <li class="list-inline-item text-muted">
                                     <span class="text-primary h5 mr-2"><span class="uim-svg" style=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em"><path class="uim-primary" d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z" opacity=".99"></path><path class="uim-tertiary" d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z"></path></svg></span></span>
                                     Type <?=$event->type_name;?></li>
+                                    <?php } ?>  
                                 </ul>
                                 <div class="text-center">
-                                <?php if( $event->event_register == 0):?>
+                                <?php 
+                                $date_now = strtotime(date('Y-m-d H:i:s', now()));
+                                $close_date = strtotime($event->event_close_date.' '.$event->event_close_time);
+                                if($close_date > $date_now): 
+                                    if($event->event_register == 0):
+                                        if($event->event_max_participant > 0):?>   
                                 
-                                <a href="javascript:void(0)"  data-id="<?php echo $event->event_id;?>" class="btn btn-primary enroll">Enroll Now</a>
-                                <a href="javascript:void(0)" data-id="<?php echo $event->event_id;?>" class="btn btn-outline-primary add-to-cart">Add to Cart</a>
-                                </div>
-                                <?php else: ?>
+                                        <a href="javascript:void(0)"  data-id="<?php echo $event->event_id;?>" id="enroll" class="btn btn-primary enroll">Enroll Now</a>
+                                        <a href="javascript:void(0)" data-id="<?php echo $event->event_id;?>" id="add-to-cart" class="btn btn-outline-primary add-to-cart">Add to Cart</a>
+                                        
+                                        <?php else: ?>
+
+                                        <a href="javascript:void(0)" class="btn btn-soft-secondary btn-block">Closed</a>
+
+                                        <?php endif; ?>
+
+                                        <?php else: ?>
+
+                                        <a href="javascript:void(0)" class="btn btn-soft-secondary btn-block">Closed</a>
+
+                                        <?php endif; ?>
+
+                                    <?php else: ?>
+
                                     <a href="javascript:void(0)" class="btn btn-soft-secondary btn-block">Closed</a>
+
                                 <?php endif; ?>
+                                </div>
                                 </div>
                             </div>
                         </div>

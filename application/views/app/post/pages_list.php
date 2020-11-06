@@ -21,6 +21,7 @@
                             <th>Status</th>
                             <th>Create On</th>
                             <th>Last Edit</th>
+                            <th>View</th>
                             <th>Action</th>
                         </tr>
                         </thead>

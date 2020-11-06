@@ -1,7 +1,7 @@
 var pjax = new Pjax({
     elements: [".mz-menu a, .mlink, .breadcrumb a, .pagination a"],
     cacheBust: false,
-    history: true,
+    history: false,
     debug: false,
     currentUrlFullReload: false, //jika di klik lagi link yg sama maka akan melakukan reload
 	selectors: ["title",".css-majax", ".js-majax", ".ajax-content",".box-users","#navigation"],

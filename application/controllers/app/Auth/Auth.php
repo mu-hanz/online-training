@@ -35,9 +35,9 @@ class Auth extends CI_Controller
 		else if ($this->ion_auth->in_group('members')) // remove this elseif if you want to enable this for non-admins
 		{
 			$this->ion_auth->logout();
-			// redirect them to the home page because they must be an administrator to view this
-			// show_error('You must be an administrator to view this page.');
-			$this->load->view('app/auth/not_authorized');
+			$this->not_authorized();
+			return ;
+
 		}
 		else
 		{
@@ -48,18 +48,23 @@ class Auth extends CI_Controller
 	/**
 	 * Log the user in
 	 */
+	public function not_authorized()
+	{
+		$this->load->view('app/auth/not_authorized');
+	}
 	public function login()
 	{
-		if ($this->ion_auth->logged_in())
+
+		if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin())
 		{
-			// redirect them to the login page
 			redirect('webadmin', 'refresh');
-		} else if ($this->ion_auth->in_group('members')) // remove this elseif if you want to enable this for non-admins
-		{
+
+		} else if ($this->ion_auth->logged_in() && $this->ion_auth->in_group('members')){
+
 			$this->ion_auth->logout();
-			// redirect them to the home page because they must be an administrator to view this
-			// show_error('You must be an administrator to view this page.');
-			$this->load->view('app/auth/not_authorized');
+			$this->not_authorized();
+			return ;
+
 		}
 
 		// validate form input
@@ -74,39 +79,56 @@ class Auth extends CI_Controller
 
 			if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember))
 			{
-				//if the login is successful
-				//redirect them back to the home page
-				$this->session->set_flashdata('message', $this->ion_auth->messages());
+				// if login di halaman admin
+				if ($this->session->userdata('from_url') == 'webadmin/login'){
 
-				if ($this->ion_auth->in_group('members')) // remove this elseif if you want to enable this for non-admins
-				{
-					// $this->ion_auth->logout();
-					// // redirect them to the home page because they must be an administrator to view this
-					// // show_error('You must be an administrator to view this page.');
-					// $this->load->view('app/auth/not_authorized');
+					if ($this->ion_auth->is_admin()){ // jika admin
 
-					$this->muhanz->success($this->lang->line('auth_success'), 'users/dashboard');
+						$this->session->unset_userdata('from_url');
+						
+						$this->muhanz->success($this->lang->line('auth_success'), 'webadmin'); // arahkan ke halaman admin
+	
+					} else { // jika bukan ?
 
+						$message = array(
+							'url'     => base_url('webadmin/login'),
+							'status'  => 'error',
+							'type'    => 'danger',
+							'csrf_hash' => $this->security->get_csrf_hash(),
+							'message' => 'You must be an administrator to view this page.',
+							'not_admin' => true
+						);
+				
+						echo json_encode($message);
+					}
 
 				} else {
 
-					if ($this->session->userdata('redirect_login')) {
+					if ($this->session->userdata('redirect_login')) { // jika ada redirect url dari cart / checkout
 
 						$redirect = $this->session->userdata('redirect_login');
 						$this->session->unset_userdata('redirect_login');
-						$this->muhanz->success($this->lang->line('auth_success'), $redirect);
 
-					} else {
+						$message = array( 
+							'url'     => $redirect,
+							'status'  => 'success',
+							'type'    => 'success',
+							'message' => $this->lang->line('auth_success'),
+							'data'	  => ''
+						);
+				
+						echo json_encode($message); // arahkan ke halaman cart/checkout
+
+
+					} else { // jika tidak ada redirect 
 							
-						$this->muhanz->success($this->lang->line('auth_success'), 'webadmin');
+						$this->muhanz->success($this->lang->line('auth_success'), 'users/dashboard'); //arahkan ke halaman dashorad user
 						
 					}
-				}
 
+				}
 				
-			}
-			else
-			{
+			} else {
 
 				if ($this->ion_auth->in_group('members')) // remove this elseif if you want to enable this for non-admins
 				{
@@ -135,6 +157,8 @@ class Auth extends CI_Controller
 		}
 		else
 		{
+			$this->session->set_userdata('from_url', $this->uri->uri_string());
+			
 			// the user is not logging in so display the login page
 			// set the flash data error message if there is one
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
@@ -169,18 +193,20 @@ class Auth extends CI_Controller
 	{
 		// log the user out
 		
-		if (!$this->ion_auth->in_group('member'))
-		{
-			$this->ion_auth->logout();
-			redirect('', 'refresh');
-		} else {
-			$this->ion_auth->logout();
-			// redirect them to the login page
-			redirect('webadmin/login', 'refresh');
-		}
+		// if ($this->ion_auth->is_admin())
+		// {
+		// 	$this->ion_auth->logout();
+		// 	redirect('webadmin/login', 'refresh');
+		// } else {
+		// 	$this->ion_auth->logout();
+		// 	// redirect them to the login page
+		// 	redirect('', 'refresh');
+		// }
 		
 		
-
+		$this->ion_auth->logout();
+		// redirect them to the login page
+		redirect('', 'refresh');
 		
 		
 	}
@@ -557,34 +583,105 @@ class Auth extends CI_Controller
 			];
 		}
 		if ($this->form_validation->run() === TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data))
-		{
+		{	
+
+			
 			if ($this->ion_auth->login($identity, $password))
 			{
-				
-				$this->muhanz->success('Registered', 'users/dashboard');
+
+				if ($this->session->userdata('redirect_login')) { // jika ada redirect url dari cart / checkout
+
+					$redirect = $this->session->userdata('redirect_login');
+					$this->session->unset_userdata('redirect_login');
+
+					$message = array( 
+						'url'     => $redirect,
+						'status'  => 'success',
+						'type'    => 'success',
+						'message' => $this->lang->line('auth_success'),
+						'data'	  => ''
+					);
+			
+					echo json_encode($message); // arahkan ke halaman cart/checkout
+
+
+				} else { // jika tidak ada redirect 
+						
+					$this->muhanz->success($this->lang->line('auth_success'), 'users/dashboard'); //arahkan ke halaman dashorad user
+					
+				}
+
+
 				
 			} else {
-				$message = array(
-					'url'     => base_url(),
-					'status'  => 'error',
-					'type'    => 'danger',
-					'message' => strip_tags($this->session->flashdata('message'))
-				);
-	
-				echo json_encode($message);
+
+				if ($this->session->userdata('redirect_login')) { // jika ada redirect url dari cart / checkout
+
+					$redirect = $this->session->userdata('redirect_login');
+					$this->session->unset_userdata('redirect_login');
+
+					$message = array( 
+						'url'     => $redirect,
+						'status'  => 'error',
+						'type'    => 'danger',
+						'csrf_hash' => $this->security->get_csrf_hash(),
+						'message' => strip_tags($this->session->flashdata('message')),
+					);
+			
+					echo json_encode($message); // arahkan ke halaman cart/checkout
+
+
+				} else { // jika tidak ada redirect 
+					
+					$message = array(
+						'url'     => base_url('account/register'),
+						'status'  => 'error',
+						'type'    => 'danger',
+						'csrf_hash' => $this->security->get_csrf_hash(),
+						'message' => strip_tags($this->session->flashdata('message'))
+					);
+		
+					echo json_encode($message);//arahkan ke halaman dashorad user
+					
+				}
+
+				
 			}
 
 		}
 		else
 		{
-			$message = array(
-				'url'     => base_url(),
-				'status'  => 'error',
-				'type'    => 'danger',
-				'message' => strip_tags($this->session->flashdata('message'))
-			);
+			$error = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
+			
+			if ($this->session->userdata('redirect_login')) { // jika ada redirect url dari cart / checkout
 
-			echo json_encode($message);
+				$redirect = $this->session->userdata('redirect_login');
+				$this->session->unset_userdata('redirect_login');
+
+				$message = array( 
+					'url'     => $redirect,
+					'status'  => 'error',
+					'type'    => 'danger',
+					'csrf_hash' => $this->security->get_csrf_hash(),
+					'message' => strip_tags($error),
+				);
+		
+				echo json_encode($message); // arahkan ke halaman cart/checkout
+
+
+			} else { // jika tidak ada redirect 
+				
+				$message = array(
+					'url'     => base_url('account/register'),
+					'status'  => 'error',
+					'type'    => 'danger',
+					'csrf_hash' => $this->security->get_csrf_hash(),
+					'message' => strip_tags($error)
+				);
+	
+				echo json_encode($message);//arahkan ke halaman dashorad user
+				
+			}
 		}
 	}
 	/**

@@ -1,3 +1,5 @@
+
+$( document ).ready(function(){
 var base_url        = window.location.origin;
 var csrfName        = $("#csrftoken").attr("name");
 var csrfHash        = $('#csrftoken').val();
@@ -63,4 +65,6 @@ $(document).on('click', '.del', function(e) {
     
         }
     })
+});
+
 });

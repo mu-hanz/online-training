@@ -5,14 +5,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Settings extends CI_Controller {
 
 	public function __construct() {
-        parent::__construct();
-		$this->_init();
+		parent::__construct();
 		
-		// Check Login
-		if(!$this->ion_auth->logged_in()) { 
-            $this->session->set_userdata('redirect_login', current_url());
-            redirect('webadmin/login', 'refresh'); 
-		}
+		$this->muhanz->check_auth();
+		$this->_init();
+	
 	}	
 
 	// Templating

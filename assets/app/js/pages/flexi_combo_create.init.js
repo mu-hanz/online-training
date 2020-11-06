@@ -55,11 +55,13 @@ $(document).ready(function() {
             o("#basic-datepicker").flatpickr(), o("#datetime-datepicker").flatpickr({
                 enableTime: !0,
                 dateFormat: "Y-m-d H:i",
-                time_24hr: true
+                time_24hr: true,
+                allowInput: true
             }), o("#datetime-datepicker2").flatpickr({
                 enableTime: !0,
                 dateFormat: "Y-m-d H:i",
-                time_24hr: true
+                time_24hr: true,
+                allowInput: true
             }), o("#range-datepicker").flatpickr({
                 mode: "range"
             })
@@ -81,6 +83,10 @@ $(document).ready(function() {
     }();
     // End Datepicker & Touchspin //
 
+    $(".readonly").keydown(function(e){
+        e.preventDefault();
+    });
+    
     // Amount Discount For Next Referral //
     if (page == 'create') {
         // $("#field_amount_discount_referral").hide();
@@ -200,6 +206,17 @@ $(document).ready(function() {
     
 
     // Add Delete Tier & Format Number
+    $(document).on('keyup', '.is_number', function(e){
+
+        if(event.which >= 37 && event.which <= 40) return;
+        $(this).val(function(index, value) {
+            return value
+            .replace(/\D/g, "")
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            ;
+        });
+    });
+
     $("#inlineFormInputGroup").keyup(function(e){
         if(event.which >= 37 && event.which <= 40) return;
         $(this).val(function(index, value) {
@@ -239,10 +256,14 @@ $(document).ready(function() {
             if(val_radio == 'criteria_qty'){
                 $( ".criteria_price"+ xix ).prop( "disabled", true ); 
                 $( ".criteria_qty"+ xix ).prop( "disabled", false );
+                $( ".criteria_price"+ xix ).prop( "required", false ); 
+                $( ".criteria_qty"+ xix ).prop( "required", true );
             }
             else {
                 $( ".criteria_price"+ xix ).prop( "disabled", false );
                 $( ".criteria_qty"+ xix ).prop( "disabled", true );
+                $( ".criteria_price"+ xix ).prop( "required", true ); 
+                $( ".criteria_qty"+ xix ).prop( "required", false );
             }
         });
         $(document).on('click', '.customRadiox'+ xi, xi, function(e) {
@@ -253,10 +274,14 @@ $(document).ready(function() {
             if(val_radio == 'discount_percent'){
                 $( ".discount_price"+ xix ).prop( "disabled", true ); 
                 $( ".discount_percent"+ xix ).prop( "disabled", false );
+                $( ".discount_price"+ xix ).prop( "required", false ); 
+                $( ".discount_percent"+ xix ).prop( "required", true );
             }
             else {
                 $( ".discount_price"+ xix ).prop( "disabled", false ); 
                 $( ".discount_percent"+ xix ).prop( "disabled", true );
+                $( ".discount_price"+ xix ).prop( "required", true ); 
+                $( ".discount_percent"+ xix ).prop( "required", false );
             }  
         });
     }

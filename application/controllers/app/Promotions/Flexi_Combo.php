@@ -1,21 +1,18 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Flexi_Combo extends CI_Controller
+class Flexi_combo extends CI_Controller
 {
 
     var $folder = 'Promotions';
-    var $file   = 'Flexi_Combo';
+    var $file   = 'Flexi_combo';
     
     //---Templating----//
     public function __construct()
     {
         parent::__construct();
+        $this->muhanz->check_auth();
         $this->_init();
-        if (!$this->ion_auth->logged_in()) {
-            $this->session->set_userdata('redirect_login', $this->agent->referrer());
-            redirect('webadmin/login', 'refresh');
-        }
         $this->load->model($this->folder.'_m');
     }
 
@@ -132,8 +129,8 @@ class Flexi_Combo extends CI_Controller
             'limit_user_referral'       => '',
             'type_discount_referral'    => '',
             'id_data'                   => '',
-            'get_data_training'         => $this->Promotions_m->get_data_training(),
-            'count_data_training'       => $this->Promotions_m->count_data_training()
+            'get_data_training'         => $this->Promotions_m->get_data_training(true),
+            'count_data_training'       => $this->Promotions_m->count_data_training(true)
         );
 
         $this->output->set_title($this->muhanz->app_title($title));
@@ -209,6 +206,12 @@ class Flexi_Combo extends CI_Controller
         }
 
         $count_data_training    = $this->input->post('count_data_training');
+
+
+        if($count_data_training == 0){
+            $this->muhanz->error('No Event Selected', 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+            exit;
+        }
         $valid_on               = $this->input->post('valid_on');
         $temp_count             = 0;
         for($i=1; $i <= $count_data_training; $i++){
@@ -328,6 +331,10 @@ class Flexi_Combo extends CI_Controller
                         'event_id'          => $id,
                     );
                     $insert_promotions_detail = $this->Promotions_m->save_promotions_detail($data_promotions_detail);
+
+                    if($insert_promotions_detail){
+                        $this->Promotions_m->update_event_on_sale($id, '1'); // 1 = sedang diskon flexi
+                    }
                     
                 }
             }
@@ -405,6 +412,11 @@ class Flexi_Combo extends CI_Controller
 
         $count_data_training        = $this->input->post('count_data_training');
 
+        if($count_data_training == 0){
+            $this->muhanz->error('No Event Selected', 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
+            exit;
+        }
+
         // Validation Duplicate Id Training / Flexi Combo On Progress
         for($i=1; $i <= $count_data_training; $i++){
             $id                 = $this->input->post('id'.$i);
@@ -445,6 +457,15 @@ class Flexi_Combo extends CI_Controller
                 'edited_date'               => $currentDateTime
             );
             $update_promotions      = $this->Promotions_m->update_promotions($id_data, $data_promotions);
+
+            if($update_promotions){ // reset on_sale event 
+                $data_current = $this->Promotions_m->get_data_training_detail($id_data);
+
+                foreach($data_current as $cr){
+                    $this->Promotions_m->update_event_on_sale($cr->event_id, '0'); // 0 = sedang diskon flexi
+                }
+                
+            }
 
             $delete_promotions_type = $this->Promotions_m->delete_promotions_type($id_data);
             if (isset($_POST['amount_discount_referral'])) {
@@ -529,6 +550,10 @@ class Flexi_Combo extends CI_Controller
                         'event_id'          => $id,
                     );
                     $insert_promotions_detail = $this->Promotions_m->save_promotions_detail($data_promotions_detail);
+
+                    if($insert_promotions_detail){
+                        $this->Promotions_m->update_event_on_sale($id, '1'); // 1 = sedang diskon flexi
+                    }
                     
                 }
             }
@@ -550,6 +575,15 @@ class Flexi_Combo extends CI_Controller
             'status_delete' => '1',
         );
         if ($this->Promotions_m->delete_promotions($id, $data)) {
+            // reset on_sale event 
+                $data_current = $this->Promotions_m->get_data_training_detail($id);
+
+                foreach($data_current as $cr){
+                    $this->Promotions_m->update_event_on_sale($cr->event_id, '0'); // 0 = reset diskon flexi
+                }
+                
+            
+
             $this->muhanz->success($this->lang->line('delete_success'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));
         }  else {
             $this->muhanz->error($this->lang->line('delete_error'), 'webadmin/'.strtolower($this->folder).'/'.strtolower($this->file));

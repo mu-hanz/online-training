@@ -982,6 +982,46 @@ class Ion_auth_model extends CI_Model
 		return FALSE;
 	}
 
+	public function login_connect($identity, $password)
+	{
+
+		$query = $this->db->select('username, email, id, password, password_connect, active, last_login')
+						  ->where('email', $identity)
+						  ->limit(1)
+						  ->order_by('id', 'desc')
+						  ->get($this->tables['users']);
+
+
+		if ($query->num_rows() === 1)
+		{
+			$user = $query->row();
+			
+  			if (password_verify($password, $user->password_connect)){
+
+				$this->set_session($user);
+
+				$this->update_last_login($user->id);
+
+				$this->clear_login_attempts($identity);
+				$this->clear_forgotten_password_code($identity);
+
+
+				return TRUE;
+
+			}
+		}
+
+		// // Hash something anyway, just to take up time
+		// $this->hash_password($password);
+
+		// $this->increase_login_attempts($identity);
+
+		// $this->trigger_events('post_login_unsuccessful');
+		// $this->set_error('login_unsuccessful');
+
+		// return FALSE;
+	}
+
 	/**
 	 * Verifies if the session should be rechecked according to the configuration item recheck_timer. If it does, then
 	 * it will check if the user is still active

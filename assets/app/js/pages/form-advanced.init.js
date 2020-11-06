@@ -71,6 +71,77 @@ $(".time24").flatpickr({
     time_24hr: true
 })
 
+const $datepickerStart = $("#datepickerStart").flatpickr({
+    enableTime: false,
+    dateFormat: "Y-m-d"
+});
+
+const $timepickerStart = $("#timepickerStart").flatpickr({
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    time_24hr: true
+});
+
+$("#cleardateStart").click(function() {
+    $datepickerStart.clear();
+    $timepickerStart.clear();
+})
+
+
+const $datepickerEnd = $("#datepickerEnd").flatpickr({
+    enableTime: false,
+    dateFormat: "Y-m-d"
+});
+
+const $timepickerEnd = $("#timepickerEnd").flatpickr({
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    time_24hr: true
+});
+
+$("#cleardateEnd").click(function() {
+    $datepickerEnd.clear();
+    $timepickerEnd.clear();
+})
+
+
+const $datepickerSC = $("#datepickerSC").flatpickr({
+    enableTime: false,
+    dateFormat: "Y-m-d"
+});
+
+const $timepickerSC = $("#timepickerSC").flatpickr({
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    time_24hr: true
+});
+
+$("#cleardateSC").click(function() {
+    $datepickerSC.clear();
+    $timepickerSC.clear();
+})
+
+const $datepickerReg = $("#datepickerReg").flatpickr({
+    enableTime: false,
+    dateFormat: "Y-m-d"
+});
+
+const $timepickerReg = $("#timepickerReg").flatpickr({
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    time_24hr: true
+});
+
+
+$("#cleardateReg").click(function() {
+    $datepickerReg.clear();
+    $timepickerReg.clear();
+})
+
 $('#reg_enable').click(function(){
     if($(this).is(':checked')){
         $('#reg_enable_text').text('Enabled Register');

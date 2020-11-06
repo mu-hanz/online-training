@@ -238,6 +238,33 @@ class Shopping_cart_m extends CI_Model
         return $this->db->get();
     }
 
+    public function get_data_flexi($id)
+    {
+        $this->db->select('*');
+        $this->db->from('promotions');
+        $this->db->where('promotions_id', $id);
+        return $this->db->get();
+    }
+
+    public function check_flexi_user($id, $event_id, $user_id)
+    {
+        $this->db->select('*');
+        $this->db->from('promotions_users');
+        $this->db->where('id_promotion', $id);
+        $this->db->where('event_id', $event_id);
+        $this->db->where('user_id', $user_id);
+        return $this->db->get();
+    }
+
+
+    public function check_stock_event($event_id)
+    {
+        $this->db->select('event_max_participant');
+        $this->db->from('events');
+        $this->db->where('event_id', $event_id);
+        return $this->db->get();
+    }
+
 
     public function check_voucher($code)
     {
@@ -245,6 +272,16 @@ class Shopping_cart_m extends CI_Model
         $this->db->from('promotions');
         $this->db->where('type', 'voucher');
         $this->db->where('promotions_code', $code);
+        $this->db->where('status_delete', '0');
+        return $this->db->get();
+    }
+
+    public function check_voucher_user($id, $user_id)
+    {
+        $this->db->select('*');
+        $this->db->from('promotions_users');
+        $this->db->where('id_promotion', $id);
+        $this->db->where('user_id', $user_id);
         return $this->db->get();
     }
 
@@ -276,221 +313,99 @@ class Shopping_cart_m extends CI_Model
     }
 
 
-    // public function get_data_promotions_flexi_combo_tier($id)
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from($this->join_table_promotions);
-    //     $this->db->join($this->table_promotions, $this->join_table_promotions.'.promotions_id = '.$this->table_promotions.'.promotions_id', 'left');
-    //     $this->db->join($this->join_table_promotions2, $this->table_promotions.'.promotions_id = '.$this->join_table_promotions2.'.promotions_id', 'left');
-    //     $this->db->where($this->join_table_promotions.'.event_id', $id);
-    //     $this->db->where($this->table_promotions.'.status', 'On Progress');
-    //     $this->db->where($this->table_promotions.'.type', 'flexi_combo');
-    //     $this->db->where($this->join_table_promotions.'.status_delete', '0');
-    //     return $this->db->get()->result();
-    // }
+    public function get_participant($id){
+        $this->db->select('id_members, name');
+        $this->db->from('members');
+        $this->db->where('members.id_users', $id);
+        $this->db->order_by('members.id_members', 'desc');
+        return $this->db->get()->result();
+    }
 
-    // public function count_data_promotions_campaign($id)
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from($this->join_table_promotions);
-    //     $this->db->join($this->table_promotions, $this->join_table_promotions.'.promotions_id = '.$this->table_promotions.'.promotions_id', 'left');
-    //     $this->db->where($this->join_table_promotions.'.event_id', $id);
-    //     $this->db->where($this->table_promotions.'.status', 'On Progress');
-    //     $this->db->where($this->table_promotions.'.type', 'campaign');
-    //     $this->db->where($this->join_table_promotions.'.status_delete', '0');
-    //     return $this->db->get()->num_rows();
-    // }
-
-    // public function get_data_promotions_campaign($id)
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from($this->join_table_promotions);
-    //     $this->db->join($this->table_promotions, $this->join_table_promotions.'.promotions_id = '.$this->table_promotions.'.promotions_id', 'left');
-    //     $this->db->join($this->join_table_promotions2, $this->table_promotions.'.promotions_id = '.$this->join_table_promotions2.'.promotions_id', 'left');
-    //     $this->db->where($this->join_table_promotions.'.event_id', $id);
-    //     $this->db->where($this->table_promotions.'.status', 'On Progress');
-    //     $this->db->where($this->table_promotions.'.type', 'campaign');
-    //     $this->db->where($this->join_table_promotions.'.status_delete', '0');
-    //     $query = $this->db->get();
-    //     return $query->row();
-    // }
-
-    // public function insert_post($data)
-    // {
-    //     $this->db->insert('posts', $data);
-    //     return $this->db->insert_id();
-    // }
-
-    // public function insert_content($data)
-    // {
-    //     $this->db->insert('posts', $data);
-    //     return $this->db->insert_id();
-    // }
-
-    // public function insert_event($data)
-    // {
-    //     $this->db->insert('events', $data);
-    //     return $this->db->insert_id();
-    // }
-
-    // public function data_content()
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from('posts');
-    //     $this->db->where('post_type', 'events-content');
-    //     return $this->db->get()->result();
-    // }
-
-    // public function get_content($id)
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from('posts');
-    //     $this->db->where('post_type', 'events-content');
-    //     $this->db->where('id_post', $id);
-    //     return $this->db->get()->row();
-    // }
-
-    // public function get_articles($id)
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from('posts');
-    //     $this->db->where('post_type', 'articles');
-    //     $this->db->where('id_post', $id);
-    //     return $this->db->get()->row();
-    // }
-
-    // public function get_pages($id)
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from('posts');
-    //     $this->db->where('post_type', 'pages');
-    //     $this->db->where('id_post', $id);
-    //     return $this->db->get()->row();
-    // }
-    
-    // public function update_post($id, $data)
-    // {
-    //     $this->db->where('id_post', $id);
-    //     return $this->db->update('posts', $data);
-    // }
-
-    // public function update_post_trash($id)
-    // {
-    //     $this->db->set('post_trash', '1');
-    //     $this->db->where('id_post', $id);
-    //     return $this->db->update('posts');
-    // }
-
-    // public function update_post_restore($id)
-    // {
-    //     $this->db->set('post_trash', '0');
-    //     $this->db->where('id_post', $id);
-    //     return $this->db->update('posts');
-    // }
-
-    // public function delete_permanent($id)
-    // {
-    //     $this->db->where('id_post', $id);
-    //     return $this->db->delete('posts');
-    // }
-
-    // public function check_post_used($id)
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from('events');
-    //     $this->db->where('post_id', $id);
-    //     return $this->db->get()->num_rows();
-    // }
+    public function add_participant($data)
+    {
+        $this->db->insert('members', $data);
+        return $this->db->insert_id();
+    }
 
 
-    // //events
-    // public function update_events($id, $data)
-    // {
-    //     $this->db->where('event_id', $id);
-    //     return $this->db->update('events', $data);
-    // }
+    public function insert_promotions_user($data, $id)
+    {
+        $this->db->insert('promotions_users', $data);
+        
+        if($this->db->insert_id()){
+            $this->db->set('limit_promotion', 'limit_promotion-1', false);
+            $this->db->where('promotions_id', $id);
+            return $this->db->update('promotions');
+        }
+    }
 
-    // public function get_event($id)
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from('events');
-    //     $this->db->join('posts', 'posts.id_post = events.post_id', 'left');
-    //     $this->db->where('event_id', $id);
-    //     return $this->db->get()->row();
-    // }
-    
-    // public function data_cron()
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from('posts');
-    //     $this->db->where('post_type', 'blog');
-    //     $this->db->where('post_status', "on_schedule");
-    //     $this->db->where('post_trash', '0');
-    //     $this->db->order_by('id_post','desc');
-    //     return $this->db->get()->result();
-    // }
+    public function insert_transactions($data)
+    {
+        $this->db->insert('transactions', $data);
+        return $this->db->insert_id();
+    }
 
-    // public function get_event_all($limit = false, $offset = false, $viewby = false, $sortby = false)
-    // {
-    //     $this->db->select('events.*, g.name as group_name, c.name as cert_name ');
-    //     $this->db->from('events');
-    //     $this->db->join('terms g', 'g.term_id = events.group_id', 'left');
-    //     $this->db->join('terms c', 'c.term_id = events.certificate_id', 'left');
-    //     $this->db->where('event_status', 'publish');
+    public function update_transaction($data, $id)
+    {
+        $this->db->where('order_id', $id);
+        return $this->db->update('transactions', $data);
+    }
 
-    //     if($limit && $offset){
-    //         $this->db->limit($limit, $offset);
-    //     } elseif ($limit && $offset == false){
-    //         $this->db->limit($limit);
-    //     }
+    public function insert_transaction_detail($data, $qty, $id)
+    {
+        $this->db->insert('transaction_detail', $data);
+        $detail_id = $this->db->insert_id();
+        if($this->db->insert_id()){
+            $this->db->set('event_max_participant', 'event_max_participant-'.$qty, false);
+            $this->db->where('event_id', $id);
+            $this->db->update('events');
+            return $detail_id;
+        }
+    }
 
-    //     if($viewby == 'popular'){
-    //         $this->db->order_by('event_id','desc');
-    //     } else {
-    //         $this->db->order_by('event_id','desc');
-    //     }
-       
-    //     return $this->db->get()->result();
-    // }
+    public function insert_transaction_user_data($data)
+    {
+        $this->db->insert('transaction_participants', $data);
+        return $this->db->insert_id();
+    }
 
-    // public function get_articles_all($limit = false, $offset = false)
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from('posts');
-    //     $this->db->join('term_relationships', 'term_relationships.object_id = posts.id_post', 'left');
-    //     $this->db->join('terms', 'terms.term_id = term_relationships.term_taxonomy_id', 'left');
-    //     $this->db->where('post_status', 'publish');
-    //     $this->db->where('post_type', 'articles');
+    public function update_user_billing($data, $id)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('users', $data);
+    }
 
-    //     if($limit && $offset){
-    //         $this->db->limit($limit, $offset);
-    //     } elseif ($limit && $offset == false){
-    //         $this->db->limit($limit);
-    //     }
 
-    //     return $this->db->get()->result();
-    // }
+    public function rollback_checkout($tabel, $id)
+    {
+        $this->db->where('transaction_id', $id);
+        return $this->db->delete($tabel);
+    }
 
-    // public function view_event($slug)
-    // {
-    //     $this->db->select('events.*,posts.*, g.name as group_name, c.name as cert_name ');
-    //     $this->db->from('events');
-    //     $this->db->join('posts', 'posts.id_post = events.post_id', 'left');
-    //     $this->db->join('terms g', 'g.term_id = events.group_id', 'left');
-    //     $this->db->join('terms c', 'c.term_id = events.certificate_id', 'left');
-    //     $this->db->where('event_slug', $slug);
-    //     return $this->db->get();
-    // }
 
-    // public function view_articles($slug)
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from('posts');
-    //     $this->db->join('term_relationships', 'term_relationships.object_id = posts.id_post', 'left');
-    //     $this->db->join('terms', 'terms.term_id = term_relationships.term_taxonomy_id', 'left');
-    //     $this->db->join('users', 'users.id = posts.post_author', 'left');
-    //     $this->db->where('post_slug', $slug);
-    //     return $this->db->get();
-    // }
+    public function get_data_participant($id){
+        $this->db->select('*');
+        $this->db->from('members');
+        $this->db->where('id_members', $id);
+        return $this->db->get()->row();
+    }
+
+    function get_order_detail_users($id){
+
+        $user_id =  $this->ion_auth->user()->row()->id;
+        $this->db->select('*');
+        $this->db->from('transactions');
+        $this->db->group_by('transaction_id');
+        $this->db->where('user_id', $user_id);
+        $this->db->where('transaction_id', $id);
+        return $this->db->get()->row();
+    }
+
+    function get_order_users_detail($transaction_id){
+        $this->db->select('*');
+        $this->db->from('transaction_detail');
+        $this->db->where('transaction_id', $transaction_id);
+        return $this->db->get()->result();
+    }
 
 }

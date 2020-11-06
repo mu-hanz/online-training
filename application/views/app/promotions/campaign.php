@@ -176,6 +176,13 @@
                                                         <?php
                                                         $xx = '1';
                                                         foreach ($get_data_training as $row) {
+
+                                                            if($row->event_on_sale == 1){
+                                                                $status = 'Campaign Flexi Combo sedang berjalan';
+                                                            } else {
+                                                                $status = '';
+                                                            }
+
                                                         ?>
                                                             <?php if ($page != 'create') {
                                                                 $checked        = '';
@@ -202,7 +209,7 @@
                                                                     <label class="custom-control-label" for="customSwitch<?=$xx;?>">&nbsp;</label>
                                                                 </div>
                                                             </td>
-                                                            <td><?=$row->post_title;?></td>
+                                                            <td><?=$row->post_title;?><br><span class="text-danger"><?=$status;?></span></td>
                                                             <td>
                                                                 <?php
                                                                 if ($row->event_cost_promo != '0' OR $row->event_cost_promo != '') {

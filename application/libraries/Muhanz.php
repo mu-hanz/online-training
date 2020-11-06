@@ -14,7 +14,7 @@ class Muhanz
 		$this->ci =& get_instance();
 		// Load config file
 		$this->ci->load->config('app');
-
+        $this->ci->load->library('ion_auth');
 
     }
 
@@ -304,6 +304,26 @@ class Muhanz
         }
 
         return date("d", strtotime($event_end_date)) . ' ' . $nama_bulan . ' ' . date("Y", strtotime($event_end_date));
+    }
+
+    public function check_auth()
+    {
+        if($this->ci->ion_auth->logged_in() && !$this->ci->ion_auth->is_admin()){
+            redirect('');
+            return;
+        }
+
+        if(!$this->ci->ion_auth->logged_in()){
+            redirect('webadmin/login', 'refresh'); 
+        }
+        
+    }
+
+    public function check_auth_user()
+    {
+        if(!$this->ci->ion_auth->logged_in()){
+            redirect('account/login', 'refresh'); 
+        } 
     }
 
 }

@@ -13,7 +13,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url('webadmin/dashboard/starter');?>">
+                                    <a href="<?php echo base_url('webadmin/orders/orders');?>">
                                         <i data-feather="shopping-cart"></i>
                                         <span class="badge badge-success float-right">1</span>
                                         <span> Manage Order </span>
@@ -129,28 +129,21 @@
                                             <a href="<?=base_url();?>webadmin/promotions/flexi_combo">Flexi Combo</a>
                                         </li>
                                         <li>
-                                            <a href="<?=base_url();?>webadmin/promotions/slider">Slider</a>
+                                            <!-- <a href="webadmin/promotions/slider">Slider</a> -->
                                         </li>
                                         <li>
-                                            <a href="<?=base_url();?>webadmin/promotions/banner">Banner</a>
+                                            <!-- <a href="webadmin/promotions/banner">Banner</a> -->
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="javascript: void(0);">
+                                    <a href="javascript:void(0);">
                                         <i data-feather="archive"></i>
+                                        <span class="badge badge-success float-right">1</span>
                                         <span> Reports </span>
-                                        <span class="menu-arrow"></span>
                                     </a>
-                                    <ul class="nav-second-level" aria-expanded="false">
-                                        <li>
-                                            <a href="#">Orders</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Referals</a>
-                                        </li>
-                                    </ul>
                                 </li>
+                                
                             </ul>
                         </div>
                     </nav>

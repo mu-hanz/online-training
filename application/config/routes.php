@@ -56,13 +56,13 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 //webadmin
-$route['webadmin'] = "App/dashboard";
-$route['webadmin/login'] = "App/auth/auth/login";
-$route['webadmin/([a-z]+)'] = "App/$1";
-$route['webadmin/([a-z]+)/(:any)'] = "App/$1/$2";
-$route['webadmin/([a-z]+)/(:any)/(:any)'] = "App/$1/$2/$3";
-$route['webadmin/([a-z]+)/(:any)/(:any)/(:any)'] = "App/$1/$2/$3/$4";
-$route['webadmin/([a-z]+)/(:any)/(:any)/(:any)/(:any)'] = "App/$1/$2/$3/$4/$5";
+$route['webadmin'] = "app/dashboard";
+$route['webadmin/login'] = "app/auth/auth/login";
+$route['webadmin/([a-z]+)'] = "app/$1";
+$route['webadmin/([a-z]+)/(:any)'] = "app/$1/$2";
+$route['webadmin/([a-z]+)/(:any)/(:any)'] = "app/$1/$2/$3";
+$route['webadmin/([a-z]+)/(:any)/(:any)/(:any)'] = "app/$1/$2/$3/$4";
+$route['webadmin/([a-z]+)/(:any)/(:any)/(:any)/(:any)'] = "app/$1/$2/$3/$4/$5";
 
 // contact
 $route['contact-us'] = "home/contact";
@@ -81,7 +81,8 @@ $route['events-groups/(:any)/(:any)/(:any)'] = "store/events/events_group/$1/$2/
 $route['events-type/(:any)/(:any)'] = "store/events/events_type/$1/$2";
 $route['events-type/(:any)/(:any)/(:any)'] = "store/events/events_type/$1/$2/$3";
 
-
+// pages
+$route['pages/(:any)'] = "store/pages/index/$1";
 
 // articles
 $route['articles/detail/(:any)'] = "store/articles/index/$1";
@@ -96,6 +97,17 @@ $route['events-show-cart-sweet']    = "store/cart/show_cart_sweet";
 $route['events-add-cart']           = "store/cart/add_cart";
 $route['events-update-cart']        = "store/cart/update_cart";
 $route['events-remove-cart']        = "store/cart/remove_cart";
+
+
+// shopping cart
+$route['events-checkout']               = "store/checkout/index";
+$route['events-checkout/place-order']        = "store/checkout/place_order";
+$route['events-checkout/add-participant']        = "store/checkout/add_participant";
+$route['events-get-participant']        = "store/checkout/get_participant";
+$route['events-checkout/snap-onpending']        = "store/checkout/snap_onpending";
+$route['events-checkout/snap-payment']        = "store/checkout/snap_payment";
+$route['events-checkout/snap-onpayment']        = "store/checkout/snap_onpayment";
+
 
 // promotions
 $route['events-apply-voucher']                      = "store/cart/apply_voucher";
@@ -114,6 +126,9 @@ $route['shopping-cart/save-collectible-voucher']  = "store/shopping_cart/save_co
 $route['account/login'] = "store/users/users/login";
 $route['account/register'] = "store/users/users/register";
 $route['account/lost-password'] = "store/users/users/lost_password";
+$route['account/forgot-password'] = "store/users/users/forgot_password";
+$route['account/change-password/(:any)'] = "store/users/users/change_password/$1";
+$route['account/reset-password/(:any)'] = "store/users/users/reset_password/$1";
 
 $route['users/email_activation'] = "store/users/users/send_email";
 $route['users/email_confirmation/(:any)/(:any)'] = "app/auth/auth/activate/$1/$2";

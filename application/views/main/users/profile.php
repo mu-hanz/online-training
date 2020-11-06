@@ -28,14 +28,14 @@
                                         <div class="form-group position-relative">
                                             <label>First Name</label>
                                             <i data-feather="user" class="fea icon-sm icons"></i>
-                                            <input name="first_name" id="first_name" type="text" class="form-control pl-5" placeholder="First Name :" value="<?=$user->first_name;?>" <?php if ($user->oauth_provider != null) { ?> readonly="" style="background-color:#ededed;" <?php } ?>>
+                                            <input name="first_name" id="first_name" type="text" class="form-control pl-5" placeholder="First Name :" value="<?=$user->first_name;?>">
                                         </div>
                                     </div><!--end col-->
                                     <div class="col-md-6">
                                         <div class="form-group position-relative">
                                             <label>Last Name</label>
                                             <i data-feather="user-check" class="fea icon-sm icons"></i>
-                                            <input name="last_name" id="last_name" type="text" class="form-control pl-5" placeholder="Last Name :" value="<?=$user->last_name;?>" <?php if ($user->oauth_provider != null) { ?> readonly="" style="background-color:#ededed;" <?php } ?>>
+                                            <input name="last_name" id="last_name" type="text" class="form-control pl-5" placeholder="Last Name :" value="<?=$user->last_name;?>" >
                                         </div>
                                     </div><!--end col-->
                                 </div>
@@ -44,24 +44,24 @@
                                         <div class="form-group position-relative">
                                             <label>Email</label>
                                             <i data-feather="mail" class="fea icon-sm icons"></i>
-                                            <input name="email" id="email" type="email" class="form-control pl-5" placeholder="Email :" value="<?=$user->email;?>" <?php if ($user->oauth_provider != null) { ?> readonly="" style="background-color:#ededed;" <?php } ?> required>
+                                            <input name="email" id="email" type="email" class="form-control pl-5" placeholder="Email :" value="<?=$user->email;?>" required>
                                         </div> 
                                     </div><!--end col-->
                                     <div class="col-md-6">
                                         <div class="form-group position-relative">
                                             <label>Phone</label>
                                             <i data-feather="phone" class="fea icon-sm icons"></i>
-                                            <input name="phone" id="phone" type="text" class="form-control pl-5" placeholder="Phone :" value="<?=$user->phone;?>">
+                                            <input name="phone" id="phone" type="number" class="form-control pl-5" placeholder="Phone :" value="<?=$user->phone;?>"  required>
                                         </div> 
                                     </div><!--end col-->
                                 </div>
-                                <?php if ($user->oauth_provider == null) { ?>
+                                
                                 <div class="row mt-2">
                                     <div class="col-md-6">
                                         <div class="form-group position-relative">
                                             <label>Password</label>
                                             <i data-feather="key" class="fea icon-sm icons"></i>
-                                            <input name="password" id="password" type="password" class="form-control pl-5" placeholder="Password :">
+                                            <input name="password" id="password" pattern=".{8,}" title="8 characters minimum" type="password" class="form-control pl-5" placeholder="Password :">
                                             <small>Leave blank if you don't want to change the password</small>
                                         </div> 
                                     </div><!--end col-->
@@ -69,12 +69,12 @@
                                         <div class="form-group position-relative">
                                             <label>Confirm Password</label>
                                             <i data-feather="key" class="fea icon-sm icons"></i>
-                                            <input name="confirm_password" id="confirm_password" type="password" class="form-control pl-5" placeholder="Confirm Password :">
+                                            <input name="confirm_password" pattern=".{8,}" title="8 characters minimum" id="confirm_password" type="password" class="form-control pl-5" placeholder="Confirm Password :">
                                             <small>Leave blank if you don't want to change the password</small>
                                         </div> 
                                     </div><!--end col-->
                                 </div>
-                                <?php } ?>
+                                
                                 <div class="row mt-2">
                                     <div class="col-md-6">
                                         <div class="form-group position-relative">

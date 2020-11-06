@@ -1,24 +1,37 @@
-<section class="bg-home bg-light d-flex align-items-center" <?php if ($promotions_image == '') { ?> style="background: url('<?php echo base_url('assets/main/images/slider/1.jpg');?>') center center; height: auto;" <?php } else { ?> style="background: url('<?php echo base_url('assets/app/images/promotions/'.$promotions_image.'');?>') center center; height: auto;" <?php } ?> id="home">
-    <div class="bg-overlay overlay-search"></div>            
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-9 text-center mt-0 mt-md-5 pt-0 pt-md-5">
-                <div class="title-heading margin-top-100">
-                    <h1 class="heading mb-3 text-white">Promotions : <span class="badge badge-pill badge-light"><?=$promotions_name;?></span></h1>
-                    <p class="text-white"><?=$promotions_content;?></p>
-                    <div class="text-center subcribe-form my-4 pt-2 aos-init aos-animate" data-aos="fade-up" data-aos-duration="1800">
-                        <form action="<?php echo base_url('events-search-ajax')?>" action="GET" class="ajaxForm">
-                            <div class="form-group mb-0">
-                                <input type="text" name="keyword" class="shadow bg-white rounded-pill" required=""  placeholder="Search course...">
-                                <button type="submit" class="btn btn-pills btn-primary">Search <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search fea icon-sm"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+
+<!-- Hero Start -->
+<section class="bg-half w-100 d-table" data-jarallax='{"speed": 0.5}' <?php if ($promotions_image == '') { ?> style="background: url('<?php echo base_url('assets/main/images/slider/1.jpg');?>') center center; height: auto;" <?php } else { ?> style="background: url('<?php echo base_url('assets/app/images/promotions/'.$promotions_image.'');?>') center center; height: auto;" <?php } ?>>
+            <div class="bg-overlay "></div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 text-center">
+                        <div class="title-heading">
+                            <h4 class="text-light mb-3"><?=date('d M Y', strtotime($start_date));?></h4>
+                            <h1 class="display-4 title-dark text-white font-weight-bold mb-3"><?=$promotions_name;?></h1>
+                            <p class="para-desc title-dark mx-auto text-light"><?=$promotions_content;?></p>
+                            
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <div id="eventdown"></div>
+                                </div>
                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div><!--end col-->
-        </div><!--end row-->
-    </div><!--end container-->
-</section>
+                            <?php
+                            $date_now = date('Y-m-d H:i:s', now());
+                            if(strtotime($start_date) >= strtotime($date_now)){
+                                $date_promo = $start_date;
+                            } else {
+                                $date_promo = $end_date;
+                            }  
+                            ?>
+                            
+                            <input type="hidden" id="date_promo" data-date="" value="<?=date('Y/m/d', strtotime($date_promo));?>">
+                            <input type="hidden" id="date_now" data-date="" value="<?=date('Y/m/d', strtotime($date_now));?>">
+                            
+                        </div>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div><!--end container-->
+        </section><!--end section-->
 
 <!-- Shape Start -->
 <div class="position-relative">
@@ -35,6 +48,7 @@
     <div class="container">
         <div class="row">
             <?php foreach($promotions as $pop){?>
+                <a href="<?php echo base_url('events/detail/'.$pop->event_slug);?>" class="mlink"> 
             <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                 <div class="card blog rounded border-0 shadow overflow-hidden">
                     <div class="position-relative">
@@ -63,6 +77,7 @@
                     </div>
                 </div> <!--end card / course-blog-->
             </div><!--end col-->
+            </a>
             <?php } ?>
             <!-- PAGINATION START -->
             <div class="col-12 pt-5 mt-5">

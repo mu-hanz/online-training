@@ -158,13 +158,13 @@ class Midtrans {
         Midtrans::getSnapBaseUrl() . '/transactions',
         Midtrans::$serverKey,
         $params);
-        $data = array (
-          "token" => $result->token,
-          "redirect_url" => Midtrans::getSnapWebBaseUrl() . '/vtweb/' . $result->token,
-        );
+    //     $data = array (
+    //       "token" => $result->token,
+    //       "redirect_url" => Midtrans::getSnapWebBaseUrl() . '/vtweb/' . $result->token,
+    //     );
 
-    $result_array = json_encode($data);
-    return $result_array;
+    // $result_array = json_encode($data);
+    return $result->token;
   }
 	
     /**

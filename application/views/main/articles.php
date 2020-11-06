@@ -19,6 +19,7 @@
                         <div class="row">
 
                         <?php foreach($data_articles as $articles){?>
+                            <a href="<?php echo base_url('articles/detail/'.$articles->post_slug);?>" class="mlink">
                             <div class="col-lg-6 col-md-12 mb-4 pb-2">
                                 <div class="card blog rounded border-0 shadow">
                                     <div class="position-relative">
@@ -28,9 +29,7 @@
                                     <div class="card-body content">
                                         <h5><a href="<?php echo base_url('articles/detail/'.$articles->post_slug);?>" class="card-title title text-dark mlink"><?php $post_title = strip_tags($articles->post_title); echo character_limiter($post_title, 100);?></a></h5>
                                         <div class="post-meta d-flex justify-content-between mt-3">
-                                            <ul class="list-unstyled mb-0">
-                                                <li class="list-inline-item mr-2 mb-0"><a href="javascript:void(0)" class="text-muted like"><i class="mdi mdi-eye-outline mr-1"></i><?= $articles->post_view;?></a></li>
-                                            </ul>
+                                            
                                             <a href="<?php echo base_url('articles/detail/'.$articles->post_slug);?>" class="text-muted readmore mlink">Read More <i class="mdi mdi-chevron-right"></i></a>
                                         </div>
                                     </div>
@@ -39,6 +38,7 @@
                                     </div>
                                 </div>
                             </div><!--end col-->
+                            </a>
                             <?php } ?>
 
         

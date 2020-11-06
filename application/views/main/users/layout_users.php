@@ -37,7 +37,7 @@
     </head>
 
     <body>
-    
+
     <div class="css-majax">
             <?php foreach($css as $file){ echo "\n\t\t"; ?>
                 <link rel="stylesheet" href="<?php echo $file; ?>" type="text/css"/>
@@ -88,8 +88,13 @@
                                                     </div><!--end col-->
                                                     <div class="col-md-5 text-md-right text-center">
                                                         <div class="social-icon social mb-0 mt-4">
-                                                           <a href="<?=base_url();?>users/profile" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Edit Profil">Edit Profil <i data-feather="edit" class="fea icon-sm fea-social"></i></a>
-                                                           <a href="<?php echo base_url('account/auth/logout');?>" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Logout">Logout <i data-feather="log-out" class="fea icon-sm fea-social"></i></a>
+                                                           <a href="<?=base_url('users/dashboard/profile');?>" class="btn btn-primary mlink" data-toggle="tooltip" data-placement="bottom" title="Edit Profil">Edit Profil <i data-feather="edit" class="fea icon-sm fea-social"></i></a>
+                                                           <a href="<?php echo base_url('account/auth/logout');?>" class="btn btn-danger " data-toggle="tooltip" data-placement="bottom" title="Logout">Logout <i data-feather="log-out" class="fea icon-sm fea-social"></i></a>
+                                                        </div><!--end icon-->
+                                                        <div class="social-icon social mb-0 mt-4 d-block d-sm-none">
+                                                            <a href="<?=base_url('users/dashboard');?>" class="btn btn-primary mlink mb-3" data-toggle="tooltip" data-placement="bottom" title="Dashboard">Dashboard</a>
+                                                           <a href="<?=base_url('users/dashboard/order');?>" class="btn btn-primary mlink mb-3" data-toggle="tooltip" data-placement="bottom" title="Order">My Order</a>
+                                                           <a href="<?=base_url('users/dashboard/participant');?>" class="btn btn-primary mlink mb-3" data-toggle="tooltip" data-placement="bottom" title="Edit Profil">Participant</a>
                                                         </div><!--end icon-->
                                                     </div><!--end col-->
                                                 </div><!--end row-->
@@ -105,10 +110,10 @@
                 <section class="section mt-60">
                     <div class="container mt-lg-3">
                         <div class="row">
-                            <div class="col-lg-4 col-md-6 col-12 d-lg-block d-none">
+                            <div class="col-lg-2 col-md-2 col-12 d-lg-block d-none">
                                 <?php echo $this->load->get_section('menu'); ?>
                             </div>
-                            <div class="col-lg-8 col-12">
+                            <div class="col-lg-10 col-12">
                                 <?php echo $output;?>
                             </div>
                         </div>
@@ -141,17 +146,30 @@
         
 
         <a href="#" class="btn btn-icon btn-soft-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
+        <?php $this->load->config('midtrans', true);
 
+        $production         = $this->config->item('production', 'midtrans');
+
+        if ($production) {
+            $client_key         = $this->config->item('client_key', 'midtrans');
+            $url_js = $this->config->item('url', 'midtrans');
+        } else {
+            $client_key = $this->config->item('client_key_sandbox', 'midtrans'); // sandbox
+            $url_js = $this->config->item('url_sandbox', 'midtrans'); // sandbox
+        }
+
+        ?>                                                       
         <!-- Javascript Start -->
         <!-- javascript -->
         <script src="<?php echo base_url('assets/main/js/jquery-3.5.1.min.js');?>"></script>
+        <script type="text/javascript" src="<?=$url_js;?>" data-client-key="<?=$client_key;?>"></script>
         <script src="<?php echo base_url('assets/main/js/bootstrap.bundle.min.js');?>"></script>
         <script src="<?php echo base_url('assets/main/js/jquery.easing.min.js');?>"></script>
         <script src="<?php echo base_url('assets/main/js/scrollspy.min.js');?>"></script>
         <!-- Icons -->
         <script src="<?php echo base_url('assets/main/js/feather.min.js');?>"></script>
         <script src="https://unicons.iconscout.com/release/v2.1.9/script/monochrome/bundle.js"></script>
-        
+        <script src="<?php echo base_url('assets/main/js/clipboard.min.js');?>"></script>
         <script src="<?php echo base_url('assets/aform/jquery.form.min.js') ;?>"></script>
         <script src="<?php echo base_url('assets/pjax/pjax.js') ;?>"></script>
         <script data-pace-options='{ "ajax": false }' src='<?php echo base_url('assets/app/js/pace.min.js') ;?>'></script>
@@ -162,9 +180,30 @@
         <!-- Main Js -->
         <script src="<?php echo base_url('assets/main/js/app.js');?>"></script>
         
-        <?php foreach($js as $file){ echo "\n\t\t"; ?>
-        <script src="<?php echo $file; ?>"></script>
-        <?php } echo "\n\t"; ?>
+        <footer id="footer">
+            <script>
+
+                var clipboard = new ClipboardJS('.copy_link');
+
+                clipboard.on('success', function(e) {
+                    const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'center',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                
+                Toast.fire({
+                    type: 'success',
+                    title: 'Copied!'
+                })
+                });
+
+            </script>
+            <?php foreach($js as $file){ echo "\n\t\t"; ?>
+            <script src="<?php echo $file; ?>"></script>
+            <?php } echo "\n\t"; ?>
+        </footer>
        
     </body>
 </html>

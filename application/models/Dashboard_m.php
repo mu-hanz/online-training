@@ -37,10 +37,75 @@ class Dashboard_m extends CI_Model
         return $this->db->update('members', $data); 
     }
 
+    function save_members($data){
+        return $this->db->insert('members', $data); 
+    }
+
     function delete_members($id){
         $this->db->where('id_members', $id);
         return $this->db->delete('members');
     }
+
+ 
+
+    function get_order_users($limit = false){
+
+        $user_id =  $this->ion_auth->user()->row()->id;
+        $this->db->select('a.transaction_id,a.invoice_pdf, a.order_id, a.payment_status, a.payment_cancel_date, a.total,  IFNULL(SUM(b.qty),0) AS person');
+        $this->db->from('transactions as a');
+        $this->db->join('transaction_detail as b', 'b.transaction_id = a.transaction_id');
+        $this->db->group_by('a.transaction_id');
+        $this->db->where('a.user_id', $user_id);
+        if($limit){
+            $this->db->limit($limit);
+        }
+        $this->db->order_by('a.transaction_id', 'desc');
+        
+        return $this->db->get();
+    }
+
+
+    function get_order_detail_users($id){
+
+        $user_id =  $this->ion_auth->user()->row()->id;
+        $this->db->select('*');
+        $this->db->from('transactions');
+        $this->db->join('users', 'users.id = transactions.user_id');
+        $this->db->group_by('transaction_id');
+        $this->db->where('user_id', $user_id);
+        $this->db->where('transaction_id', $id);
+        return $this->db->get();
+    }
+
+    function get_order_users_detail($transaction_id){
+        $this->db->select('*');
+        $this->db->from('transaction_detail');
+        $this->db->where('transaction_id', $transaction_id);
+        return $this->db->get()->result();
+    }
+
+    function list_peserta($id){
+        $this->db->select('*');
+        $this->db->from('transaction_participants');
+        $this->db->where('transaction_detail_id', $id);
+        return $this->db->get()->result();
+    }
+
+    function get_order_users1($limit = false){
+
+        $user_id =  $this->ion_auth->user()->row()->id;
+        $this->db->select('*');
+        $this->db->from('transactions');
+        $this->db->join('transaction_detail', 'transaction_detail.transaction_id = transactions.transaction_id', 'left');
+        $this->db->join('transaction_participants', 'transaction_participants.transaction_detail_id = transaction_detail.transaction_detail_id', 'left');
+        $this->db->where('transactions.user_id', 12);
+        if($limit){
+            $this->db->limit($limit);
+        }
+        return $this->db->get();
+    }
+
+
 
 
 

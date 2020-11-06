@@ -8,11 +8,8 @@ class Articles extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->muhanz->check_auth();
         $this->_init();
-        if (!$this->ion_auth->logged_in()) {
-            $this->session->set_userdata('redirect_login', $this->agent->referrer());
-            redirect('webadmin/login');
-        }
 
         $this->load->model('Post_m');
         $this->load->model('Terms_m');
@@ -341,31 +338,27 @@ class Articles extends CI_Controller
     {
         $this->output->unset_template('layout');
 
-        function is_action($id_post)
+        function is_action($id_post, $post_slug)
         {
-            $CI =& get_instance();
-
-            $count_post = $CI->Post_m->check_post_used($id_post);
-            $data = '';
-            $data .= '<a href="'.base_url('webadmin/posts/articles/edit/'.$id_post).'" class="btn btn-primary btn-sm btn-block mlink"><i class="uil uil-edit"></i> Edit</a>';
             
-            if($count_post <= 0){
-                $data .= '<button class="btn btn-danger btn-sm  btn-block del" data-id="'.$id_post.'"><i class="uil uil-trash-alt"></i> Delete</button>';
-            }
-           
+            $data = '<a href="'.base_url('webadmin/posts/articles/edit/'.$id_post).'" class="btn btn-primary btn-sm btn-block mlink"><i class="uil uil-edit"></i> Edit</a>
+            <a href="'.base_url('articles/detail/'.$post_slug).'" target="_blank" class="btn btn-secondary btn-sm btn-block"><i class="uil uil-eye"></i> View</a>
+            <button class="btn btn-danger btn-sm  btn-block del" data-id="'.$id_post.'"><i class="uil uil-trash-alt"></i> Delete</button>';
+            
+            
         
             return $data;
         }
       
 
-        $this->datatables->select('id_post, post_status, post_title, post_date, post_modifed, a.first_name as author_name, e.first_name as author_name_edit');
+        $this->datatables->select('id_post, post_status, post_title, post_date, post_modifed,post_slug, a.first_name as author_name, e.first_name as author_name_edit');
         $this->datatables->from('posts');
         $this->datatables->join('users as a', 'a.id = posts.post_author', 'left');
         $this->datatables->join('users as e', 'e.id = posts.post_author_modifed', 'left');
         $this->datatables->where('post_type','articles');
         $this->datatables->order_by('id_post', 'desc');
         $this->datatables->group_by('id_post');
-        $this->datatables->add_column('action', '$1', "is_action('id_post')");
+        $this->datatables->add_column('action', '$1', "is_action('id_post','post_slug')");
         
         return print_r($this->datatables->generate());
     }

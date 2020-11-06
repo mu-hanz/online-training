@@ -74,6 +74,9 @@ class Promotions extends CI_Controller {
 
     public function detail_promotions($slug) {
 
+        $this->load->js('assets/main/js/jquery.countdown.min.js');
+        $this->load->js('assets/main/js/countdown.init.js');
+
         $row = $this->Post_m->get_data_promotions($slug);
 
         $config["base_url"]             = base_url() . "promotions/detail-promotion/" .$slug;
@@ -118,7 +121,9 @@ class Promotions extends CI_Controller {
             'promotions'            => $this->Post_m->get_detail_promotions_all($row->promotions_id, $config["per_page"], $from)->result(),
             'promotions_image'      => $row->promotions_image,
             'promotions_name'       => $row->promotions_name,
-            'promotions_content'    => $row->promotions_content
+            'promotions_content'    => $row->promotions_content,
+            'start_date'            => $row->start_date,
+            'end_date'              => $row->end_date
         );
         
 		$this->load->view('main/promotions_detail', $data);

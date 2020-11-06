@@ -443,3 +443,16 @@ background-color: rgba(0, 0, 0, 0.1);
 .navbar-custom .button-menu-mobile {
   width:auto;
 }
+
+td.details-control {
+  background: url('../images/details_open.png') no-repeat center center;
+  cursor: pointer;
+}
+tr.shown td.details-control {
+  background: url('../images/details_closed.png') no-repeat center center;
+}
+
+tr.highlightExpanded {
+background-color:#f8f8f8 !important;
+}
+

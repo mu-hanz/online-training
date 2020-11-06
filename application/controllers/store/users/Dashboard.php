@@ -8,10 +8,7 @@ class Dashboard extends CI_Controller {
     {
         parent::__construct();
         $this->_init();
-        if (!$this->ion_auth->logged_in()) {
-            $this->session->set_userdata('redirect_login', $this->agent->referrer());
-            redirect('');
-        }
+        $this->muhanz->check_auth_user();
         $this->load->model('Dashboard_m');
         $this->load->library('form_validation');
     }
@@ -23,15 +20,22 @@ class Dashboard extends CI_Controller {
         );
         $this->output->set_template('main/users/layout_users');
         $this->load->section('header', 'main/layout/header');
-        $this->load->section('menu', 'main/users/users_menu');   
+        $this->load->section('menu', 'main/users/users_menu');  
+        $this->load->js('assets/scripts/pay.init.js'); 
     }
 
     public function index()
 	{	
+        $status = $this->input->get('status_code');
+        if($status){
+            redirect('users/dashboard/order');
+        }
+
         $data = array(
-            'user' => $this->ion_auth->user()->row()
+            'user' => $this->ion_auth->user()->row(),
+            'last_order'=> $this->Dashboard_m->get_order_users(5)->result()
         );
-		$this->output->set_title($this->muhanz->app_title('User Login'));
+		$this->output->set_title($this->muhanz->app_title('Dasboard Saya'));
 		$this->load->view('main/users/dashboard', $data);
     }
 
@@ -98,9 +102,9 @@ class Dashboard extends CI_Controller {
         }
     }
 
-    public function members()
+    public function participant()
 	{	
-        $this->load->css('https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css');
+        $this->load->css('assets/main/css/dataTables.bootstrap4.min.css');
         $this->load->css('assets/app/libs/datatables/responsive.bootstrap4.min.css');
         $this->load->css('assets/app/libs/datatables/buttons.bootstrap4.min.css');
         $this->load->js('assets/app/libs/datatables/jquery.dataTables.min.js');
@@ -117,17 +121,52 @@ class Dashboard extends CI_Controller {
             'user'          => $this->ion_auth->user()->row(),
             'list_members'  => $this->Dashboard_m->list_members($user->id),
             'page'          => 'index',
-            'redirect_sweetalert'   => '/members'
+            'redirect_sweetalert'   => 'users/dashboard/participant'
         );
 		$this->output->set_title($this->muhanz->app_title('Members'));
 		$this->load->view('main/users/members', $data);
     }
 
-    public function edit_members($id)
+    public function add_participant()
+	{	
+
+        $data = array(
+            'action'        => base_url('users/dashboard/save_participant'),
+            'user'          => $this->ion_auth->user()->row(),
+            'id_members'    => '',
+            'name'          => '',
+            'email'         => '',
+            'job_title'     => '',
+            'phone'         => '',
+            'page'          => 'add'
+        );
+        $this->output->set_title($this->muhanz->app_title('Add Members'));
+		$this->load->view('main/users/members', $data);
+    }
+
+    public function save_participant()
+    {
+        $this->output->unset_template('layout');
+        $data = array(
+            'id_users'        => $this->ion_auth->user()->row()->id,  
+            'name'            => $this->input->post('name'),
+            'email'           => $this->input->post('email'),
+            'job_title'       => $this->input->post('job_title'),
+            'phone'           => $this->input->post('phone'),
+            'created_date'    => date('Y-m-d H:i:s')
+        );
+        if (!$this->Dashboard_m->save_members($data)) {
+            $this->muhanz->error($this->lang->line('save_error'), 'users/dashboard/participant');
+        } else {
+            $this->muhanz->success($this->lang->line('save_success'), 'users/dashboard/participant');
+        }
+    }
+
+    public function edit_participant($id)
 	{	
         $row = $this->Dashboard_m->edit_members($id);
         $data = array(
-            'action'        => base_url('store/users/dashboard/update_members'),
+            'action'        => base_url('users/dashboard/update_participant'),
             'user'          => $this->ion_auth->user()->row(),
             'id_members'    => $row->id_members,
             'name'          => $row->name,
@@ -140,7 +179,7 @@ class Dashboard extends CI_Controller {
 		$this->load->view('main/users/members', $data);
     }
 
-    public function update_members()
+    public function update_participant()
     {
         $this->output->unset_template('layout');
         $id = $this->input->post('id');
@@ -152,13 +191,13 @@ class Dashboard extends CI_Controller {
             'phone'           => $this->input->post('phone'),
         );
         if (!$this->Dashboard_m->update_members($id, $data)) {
-            $this->muhanz->error($this->lang->line('save_error'), 'members');
+            $this->muhanz->error($this->lang->line('save_error'), 'users/dashboard/participant');
         } else {
-            $this->muhanz->success($this->lang->line('save_success'), 'members');
+            $this->muhanz->success($this->lang->line('save_success'), 'users/dashboard/participant');
         }
     }
 
-    public function delete_members()
+    public function delete_participant()
     {
         $this->output->unset_template();
         
@@ -170,11 +209,49 @@ class Dashboard extends CI_Controller {
         }
     } 
 
-    public function my_order()
+    public function order()
 	{	
+        $data = array(
+            'user' => $this->ion_auth->user()->row(),
+            'last_order'=> $this->Dashboard_m->get_order_users()->result()
+        );
 		$this->output->set_title($this->muhanz->app_title('Order Saya'));
-		$this->load->view('users/my_order');
+		$this->load->view('main/users/my_order', $data);
     }
+
+
+    public function detail_order($id)
+	{	
+        $data = array(
+            'user' => $this->ion_auth->user()->row(),
+            'data_transaction' => $this->Dashboard_m->get_order_detail_users($id)->row(),
+            'list_order'=> $this->Dashboard_m->get_order_users_detail($id)
+        );
+		$this->output->set_title($this->muhanz->app_title('Order Saya'));
+		$this->load->view('main/users/detail_order', $data);
+    }
+
+    public function create_invoice($id)
+	{	
+        $this->output->unset_template();
+
+        $data_transaction = $this->Dashboard_m->get_order_detail_users($id)->row();
+        $data = array(
+            'data_transaction' => $this->Dashboard_m->get_order_detail_users($id)->row(),
+            'list_order'=> $this->Dashboard_m->get_order_users_detail($id)
+        );
+
+        $layout       = 'main/invoice_pdf_tpl';
+        
+
+        //save_pdf
+        $html = $this->load->view($layout, $data, true);
+        $file_name = $data_transaction->order_id;
+        $this->pdf->download_pdf($html, $file_name);
+
+
+    }
+
 
     
     

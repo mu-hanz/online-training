@@ -79,6 +79,7 @@ var options = {
 $(document).on('submit', '.ajaxForm', function(e) {
 	e.preventDefault(); // prevent native submit
 	$(this).ajaxSubmit(options);
+	e.stopImmediatePropagation();
 	return false;
 });
 
@@ -140,5 +141,6 @@ var optionsAuth = {
 $(document).on('submit', '.ajaxFormAuth', function(e) {
 	e.preventDefault(); // prevent native submit
 	$(this).ajaxSubmit(optionsAuth);
+	e.stopImmediatePropagation();
 	return false;
 });

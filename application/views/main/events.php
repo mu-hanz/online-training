@@ -35,10 +35,12 @@
             <div class="container">
                 <div class="row">
                 <?php foreach($event as $pop){?>
-
+                    <a href="<?php echo base_url('events/detail/'.$pop->event_slug);?>" class="mlink"> 
                     <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                     <div class="card blog rounded border-0 shadow overflow-hidden">
+                        
                         <div class="position-relative">
+                        
                             <img src="<?php echo base_url($pop->event_thumbs);?>" class="card-img-top" alt="<?=$pop->event_name;?>">
                             <div class="overlay bg-dark"></div>
                             <a href="<?php echo base_url('events/detail/'.$pop->event_slug);?>" class="mlink">
@@ -47,6 +49,7 @@
                                 </div>
                             </a>
                         </div>
+                    
                         <div class="position-relative">
                             <div class="shape overflow-hidden text-white" style="bottom: -3px;">
                                 <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,8 +57,13 @@
                                 </svg>
                             </div>
                         </div>
+                        <?php if($pop->event_type !== 'e-training' && $pop->event_type !== 'in-house-training'){?>
+                            <ul class="list-unstyled head mb-0 mx-4 text-center">
+                                <li class="badge badge-danger badge-pill"><?= date('d M Y', strtotime($pop->event_start_date));?></li>
+                            </ul>
+                        <?php } ?>
                         <div class="card-body content">
-                            <small><a href="javascript:void(0)" class="text-primary h6"><?=$pop->group_name;?></a></small>
+                            <small><a href="<?=base_url('events-groups/'.$pop->groupid.'/'.$pop->group_slug);?>" class="text-primary h6 mlink"><?=$pop->group_name;?></a></small>
                             <h5 class="mt-2"><a href="<?php echo base_url('events/detail/'.$pop->event_slug);?>" class="title text-dark mlink"><?=$pop->event_name;?></a></h5>
                             <ul class="list-unstyled d-flex justify-content-between border-top mt-3 pt-3 mb-0">
                                 <li class="text-muted small"><i data-feather="award" class="fea icon-sm text-info"></i> <?=$pop->cert_name;?></li>
@@ -64,7 +72,7 @@
                         </div>
                     </div> <!--end card / course-blog-->
                     </div><!--end col-->
-
+                    </a>
                     <?php }?>
 
                     <!-- PAGINATION START -->

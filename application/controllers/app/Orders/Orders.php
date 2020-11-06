@@ -6,15 +6,10 @@ class Orders extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
-		$this->_init();
+		$this->muhanz->check_auth();
+        $this->_init();
 		
-		// Check Login
-		// if(!$this->ion_auth->logged_in()) { 
-        //     $this->session->set_userdata('redirect_login', current_url());
-        //     redirect('webadmin/auth/login'); 
-		// }
-		
-		$this->load->model('dashboard_m');
+		$this->load->model('orders_m');
 	}	
 
 	// Templating
@@ -29,99 +24,121 @@ class Orders extends CI_Controller {
 	public function index()
 	{
 	
-		$this->load->js('assets/app/libs/apexcharts/apexcharts.min.js');
+		// css
+        $this->load->css('assets/app/libs/datatables/dataTables.bootstrap4.min.css');
+        $this->load->css('assets/app/libs/datatables/responsive.bootstrap4.min.css');
+        $this->load->css('assets/app/libs/datatables/buttons.bootstrap4.min.css');
+        $this->load->css('assets/app/libs/datatables/select.bootstrap4.min.css');
+		$this->load->css('assets/sweetalert/sweetalert2.min.css');
 		
-		$this->load->js('assets/app/js/pages/dashboard.init.js');
+		// js
+		$this->load->js('assets/app/libs/datatables/jquery.dataTables.min.js');
+		$this->load->js('assets/app/libs/datatables/dataTables.bootstrap4.min.js');
+		$this->load->js('assets/app/libs/datatables/dataTables.responsive.min.js');
+		$this->load->js('assets/app/libs/datatables/responsive.bootstrap4.min.js');
+		$this->load->js('assets/sweetalert/sweetalert2.all.min.js');
+		$this->load->js('assets/app/js/pages/orders.datatables.js');
+
+		$title = 'Manage Orders';
+
+        $data = array(
+            'title'             => $title,
+        );
+
+        $this->output->set_title($this->muhanz->app_title($title));
+        // Breadcrumbs
+		$this->breadcrumbs->push('Dashboard', '/webadmin');
+		$this->breadcrumbs->push('Order' , '/webadmin/orders/orders');
 
 		// Load View
-		$this->load->view('app/dashboard');
+		$this->load->view('app/orders', $data);
 
 	}
 
-	public function starter()
-	{
-		// Load View
-		$this->load->view('app/starter');
+	public function detail($transaction_id)
+    {
+
+		$title = 'Detail Orders';
+
+        $data = array(
+            
+		);
+		
+        $data = array(
+			'title'             => $title,
+            'data_transaction' 	=>  $this->orders_m->get_order_transactions($transaction_id)->row(),
+            'list_order'		=> $this->orders_m->get_order_transaction_detail($transaction_id)
+        );
+
+        $this->output->set_title($this->muhanz->app_title($title));
+        // Breadcrumbs
+		$this->breadcrumbs->push('Dashboard', '/webadmin');
+		$this->breadcrumbs->push('Order' , '/webadmin/orders/orders');
+		$this->breadcrumbs->push('Detail' , '/webadmin/orders/orders/detail');
+
+		$this->load->view('app/orders_detail', $data);
 	}
 
-	public function starter1()
-	{
-		// Load View
-		$this->load->view('app/starter1');
-	}
+	public function json_orders()
+    {
+        $this->output->unset_template('layout');
 
-	public function data()
-	{
-		$this->output->unset_template('app/layout/webadmin');
+        function is_tools($transaction_id)
+        {
 
-		$data		= $this->dashboard_m->get_visitor_chart();
-
-		foreach ($data as $key) {
-            $val['value_date'][] = $key->month_date;
+            $data = '<a href="'.base_url('webadmin/orders/orders/detail/'.$transaction_id).'" class="btn btn-primary btn-sm btn-block mlink">View Detail</a>';
+            return $data;
 		}
+		
+		function is_invoice($transaction_id)
+        {
 
-		foreach ($data as $key) {
-            $val1['value_days'][] = $key->count;
-		}
+            $data = '<a href="'.base_url('webadmin/orders/orders/create_invoice/'.$transaction_id).'" class="btn btn-light btn-sm btn-block">Donwnload Invoice</a>';
+            return $data;
+        }
+      
 
-		$marge = array_merge($val, $val1);
-
-		header('Content-Type: application/json');
-		echo json_encode($marge);
-
+        $this->datatables->select('transaction_id, order_id, payment_type, payment_status, created_date, total');
+        $this->datatables->from('transactions');
+        $this->datatables->order_by('transaction_id', 'desc');
+		$this->datatables->add_column('invoice', '$1', "is_invoice('transaction_id')");
+        $this->datatables->add_column('tools', '$1', "is_tools('transaction_id')");
+        
+        return print_r($this->datatables->generate());
 	}
+	
 
-	public function data_visitor()
+	public function detail_order()
 	{
-		$this->output->unset_template('app/layout/webadmin');
+		$this->output->unset_template();
 
-		$sum_viewer_all		= $this->dashboard_m->get_visitor_chart_month();
-		foreach ($sum_viewer_all as $key) {
-            $val[] = $key->month_date;
-		}
+		$list_event = $this->orders_m->detail_order($this->input->post('id'));
 
-		header('Content-Type: application/json');
-		echo json_encode($val);
+		echo json_encode($list_event);
 
 	}
+	
 
-	public function data_visitor_all()
-	{
-		$this->output->unset_template('app/layout/webadmin');
+	public function create_invoice($transaction_id)
+	{	
+        $this->output->unset_template();
 
-		$sum_viewer_all		= $this->dashboard_m->get_visitor_chart_month();
-		$sum_viewer_unique		= $this->dashboard_m->get_visitor_chart_month_unique();
+        $data_transaction = $this->orders_m->get_order_transactions($transaction_id)->row();
+        $data = array(
+            'data_transaction' => $data_transaction,
+            'list_order'=> $this->orders_m->get_order_transaction_detail($transaction_id)
+        );
 
-		foreach ($sum_viewer_all as $key) {
-            $val['all_visitor'][] = $key->count;
-		}
+        $layout       = 'main/invoice_pdf_tpl';
+        
 
-		foreach ($sum_viewer_unique as $key) {
-            $val1['unique_visitor'][] = $key->count;
-		}
-
-		$data = array_merge($val, $val1);
-
-		header('Content-Type: application/json');
-		echo json_encode($data);
-
-	}
-
-	public function data_visitor_unique()
-	{
-		$this->output->unset_template('app/layout/webadmin');
-
-		$sum_viewer_unique		= $this->dashboard_m->get_visitor_chart_month_unique();
-		foreach ($sum_viewer_unique as $key) {
-            $val[] = $key->count;
-		}
-
-		header('Content-Type: application/json');
-		echo json_encode($val);
-
-	}
+        //save_pdf
+        $html = $this->load->view($layout, $data, true);
+        $file_name = $data_transaction->order_id;
+        $this->pdf->download_pdf($html, $file_name);
 
 
+    }
 
 	
 

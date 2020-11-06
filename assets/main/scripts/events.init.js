@@ -7,7 +7,8 @@ var getcsrf  = function(name){
 };
 
 
-$(".enroll").click(function(){
+
+    $('#enroll').on('click', function(e){
     var id              = $(this).data('id'); 
     var url          = window.location.pathname;
     var base_url        = window.location.origin;
@@ -44,12 +45,13 @@ $(".enroll").click(function(){
                 
         }
     });
+    e.stopImmediatePropagation();
     return false;
 });
 
 
 
-$(".add-to-cart").click(function(){
+$("#add-to-cart").click(function(e){
     var id              = $(this).data('id'); 
     var url          = window.location.pathname;
     var base_url        = window.location.origin;
@@ -90,7 +92,7 @@ $(".add-to-cart").click(function(){
                         pjax.loadUrl(base_url + '/events-cart', $.extend({}, pjax.options))
                     } else {
                         pjax.options.requestOptions = {}
-                        pjax.loadUrl(base_url + '/' + url, $.extend({}, pjax.options))
+                        pjax.loadUrl(base_url + '/events/all-events', $.extend({}, pjax.options))
                       
                     }
                   })
@@ -112,9 +114,9 @@ $(".add-to-cart").click(function(){
             }
                 
                 
-                
         }
     });
+    e.stopImmediatePropagation();
     return false;
 });
 
