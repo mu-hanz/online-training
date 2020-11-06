@@ -334,7 +334,6 @@ class Post_m extends CI_Model
             $this->db->limit($limit, $offset);
         } elseif ($limit && $offset == false){
             $this->db->limit($limit);
-<<<<<<< Updated upstream
         }
         $this->db->order_by('posts.id_post','desc');
         return $this->db->get();
