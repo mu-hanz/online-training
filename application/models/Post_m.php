@@ -334,11 +334,16 @@ class Post_m extends CI_Model
             $this->db->limit($limit, $offset);
         } elseif ($limit && $offset == false){
             $this->db->limit($limit);
+<<<<<<< Updated upstream
         }
         $this->db->order_by('posts.id_post','desc');
+=======
+        } 
+
 >>>>>>> Stashed changes
         return $this->db->get();
     }
+    
 
     public function get_articles_popular()
     {
