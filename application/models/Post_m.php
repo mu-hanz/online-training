@@ -336,6 +336,7 @@ class Post_m extends CI_Model
             $this->db->limit($limit);
         }
         $this->db->order_by('posts.id_post','desc');
+>>>>>>> Stashed changes
         return $this->db->get();
     }
 
