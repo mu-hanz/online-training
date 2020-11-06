@@ -51,6 +51,7 @@
         <section class="section">
             <div class="container">
                 <div class="row">
+        
                 <?php $no = 1; foreach($data_articles as $articles){
                     
                     if($no ==1){
